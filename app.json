@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "icompras",
+    "slug": "icompras",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
