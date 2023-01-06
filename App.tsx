@@ -61,7 +61,7 @@ const App = () => {
       <FlatList
         data={list}
         style={styles.list}
-        keyExtractor={(item) => item.name}
+        keyExtractor={(item) => item.id}
         renderItem={({ item }) => <ListItem data={item} />}
       />
 
