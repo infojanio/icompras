@@ -7,7 +7,7 @@ import React from 'react'
 export default function User() {
   return (
     <View>
-      <Text>Usuário</Text>
+      <Text>Usuário Master</Text>
     </View>
   )
 }
