@@ -40,7 +40,7 @@ const App = () => {
   };
 
   return (
-<<<<<<< HEAD
+
     <SafeAreaView style={styles.container}>
       <View style={styles.searchArea}>
         <TextInput
@@ -68,12 +68,9 @@ const App = () => {
 
       <StatusBar style="light" />
     </SafeAreaView>
-=======
-    <View style={styles.container}>
-      <Text>Iniciando projeto apps mercados online compras!</Text>
-      <StatusBar style="auto" />
-    </View>
->>>>>>> dev
+
+ 
+
   );
 };
 
