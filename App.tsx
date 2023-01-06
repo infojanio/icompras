@@ -1,21 +1,102 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { useState, useEffect } from 'react';
+import {
+  SafeAreaView,
+  View,
+  TextInput,
+  FlatList,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import ListItem from './src/components/ListItem';
 
-export default function App() {
+import results from './results';
+
+const App = () => {
+  const [searchText, setSearchText] = useState('');
+  const [list, setList] = useState(results);
+
+  useEffect(() => {
+    if (searchText === '') {
+      setList(results);
+    } else {
+      setList(
+        results.filter(
+          (item) =>
+            item.name.toLowerCase().indexOf(searchText.toLowerCase()) > -1
+        )
+      );
+    }
+  }, [searchText]);
+
+  const handleOrderClick = () => {
+    let newList = [...results];
+
+    newList.sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0));
+
+    setList(newList);
+  };
+
   return (
-    <View style={styles.container}>
-      <Text>app mercado cb compras online!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.searchArea}>
+        <TextInput
+          style={styles.input}
+          placeholder="Pesquise uma pessoa"
+          placeholderTextColor="#888"
+          value={searchText}
+          onChangeText={(t) => setSearchText(t)}
+        />
+        <TouchableOpacity onPress={handleOrderClick} style={styles.orderButton}>
+          <MaterialCommunityIcons
+            name="order-alphabetical-ascending"
+            size={32}
+            color="#888"
+          />
+        </TouchableOpacity>
+      </View>
+
+      <FlatList
+        data={list}
+        style={styles.list}
+        keyExtractor={(item) => item.name}
+        renderItem={({ item }) => <ListItem data={item} />}
+      />
+
+      <StatusBar style="light" />
+    </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#242425',
+  },
+  input: {
+    flex: 1,
+    height: 50,
+    backgroundColor: '#363636',
+    margin: 30,
+    borderRadius: 5,
+    fontSize: 19,
+    paddingLeft: 15,
+    paddingRight: 15,
+    color: '#FFFFFF',
+  },
+  searchArea: {
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+  },
+  orderButton: {
+    width: 32,
+    marginRight: 30,
+  },
+  list: {
+    flex: 1,
   },
 });
+
+export default App;
