@@ -1,106 +1,112 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
+//import ListItem from '@components/ListItem';
+
+import React, { useEffect, useState } from 'react';
 import {
-  SafeAreaView,
+  Text,
+  Image,
+  FlatList, 
   View,
-  TextInput,
-  FlatList,
   StyleSheet,
-  TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import ListItem from './src/components/ListItem';
 
-import results from './results';
+import axios from 'axios'
 
-const App = () => {
-  const [searchText, setSearchText] = useState('');
-  const [list, setList] = useState(results);
+export default function App () {
 
-  useEffect(() => {
-    if (searchText === '') {
-      setList(results);
-    } else {
-      setList(
-        results.filter(
-          (item) =>
-            item.name.toLowerCase().indexOf(searchText.toLowerCase()) > -1
-        )
-      );
-    }
-  }, [searchText]);
+const baseURL = 'https://api.github.com'
+const perPage = 20
 
-  const handleOrderClick = () => {
-    let newList = [...results];
+const [data, setData] = useState([])
+const [loading, setLoading] = useState(false)
+const [page, setPage] = useState(1)
 
-    newList.sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0));
+useEffect(()=> {
+loadProducts()
+},[])
 
-    setList(newList);
-  };
+async function loadProducts(){
+if(loading) return;
+
+setLoading(true)
+
+const response = await axios.get(`${baseURL}/search/repositories?q=react&per_page=${perPage}&page=${page}`)
+
+setData([...data, ...response.data.items])
+setPage(page+1)
+setLoading(false)
+}
 
   return (
 
-    <SafeAreaView style={styles.container}>
-      <View style={styles.searchArea}>
-        <TextInput
-          style={styles.input}
-          placeholder="Pesquise uma pessoa"
-          placeholderTextColor="#888"
-          value={searchText}
-          onChangeText={(t) => setSearchText(t)}
-        />
-        <TouchableOpacity onPress={handleOrderClick} style={styles.orderButton}>
-          <MaterialCommunityIcons
-            name="order-alphabetical-ascending"
-            size={32}
-            color="#888"
-          />
-        </TouchableOpacity>
-      </View>
-
-      <FlatList
-        data={list}
-        style={styles.list}
-        keyExtractor={(item) => item.name}
-        renderItem={({ item }) => <ListItem data={item} />}
-      />
-
-      <StatusBar style="light" />
-    </SafeAreaView>
-
- 
+      <View style={styles.container}>
+       <FlatList 
+        style={{marginTop:35}}
+        contentContainerStyle={{marginHorizontal:20}}
+        data={data}
+        keyExtractor={item=> String(item.id)}
+        renderItem={({ item }) => <ListItem data={item}/> }
+        onEndReached={loadProducts}
+        onEndReachedThreshold={0.4}
+        ListFooterComponent={<FooterList load={loading} />}
+       />
+      </View>   
 
   );
 };
 
+function ListItem({item, data}) {
+  return(
+  <View style={styles.listItem}>
+    <Image style={styles.image} source={{uri: data?.image_avatar}}/>
+    <Text style={styles.listText}>{data.id}</Text>
+    <Text style={styles.listText}>{data.login}</Text>
+    <Text style={styles.listText}>{data.url}</Text>
+
+  </View>
+  )
+}
+
+function FooterList({load}) {
+  if(!load) return null;
+  return(
+    <View style= {styles.loading}>
+      <ActivityIndicator size={25} color="#121212"/>
+    </View>
+  )
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#242425',
+    backgroundColor: '#fff',
   },
-  input: {
-    flex: 1,
-    height: 50,
-    backgroundColor: '#363636',
-    margin: 30,
-    borderRadius: 5,
-    fontSize: 19,
-    paddingLeft: 15,
-    paddingRight: 15,
-    color: '#FFFFFF',
+
+  listItem: {
+    backgroundColor: '#121212',
+    padding: 30,
+    marginTop: 20,
+    borderRadius: 10,
+
   },
-  searchArea: {
-    flexDirection: 'row',
-    alignItems: 'center',
+
+  listText: {
+    fontSize: 16,
+    color: '#fff'
+  }, 
+
+  loading: {
+    padding: 10
   },
-  orderButton: {
-    width: 32,
-    marginRight: 30,
-  },
-  list: {
-    flex: 1,
-  },
+
+  image: {
+    fontSize: 18,
+    borderRadius: 24
+  }
+
+
+
 });
 
-export default App;
+
+
