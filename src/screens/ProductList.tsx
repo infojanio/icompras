@@ -1,5 +1,5 @@
 import { Sessions } from '@components/Sessions'
-import { HomeHeader } from '@components/HomeHeader'
+import { HomeProduct } from '@components/HomeProduct'
 import { VStack, Text, Divider, HStack, FlatList } from 'native-base'
 import { Filter } from '@components/Filter'
 import { Department } from '@components/Department'
@@ -9,19 +9,20 @@ import { ScrollView } from 'react-native-virtualized-view'
 import { Promotion } from '@components/Promotion'
 import { Group } from '@components/Group'
 import { useState } from 'react'
+import { AllProduct } from '@components/AllProduct'
 
 export function ProductList() {
   const [groups, setGroups] = useState([
-    'Carnes & Peixes',
-    'Frios & Laticínios',
-    'Higiene & Perfumaria',
-    'Bebidas',
+    'Carnes Bovinas',
+    'Aves',
+    'Peixes',
+    'Linguiças',
   ])
-  const [groupSelected, setGroupSelected] = useState('Carnes & Peixes')
+  const [groupSelected, setGroupSelected] = useState('Carnes Bovinas')
 
   return (
     <VStack flex={1}>
-      <HomeHeader />
+      <HomeProduct />
 
       <FlatList
         data={groups}
@@ -44,10 +45,11 @@ export function ProductList() {
 
         <SeparatorItem />
         <VStack flex={1} bg={'white'}>
-          <Text fontSize={'lg'} paddingLeft={4} bg={'gray.100'}>
-            Carnes, Aves e Peixes
+          <Text fontSize={'sm'} paddingLeft={4} bg={'gray.100'}>
+            Açougue e peixaria
           </Text>
         </VStack>
+        <AllProduct />
       </ScrollView>
     </VStack>
   )

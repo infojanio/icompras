@@ -59,6 +59,13 @@ export function AuthRoutes() {
       }}
     >
 
+<Screen
+        name="productList"
+        component={ProductList}
+        options={{
+          tabBarButton: () => null,
+        }} //não mostra ícone
+      />
 
       <Screen
         name="home"
@@ -111,13 +118,7 @@ export function AuthRoutes() {
         }}
       />
 
-      <Screen
-        name="productList"
-        component={ProductList}
-        options={{
-          tabBarButton: () => null,
-        }} //não mostra ícone
-      />
+
 
       {/*  Inserir uma rota pra não aparecer o ícone no tabBar */}
       <Screen
