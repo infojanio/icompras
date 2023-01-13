@@ -21,7 +21,11 @@ import { SignUp } from '@screens/SignUp'
 import { SignIn } from '@screens/SignIn'
 import { ProductList } from '@screens/ProductList'
 
+
 type AuthRoutes = {
+  initial: undefined
+  address: undefined
+  localization: undefined
   home: undefined
   search: undefined
   cart: undefined
@@ -59,13 +63,8 @@ export function AuthRoutes() {
       }}
     >
 
-<Screen
-        name="productList"
-        component={ProductList}
-        options={{
-          tabBarButton: () => null,
-        }} //não mostra ícone
-      />
+
+
 
       <Screen
         name="home"
@@ -84,9 +83,18 @@ export function AuthRoutes() {
           tabBarLabel: 'Pesquisar',
           tabBarIcon: ({ color }) => (
             <SearchSvg fill={color} width={iconSize} height={iconSize} />
-          ),
-        }}
+            ),
+          }}
       />
+
+          <Screen
+                  name="productList"
+                  component={ProductList}
+                  options={{
+                    tabBarButton: () => null,
+                  }} //não mostra ícone
+                />
+
       <Screen
         name="cart"
         component={SignIn}
