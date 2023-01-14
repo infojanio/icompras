@@ -3,14 +3,6 @@
     "name": "icompras",
     "slug": "icompras",
     "version": "1.0.0",
-    "permissions": [
-      "ACCESS_COARSE_LOCATION",
-      "ACCESS_FINE_LOCATION",
-      "FOREGROUND_SERVICE",
-      "ACCESS_BACKGROUND_LOCATION"
-    ],
-    "assetBundlePatterns": [
-      "**/*"
-    ]
+    "assetBundlePatterns": ["**/*"]
   }
 }
