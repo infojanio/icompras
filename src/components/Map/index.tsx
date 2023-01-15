@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import MapView, { Marker } from 'react-native-maps'
+import MapView, { Marker, Region } from 'react-native-maps'
 import {
   StyleSheet,
   View,
@@ -8,10 +8,28 @@ import {
   PermissionsAndroid,
 } from 'react-native'
 
+const { width, height } = Dimensions.get('screen')
+
 //import Geolocation from '@react-native-community/geolocation'
 import * as Location from 'expo-location'
+import { MapCard } from '@components/MapCard'
 
-const { width, height } = Dimensions.get('screen')
+//Pede ao usuário permissão pra mostrar a localização
+const getMyLocation = async (): Promise<Region | undefined> => {
+  let { status } = await Location.requestForegroundPermissionsAsync()
+  if (status !== 'granted') return
+
+  const { latitude, longitude } = (
+    await Location.getCurrentPositionAsync({})
+  ).coords
+  const region = {
+    latitude,
+    longitude,
+    latitudeDelta: 0.035,
+    longitudeDelta: 0.035,
+  }
+  return region
+}
 
 /* 
 fazer a tipagem
@@ -24,13 +42,20 @@ type region = LocationObject
  */
 export function Map() {
   const [region, setRegion] = useState()
-  const [markers, setMarkers] = useState([]) //
+  const [markers, setMarkers] = useState([])
+
   const mapRef = useRef<MapView>(null)
 
+  const goToMyLocation = async () => {
+    const region = await getMyLocation() //pega a localização do usuário
+    region && mapRef.current?.animateToRegion(region, 1000) //dá um zoom até o local do usuário
+  }
+
+  /*
   useEffect(() => {
     handleMyPermission()
   }, [])
-
+  
   //pega a permissão em projetos EXPO
   function handleMyPermission() {
     ;(async () => {
@@ -39,18 +64,19 @@ export function Map() {
         //setErrorMsg('Permission to access location was denied')
         return
       }
-
+      
       let region = await Location.getCurrentPositionAsync({})
-
+      
       setRegion(region)
       console.log(region)
     })()
   }
-
+  
   //Mostra o ponto atual do usuário no mapa
   function PointActual() {
     const mapRef = useRef<MapView>(null)
   }
+  */
 
   //cria um marcador no mapa
   function newMarker(e) {
@@ -96,9 +122,13 @@ export function Map() {
         zoomEnabled={true}
         minZoomLevel={15}
         showsUserLocation={true}
+        onMapLoaded={() => {
+          goToMyLocation()
+        }}
         loadingEnabled={true}
         onPress={(e) => newMarker(e)}
       >
+        <MapCard />
         {markers.map((marker) => {
           return (
             <Marker
