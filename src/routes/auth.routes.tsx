@@ -22,10 +22,11 @@ import { SignIn } from '@screens/SignIn'
 import { ProductList } from '@screens/ProductList'
 
 
+
 type AuthRoutes = {
   initial: undefined
   address: undefined
-  localization: undefined
+
   home: undefined
   search: undefined
   cart: undefined
@@ -63,7 +64,8 @@ export function AuthRoutes() {
       }}
     >
 
-
+    
+   
 
 
       <Screen

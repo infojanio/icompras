@@ -1,15 +1,15 @@
-import { Sessions } from '@components/Sessions'
-import { HomeProduct } from '@components/HomeProduct'
+import { Sessions } from 'src/components/Sessions'
+import { HomeProduct } from 'src/components/HomeProduct'
 import { VStack, Text, Divider, HStack, FlatList } from 'native-base'
-import { Filter } from '@components/Filter'
-import { Department } from '@components/Department'
+import { Filter } from 'src/components/Filter'
+import { Department } from 'src/components/Department'
 
-import { SeparatorItem } from '@components/SeparatorItem'
+import { SeparatorItem } from 'src/components/SeparatorItem'
 import { ScrollView } from 'react-native-virtualized-view'
-import { Promotion } from '@components/Promotion'
-import { Group } from '@components/Group'
+import { Promotion } from 'src/components/Promotion'
+import { Group } from 'src/components/Group'
 import { useState } from 'react'
-import { AllProduct } from '@components/AllProduct'
+import { AllProduct } from 'src/components/AllProduct'
 
 export function ProductList() {
   const [groups, setGroups] = useState([

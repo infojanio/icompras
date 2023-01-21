@@ -5,10 +5,13 @@ import { Localization } from '../screens/Localization'
 
 const { Navigator, Screen } = createNativeStackNavigator()
 
+
+
+
 export function StackRoutes() {
   return (
     <Navigator screenOptions={{ headerShown: false }}>
-      <Screen name="Localization" component={Localization} />    
+      <Screen name="localization" component={Localization} />    
       </Navigator>
   )
 }

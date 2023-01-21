@@ -1,14 +1,14 @@
-import { Sessions } from '@components/Sessions'
-import { HomeHeader } from '@components/HomeHeader'
+import { Sessions } from 'src/components/Sessions'
+import { HomeHeader } from 'src/components/HomeHeader'
 import { VStack, Text, Divider } from 'native-base'
-import { Filter } from '@components/Filter'
-import { Department } from '@components/Department'
+import { Filter } from 'src/components/Filter'
+import { Department } from 'src/components/Department'
 
-import { SeparatorItem } from '@components/SeparatorItem'
+import { SeparatorItem } from 'src/components/SeparatorItem'
 import { ScrollView } from 'react-native-virtualized-view'
-import { Promotion } from '@components/Promotion'
+import { Promotion } from 'src/components/Promotion'
 import { ProductList } from '@screens/ProductList'
-import { Group } from '@components/Group'
+import { Group } from 'src/components/Group'
 
 export function Home() {
   return (
