@@ -26,7 +26,7 @@ import {MapTypeCard} from '@components/MapTypeCard'
 import {MapType } from '@utils/MapType'
 import {NewMarker } from '@components/NewMarker'
 
-import database from '../NewMarker/database'
+import database from '../../components/NewMarker/database'
 
 interface PointProperties {
   cluster: boolean;

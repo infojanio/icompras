@@ -17,12 +17,23 @@ function getRandomColor(): 'red' | 'green' {
   return Math.random() > 0.5 ? 'red' : 'green'
 }
 
+/*
 function getRandomLatitude(min = -6, max = -23) {
   return Math.random() * (max - min) + min
 }
 
+
 function getRandomLongitude(min = -40, max = -60) {
   return Math.random() * (max - min) + min
+}
+*/
+
+function getCityLatitude(latitude: Coordinates) {
+  return latitude
+}
+
+function getCityLongitude(longitude: Coordinates) {
+  return longitude
 }
 
 function generateRandomMarkers(numberOfmarkers = 1) {
@@ -32,8 +43,8 @@ function generateRandomMarkers(numberOfmarkers = 1) {
       id: i,
       color: getRandomColor(),
       coordinates: {
-        latitude: getRandomLatitude(),
-        longitude: getRandomLongitude(),
+        latitude: -13.037538,
+        longitude: -46.770345,
       },
     })
   }
@@ -41,7 +52,7 @@ function generateRandomMarkers(numberOfmarkers = 1) {
 }
 
 const database: Database = {
-  markers: generateRandomMarkers(10),
+  markers: generateRandomMarkers(0),
 }
 
 export default database

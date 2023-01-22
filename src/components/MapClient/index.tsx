@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 
 import { Dimensions, StyleSheet, Text } from 'react-native'
-import { View, Image } from 'native-base'
+import { View, Image, Box } from 'native-base'
 
 const { width, height } = Dimensions.get('screen')
 
@@ -16,9 +16,8 @@ import { ButtonBack } from '@components/ButtonBack'
 import { MapTypeCard } from '@components/MapTypeCard'
 import { LocationActual } from '@components/LocationActual'
 import database from '@components/NewMarker/database'
-import { useIsPressed } from 'native-base/lib/typescript/components/primitives'
 
-import PhotoSvg from '@assets/account.svg'
+import PhotoPng from '@assets/fundo.png'
 import { ItemClick } from 'native-base/lib/typescript/components/composites/Typeahead/useTypeahead/types'
 
 //Pede ao usuário permissão pra mostrar a localização atual
@@ -129,7 +128,12 @@ export function MapClient() {
             key={marker.id}
             coordinate={marker.coordinates}
             pinColor={marker.color}
-          />
+            image={PhotoPng}
+          >
+            <Callout>
+              <Text>Local de entrega</Text>
+            </Callout>
+          </Marker>
         ))}
       </MapView>
 
