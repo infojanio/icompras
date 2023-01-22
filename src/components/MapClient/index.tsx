@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-import { Dimensions, StyleSheet, View, Text } from 'react-native'
+import { Dimensions, StyleSheet, Text } from 'react-native'
+import { View, Image } from 'native-base'
+
 const { width, height } = Dimensions.get('screen')
 
 import MapView, { Callout, LatLng, Marker, Region } from 'react-native-maps'
@@ -10,10 +12,14 @@ import * as Location from 'expo-location'
 import { MapGoogleType } from '@components/MapGoogleType'
 import { MapCard } from '@components/MapCard'
 import { NewMarker } from '@components/NewMarker'
-import { SearchCard } from '@components/SearchCard'
+import { ButtonBack } from '@components/ButtonBack'
 import { MapTypeCard } from '@components/MapTypeCard'
 import { LocationActual } from '@components/LocationActual'
 import database from '@components/NewMarker/database'
+import { useIsPressed } from 'native-base/lib/typescript/components/primitives'
+
+import PhotoSvg from '@assets/account.svg'
+import { ItemClick } from 'native-base/lib/typescript/components/composites/Typeahead/useTypeahead/types'
 
 //Pede ao usuário permissão pra mostrar a localização atual
 const getMyLocation = async (): Promise<Region | undefined> => {
@@ -42,7 +48,7 @@ export function MapClient() {
   })
 
   const [cardHeight, setCardHeight] = useState(0)
-  const [showCard, setShowCard] = useState<'search' | 'mapType'>('search')
+  const [showCard, setShowCard] = useState<'back' | 'mapType'>('back')
   const [mapType, setMapType] = useState<'standard' | 'satellite' | 'terrain'>(
     'standard',
   )
@@ -52,7 +58,7 @@ export function MapClient() {
   const mapRef = useRef<MapView>(null)
 
   useEffect(() => {
-    handleNewMarker()
+    handleMsg()
   }, [])
 
   const goToMyLocation = async () => {
@@ -67,7 +73,7 @@ export function MapClient() {
   }
   */
 
-  const handleTimesTemp = () => {}
+  const handleMsg = () => {}
 
   //adiciona marcador - 2 opção
   const handleNewMarker = async () => {
@@ -94,9 +100,8 @@ export function MapClient() {
   }
 
   return (
-    <View style={styles.container}>
+    <View flex={1}>
       <MapView
-        onPress={(e) => handleNewMarker(e.nativeEvent.coordinate)}
         style={styles.map}
         ref={mapRef}
         onMapReady={() => {
@@ -115,8 +120,10 @@ export function MapClient() {
             coordinate={markerCoordinates}
             onDragEnd={(e) => setMarkerCoordinates(e.nativeEvent.coordinate)}
             isPreselected={true}
+            title={'Local de entrega'}
           />
         )}
+
         {markers.map((marker) => (
           <Marker
             key={marker.id}
@@ -132,21 +139,20 @@ export function MapClient() {
         mBottom={cardHeight}
         onPress={() => setShowCard('mapType')}
       />
-
       <NewMarker
-        mBottom={cardHeight + 100}
+        mBottom={cardHeight}
         showMarkerSetter={showMarkerSetter}
         onPress={handleNewMarker}
       />
 
       <MapCard />
 
-      {showCard === 'search' ? (
-        <SearchCard handleLayoutChange={handleLayoutChange} />
+      {showCard === 'back' ? (
+        <ButtonBack handleLayoutChange={handleLayoutChange} />
       ) : (
         <MapTypeCard
           handleLayoutChange={handleLayoutChange}
-          closeModal={() => setShowCard('search')}
+          closeModal={() => setShowCard('back')}
           changeMapType={(mapType) => setMapType(mapType)}
         />
       )}
@@ -155,9 +161,6 @@ export function MapClient() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   map: {
     width: width,
     height: height,

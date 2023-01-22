@@ -13,9 +13,9 @@ export function NewMarker({ mBottom, onPress, showMarkerSetter }: Props) {
   return (
     <View
       position={'absolute'}
-      width={20}
+      width={44}
       height={20}
-      marginLeft={155}
+      marginLeft={300}
       marginTop={605}
     >
       <TouchableOpacity
@@ -29,6 +29,7 @@ export function NewMarker({ mBottom, onPress, showMarkerSetter }: Props) {
 }
 
 /*
+
         <TouchableOpacity onPress={onPress} >
             <Center bg={'gray.100'} borderRadius={'full'} padding={2} ml={2} mr={8} opacity={0.85} >
             <MyLocationSvg />

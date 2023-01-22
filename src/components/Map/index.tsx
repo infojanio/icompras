@@ -18,7 +18,7 @@ const { width, height } = Dimensions.get('screen')
 
 //import Geolocation from '@react-native-community/geolocation'
 import * as Location from 'expo-location'
-import { SearchCard } from '@components/SearchCard'
+import { SearchCard } from '@components/ButtonBack'
 import { Icon } from 'native-base'
 import { MaterialIcons } from '@expo/vector-icons'
 import {MyLocation} from '@c@utils/Mylocation

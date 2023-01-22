@@ -41,7 +41,7 @@ function generateRandomMarkers(numberOfmarkers = 1) {
 }
 
 const database: Database = {
-  markers: generateRandomMarkers(100),
+  markers: generateRandomMarkers(10),
 }
 
 export default database
