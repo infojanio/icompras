@@ -21,4 +21,4 @@ export default function App() {
       {fontsLoaded ? <Routes /> : <Loading />}
     </NativeBaseProvider>
   )
-}
+}   
