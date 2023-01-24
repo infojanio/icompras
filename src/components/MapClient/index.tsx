@@ -17,9 +17,8 @@ import { MapTypeCard } from '@components/MapTypeCard'
 import { LocationActual } from '@components/LocationActual'
 import database from '@components/NewMarker/database'
 
-
-import PhotoPng from '@assets/fundo.png'
-
+import PhotoPng from '@assets/UserLocal.png'
+import { ItemClick } from 'native-base/lib/typescript/components/composites/Typeahead/useTypeahead/types'
 
 
 //Pede ao usuário permissão pra mostrar a localização atual
