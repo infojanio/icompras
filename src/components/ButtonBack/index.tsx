@@ -26,16 +26,16 @@ export function ButtonBack() {
     >
       <TouchableOpacity onPress={handleGoBack}>
         <Icon
-          opacity={0.95}
+          opacity={1.25}
           as={<MaterialIcons name="arrow-back" />}
           size={6}
           mr={1}
           ml={4}
           _light={{
-            color: 'gray.600',
+            color: 'gray.800',
           }}
           _dark={{
-            color: 'gray.700',
+            color: 'gray.100',
           }}
         />
       </TouchableOpacity>
