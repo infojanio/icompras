@@ -18,25 +18,8 @@ import { LocationActual } from '@components/LocationActual'
 import database from '@components/NewMarker/database'
 
 import PhotoPng from '@assets/UserLocal.png'
-import { ItemClick } from 'native-base/lib/typescript/components/composites/Typeahead/useTypeahead/types'
+
 import { InfoAdd } from '@components/InfoAdd'
-
-//Pede ao usuário permissão pra mostrar a localização atual
-const getMyLocation = async (): Promise<Region | undefined> => {
-  let { status } = await Location.requestForegroundPermissionsAsync()
-  if (status !== 'granted') return
-
-  const { latitude, longitude } = (
-    await Location.getCurrentPositionAsync({})
-  ).coords
-  const region = {
-    latitude,
-    longitude,
-    latitudeDelta: 0.025,
-    longitudeDelta: 0.025,
-  }
-  return region
-}
 
 export function MapClient() {
   const [marker, setMarker] = useState([])
@@ -58,8 +41,33 @@ export function MapClient() {
   const mapRef = useRef<MapView>(null)
 
   useEffect(() => {
-    handleMsg()
+    getMyLocation()
+
+    let timer = setTimeout(() => {}, 1000)
+
+    return () => {
+      handleNewMarker()
+      console.log('O tempo foi:' + timer)
+    }
   }, [])
+
+  //Pede ao usuário permissão pra mostrar a localização atual
+  const getMyLocation = async (): Promise<Region | undefined> => {
+    let { status } = await Location.requestForegroundPermissionsAsync()
+    if (status !== 'granted') return
+
+    const { latitude, longitude } = (
+      await Location.getCurrentPositionAsync({})
+    ).coords
+    const region = {
+      latitude,
+      longitude,
+      latitudeDelta: 0.025,
+      longitudeDelta: 0.025,
+    }
+
+    return region
+  }
 
   const goToMyLocation = async () => {
     const region = await getMyLocation() //pega a localização do usuário

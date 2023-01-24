@@ -15,7 +15,7 @@ export function InfoAdd() {
       width={90}
       height={40}
       marginLeft={285}
-      marginTop={485}
+      marginTop={495}
     >
       <VStack justifyContent={'center'} ml={2} mr={8} opacity={0.85}>
         <Image
