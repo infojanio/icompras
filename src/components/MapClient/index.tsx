@@ -17,8 +17,9 @@ import { MapTypeCard } from '@components/MapTypeCard'
 import { LocationActual } from '@components/LocationActual'
 import database from '@components/NewMarker/database'
 
-import PhotoPng from '@assets/fundo.png'
+import PhotoPng from '@assets/UserLocal.png'
 import { ItemClick } from 'native-base/lib/typescript/components/composites/Typeahead/useTypeahead/types'
+import { InfoAdd } from '@components/InfoAdd'
 
 //Pede ao usuário permissão pra mostrar a localização atual
 const getMyLocation = async (): Promise<Region | undefined> => {
@@ -138,6 +139,8 @@ export function MapClient() {
       </MapView>
 
       <LocationActual mBottom={cardHeight} onPress={goToMyLocation} />
+
+      <InfoAdd />
 
       <MapGoogleType
         mBottom={cardHeight}
