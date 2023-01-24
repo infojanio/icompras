@@ -1,5 +1,5 @@
 import { StyleSheet, TouchableOpacity } from 'react-native'
-import { View, Center, Image, Box, Text, VStack } from 'native-base'
+import { View, Center, Image, Box, Text, HStack } from 'native-base'
 
 import IndicatorPng from '../../assets/down.png'
 
@@ -10,23 +10,32 @@ interface Props {
 
 export function InfoAdd() {
   return (
-    <View
-      position={'absolute'}
-      width={90}
-      height={40}
-      marginLeft={285}
-      marginTop={495}
+    <HStack      position={'absolute'}
+      width={120}
+      height={70}
+      marginLeft={20}
+      justifyContent={'space-between'}
+      marginTop={530}
+    
     >
-      <VStack justifyContent={'center'} ml={2} mr={8} opacity={0.85}>
+      <Box h={70} w={170} ml={2} mr={2} bg={'gray.100'} borderRadius="8" justifyContent={'center'}>
+      <Text fontSize={16} fontWeight={'bold'} textAlign={'center'}>Adicione a localização </Text>
+      <Text fontSize={14} textAlign={'center'}>Ajuste o ponto no mapa </Text>
+      </Box>
+
+      <Box h={20} w={120} borderRadius="20" textAlign="center" justifyContent={'space-between'} >
         <Image
-          size={120}
+          h={12}
+          w={10}
+          ml={'10'}
+          mb={'2'}
+
           source={IndicatorPng}
           defaultSource={IndicatorPng}
           alt="Pessoa comprando online"
-          resizeMode="contain"
-          position="relative"
-        />
-      </VStack>
-    </View>
+          />
+          </Box>
+
+    </HStack>
   )
 }
