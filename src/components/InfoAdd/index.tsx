@@ -11,24 +11,30 @@ interface Props {
 export function InfoAdd() {
   return (
     <HStack      position={'absolute'}
-      width={120}
+      width={160}
       height={70}
       marginLeft={20}
       justifyContent={'space-between'}
       marginTop={530}
     
     >
-      <Box h={70} w={170} ml={2} mr={2} bg={'gray.100'} borderRadius="8" justifyContent={'center'}>
-      <Text fontSize={16} fontWeight={'bold'} textAlign={'center'}>Adicione a localização </Text>
-      <Text fontSize={14} textAlign={'center'}>Ajuste o ponto no mapa </Text>
+      <Box h={70} w={180} ml={2} mr={2} bg={'gray.100'} 
+      borderTopRightRadius={30} 
+      borderTopLeftRadius={30}
+      borderBottomLeftRadius={30}
+       
+      justifyContent={'center'}
+      >
+      <Text fontSize={17} fontWeight={'bold'} textAlign={'center'}>Local de entrega </Text>
+      <Text fontSize={15} textAlign={'center'}>Ajuste sua localização </Text>
       </Box>
 
       <Box h={20} w={120} borderRadius="20" textAlign="center" justifyContent={'space-between'} >
         <Image
           h={12}
           w={10}
-          ml={'10'}
-          mb={'2'}
+          ml={'6'}
+          
 
           source={IndicatorPng}
           defaultSource={IndicatorPng}
