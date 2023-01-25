@@ -36,12 +36,13 @@ export function MapClient() {
   const markers = database.markers
   const mapRef = useRef<MapView>(null)
 
+  /*
   useEffect(() => {
     setTimeout(()=> {
       handleNewMarker()
-      }, 5000)
-//      console.log('passei no useeffect')      
+      }, 5000)    
   }, [])
+  */
 
   //Pede ao usuário permissão pra mostrar a localização atual
   const getMyLocation = async (): Promise<Region | undefined> => {
@@ -85,13 +86,10 @@ export function MapClient() {
         id: markers.length + 1,
         color: 'green',
         coordinates: markerCoordinates,
-      })
-
-      markers.map()
-      
+      })      
     }
     setShowMarkerSetter((v) => (!v))
-    console.log("Incluí novo NewMarker")
+  //  console.log("Incluí novo NewMarker")
   }
 
   //pega a altura da View
