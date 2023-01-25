@@ -1,13 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-import { Dimensions, StyleSheet, Text } from 'react-native'
-import { View, Image, Box } from 'native-base'
-
-const { width, height } = Dimensions.get('screen')
-
+import { View } from 'native-base'
 import MapView, { Callout, LatLng, Marker, Region } from 'react-native-maps'
+import { Dimensions, StyleSheet, Text } from 'react-native'
 
 import * as Location from 'expo-location'
+
+const { width, height } = Dimensions.get('screen')
 
 import { MapGoogleType } from '@components/MapGoogleType'
 import { MapCard } from '@components/MapCard'
@@ -15,15 +14,13 @@ import { NewMarker } from '@components/NewMarker'
 import { ButtonBack } from '@components/ButtonBack'
 import { MapTypeCard } from '@components/MapTypeCard'
 import { LocationActual } from '@components/LocationActual'
+import { InfoAdd } from '@components/InfoAdd'
 import database from '@components/NewMarker/database'
 
 import PhotoPng from '@assets/UserLocal.png'
 
-import { InfoAdd } from '@components/InfoAdd'
-
 export function MapClient() {
-  const [marker, setMarker] = useState([])
-
+  
   const [showMarkerSetter, setShowMarkerSetter] = useState(false)
   const [markerCoordinates, setMarkerCoordinates] = useState<LatLng>({
     latitude: 0,
@@ -37,27 +34,19 @@ export function MapClient() {
   )
 
   const markers = database.markers
-
   const mapRef = useRef<MapView>(null)
 
-
-
   useEffect(() => {
-   
     setTimeout(()=> {
       handleNewMarker()
-      }, 3000)
-
-    
-       console.log('carreguei o useeffect')
-      
-
+      }, 5000)
+//      console.log('passei no useeffect')      
   }, [])
-
 
   //Pede ao usuário permissão pra mostrar a localização atual
   const getMyLocation = async (): Promise<Region | undefined> => {
-    let { status } = await Location.requestForegroundPermissionsAsync()
+    let { status } = await Location.requestForegroundPermissionsAsync()        
+
     if (status !== 'granted') return
 
     const { latitude, longitude } = (
@@ -69,50 +58,40 @@ export function MapClient() {
       latitudeDelta: 0.025,
       longitudeDelta: 0.025,
     }
-    console.log('carreguei getMyLocation')
+    console.log("Minha localização: "+region?.latitude +" e "+ region?.longitude)
     return region
     
   }
 
-  
-
+  //direcionar o zoom para essa localização
   const goToMyLocation = async () => {
     const region = await getMyLocation() //pega a localização do usuário
     region && mapRef.current?.animateToRegion(region, 1000) //dá um zoom até o local do usuário
     
-    console.log("Carreguei o goToMyLocation")
+    console.log("Vou para o ponto: "+region?.latitude +" e "+ region?.longitude)
+    return region
   }
 
-  /*adicionar marcador - 1 opção
-  const handleNewMarker = (coordinate) => {
-    setMarker([...marker, coordinate])
-    console.log(coordinate)
-  }
-  */
-
- 
-  
-    
-    
-
-  //adiciona marcador - 2 opção
+  //adiciona marcador no local
   const handleNewMarker = async () => {
     if (!showMarkerSetter) {
-      //se o botão estiver habilitado adicionar
+      //se o botão adicionar não estiver habilitado
       const camera = await mapRef.current?.getCamera()
       camera?.center && setMarkerCoordinates(camera?.center) //centraliza a tela
-    
 
-    
     } else {
+      //salvar marcador
       markers.push({
         id: markers.length + 1,
         color: 'green',
         coordinates: markerCoordinates,
       })
+
+      markers.map()
+      
     }
-    console.log("carreguei o NewMarker")
-    setShowMarkerSetter((v) => !v)
+    setShowMarkerSetter((v) => (!v))
+    console.log("Incluí novo NewMarker")
   }
 
   //pega a altura da View
@@ -129,7 +108,7 @@ export function MapClient() {
         
         onMapReady={() => {
          goToMyLocation()
-          console.log('carreguei no MapView')
+          console.log('carreguei o MapView')
           
         }}
         loadingEnabled

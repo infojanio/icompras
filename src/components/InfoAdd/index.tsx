@@ -25,8 +25,8 @@ export function InfoAdd() {
        
       justifyContent={'center'}
       >
-      <Text fontSize={17} fontWeight={'bold'} textAlign={'center'}>Local de entrega </Text>
-      <Text fontSize={15} textAlign={'center'}>Ajuste sua localização </Text>
+      <Text fontSize={17} fontWeight={'bold'} textAlign={'center'}>Endereço de entrega </Text>
+      <Text fontSize={15} textAlign={'center'}>Confirme a localização! </Text>
       </Box>
 
       <Box h={20} w={120} borderRadius="20" textAlign="center" justifyContent={'space-between'} >
