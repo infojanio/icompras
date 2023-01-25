@@ -40,13 +40,20 @@ export function MapClient() {
 
   const mapRef = useRef<MapView>(null)
 
-  useEffect(() => {
-    getMyLocation()
 
-      return () => {
+
+  useEffect(() => {
+   
+    setTimeout(()=> {
       handleNewMarker()
-      }
+      }, 3000)
+
+    
+       console.log('carreguei o useeffect')
+      
+
   }, [])
+
 
   //Pede ao usuário permissão pra mostrar a localização atual
   const getMyLocation = async (): Promise<Region | undefined> => {
@@ -62,13 +69,18 @@ export function MapClient() {
       latitudeDelta: 0.025,
       longitudeDelta: 0.025,
     }
-
+    console.log('carreguei getMyLocation')
     return region
+    
   }
+
+  
 
   const goToMyLocation = async () => {
     const region = await getMyLocation() //pega a localização do usuário
     region && mapRef.current?.animateToRegion(region, 1000) //dá um zoom até o local do usuário
+    
+    console.log("Carreguei o goToMyLocation")
   }
 
   /*adicionar marcador - 1 opção
@@ -78,7 +90,10 @@ export function MapClient() {
   }
   */
 
-  const handleMsg = () => {}
+ 
+  
+    
+    
 
   //adiciona marcador - 2 opção
   const handleNewMarker = async () => {
@@ -86,8 +101,9 @@ export function MapClient() {
       //se o botão estiver habilitado adicionar
       const camera = await mapRef.current?.getCamera()
       camera?.center && setMarkerCoordinates(camera?.center) //centraliza a tela
+    
 
-      //adiciona um novo marcador no mapa
+    
     } else {
       markers.push({
         id: markers.length + 1,
@@ -95,6 +111,7 @@ export function MapClient() {
         coordinates: markerCoordinates,
       })
     }
+    console.log("carreguei o NewMarker")
     setShowMarkerSetter((v) => !v)
   }
 
@@ -109,8 +126,11 @@ export function MapClient() {
       <MapView
         style={styles.map}
         ref={mapRef}
+        
         onMapReady={() => {
-          goToMyLocation()
+         goToMyLocation()
+          console.log('carreguei no MapView')
+          
         }}
         loadingEnabled
         showsUserLocation
