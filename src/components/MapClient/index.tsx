@@ -69,7 +69,7 @@ export function MapClient() {
     const region = await getMyLocation() //pega a localização do usuário
     region && mapRef.current?.animateToRegion(region, 1000) //dá um zoom até o local do usuário
     
-    console.log("Vou para o ponto: "+region?.latitude +" e "+ region?.longitude)
+    //console.log("Vou para o ponto: "+region?.latitude +" e "+ region?.longitude)
     return region
   }
 
