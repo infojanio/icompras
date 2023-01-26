@@ -11,7 +11,7 @@ export function ButtonBack() {
   const navigation = useNavigation<AuthNavigatorRoutesProps>()
 
   function handleGoBack() {
-    // navigation.goBack()
+     navigation.goBack()
     console.log('voltei')
   }
 

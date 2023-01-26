@@ -22,11 +22,9 @@ import { SignIn } from '@screens/SignIn'
 import { ProductList } from '@screens/ProductList'
 
 
-
 type AuthRoutes = {
   initial: undefined
   address: undefined
-
   home: undefined
   search: undefined
   cart: undefined
@@ -47,9 +45,10 @@ export function AuthRoutes() {
   const { sizes, colors } = useTheme()
   const iconSize = sizes[8]
 
-  return (
+    return (
     <Navigator
-      screenOptions={{
+      initialRouteName='home'
+    screenOptions={{
         headerShown: false,
 
         tabBarActiveTintColor: colors.green[500],
@@ -64,10 +63,7 @@ export function AuthRoutes() {
       }}
     >
 
-    
-   
-
-
+  
       <Screen
         name="home"
         component={Home}

@@ -87,7 +87,7 @@ export function Initial() {
           <Select.Item label="Taguatinga - TO" value="ta" />
                  </Select>
      <Box mt={2}>
-     <Button title='Buscar Supermercados' />
+     <Button title='Buscar Supermercados' onPress={()=> navigation.navigate('localization')} />
      </Box>
 
       </Box>

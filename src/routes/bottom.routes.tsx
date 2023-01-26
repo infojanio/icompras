@@ -5,6 +5,7 @@ import {
   createBottomTabNavigator,
   BottomTabNavigationProp,
 } from '@react-navigation/bottom-tabs'
+import React from 'react'
 
 import HomeSvg from '@assets/home.svg'
 import SearchSvg from '@assets/search.svg'
@@ -18,39 +19,46 @@ import { Cart } from '@screens/Cart'
 import { Request } from '@screens/Request'
 import { Profile } from '@screens/Profile'
 import { SignUp } from '@screens/SignUp'
+import { SignIn } from '@screens/SignIn'
+import { ProductList } from '@screens/ProductList'
 
-type AppRoutes = {
+
+type BottomRoutes = {
+  initial: undefined
+  address: undefined
   home: undefined
   search: undefined
   cart: undefined
   request: undefined
   profile: undefined
   signUp: undefined
+  signIn: undefined
+  productList: undefined
 }
 
-export type AppNavigatorRoutesProps = BottomTabNavigationProp<AppRoutes>
+export type AuthNavigatorRoutesProps = BottomTabNavigationProp<BottomRoutes>
 
-const { Navigator, Screen } = createBottomTabNavigator<AppRoutes>()
+const { Navigator, Screen } = createBottomTabNavigator<BottomRoutes>()
 
 //rotas da aplicação
-export function AppRoutes() {
+export function BottomRoutes() {
   //definição do tamanho dos ícones
   const { sizes, colors } = useTheme()
   const iconSize = sizes[8]
 
-  return (
-    <Navigator
-      screenOptions={{
+    return (
+    <Navigator     
+    screenOptions={{
         headerShown: false,
-        // tabBarShowLabel: false,
+
         tabBarActiveTintColor: colors.green[500],
-        tabBarInactiveTintColor: colors.blueGray[800],
+        tabBarInactiveTintColor: colors.blueGray[600],
         tabBarStyle: {
           backgroundColor: colors.gray[100],
           borderTopWidth: 1,
-          height: Platform.OS === 'android' ? 'auto' : 96,
-          paddingBottom: sizes[8],
-          paddingTop: sizes[6],
+          height: Platform.OS === 'android' ? 60 : 96,
+          paddingBottom: sizes[2],
+          paddingTop: sizes[2],
         },
       }}
     >
@@ -58,6 +66,7 @@ export function AppRoutes() {
         name="home"
         component={Home}
         options={{
+          tabBarLabel: 'Home',
           tabBarIcon: ({ color }) => (
             <HomeSvg fill={color} width={iconSize} height={iconSize} />
           ),
@@ -67,15 +76,18 @@ export function AppRoutes() {
         name="search"
         component={Search}
         options={{
+          tabBarLabel: 'Pesquisar',
           tabBarIcon: ({ color }) => (
             <SearchSvg fill={color} width={iconSize} height={iconSize} />
-          ),
-        }}
+            ),
+          }}
       />
+        
       <Screen
         name="cart"
-        component={Cart}
+        component={SignIn}
         options={{
+          tabBarLabel: 'Carrinho',
           tabBarIcon: ({ color }) => (
             <CartSvg fill={color} width={iconSize} height={iconSize} />
           ),
@@ -83,8 +95,9 @@ export function AppRoutes() {
       />
       <Screen
         name="request"
-        component={Request}
+        component={SignIn}
         options={{
+          tabBarLabel: 'Pedidos',
           tabBarIcon: ({ color }) => (
             <RequestSvg fill={color} width={iconSize} height={iconSize} />
           ),
@@ -92,23 +105,17 @@ export function AppRoutes() {
       />
       <Screen
         name="profile"
-        component={Profile}
+        component={SignIn}
         options={{
+          tabBarLabel: 'Perfil',
           tabBarIcon: ({ color }) => (
             <ProfileSvg fill={color} width={iconSize} height={iconSize} />
           ),
         }}
       />
 
-      {/*  Inserir uma rota pra não aparecer o ícone no tabBar 
-      <Screen
-        name="profile"
-        component={Profile}
-        options={{
-          tabBarButton: () => null,
-        }} //não mostra ícone
-      />
-      */}
+      {/*  Inserir uma rota pra não aparecer o ícone no tabBar */}
+    
     </Navigator>
   )
 }

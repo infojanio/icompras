@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { TouchableOpacity } from 'react-native'
-import { Center, HStack, Icon, useTheme, Button, Alert } from 'native-base'
+import { Center, HStack, Icon, useTheme, Button } from 'native-base'
 
 import { UserPhoto } from './UserPhoto'
 
