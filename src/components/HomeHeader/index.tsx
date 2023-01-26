@@ -1,20 +1,23 @@
 import React from 'react'
-
 import { TouchableOpacity } from 'react-native'
 import { Center, HStack, Icon, useTheme, Button } from 'native-base'
+import { useNavigation } from '@react-navigation/native'
 
 import { UserPhoto } from './UserPhoto'
-
 import { MaterialIcons } from '@expo/vector-icons'
 import LocationSvg from '@assets/location.svg'
+import { StackNavigatorRoutesProps } from '@routes/stack.routes'
 
 const LogoImage =
   'https://play-lh.googleusercontent.com/BbcUGwdG1x5mJc-WXOwIblcYhmpyFPdBaunDHoWgS2L1ZUMeIncz1XZgKt7K1EKFHA=w240-h480'
 
 export function HomeHeader() {
+  const navigation = useNavigation< StackNavigatorRoutesProps>()
+  
   //definição do tamanho dos ícones
   const { sizes, colors } = useTheme()
   const iconSize = sizes[10]
+
 
   function OpenLogo() {
     console.log('Abrir janela da logoMarca')
@@ -59,7 +62,7 @@ export function HomeHeader() {
         </Button>
       </Center>
 
-      <TouchableOpacity>
+      <TouchableOpacity onPress={()=> navigation.navigate('initial')}>
         <Icon
           as={<MaterialIcons name="logout" />}
           size={6}

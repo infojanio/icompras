@@ -1,31 +1,26 @@
 import React from 'react'
 import {
   VStack,
-  Image,
   Center,
   Text,
-  Heading,
   View,
   ScrollView,
   IconButton,
   Box,
   Icon,
   Divider,
-  Flex,
   Stack,
 } from 'native-base'
 
 import { AuthNavigatorRoutesProps } from '@routes/auth.routes'
-import LogoSvg from '@assets/logomarca.svg'
-import GoogleSvg from '../../assets/google.svg'
-
-import { Input } from 'src/components/Input'
-import { Button } from 'src/components/Button'
-import { Feather } from '@expo/vector-icons'
 import { MaterialIcons } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-//import BackgoundImg from '@assets/background.png'
+
+import LogoSvg from '@assets/logomarca.svg'
+import { Input } from '@components/Input'
+import { Button } from '@components/Button'
+import { Feather } from '@expo/vector-icons'
 
 export function SignIn() {
   const [show, setShow] = React.useState(false) //mostra senha

@@ -4,35 +4,21 @@ import {
   Image,
   Center,
   Text,
-  Heading,
-  View,
-  ScrollView,
-  IconButton,
   Box,
-  Icon,
-  Divider,
-  Flex,
-  Stack,
-
   Select,
   CheckIcon,
 } from 'native-base'
 
-import { Button } from '@components/Button'
-import { StackNavigatorRoutesProps } from '@routes/stack.routes'
-import LogoPng from '@assets/logoInitial.png'
-
-
 import { useNavigation } from '@react-navigation/native'
+import { StackNavigatorRoutesProps } from '@routes/stack.routes'
+
+import { Button } from '@components/Button'
+import LogoPng from '@assets/logoInitial.png'
 
 export function Initial() {
   const [service, setService] = useState("");
   const navigation = useNavigation<StackNavigatorRoutesProps>()
 
-  //Criar nova conta
-  function handleGoHome() {
-   // navigation.navigate('City')
-  }
 
   //voltar a tela anterior
   function handleGoBack() {
@@ -87,7 +73,7 @@ export function Initial() {
           <Select.Item label="Taguatinga - TO" value="ta" />
                  </Select>
      <Box mt={2}>
-     <Button title='Buscar Supermercados' onPress={()=> navigation.navigate('localization')} />
+     <Button title='Buscar Supermercados' onPress={()=> navigation.navigate('home')} />
      </Box>
 
       </Box>

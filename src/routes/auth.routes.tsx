@@ -6,24 +6,20 @@ import {
   BottomTabNavigationProp,
 } from '@react-navigation/bottom-tabs'
 
+import { Home } from '@screens/Home'
+import { Search } from '@screens/Search'
+import { SignUp } from '@screens/SignUp'
+import { SignIn } from '@screens/SignIn'
+import { ProductList } from '@screens/ProductList'
+
 import HomeSvg from '@assets/home.svg'
 import SearchSvg from '@assets/search.svg'
 import CartSvg from '@assets/cart.svg'
 import RequestSvg from '@assets/request.svg'
 import ProfileSvg from '@assets/profile.svg'
 
-import { Home } from '@screens/Home'
-import { Search } from '@screens/Search'
-import { Cart } from '@screens/Cart'
-import { Request } from '@screens/Request'
-import { Profile } from '@screens/Profile'
-import { SignUp } from '@screens/SignUp'
-import { SignIn } from '@screens/SignIn'
-import { ProductList } from '@screens/ProductList'
-
-
 type AuthRoutes = {
-  initial: undefined
+  
   address: undefined
   home: undefined
   search: undefined
@@ -39,7 +35,7 @@ export type AuthNavigatorRoutesProps = BottomTabNavigationProp<AuthRoutes>
 
 const { Navigator, Screen } = createBottomTabNavigator<AuthRoutes>()
 
-//rotas da aplicação
+//rotas para usuários autenticados
 export function AuthRoutes() {
   //definição do tamanho dos ícones
   const { sizes, colors } = useTheme()

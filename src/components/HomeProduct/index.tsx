@@ -7,15 +7,12 @@ import {
   Icon,
   useTheme,
   Text,
-  Button,
-  Alert,
-  Stack,
   VStack,
 } from 'native-base'
 
 import { MaterialIcons } from '@expo/vector-icons'
-import LocationSvg from '@assets/location.svg'
 import { Input } from '@components/Input'
+import { ButtonBack } from '@components/ButtonBack'
 
 const LogoImage =
   'https://play-lh.googleusercontent.com/BbcUGwdG1x5mJc-WXOwIblcYhmpyFPdBaunDHoWgS2L1ZUMeIncz1XZgKt7K1EKFHA=w240-h480'
@@ -38,22 +35,9 @@ export function HomeProduct() {
         justifyContent="space-between"
         alignItems="center"
       >
-        <TouchableOpacity>
-          <Icon
-            as={<MaterialIcons name="arrow-back" />}
-            size={6}
-            mr={1}
-            ml={4}
-            _light={{
-              color: 'gray.600',
-            }}
-            _dark={{
-              color: 'gray.700',
-            }}
-          />
-        </TouchableOpacity>
+        <ButtonBack />
 
-        <Text>Açougue e Peixaria</Text>
+        <Text ml={8} alignItems={'center'}>Açougue e Peixaria</Text>
         <Text fontWeight={'bold'} fontSize={16} color="red.600" ml={4}>
           R$ 0,00
         </Text>

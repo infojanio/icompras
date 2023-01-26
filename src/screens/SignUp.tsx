@@ -14,10 +14,12 @@ import {
   Stack,
 } from 'native-base'
 
-import { Input } from 'src/components/Input'
-import { Button } from 'src/components/Button'
 import { Feather } from '@expo/vector-icons'
 import { MaterialIcons } from '@expo/vector-icons'
+
+import { Input } from '@components/Input'
+import { Button } from '@components/Button'
+
 
 export function SignUp() {
   const navigation = useNavigation()
