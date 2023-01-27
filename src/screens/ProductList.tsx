@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { ScrollView } from 'react-native-virtualized-view'
-import { VStack, Text, Divider, HStack, FlatList } from 'native-base'
+import { VStack, Text, Divider, HStack, FlatList, View } from 'native-base'
 
 import { HomeProduct } from '@components/HomeProduct'
 import { SeparatorItem } from '@components/SeparatorItem'
@@ -21,13 +21,14 @@ export function ProductList() {
 
   return (
     <VStack flex={1}>
-      <HomeScreen title="Açougue e Peixaria" price={30} />
+      <HomeScreen title={'Carnes Bovinas'} />
 
       <FlatList
         data={groups}
         keyExtractor={(item) => item}
         renderItem={({ item }) => (
           <Group
+
             name={item}
             isActive={groupSelected === item}
             onPress={() => setGroupSelected(item)}
@@ -39,17 +40,14 @@ export function ProductList() {
         maxH={16}
       />
 
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <VStack flex={1} bg={'gray.200'} marginTop={2}></VStack>
-
         <SeparatorItem />
-        <VStack flex={1} bg={'white'}>
-          <Text fontSize={'md'} paddingLeft={4} bg={'red.100'}>
-            Açougue e peixaria
-          </Text>
-        </VStack>
-        <AllProduct />
+      <ScrollView showsVerticalScrollIndicator={false}>
+
+<AllProduct />
+
+        <VStack flex={1} bg={'gray.200'} marginTop={2}></VStack>
       </ScrollView>
+        
     </VStack>
   )
 }

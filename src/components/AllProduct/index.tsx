@@ -76,7 +76,7 @@ export function AllProduct() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Produtos</Text>
+     
       <TextInput
         style={styles.input}
         placeholder={'Buscar produto'}
@@ -114,16 +114,17 @@ export function AllProduct() {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
+    marginTop: 20,
   },
 
   input: {
     borderColor: '#eee',
     borderWidth: 1,
     borderRadius: 4,
-    height: 40,
+    height: 50,
     marginHorizontal: 20,
     paddingLeft: 10,
-    marginTop: 10,
+    marginTop: 20,
     marginBottom: 20,
   },
 })

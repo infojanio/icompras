@@ -8,6 +8,7 @@ import {
   useTheme,
   Text,
   VStack,
+  Box,
 } from 'native-base'
 
 import { MaterialIcons } from '@expo/vector-icons'
@@ -16,9 +17,10 @@ import { ButtonBack } from '@components/ButtonBack'
 import { Double } from 'react-native/Libraries/Types/CodegenTypes'
 
 interface Props {
-  title: string
+ 
   price: number
   quantity: number
+  title: string
 }
 
 
@@ -34,51 +36,39 @@ export function HomeCart({title, price, quantity}: Props) {
         paddingTop={2}
         justifyContent="space-between"
         alignItems="center"
+        borderBottomWidth={0.2}
       >
         <ButtonBack />
 
-        <Text ml={8} alignItems={'center'}>{title}</Text>
-        <Text fontWeight={'bold'} fontSize={16} color="green.700" ml={4}>
-          Total R$ {price}
+        <Box mr={16}>
+        <Text fontWeight={'semibold'} fontStyle={'oblique'} fontSize={18} color="black" >
+          {title}
         </Text>
+        </Box>
 
-        <VStack  mr={4} alignItems={'center'} justifyContent={'center'} >  
-        <Center bg={'red.500'} borderRadius='full' padding={1}>
-        <Text fontSize={14} fontWeight={'bold'} color='white'> 
+        <VStack mr={2} alignItems={'center'} justifyContent={'center'} >  
+        <Center mr={1} bg={'red.500'} borderRadius='full' padding={1}>
+        <Text fontSize={12} fontWeight={'bold'} color='white'> 
         {quantity}
         </Text>
         </Center>
+        <Box mt={-2} mr={4}>
           <Icon
+        
             as={<MaterialIcons name="shopping-cart" />}
-            size={8}
-            
+            size={7}            
             _light={{
-              color: 'gray.700',
+              color: 'green.700',
             }}
             _dark={{
-              color: 'gray.700',
+              color: 'green.700',
             }}
           />
-       
+       </Box>
         </VStack>
 
       </HStack>
 
-      <Center pr={4} ml="2" mr="2" mt="4" flexDirection="row">
-        <Input
-          flex={1}
-          borderRadius="md"
-          borderBottomWidth={2}
-          size="md"
-          placeholder="Buscar produtos"
-          _light={{
-            placeholderTextColor: 'blueGray.500',
-          }}
-          _dark={{
-            placeholderTextColor: 'blueGray.100',
-          }}
-        />{' '}
-      </Center>
     </VStack>
   )
 }

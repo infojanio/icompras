@@ -24,7 +24,7 @@ export function CategoryItem({ id, title, image }: Category) {
         alignItems="center"
         marginLeft={2}
         marginRight={2}
-        pb={2}
+        
         borderRadius={'xl'}
       >
         <Image alt="produtos" ml={2} height={24} width={24} source={image} />

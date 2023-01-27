@@ -28,32 +28,20 @@ export function HomeScreen({title}: Props) {
   return (
     <VStack>
       <HStack
-        bg="gray.200"      
-        paddingTop={2}
+        bg="gray.300"      
+        pt={2}        
+        mb={2}
         justifyContent="space-between"
         alignItems="center"
+        borderBottomWidth={0.2}
       >
         <ButtonBack />
-
-        <Text ml={8} alignItems={'center'}>{title}</Text>
-        
+        <Center justifyContent={'center'} paddingBottom={2}>
+        <Text mr={180} fontSize={18} fontWeight={'bold'}  justifyContent="center" alignItems={'center'}>{title}</Text>
+        </Center>   
+      
       </HStack>
-
-      <Center pr={4} ml="2" mr="2" mt="4" flexDirection="row">
-        <Input
-          flex={1}
-          borderRadius="md"
-          borderBottomWidth={2}
-          size="md"
-          placeholder="Buscar produtos"
-          _light={{
-            placeholderTextColor: 'blueGray.500',
-          }}
-          _dark={{
-            placeholderTextColor: 'blueGray.100',
-          }}
-        />{' '}
-      </Center>
+      
     </VStack>
   )
 }

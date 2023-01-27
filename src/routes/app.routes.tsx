@@ -15,6 +15,7 @@ import ProfileSvg from '@assets/profile.svg'
 import { Home } from '@screens/Home'
 import { Search } from '@screens/Search'
 import { Cart } from '@screens/Cart'
+import { CartVazio } from '@components/CartVazio'
 import { Request } from '@screens/Request'
 import { Profile } from '@screens/Profile'
 import { Localization } from '@screens/Localization'
@@ -25,6 +26,7 @@ type AppRoutes = {
   homeScreen: undefined 
   search: undefined
   cart: undefined
+  cartVazio: undefined
   request: undefined
   profile: undefined
   signUp: undefined
@@ -79,8 +81,8 @@ export function AppRoutes() {
       />
       
       <Screen
-        name="cart"
-        component={Cart}
+        name="cartVazio"
+        component={CartVazio}
         options={{
           
           title: 'Carrinho',             
