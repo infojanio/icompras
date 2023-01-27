@@ -6,6 +6,8 @@ import { HomeProduct } from '@components/HomeProduct'
 import { SeparatorItem } from '@components/SeparatorItem'
 import { Group } from '@components/Group'
 import { AllProduct } from '@components/AllProduct'
+import { HomeScreen } from '@components/HomeScreen'
+
 
 
 export function ProductList() {
@@ -19,7 +21,7 @@ export function ProductList() {
 
   return (
     <VStack flex={1}>
-      <HomeProduct />
+      <HomeScreen title="Açougue e Peixaria" price={30} />
 
       <FlatList
         data={groups}
@@ -42,7 +44,7 @@ export function ProductList() {
 
         <SeparatorItem />
         <VStack flex={1} bg={'white'}>
-          <Text fontSize={'sm'} paddingLeft={4} bg={'gray.100'}>
+          <Text fontSize={'md'} paddingLeft={4} bg={'red.100'}>
             Açougue e peixaria
           </Text>
         </VStack>

@@ -44,7 +44,7 @@ export function AppRoutes() {
     <Navigator
     initialRouteName='homeScreen'
       screenOptions={{
-        //headerShown: false,
+        headerShown: false,
        //  tabBarShowLabel: true,
         tabBarActiveTintColor: colors.green[500],
         tabBarInactiveTintColor: colors.blueGray[800],
@@ -82,16 +82,16 @@ export function AppRoutes() {
         name="cart"
         component={Cart}
         options={{
-          title: 'Carrinho',   
+          
+          title: 'Carrinho',             
           headerStyle: {
             backgroundColor: '#c6c9c1',
           },
           headerTintColor: '#272525',
           headerTitleStyle: {
-            justifyContent: 'center',
-            textAlign: 'center',
             fontSize: 18
           },
+        
           tabBarIcon: ({ color }) => (
             <CartSvg fill={color} width={iconSize} height={iconSize} />
           ),
@@ -138,15 +138,7 @@ export function AppRoutes() {
         }}
       />
 
-      {/*  Inserir uma rota pra não aparecer o ícone no tabBar 
-      <Screen
-        name="profile"
-        component={Profile}
-        options={{
-          tabBarButton: () => null,
-        }} //não mostra ícone
-      />
-      */}
+     
     </Navigator>
   )
 }
