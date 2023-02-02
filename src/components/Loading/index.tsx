@@ -13,7 +13,7 @@ export function Loading() {
         resizeMode="contain"
         position="relative"
       />
-      <Text fontSize={14}>Compre App Soluctions </Text>
+      <Text fontSize={14}>iCompras Online </Text>
 
       <Spinner color="green.500" />
     </Center>
