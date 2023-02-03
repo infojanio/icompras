@@ -18,6 +18,7 @@ import { Market } from '@components/Market'
 
 export function SuperMarket() {
 <<<<<<< HEAD
+<<<<<<< HEAD
   const [markets, setMarkets] = useState([1, 2, 3, 4, 5, 6, 7])
   const [marketSelected, setMarketSelected] = useState('Supermercado Goiano')
 
@@ -33,13 +34,20 @@ export function SuperMarket() {
     'Supermercado do ponto',
     'Supermercado Bahia',
   ])
+=======
+  const [markets, setMarkets] = useState([1, 2, 3, 4, 5, 6, 7])
+>>>>>>> lista de supermercados
   const [marketSelected, setMarketSelected] = useState('Supermercado Goiano')
 
   return (
     <VStack flex={1}>
       <HomeScreen title={'Supermercados'} />
 
+<<<<<<< HEAD
       <Center bg={'amber.400'} flex={1}>
+>>>>>>> lista de supermercados
+=======
+      <Center bg={'gray.100'} flex={1}>
 >>>>>>> lista de supermercados
         <FlatList
           showsVerticalScrollIndicator
@@ -48,8 +56,11 @@ export function SuperMarket() {
           renderItem={({ item }) => (
             <Market
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
               w={120}
+>>>>>>> lista de supermercados
+=======
 >>>>>>> lista de supermercados
               name={item}
               isActive={marketSelected === item}

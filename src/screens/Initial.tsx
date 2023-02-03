@@ -9,18 +9,9 @@ import {
   CheckIcon,
 } from 'native-base'
 
-<<<<<<< HEAD
-import { useNavigation } from '@react-navigation/native'
-import { StackNavigatorRoutesProps } from '@routes/stack.routes'
-import LogoPng from '@assets/logoInitial.png'
-
-import { TouchableOpacity } from 'react-native'
-import { Button } from '@components/Button'
-=======
 import { Button } from '@components/Button'
 import { StackNavigatorRoutesProps } from '@routes/stack.routes'
 import LogoPng from '@assets/logoInitial.png'
->>>>>>> lista de supermercados
 
 import { useNavigation } from '@react-navigation/native'
 import { TouchableOpacity } from 'react-native'
@@ -33,7 +24,6 @@ export function Initial() {
     <VStack bg={'gray.50'} flex={1}>
       <Box alignItems={'center'} bg={'gray.50'}>
         <Image alt="Imagem logo" h={310} w={360} source={LogoPng} />
-<<<<<<< HEAD
       </Box>
 
       <Box
@@ -58,32 +48,6 @@ export function Initial() {
       </Box>
 
       <Box
-=======
-      </Box>
-
-      <Box
-        borderWidth={'0.2'}
-        bg={'blue.600'}
-        pb={2}
-        ml={4}
-        mr={4}
-        borderBottomRadius={1}
-        borderTopRadius={50}
-        alignItems={'center'}
-        justifyContent={'center'}
-        marginTop={2}
-      >
-        <Text color={'white'} fontWeight={'bold'} fontSize={'24'}>
-          Click Fácil
-        </Text>
-
-        <Text color={'white'} fontSize={'16'}>
-          Compre no aplicativo e receba em sua casa
-        </Text>
-      </Box>
-
-      <Box
->>>>>>> lista de supermercados
         bg={'gray.100'}
         borderRadius={2}
         borderWidth={'0.2'}

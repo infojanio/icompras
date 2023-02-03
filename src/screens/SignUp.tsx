@@ -355,14 +355,7 @@ export function SignUp() {
       </View>
 
       <View marginLeft="4" marginRight="4" marginTop="0.5">
-<<<<<<< HEAD
-        <Button
-          title="Próximo"
-          onPress={() => navigation.navigate('localization')}
-        />
-=======
         <Button title="Cadastrar" onPress={() => navigation.navigate('home')} />
->>>>>>> lista de supermercados
       </View>
     </ScrollView>
   )
