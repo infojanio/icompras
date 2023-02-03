@@ -1,48 +1,45 @@
-import { SeparatorItem } from '@components/SeparatorItem'
+import React from 'react'
 import {
-  Text,
-  Pressable,
-  IPressableProps,
-  VStack,
-  Divider,
   View,
+  Text,
+  Image,
+  HStack,
+  VStack,
+  ScrollView,
+  Box,
+  Center,
 } from 'native-base'
 
-type Props = IPressableProps & {
-  name: string
-  isActive: boolean
-}
+import MarketPng from '@assets/logoMercado/03.png'
+import { TouchableOpacity } from 'react-native'
 
-export function Market({ name, isActive, ...rest }: Props) {
+export function Market() {
   return (
-    <Pressable
-      mr={1}
-      ml={1}
-      mt={2}
-      mb={2}
-      w={32}
-      h={12}
-      bg={'gray.50'}
-      rounded="md"
-      justifyContent="center"
-      alignItems="center"
-      overflow="hidden"
-      isPressed={isActive}
-      _pressed={{
-        bgColor: 'gray.100',
-        borderColor: 'red.500',
-        borderBottomWidth: 2,
-      }}
-      {...rest}
-    >
-      <Text
-        color={isActive ? 'green.700' : 'gray.700'}
-        textTransform="uppercase"
-        fontSize="xs"
-        fontWeight="bold"
+    <TouchableOpacity>
+      <HStack
+        justifyContent={'space-between'}
+        bg={'blue.200'}
+        h={120}
+        w={345}
+        mb={2}
+        borderRadius={8}
       >
-        {name}
-      </Text>
-    </Pressable>
+        <VStack>
+          <Box h={110} w={170} ml={1} mt={2} alignItems={'center'}>
+            <Text fontSize={18} fontWeight={'bold'}>
+              Supermercado Lima
+            </Text>
+            <Text fontSize={14} fontWeight={'bold'}>
+              Horário de Atendimento
+            </Text>
+            <Text>Seg/Sáb (07:00 - 19:00) </Text>
+            <Text>Domingo (07:00 - 12:00) </Text>
+          </Box>
+        </VStack>
+        <Center mt={2} mb={4} mr={2} alignItems={'center'} h={110} w={155}>
+          <Image alt="Logo do mercado" source={MarketPng} h={70} w={150} />
+        </Center>
+      </HStack>
+    </TouchableOpacity>
   )
 }
