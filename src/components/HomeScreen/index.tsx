@@ -29,14 +29,14 @@ export function HomeScreen({title}: Props) {
     <VStack>
       <HStack
         bg="gray.300"      
-        pt={2}        
-        mb={2}
+        pt={4}        
+        
         justifyContent="space-between"
         alignItems="center"
         borderBottomWidth={0.2}
       >
-        <ButtonBack />
-        <Center justifyContent={'center'} paddingBottom={2}>
+        <ButtonBack/>
+        <Center justifyContent={'center'} marginBottom={4}>
         <Text mr={180} fontSize={18} fontWeight={'bold'}  justifyContent="center" alignItems={'center'}>{title}</Text>
         </Center>   
       

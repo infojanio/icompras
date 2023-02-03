@@ -1,9 +1,15 @@
-import { Center, Text } from 'native-base'
+import { ButtonBack } from '@components/ButtonBack'
+import { HomeScreen } from '@components/HomeScreen'
+import { Center, Text, VStack } from 'native-base'
+import { Localization } from './Localization'
 
 export function Profile() {
   return (
-    <Center flex={1}>
-      <Text color="black">Perfil</Text>
+<VStack>
+      <HomeScreen title='Perfil'/>
+    <Center bg={'amber.500'}>
+      <Text color="black">Carrinho</Text>
     </Center>
+    </VStack>
   )
 }

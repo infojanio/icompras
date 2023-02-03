@@ -1,9 +1,11 @@
-import { Center, Text } from 'native-base'
+import { HomeScreen } from '@components/HomeScreen'
+import { Center, Text, VStack } from 'native-base'
 
 export function Request() {
   return (
-    <Center flex={1}>
-      <Text color="black">Pedidos</Text>
-    </Center>
+    <VStack>
+    <HomeScreen title='Pedidos' />
+
+  </VStack>
   )
 }

@@ -1,9 +1,13 @@
-import { Center, Text } from 'native-base'
+import { HomeHeader } from '@components/HomeHeader'
+import { HomeScreen } from '@components/HomeScreen'
+import { Center, Text, VStack } from 'native-base'
+import { ProductList } from './ProductList'
 
 export function Search() {
   return (
-    <Center flex={1}>
-      <Text color="black">Busca</Text>
-    </Center>
+    <VStack>
+    <HomeScreen title='Pesquisar' />
+
+  </VStack>
   )
 }

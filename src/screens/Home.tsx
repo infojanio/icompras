@@ -15,7 +15,7 @@ export function Home() {
 
       <ScrollView showsVerticalScrollIndicator={false}>
         <VStack flex={1} bg={'gray.50'} marginTop={2}>
-          <Text fontSize={'lg'} paddingLeft={4} bg={'gray.100'}>
+          <Text fontSize={'16'} paddingLeft={4} bg={'gray.100'}>
             Promoções
           </Text>
           <Promotion />
@@ -23,7 +23,7 @@ export function Home() {
 
         <SeparatorItem />
         <VStack flex={1} bg={'white'}>
-          <Text fontSize={'lg'} paddingLeft={4} bg={'gray.100'}>
+          <Text fontSize={'16'} paddingLeft={4} bg={'gray.100'}>
             Departamentos
           </Text>
         </VStack>
