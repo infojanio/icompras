@@ -1,24 +1,21 @@
-import { Sessions } from 'src/components/Sessions'
-import { HomeHeader } from 'src/components/HomeHeader'
-import { VStack, Text, Divider } from 'native-base'
-import { Filter } from 'src/components/Filter'
-import { Department } from 'src/components/Department'
-
-import { SeparatorItem } from 'src/components/SeparatorItem'
+import { VStack, Text } from 'native-base'
 import { ScrollView } from 'react-native-virtualized-view'
-import { Promotion } from 'src/components/Promotion'
-import { ProductList } from '@screens/ProductList'
-import { Group } from 'src/components/Group'
+
+import { Filter } from '@components/Filter'
+import { Department } from '@components/Department'
+import { SeparatorItem } from '@components/SeparatorItem'
+import { Promotion } from '@components/Promotion'
+import { HomeHeader } from '@components/HomeHeader'
 
 export function Home() {
   return (
     <VStack flex={1}>
-      <HomeHeader />
+      <HomeHeader/>
       <Filter />
 
       <ScrollView showsVerticalScrollIndicator={false}>
         <VStack flex={1} bg={'gray.50'} marginTop={2}>
-          <Text fontSize={'lg'} paddingLeft={4} bg={'gray.100'}>
+          <Text fontSize={'16'} paddingLeft={4} bg={'gray.100'}>
             Promoções
           </Text>
           <Promotion />
@@ -26,7 +23,7 @@ export function Home() {
 
         <SeparatorItem />
         <VStack flex={1} bg={'white'}>
-          <Text fontSize={'lg'} paddingLeft={4} bg={'gray.100'}>
+          <Text fontSize={'16'} paddingLeft={4} bg={'gray.100'}>
             Departamentos
           </Text>
         </VStack>
