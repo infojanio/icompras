@@ -19,10 +19,14 @@ import { Market } from '@components/Market'
 export function SuperMarket() {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 76f9ddf654c2afee5ff5946604859f36ce39296d
   const [markets, setMarkets] = useState([1, 2, 3, 4, 5, 6, 7])
   const [marketSelected, setMarketSelected] = useState('Supermercado Goiano')
 
   return (
+<<<<<<< HEAD
     <VStack flex={1} >
       <HomeScreen title={'Supermercados'} />
         
@@ -49,6 +53,12 @@ export function SuperMarket() {
 =======
       <Center bg={'gray.100'} flex={1}>
 >>>>>>> lista de supermercados
+=======
+    <VStack flex={1}>
+      <HomeScreen title={'Supermercados'} />
+
+      <Center bg={'gray.100'} flex={1}>
+>>>>>>> 76f9ddf654c2afee5ff5946604859f36ce39296d
         <FlatList
           showsVerticalScrollIndicator
           data={markets}
@@ -57,11 +67,14 @@ export function SuperMarket() {
             <Market
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
               w={120}
 >>>>>>> lista de supermercados
 =======
 >>>>>>> lista de supermercados
+=======
+>>>>>>> 76f9ddf654c2afee5ff5946604859f36ce39296d
               name={item}
               isActive={marketSelected === item}
               onPress={() => setMarketSelected(item)}

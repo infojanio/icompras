@@ -1,5 +1,8 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 76f9ddf654c2afee5ff5946604859f36ce39296d
 import React from 'react'
 import {
   View,
@@ -10,6 +13,7 @@ import {
   ScrollView,
   Box,
   Center,
+<<<<<<< HEAD
   Divider,
 } from 'native-base'
 
@@ -71,6 +75,8 @@ import {
   ScrollView,
   Box,
   Center,
+=======
+>>>>>>> 76f9ddf654c2afee5ff5946604859f36ce39296d
 } from 'native-base'
 
 import MarketPng from '@assets/logoMercado/03.png'
@@ -88,11 +94,14 @@ export function Market() {
         borderRadius={8}
       >
 <<<<<<< HEAD
+<<<<<<< HEAD
         {name}
       </Text>
     </Pressable>
 >>>>>>> lista de supermercados
 =======
+=======
+>>>>>>> 76f9ddf654c2afee5ff5946604859f36ce39296d
         <VStack>
           <Box h={110} w={170} ml={1} mt={2} alignItems={'center'}>
             <Text fontSize={18} fontWeight={'bold'}>
@@ -110,6 +119,9 @@ export function Market() {
         </Center>
       </HStack>
     </TouchableOpacity>
+<<<<<<< HEAD
 >>>>>>> lista de supermercados
+=======
+>>>>>>> 76f9ddf654c2afee5ff5946604859f36ce39296d
   )
 }
