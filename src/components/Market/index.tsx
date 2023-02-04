@@ -17,7 +17,7 @@ import { useNavigation } from '@react-navigation/native'
 import { StackNavigatorRoutesProps } from '@routes/stack.routes'
 import { TouchableOpacity } from 'react-native'
 
-import MarketPng from '@assets/logoMercado/03.png'
+import MarketPng from '@assets/logoMercado/04.png'
 
 export function Market() {
 
