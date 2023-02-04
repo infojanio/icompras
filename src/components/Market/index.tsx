@@ -1,127 +1,48 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 76f9ddf654c2afee5ff5946604859f36ce39296d
-import React from 'react'
-import {
-  View,
-  Text,
-  Image,
-  HStack,
-  VStack,
-  ScrollView,
-  Box,
-  Center,
-<<<<<<< HEAD
-  Divider,
-} from 'native-base'
-
-
-import { useNavigation } from '@react-navigation/native'
-
-import { StackNavigatorRoutesProps } from '@routes/stack.routes'
-import { TouchableOpacity } from 'react-native'
-
-import MarketPng from '@assets/logoMercado/04.png'
-
-export function Market() {
-
-  const navigation = useNavigation<StackNavigatorRoutesProps>()
-
-
-
-
-  return (
-    <TouchableOpacity  onPress={() => navigation.navigate('home')}>
-      <HStack
-        justifyContent={'space-between'}
-        bg={'gray.100'}
-        h={120}
-        w={345}
-    
-        mb={2}
-        borderRadius={8}
-      >
-        <VStack >
-
-          <Box h={110} w={170} ml={1} mt={2} alignItems={'center'}>
-            <Text fontSize={18} fontWeight={'bold'}>
-              Supermercado Lima
-            </Text>
-            <Text fontSize={14} fontWeight={'bold'}>
-              Horário de Atendimento
-            </Text>
-            <Text>Seg/Sáb (07:00 - 19:00) </Text>
-            <Text>Domingo (07:00 - 12:00) </Text>
-          </Box>
-        </VStack>
-        <Center mt={2} mb={4} mr={2} alignItems={'center'} h={110} w={155}>
-          <Image alt="Logo do mercado" source={MarketPng} h={70} w={150} />
-        </Center>
-      </HStack>
-    </TouchableOpacity>
-=======
 import { SeparatorItem } from '@components/SeparatorItem'
-=======
-import React from 'react'
->>>>>>> lista de supermercados
 import {
-  View,
   Text,
-  Image,
-  HStack,
+  Pressable,
+  IPressableProps,
   VStack,
-  ScrollView,
-  Box,
-  Center,
-=======
->>>>>>> 76f9ddf654c2afee5ff5946604859f36ce39296d
+  Divider,
+  View,
 } from 'native-base'
 
-import MarketPng from '@assets/logoMercado/03.png'
-import { TouchableOpacity } from 'react-native'
+type Props = IPressableProps & {
+  name: string
+  isActive: boolean
+}
 
-export function Market() {
+export function Market({ name, isActive, ...rest }: Props) {
   return (
-    <TouchableOpacity>
-      <HStack
-        justifyContent={'space-between'}
-        bg={'blue.200'}
-        h={120}
-        w={345}
-        mb={2}
-        borderRadius={8}
+    <Pressable
+      mr={1}
+      ml={1}
+      mt={2}
+      mb={2}
+      w={32}
+      h={12}
+      bg={'gray.50'}
+      rounded="md"
+      justifyContent="center"
+      alignItems="center"
+      overflow="hidden"
+      isPressed={isActive}
+      _pressed={{
+        bgColor: 'gray.100',
+        borderColor: 'red.500',
+        borderBottomWidth: 2,
+      }}
+      {...rest}
+    >
+      <Text
+        color={isActive ? 'green.700' : 'gray.700'}
+        textTransform="uppercase"
+        fontSize="xs"
+        fontWeight="bold"
       >
-<<<<<<< HEAD
-<<<<<<< HEAD
         {name}
       </Text>
     </Pressable>
->>>>>>> lista de supermercados
-=======
-=======
->>>>>>> 76f9ddf654c2afee5ff5946604859f36ce39296d
-        <VStack>
-          <Box h={110} w={170} ml={1} mt={2} alignItems={'center'}>
-            <Text fontSize={18} fontWeight={'bold'}>
-              Supermercado Lima
-            </Text>
-            <Text fontSize={14} fontWeight={'bold'}>
-              Horário de Atendimento
-            </Text>
-            <Text>Seg/Sáb (07:00 - 19:00) </Text>
-            <Text>Domingo (07:00 - 12:00) </Text>
-          </Box>
-        </VStack>
-        <Center mt={2} mb={4} mr={2} alignItems={'center'} h={110} w={155}>
-          <Image alt="Logo do mercado" source={MarketPng} h={70} w={150} />
-        </Center>
-      </HStack>
-    </TouchableOpacity>
-<<<<<<< HEAD
->>>>>>> lista de supermercados
-=======
->>>>>>> 76f9ddf654c2afee5ff5946604859f36ce39296d
   )
 }
