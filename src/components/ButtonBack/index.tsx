@@ -4,14 +4,14 @@ import { HStack, Center, Text, Button, Icon } from 'native-base'
 import { MaterialIcons } from '@expo/vector-icons'
 
 import { useNavigation } from '@react-navigation/native'
-import { AuthNavigatorRoutesProps } from '@routes/auth.routes'
+import { AppNavigatorRoutesProps } from '@routes/app.routes'
 
 //voltar a tela anterior
 export function ButtonBack() {
-  const navigation = useNavigation<AuthNavigatorRoutesProps>()
+  const navigation = useNavigation<AppNavigatorRoutesProps>()
 
   function handleGoBack() {
-    // navigation.goBack()
+     navigation.goBack()
     console.log('voltei')
   }
 
