@@ -23,7 +23,7 @@ export function Initial() {
   return (
     <VStack bg={'gray.50'} flex={1}>
       <Box alignItems={'center'} bg={'gray.50'}>
-        <Image alt="Imagem logo" h={310} w={360} source={LogoPng} />
+        <Image alt="logo" h={310} w={360} source={LogoPng} />
       </Box>
 
       <Box
