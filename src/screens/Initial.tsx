@@ -11,30 +11,15 @@ import {
 
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigatorRoutesProps } from '@routes/stack.routes'
-<<<<<<< HEAD
-
-import { Button } from '@components/Button'
-import LogoPng from '@assets/logoInitial.png'
-=======
 import LogoPng from '@assets/logoInitial.png'
 
-import { useNavigation } from '@react-navigation/native'
 import { TouchableOpacity } from 'react-native'
->>>>>>> a1ad2a14a7fe927b4caf37dbf243c18e310cc7db
+import { Button } from '@components/Button'
 
 export function Initial() {
   const [service, setService] = useState('')
   const navigation = useNavigation<StackNavigatorRoutesProps>()
 
-<<<<<<< HEAD
-
-  //voltar a tela anterior
-  function handleGoBack() {
-    navigation.goBack()
-  }
-
-=======
->>>>>>> a1ad2a14a7fe927b4caf37dbf243c18e310cc7db
   return (
     <VStack bg={'gray.50'} flex={1}>
       <Box alignItems={'center'} bg={'gray.50'}>
@@ -97,14 +82,7 @@ export function Initial() {
           <Select.Item label="Cavalcante - GO" value="ca" />
           <Select.Item label="Teresina - GO" value="te" />
           <Select.Item label="Taguatinga - TO" value="ta" />
-<<<<<<< HEAD
-                 </Select>
-     <Box mt={2}>
-     <Button title='Buscar Supermercados' onPress={()=> navigation.navigate('home')} />
-     </Box>
-=======
         </Select>
->>>>>>> a1ad2a14a7fe927b4caf37dbf243c18e310cc7db
 
         <Box mt={2}>
           <Button

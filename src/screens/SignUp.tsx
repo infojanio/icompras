@@ -19,12 +19,8 @@ import { MaterialIcons } from '@expo/vector-icons'
 
 import { Input } from '@components/Input'
 import { Button } from '@components/Button'
-<<<<<<< HEAD
-
-=======
 import { SeparatorItem } from '@components/SeparatorItem'
 import { StackNavigatorRoutesProps } from '@routes/stack.routes'
->>>>>>> a1ad2a14a7fe927b4caf37dbf243c18e310cc7db
 
 export function SignUp() {
   const navigation = useNavigation<StackNavigatorRoutesProps>()
@@ -359,7 +355,10 @@ export function SignUp() {
       </View>
 
       <View marginLeft="4" marginRight="4" marginTop="0.5">
-        <Button title="Próximo" onPress={() => navigation.navigate('localization')} />
+        <Button
+          title="Próximo"
+          onPress={() => navigation.navigate('localization')}
+        />
       </View>
     </ScrollView>
   )
