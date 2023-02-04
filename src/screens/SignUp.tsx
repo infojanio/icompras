@@ -19,10 +19,15 @@ import { MaterialIcons } from '@expo/vector-icons'
 
 import { Input } from '@components/Input'
 import { Button } from '@components/Button'
+<<<<<<< HEAD
 
+=======
+import { SeparatorItem } from '@components/SeparatorItem'
+import { StackNavigatorRoutesProps } from '@routes/stack.routes'
+>>>>>>> a1ad2a14a7fe927b4caf37dbf243c18e310cc7db
 
 export function SignUp() {
-  const navigation = useNavigation()
+  const navigation = useNavigation<StackNavigatorRoutesProps>()
 
   const [show, setShow] = React.useState(false) //mostra senha
   const handleClick = () => setShow(!show)
@@ -41,8 +46,8 @@ export function SignUp() {
         space={24}
         direction="row"
         marginTop="4"
-        marginBottom="2"
-        marginLeft="4"
+        marginBottom="4"
+        marginLeft="2"
       >
         {['sm'].map((size) => (
           <IconButton
@@ -59,17 +64,20 @@ export function SignUp() {
         ))}
 
         <Center color="gray.100" fontSize="2xl" mb={2} paddingTop="0.5">
-          <Text fontSize="xs"> CADASTRO</Text>
+          <Text fontSize="14" fontWeight={'bold'}>
+            {' '}
+            CADASTRO
+          </Text>
         </Center>
       </VStack>
 
-      <View>
+      <View marginBottom="2">
         <VStack marginRight="4" marginLeft="4" borderRadius="2xl" bg="gray.50">
-          <Text fontSize="sm" color="gray.500">
-            Dados do sistema
+          <Text ml={4} fontSize="16" color="gray.500">
+            Dados pessoais
           </Text>
 
-          <Center marginTop="4" marginBottom="4" marginRight="1" marginLeft="1">
+          <Center marginRight="2" marginLeft="2">
             <Box w="100%">
               <Input
                 InputLeftElement={
@@ -212,13 +220,14 @@ export function SignUp() {
         </VStack>
       </View>
 
-      <View marginBottom="0.5">
+      <View marginBottom="2">
+        <SeparatorItem />
         <VStack marginRight="4" marginLeft="4" borderRadius="2xl" bg="gray.50">
-          <Text fontSize="sm" color="gray.500">
+          <Text fontSize="16" color="gray.500" marginLeft="4">
             Endereço
           </Text>
 
-          <Center marginTop="4" marginBottom="4" marginRight="1" marginLeft="1">
+          <Center marginBottom="2" marginRight="1" marginLeft="1">
             <Box w="100%">
               <Input
                 InputLeftElement={
@@ -350,12 +359,7 @@ export function SignUp() {
       </View>
 
       <View marginLeft="4" marginRight="4" marginTop="0.5">
-        <Button
-          title="Cadastrar"
-          color="gray.50"
-          variant="outline"
-          bg="green.500"
-        />
+        <Button title="Próximo" onPress={() => navigation.navigate('localization')} />
       </View>
     </ScrollView>
   )

@@ -4,7 +4,11 @@ import { HStack, Center, Text, Button, Icon } from 'native-base'
 import { MaterialIcons } from '@expo/vector-icons'
 
 import { useNavigation } from '@react-navigation/native'
+<<<<<<< HEAD
 import { AppNavigatorRoutesProps } from '@routes/app.routes' //Atenção: verificar se precisará logar -> AuthRoutes
+=======
+import { AppNavigatorRoutesProps } from '@routes/app.routes'
+>>>>>>> a1ad2a14a7fe927b4caf37dbf243c18e310cc7db
 
 //voltar a tela anterior
 export function ButtonBack() {
