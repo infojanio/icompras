@@ -23,26 +23,22 @@ export function Initial() {
   return (
     <VStack bg={'gray.50'} flex={1}>
       <Box alignItems={'center'} bg={'gray.50'}>
-        <Image alt="logo" h={310} w={360} source={LogoPng} />
+        <Image alt="logo" h={300} w={360} source={LogoPng} />
       </Box>
 
       <Box
-        borderWidth={'0.2'}
-        bg={'blue.600'}
         pb={2}
         ml={4}
         mr={4}
-        borderBottomRadius={1}
-        borderTopRadius={50}
         alignItems={'center'}
         justifyContent={'center'}
         marginTop={2}
       >
-        <Text color={'white'} fontWeight={'bold'} fontSize={'24'}>
+        <Text color={'blue.700'} fontWeight={'bold'} fontSize={'24'}>
           Click Fácil
         </Text>
 
-        <Text color={'white'} fontSize={'16'}>
+        <Text color={'blue.700'} fontSize={'16'}>
           Compre no aplicativo e receba em sua casa
         </Text>
       </Box>
@@ -61,11 +57,11 @@ export function Initial() {
           minWidth="200"
           accessibilityLabel="Choose Service"
           alignContent={'center'}
-          placeholderTextColor={'gray.500'}
+          placeholderTextColor={'gray.400'}
           fontSize={'16'}
           placeholder="Cidades Atendidas"
           _selectedItem={{
-            bg: 'teal.100',
+            bg: 'blue.100',
             endIcon: <CheckIcon size="5" />,
           }}
           mt={4}
@@ -84,7 +80,7 @@ export function Initial() {
           <Select.Item label="Taguatinga - TO" value="ta" />
         </Select>
 
-        <Box mt={2}>
+        <Box mt={4}>
           <Button
             title="Buscar Supermercados"
             onPress={() => navigation.navigate('supermarket')}
@@ -92,10 +88,10 @@ export function Initial() {
         </Box>
       </Box>
 
-      <Center mt={6} mb={2}>
+      <Center mt={4} mb={2}>
         <TouchableOpacity onPress={() => navigation.navigate('signup')}>
-          <Center h={'50'} w={'320'} borderRadius={8} borderWidth={0.2}>
-            <Text color="blue.600" fontSize="md" fontFamily="body">
+          <Center h={'50'} w={'340'} borderRadius={4} borderWidth={0.2}>
+            <Text color="blue.700" fontSize="md" fontFamily="body">
               Ainda não tenho cadastro
             </Text>
           </Center>

@@ -18,17 +18,19 @@ import { Cart } from '@screens/Cart'
 import { CartVazio } from '@components/CartVazio'
 import { Request } from '@screens/Request'
 import { Profile } from '@screens/Profile'
+import { ProductList } from '@screens/ProductList'
 import { Localization } from '@screens/Localization'
 import { SignUp } from '@screens/SignUp'
 import { StackRoutes } from './stack.routes'
 
 type AppRoutes = {
-  homeScreen: undefined 
+  homeScreen: undefined
   search: undefined
   cart: undefined
   cartVazio: undefined
   request: undefined
   profile: undefined
+  productList: undefined
   signUp: undefined
 }
 
@@ -44,10 +46,10 @@ export function AppRoutes() {
 
   return (
     <Navigator
-    initialRouteName='homeScreen'
+      initialRouteName="homeScreen"
       screenOptions={{
         headerShown: false,
-       //  tabBarShowLabel: true,
+        //  tabBarShowLabel: true,
         tabBarActiveTintColor: colors.green[500],
         tabBarInactiveTintColor: colors.blueGray[800],
         tabBarStyle: {
@@ -73,27 +75,26 @@ export function AppRoutes() {
         name="search"
         component={Search}
         options={{
-          headerShown: false,   
+          headerShown: false,
           tabBarIcon: ({ color }) => (
             <SearchSvg fill={color} width={iconSize} height={iconSize} />
           ),
         }}
       />
-      
+
       <Screen
         name="cartVazio"
         component={CartVazio}
         options={{
-          
-          title: 'Carrinho',             
+          title: 'Carrinho',
           headerStyle: {
             backgroundColor: '#c6c9c1',
           },
           headerTintColor: '#272525',
           headerTitleStyle: {
-            fontSize: 18
+            fontSize: 18,
           },
-        
+
           tabBarIcon: ({ color }) => (
             <CartSvg fill={color} width={iconSize} height={iconSize} />
           ),
@@ -103,7 +104,7 @@ export function AppRoutes() {
         name="request"
         component={Request}
         options={{
-          title: 'Pedidos',  
+          title: 'Pedidos',
           headerStyle: {
             backgroundColor: '#c6c9c1',
           },
@@ -111,7 +112,7 @@ export function AppRoutes() {
           headerTitleStyle: {
             justifyContent: 'center',
             textAlign: 'center',
-            fontSize: 18
+            fontSize: 18,
           },
           tabBarIcon: ({ color }) => (
             <RequestSvg fill={color} width={iconSize} height={iconSize} />
@@ -122,16 +123,16 @@ export function AppRoutes() {
         name="profile"
         component={Profile}
         options={{
-          title: 'Perfil',  
+          title: 'Perfil',
           headerStyle: {
             backgroundColor: '#c6c9c1',
           },
-          
+
           headerTintColor: '#272525',
           headerTitleStyle: {
             justifyContent: 'center',
             textAlign: 'center',
-            fontSize: 18
+            fontSize: 18,
           },
 
           tabBarIcon: ({ color }) => (
@@ -140,7 +141,13 @@ export function AppRoutes() {
         }}
       />
 
-     
+      <Screen
+        name="productList"
+        component={ProductList}
+        options={{
+          tabBarButton: () => null,
+        }} //não mostra ícone
+      />
     </Navigator>
   )
 }

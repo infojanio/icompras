@@ -19,7 +19,7 @@ import { Request } from '@screens/Request'
 import { Profile } from '@screens/Profile'
 import { SignUp } from '@screens/SignUp'
 import { SignIn } from '@screens/SignIn'
-import { ProductList } from '@screens/ProductList'
+
 
 
 
@@ -34,7 +34,7 @@ type AuthRoutes = {
   profile: undefined
   signUp: undefined
   signIn: undefined
-  productList: undefined
+
 }
 
 export type AuthNavigatorRoutesProps = BottomTabNavigationProp<AuthRoutes>
@@ -89,14 +89,7 @@ export function AuthRoutes() {
           }}
       />
 
-          <Screen
-                  name="productList"
-                  component={ProductList}
-                  options={{
-                    tabBarButton: () => null,
-                  }} //não mostra ícone
-                />
-
+         
       <Screen
         name="cart"
         component={SignIn}
