@@ -20,7 +20,6 @@ import database from '@components/NewMarker/database'
 import PhotoPng from '@assets/UserLocal.png'
 
 export function MapClient() {
-  
   const [showMarkerSetter, setShowMarkerSetter] = useState(false)
   const [markerCoordinates, setMarkerCoordinates] = useState<LatLng>({
     latitude: 0,
@@ -46,7 +45,7 @@ export function MapClient() {
 
   //Pede ao usuário permissão pra mostrar a localização atual
   const getMyLocation = async (): Promise<Region | undefined> => {
-    let { status } = await Location.requestForegroundPermissionsAsync()        
+    let { status } = await Location.requestForegroundPermissionsAsync()
 
     if (status !== 'granted') return
 
@@ -59,16 +58,17 @@ export function MapClient() {
       latitudeDelta: 0.025,
       longitudeDelta: 0.025,
     }
-    console.log("Minha localização: "+region?.latitude +" e "+ region?.longitude)
+    console.log(
+      'Minha localização: ' + region?.latitude + ' e ' + region?.longitude,
+    )
     return region
-    
   }
 
   //direcionar o zoom para essa localização
   const goToMyLocation = async () => {
     const region = await getMyLocation() //pega a localização do usuário
     region && mapRef.current?.animateToRegion(region, 1000) //dá um zoom até o local do usuário
-    
+
     //console.log("Vou para o ponto: "+region?.latitude +" e "+ region?.longitude)
     return region
   }
@@ -79,17 +79,16 @@ export function MapClient() {
       //se o botão adicionar não estiver habilitado
       const camera = await mapRef.current?.getCamera()
       camera?.center && setMarkerCoordinates(camera?.center) //centraliza a tela
-
     } else {
       //salvar marcador
       markers.push({
         id: markers.length + 1,
         color: 'green',
         coordinates: markerCoordinates,
-      })      
+      })
     }
-    setShowMarkerSetter((v) => (!v))
-  //  console.log("Incluí novo NewMarker")
+    setShowMarkerSetter((v) => !v)
+    //  console.log("Incluí novo NewMarker")
   }
 
   //pega a altura da View
@@ -103,11 +102,9 @@ export function MapClient() {
       <MapView
         style={styles.map}
         ref={mapRef}
-        
         onMapReady={() => {
-         goToMyLocation()
+          goToMyLocation()
           console.log('carreguei o MapView')
-          
         }}
         loadingEnabled
         showsUserLocation

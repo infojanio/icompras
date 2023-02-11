@@ -7,12 +7,12 @@ import { Category } from '@data/CategoryList'
 import { TouchableOpacity } from 'react-native'
 
 import { useNavigation } from '@react-navigation/native'
-import { AuthNavigatorRoutesProps } from '@routes/auth.routes'
+import { AppNavigatorRoutesProps } from '@routes/app.routes'
 
 export function CategoryItem({ id, title, image }: Category) {
   //Criar nova conta, preciso fazer ajustes no routes/index.tsx , acertar a navegação auth
   function handleProduct() {
-    const navigation = useNavigation<AuthNavigatorRoutesProps>()
+    const navigation = useNavigation<AppNavigatorRoutesProps>()
 
     navigation.navigate('productList')
   }

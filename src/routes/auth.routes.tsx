@@ -10,7 +10,7 @@ import { Home } from '@screens/Home'
 import { Search } from '@screens/Search'
 import { SignUp } from '@screens/SignUp'
 import { SignIn } from '@screens/SignIn'
-import { ProductList } from '@screens/ProductList'
+
 
 import HomeSvg from '@assets/home.svg'
 import SearchSvg from '@assets/search.svg'
@@ -28,7 +28,7 @@ type AuthRoutes = {
   profile: undefined
   signUp: undefined
   signIn: undefined
-  productList: undefined
+
 }
 
 export type AuthNavigatorRoutesProps = BottomTabNavigationProp<AuthRoutes>
@@ -81,14 +81,7 @@ export function AuthRoutes() {
           }}
       />
 
-          <Screen
-                  name="productList"
-                  component={ProductList}
-                  options={{
-                    tabBarButton: () => null,
-                  }} //não mostra ícone
-                />
-
+         
       <Screen
         name="cart"
         component={SignIn}
