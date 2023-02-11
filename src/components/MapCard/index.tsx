@@ -3,8 +3,22 @@ import { HStack, Center, Text, Button } from 'native-base'
 
 import LocationSvg from '@assets/location.svg'
 
+  import { useNavigation } from '@react-navigation/native'
+  import { StackNavigatorRoutesProps } from '@routes/stack.routes'
+
 
 export function MapCard() {
+
+  
+    const navigation = useNavigation<StackNavigatorRoutesProps>()
+  
+    function handleGoBack() {
+       navigation.goBack()
+      console.log('voltei')
+    }
+
+
+
   return (
     <HStack 
     position={'absolute'}
@@ -24,8 +38,8 @@ export function MapCard() {
       <Text justifyContent={'center'} fontSize={'13'}>
       Endereço: {'\n'}Setor Aeroporto, Rua 5, Qd. 6, Lt. 1{'\n'}Campos Belos 
       </Text>
-      <Button bg={'green.400'} color={'green.400'} marginRight={2}>
-        Alterar
+      <Button bg={'green.400'} color={'green.400'} marginRight={2} onPress={() => navigation.navigate('home')}>
+        Confirmar
       </Button>
       
     </HStack>

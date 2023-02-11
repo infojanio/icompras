@@ -29,4 +29,8 @@ export function InfoAdd() {
       </VStack>
     </View>
   )
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> master
