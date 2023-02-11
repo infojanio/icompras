@@ -18,11 +18,6 @@ import { InfoAdd } from '@components/InfoAdd'
 import database from '@components/NewMarker/database'
 
 import PhotoPng from '@assets/UserLocal.png'
-<<<<<<< HEAD
-
-import { InfoAdd } from '@components/InfoAdd'
-=======
->>>>>>> master
 
 export function MapClient() {
   const [showMarkerSetter, setShowMarkerSetter] = useState(false)
@@ -42,20 +37,9 @@ export function MapClient() {
 
   /*
   useEffect(() => {
-<<<<<<< HEAD
-    getMyLocation()
-
-    let timer = setTimeout(() => {}, 1000)
-
-    return () => {
-      handleNewMarker()
-      console.log('O tempo foi:' + timer)
-    }
-=======
     setTimeout(()=> {
       handleNewMarker()
       }, 5000)    
->>>>>>> master
   }, [])
   */
 
@@ -80,28 +64,7 @@ export function MapClient() {
     return region
   }
 
-<<<<<<< HEAD
-  //Pede ao usuário permissão pra mostrar a localização atual
-  const getMyLocation = async (): Promise<Region | undefined> => {
-    let { status } = await Location.requestForegroundPermissionsAsync()
-    if (status !== 'granted') return
-
-    const { latitude, longitude } = (
-      await Location.getCurrentPositionAsync({})
-    ).coords
-    const region = {
-      latitude,
-      longitude,
-      latitudeDelta: 0.025,
-      longitudeDelta: 0.025,
-    }
-
-    return region
-  }
-
-=======
   //direcionar o zoom para essa localização
->>>>>>> master
   const goToMyLocation = async () => {
     const region = await getMyLocation() //pega a localização do usuário
     region && mapRef.current?.animateToRegion(region, 1000) //dá um zoom até o local do usuário
