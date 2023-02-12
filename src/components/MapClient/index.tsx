@@ -18,9 +18,12 @@ import { InfoAdd } from '@components/InfoAdd'
 import database from '@components/NewMarker/database'
 
 import PhotoPng from '@assets/UserLocal.png'
+import MapType from '@utils/MapType'
 
 export function MapClient() {
   const [showMarkerSetter, setShowMarkerSetter] = useState(false)
+  const [showAddress, setShowAddress] = useState(false)
+
   const [markerCoordinates, setMarkerCoordinates] = useState<LatLng>({
     latitude: 0,
     longitude: 0,
@@ -28,6 +31,9 @@ export function MapClient() {
 
   const [cardHeight, setCardHeight] = useState(0)
   const [showCard, setShowCard] = useState<'back' | 'mapType'>('back')
+
+  //const [showAddress, setShowAddress] = useState<'init' | 'mapAddress'>('init')
+
   const [mapType, setMapType] = useState<'standard' | 'satellite' | 'terrain'>(
     'standard',
   )
@@ -87,8 +93,9 @@ export function MapClient() {
         coordinates: markerCoordinates,
       })
     }
-    setShowMarkerSetter((v) => !v)
-    //  console.log("Incluí novo NewMarker")
+    setShowMarkerSetter((v) => !v) //  console.log("Incluí novo NewMarker")
+
+    setShowAddress((v) => !v) //  console.log("Incluí a caixa de endereço")
   }
 
   //pega a altura da View
@@ -139,19 +146,16 @@ export function MapClient() {
 
       <LocationActual mBottom={cardHeight} onPress={goToMyLocation} />
 
-      <InfoAdd />
-
       <MapGoogleType
         mBottom={cardHeight}
         onPress={() => setShowCard('mapType')}
       />
+
       <NewMarker
         mBottom={cardHeight}
         showMarkerSetter={showMarkerSetter}
         onPress={handleNewMarker}
       />
-
-      <MapCard />
 
       {showCard === 'back' ? (
         <ButtonBack handleLayoutChange={handleLayoutChange} />
@@ -161,6 +165,12 @@ export function MapClient() {
           closeModal={() => setShowCard('back')}
           changeMapType={(mapType) => setMapType(mapType)}
         />
+      )}
+
+      {showAddress === false ? (
+        <InfoAdd handleLayoutChange={handleLayoutChange} />
+      ) : (
+        <MapCard handleLayoutChange={handleLayoutChange} />
       )}
     </View>
   )
