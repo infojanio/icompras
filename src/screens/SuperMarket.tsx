@@ -8,6 +8,7 @@ import {
   FlatList,
   View,
   Center,
+  Box,
 } from 'native-base'
 
 import { SeparatorItem } from '@components/SeparatorItem'
@@ -17,13 +18,16 @@ import { HomeScreen } from '@components/HomeScreen'
 import { Market } from '@components/Market'
 
 export function SuperMarket() {
-  const [markets, setMarkets] = useState([1, 2, 3, 4, 5, 6, 7])
-  const [marketSelected, setMarketSelected] = useState('Supermercado Goiano')
+  const [markets, setMarkets] = useState<string[]>([
+    'Supermercado Mercadona',
+    'Mercado do Ponto',
+  ])
+  const [marketSelected, setMarketSelected] = useState('Supermercado Mercadona')
 
   return (
-    <VStack flex={1} >
+    <VStack flex={1}>
       <HomeScreen title={'Supermercados'} />
-        
+
       <Center bg={'gray.300'} flex={1} paddingTop={2}>
         <FlatList
           showsVerticalScrollIndicator
@@ -31,12 +35,22 @@ export function SuperMarket() {
           keyExtractor={(item) => item}
           renderItem={({ item }) => (
             <Market
-              name={item}
+              title={item}
+              subTitle="Horário de Atendimento"
+              hour_week="Seg/Sáb (07:00 - 19:00)"
+              hour_weekend="Dom (07:00 - 12:00)"
               isActive={marketSelected === item}
               onPress={() => setMarketSelected(item)}
             />
           )}
-          _contentContainerStyle={{ px: 2 }}
+          ListEmptyComponent={() => (
+            <Center bg={'gray.300'} flex={1}>
+              <Text tintColor={'red'} fontSize={18}>
+                Ainda não temos parceiros na cidade!
+              </Text>
+            </Center>
+          )}
+          _contentContainerStyle={{ px: 2 } && { flex: 1 }}
         />
       </Center>
     </VStack>
