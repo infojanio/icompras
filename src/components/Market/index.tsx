@@ -16,7 +16,7 @@ import { useNavigation } from '@react-navigation/native'
 import { StackNavigatorRoutesProps } from '@routes/stack.routes'
 import { TouchableOpacity, TouchableOpacityProps } from 'react-native'
 
-import MarketPng from '@assets/logoMercado/04.png'
+import MarketPng from '@assets/logoMercado/03.png'
 
 type Props = TouchableOpacityProps & {
   title: string

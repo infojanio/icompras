@@ -1,26 +1,18 @@
 import React from 'react'
 
 import { TouchableOpacity } from 'react-native'
-import {
-  Center,
-  HStack,
-  Icon,
-  useTheme,
-  Text,
-  VStack,
-} from 'native-base'
+import { Center, HStack, Icon, useTheme, Text, VStack } from 'native-base'
 
 import { MaterialIcons } from '@expo/vector-icons'
 import { Input } from '@components/Input'
 import { ButtonBack } from '@components/ButtonBack'
 import { Double } from 'react-native/Libraries/Types/CodegenTypes'
 
-interface Props {
+type Props = {
   title: string
-
 }
 
-export function HomeScreen({title}: Props) {
+export function HomeScreen({ title }: Props) {
   //definição do tamanho dos ícones
   const { sizes, colors } = useTheme()
   const iconSize = sizes[10]
@@ -28,20 +20,25 @@ export function HomeScreen({title}: Props) {
   return (
     <VStack>
       <HStack
-        bg="gray.300"      
-        pt={4}        
-        
+        bg="gray.300"
+        pt={4}
         justifyContent="space-between"
         alignItems="center"
         borderBottomWidth={0.2}
       >
-        <ButtonBack/>
+        <ButtonBack />
         <Center justifyContent={'center'} marginBottom={4}>
-        <Text mr={180} fontSize={18} fontWeight={'bold'}  justifyContent="center" alignItems={'center'}>{title}</Text>
-        </Center>   
-      
+          <Text
+            mr={180}
+            fontSize={18}
+            fontWeight={'bold'}
+            justifyContent="center"
+            alignItems={'center'}
+          >
+            {title}
+          </Text>
+        </Center>
       </HStack>
-      
     </VStack>
   )
 }

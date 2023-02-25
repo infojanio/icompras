@@ -16,17 +16,30 @@ import {
 import { MaterialIcons } from '@expo/vector-icons'
 import LocationSvg from '@assets/location.svg'
 import { Input } from '@components/Input'
+import { AppNavigatorRoutesProps } from '@routes/app.routes'
+import { useNavigation } from '@react-navigation/native'
 
 const LogoImage =
   'https://play-lh.googleusercontent.com/BbcUGwdG1x5mJc-WXOwIblcYhmpyFPdBaunDHoWgS2L1ZUMeIncz1XZgKt7K1EKFHA=w240-h480'
 
-export function HomeProduct() {
+interface Props {
+  name: string
+}
+
+export function HomeProduct({ name }: Props) {
+  const navigation = useNavigation<AppNavigatorRoutesProps>()
+
   //definição do tamanho dos ícones
   const { sizes, colors } = useTheme()
   const iconSize = sizes[10]
 
   function OpenLogo() {
     console.log('Abrir janela da logoMarca')
+  }
+
+  //voltar a tela anterior
+  function handleGoBack() {
+    navigation.goBack()
   }
 
   return (
@@ -38,7 +51,7 @@ export function HomeProduct() {
         justifyContent="space-between"
         alignItems="center"
       >
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handleGoBack}>
           <Icon
             as={<MaterialIcons name="arrow-back" />}
             size={6}
@@ -53,7 +66,7 @@ export function HomeProduct() {
           />
         </TouchableOpacity>
 
-        <Text>Açougue e Peixaria</Text>
+        <Text>{name}</Text>
         <Text fontWeight={'bold'} fontSize={16} color="red.600" ml={4}>
           R$ 0,00
         </Text>

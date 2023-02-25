@@ -223,7 +223,7 @@ export function SignIn() {
             fontSize="lg"
             fontStyle="italic"
           >
-            CompreApp
+            Compre Fácil
           </Text>
         </Center>
       </View>

@@ -21,6 +21,7 @@ export function SuperMarket() {
   const [markets, setMarkets] = useState<string[]>([
     'Supermercado Mercadona',
     'Mercado do Ponto',
+    'Goianão',
   ])
   const [marketSelected, setMarketSelected] = useState('Supermercado Mercadona')
 

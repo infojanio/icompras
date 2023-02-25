@@ -1,6 +1,6 @@
 import { Sessions } from '@components/Sessions'
 import { HomeProduct } from '@components/HomeProduct'
-import { VStack, Text, Divider, HStack, FlatList } from 'native-base'
+import { VStack, Text, Divider, HStack, FlatList, Heading } from 'native-base'
 import { Filter } from '@components/Filter'
 import { Department } from '@components/Department'
 
@@ -10,19 +10,32 @@ import { Promotion } from '@components/Promotion'
 import { Group } from '@components/Group'
 import { useState } from 'react'
 import { AllProduct } from '@components/AllProduct'
+import { ProductCategory } from '@components/ProductCategory'
 
 export function ProductList() {
   const [groups, setGroups] = useState([
-    'Carnes Bovinas',
-    'Aves',
+    'carnes bovinas',
+    'aves',
     'Peixes',
-    'Linguiças',
+    'linguiças',
   ])
-  const [groupSelected, setGroupSelected] = useState('Carnes Bovinas')
+
+  const [subCategory, setSubCategory] = useState([
+    'Filé Mignon',
+    'Picanha',
+    'Fraudinha',
+    'Contra filé',
+    'Filé Mignonn',
+    'Picanhan',
+    'Fraudinhan',
+    'Contra filén',
+  ])
+
+  const [groupSelected, setGroupSelected] = useState('Carnes bovinas')
 
   return (
     <VStack flex={1}>
-      <HomeProduct />
+      <HomeProduct name="Açougue e Peixaria" />
 
       <FlatList
         data={groups}
@@ -30,7 +43,9 @@ export function ProductList() {
         renderItem={({ item }) => (
           <Group
             name={item}
-            isActive={groupSelected === item}
+            isActive={
+              groupSelected.toLocaleUpperCase() === item.toLocaleUpperCase()
+            }
             onPress={() => setGroupSelected(item)}
           />
         )}
@@ -40,17 +55,25 @@ export function ProductList() {
         maxH={16}
       />
 
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <VStack flex={1} bg={'gray.200'} marginTop={2}></VStack>
+      <VStack flex={1} px={8}>
+        <HStack justifyContent={'space-between'} mb={5}>
+          <Heading fontSize={'md'} color={'black.200'}>
+            {groups[0]}
+          </Heading>
 
-        <SeparatorItem />
-        <VStack flex={1} bg={'white'}>
-          <Text fontSize={'sm'} paddingLeft={4} bg={'gray.100'}>
-            Açougue e peixaria
+          <Text fontSize={'md'} color={'black.200'}>
+            {subCategory.length}
           </Text>
-        </VStack>
-        <AllProduct />
-      </ScrollView>
+        </HStack>
+
+        <FlatList
+          data={subCategory}
+          keyExtractor={(item) => item}
+          renderItem={({ item }) => <ProductCategory />}
+          showsVerticalScrollIndicator={false}
+          _contentContainerStyle={{ paddingBottom: 20 }}
+        />
+      </VStack>
     </VStack>
   )
 }

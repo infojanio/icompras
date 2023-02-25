@@ -4,7 +4,12 @@ import { Button } from 'native-base'
 import SearchSvg from '@assets/search.svg'
 import { View } from 'native-base'
 
+import { AppNavigatorRoutesProps } from '@routes/app.routes'
+import { useNavigation } from '@react-navigation/native'
+
 export function Filter() {
+  const navigation = useNavigation<AppNavigatorRoutesProps>()
+
   return (
     <View pt="1" pl={2} pr={2} pb="2" bg="gray.100">
       <Button
@@ -15,7 +20,7 @@ export function Filter() {
         size="lg"
         leftIcon={<SearchSvg height={20} width={20} />}
         onPress={() => {
-          console.log('Pesquise o produto!')
+          navigation.navigate('productList')
         }}
         _text={{
           color: 'gray.500',

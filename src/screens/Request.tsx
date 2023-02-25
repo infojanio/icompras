@@ -4,8 +4,7 @@ import { Center, Text, VStack } from 'native-base'
 export function Request() {
   return (
     <VStack>
-    <HomeScreen title='Pedidos' />
-
-  </VStack>
+      <HomeScreen title="Pedidos" />
+    </VStack>
   )
 }
