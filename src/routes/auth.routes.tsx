@@ -20,9 +20,6 @@ import { Profile } from '@screens/Profile'
 import { SignUp } from '@screens/SignUp'
 import { SignIn } from '@screens/SignIn'
 
-
-
-
 type AuthRoutes = {
   initial: undefined
   address: undefined
@@ -34,7 +31,6 @@ type AuthRoutes = {
   profile: undefined
   signUp: undefined
   signIn: undefined
-
 }
 
 export type AuthNavigatorRoutesProps = BottomTabNavigationProp<AuthRoutes>
@@ -63,11 +59,6 @@ export function AuthRoutes() {
         },
       }}
     >
-
-    
-   
-
-
       <Screen
         name="home"
         component={Home}
@@ -85,11 +76,10 @@ export function AuthRoutes() {
           tabBarLabel: 'Pesquisar',
           tabBarIcon: ({ color }) => (
             <SearchSvg fill={color} width={iconSize} height={iconSize} />
-            ),
-          }}
+          ),
+        }}
       />
 
-         
       <Screen
         name="cart"
         component={SignIn}
@@ -120,8 +110,6 @@ export function AuthRoutes() {
           ),
         }}
       />
-
-
 
       {/*  Inserir uma rota pra não aparecer o ícone no tabBar */}
       <Screen

@@ -15,27 +15,27 @@ import {
   Stack,
 } from 'native-base'
 
-import { AuthNavigatorRoutesProps } from '@routes/auth.routes'
+import { StackNavigatorRoutesProps } from '@routes/stack.routes'
 import LogoSvg from '@assets/logomarca.svg'
 import GoogleSvg from '../../assets/google.svg'
 
-import { Input } from 'src/components/Input'
-import { Button } from 'src/components/Button'
+import { Input } from '@components/Input'
+import { Button } from '@components/Button'
 import { Feather } from '@expo/vector-icons'
 import { MaterialIcons } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+
 //import BackgoundImg from '@assets/background.png'
 
 export function SignIn() {
   const [show, setShow] = React.useState(false) //mostra senha
   const handleClick = () => setShow(!show)
 
-  const navigation = useNavigation<AuthNavigatorRoutesProps>()
+  const navigation = useNavigation<StackNavigatorRoutesProps>()
 
   //Criar nova conta
   function handleNewAccount() {
-    navigation.navigate('signUp')
+    navigation.navigate('signup')
   }
 
   //voltar a tela anterior
@@ -48,28 +48,27 @@ export function SignIn() {
       contentContainerStyle={{ flexGrow: 1 }}
       showsVerticalScrollIndicator={false}
     >
-      <TouchableOpacity onPress={handleGoBack}>
-        <VStack
-          space={2}
-          alignItems="center"
-          direction="row"
-          marginTop="2"
-          marginLeft="2"
-        >
-          {['sm'].map((size) => (
-            <IconButton
-              key={size}
-              borderRadius="full"
-              size={size}
-              variant="outline"
-              _icon={{
-                as: Feather,
-                name: 'chevron-left',
-              }}
-            />
-          ))}
-        </VStack>
-      </TouchableOpacity>
+      <VStack
+        space={2}
+        alignItems="center"
+        direction="row"
+        marginTop="2"
+        marginLeft="2"
+      >
+        {['sm'].map((size) => (
+          <IconButton
+            key={size}
+            borderRadius="full"
+            size={size}
+            variant="outline"
+            _icon={{
+              as: Feather,
+              name: 'chevron-left',
+            }}
+            onPress={handleGoBack}
+          />
+        ))}
+      </VStack>
 
       <View
         justifyContent="center"
@@ -91,7 +90,7 @@ export function SignIn() {
         <Text>Acesse sua conta ou cadastre-se</Text>
       </View>
 
-      <View bg="green.500" pt="4" pb="18">
+      <View bg="green.500" pt="4" pb="20">
         <VStack marginRight="4" marginLeft="4" borderRadius="2xl" bg="gray.50">
           <Center marginTop="2" marginBottom="2" marginRight="2" marginLeft="2">
             <Box w="100%">

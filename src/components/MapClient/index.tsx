@@ -93,7 +93,8 @@ export function MapClient() {
         coordinates: markerCoordinates,
       })
     }
-    setShowMarkerSetter((v) => !v) //  console.log("Incluí novo NewMarker")
+    setShowMarkerSetter((v) => !v) //
+    console.log('Incluí novo NewMarker')
 
     setShowAddress((v) => !v) //  console.log("Incluí a caixa de endereço")
   }

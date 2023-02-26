@@ -124,6 +124,7 @@ export function AppRoutes() {
         component={Profile}
         options={{
           title: 'Perfil',
+
           headerStyle: {
             backgroundColor: '#c6c9c1',
           },

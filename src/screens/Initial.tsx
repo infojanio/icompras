@@ -62,7 +62,7 @@ export function Initial() {
           placeholder="Cidades Atendidas"
           _selectedItem={{
             bg: 'blue.100',
-            endIcon: <CheckIcon size="5" />,
+            endIcon: <CheckIcon size="4" />,
           }}
           mt={4}
           onValueChange={(itemValue) => setService(itemValue)}
@@ -89,10 +89,10 @@ export function Initial() {
       </Box>
 
       <Center mt={4} mb={2}>
-        <TouchableOpacity onPress={() => navigation.navigate('signup')}>
+        <TouchableOpacity onPress={() => navigation.navigate('signin')}>
           <Center h={'50'} w={'340'} borderRadius={4} borderWidth={0.2}>
             <Text color="blue.700" fontSize="md" fontFamily="body">
-              Ainda não tenho cadastro
+              Possui cadastro? Faça Login
             </Text>
           </Center>
         </TouchableOpacity>

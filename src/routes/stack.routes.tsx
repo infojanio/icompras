@@ -7,11 +7,13 @@ import {
 import { Initial } from '@screens/Initial'
 import { Localization } from '@screens/Localization'
 import { AppRoutes } from './app.routes'
+import { SignIn } from '@screens/SignIn'
 import { SignUp } from '@screens/SignUp'
 import { SuperMarket } from '@screens/SuperMarket'
 
 type StackRoutes = {
   initial: undefined
+  signin: undefined
   signup: undefined
   supermarket: undefined
   localization: undefined
@@ -29,6 +31,7 @@ export function StackRoutes() {
       screenOptions={{ headerShown: false }}
     >
       <Screen name="initial" component={Initial} />
+      <Screen name="signin" component={SignIn} />
       <Screen name="signup" component={SignUp} />
       <Screen name="supermarket" component={SuperMarket} />
       <Screen name="localization" component={Localization} />
