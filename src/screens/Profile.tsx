@@ -24,8 +24,8 @@ export function Profile() {
   return (
     <VStack>
       <HomeScreen title="Perfil" />
-      <ScrollView contentContainerStyle={{ paddingBottom: 56 }}>
-        <Center mt={6} px={10}>
+      <ScrollView contentContainerStyle={{ paddingBottom: 36 }}>
+        <Center mt={2} px={10}>
           {photoIsLoading ? (
             <Skeleton
               w={PHOTO_SIZE}
@@ -51,7 +51,7 @@ export function Profile() {
               fontWeight="bold"
               fontSize="md"
               mt={2}
-              mb={8}
+              mb={4}
             >
               Alterar foto
             </Text>
@@ -61,7 +61,7 @@ export function Profile() {
           <Input placeholder="info.janio@gmail.com" isDisabled={true} />
         </Center>
 
-        <VStack px={10} mt={8} mb={9}>
+        <VStack px={10} mt={4} mb={9}>
           <Heading color="gray.500" fontSize="md" mb={2}>
             Alterar senha
           </Heading>
@@ -70,7 +70,7 @@ export function Profile() {
           <Input placeholder="Nova senha" secureTextEntry />
           <Input placeholder="Confirme a nova senha" secureTextEntry />
 
-          <Button title="Atualizar" mt={4} />
+          <Button title="Atualizar" mt={2} />
         </VStack>
       </ScrollView>
     </VStack>

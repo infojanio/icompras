@@ -18,7 +18,7 @@ export function Request() {
 
   return (
     <VStack bg={'gray.200'} flex="1">
-      <HomeScreen title="Acompanhe seu Pedido" />
+      <HomeScreen title="Pedidos" />
 
       <SectionList
         sections={request}
