@@ -27,14 +27,8 @@ export function HomeScreen({ title }: Props) {
         borderBottomWidth={0.2}
       >
         <ButtonBack />
-        <Center justifyContent={'center'} marginBottom={4}>
-          <Text
-            mr={180}
-            fontSize={18}
-            fontWeight={'bold'}
-            justifyContent="center"
-            alignItems={'center'}
-          >
+        <Center mr={160} marginBottom={4}>
+          <Text fontSize={16} fontWeight={'bold'}>
             {title}
           </Text>
         </Center>
