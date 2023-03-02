@@ -1,16 +1,12 @@
-import { Sessions } from '@components/Sessions'
 import { HomeProduct } from '@components/HomeProduct'
 import { VStack, Text, Divider, HStack, FlatList, Heading } from 'native-base'
-import { Filter } from '@components/Filter'
-import { Department } from '@components/Department'
 
-import { SeparatorItem } from '@components/SeparatorItem'
-import { ScrollView } from 'react-native-virtualized-view'
-import { Promotion } from '@components/Promotion'
 import { Group } from '@components/Group'
 import { useState } from 'react'
-import { AllProduct } from '@components/AllProduct'
+
 import { ProductCategory } from '@components/ProductCategory'
+import { useNavigation } from '@react-navigation/native'
+import { AppNavigatorRoutesProps } from '@routes/app.routes'
 
 export function ProductList() {
   const [groups, setGroups] = useState([
@@ -55,7 +51,7 @@ export function ProductList() {
         maxH={16}
       />
 
-      <VStack flex={1} px={8}>
+      <VStack flex={1} px={4}>
         <HStack justifyContent={'space-between'} mb={5}>
           <Heading fontSize={'md'} color={'black.200'}>
             {groups[0]}
@@ -70,6 +66,7 @@ export function ProductList() {
           data={subCategory}
           keyExtractor={(item) => item}
           renderItem={({ item }) => <ProductCategory />}
+          horizontal
           showsVerticalScrollIndicator={false}
           _contentContainerStyle={{ paddingBottom: 20 }}
         />

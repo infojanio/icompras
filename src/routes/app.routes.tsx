@@ -14,14 +14,12 @@ import ProfileSvg from '@assets/profile.svg'
 
 import { Home } from '@screens/Home'
 import { Search } from '@screens/Search'
-import { Cart } from '@screens/Cart'
+
 import { CartVazio } from '@components/CartVazio'
 import { Request } from '@screens/Request'
 import { Profile } from '@screens/Profile'
 import { ProductList } from '@screens/ProductList'
-import { Localization } from '@screens/Localization'
-import { SignUp } from '@screens/SignUp'
-import { StackRoutes } from './stack.routes'
+import { ProductDetails } from '@screens/ProductDetails'
 
 type AppRoutes = {
   homeScreen: undefined
@@ -32,6 +30,7 @@ type AppRoutes = {
   profile: undefined
   productList: undefined
   signUp: undefined
+  productDetails: undefined
 }
 
 export type AppNavigatorRoutesProps = BottomTabNavigationProp<AppRoutes>
@@ -145,6 +144,14 @@ export function AppRoutes() {
       <Screen
         name="productList"
         component={ProductList}
+        options={{
+          tabBarButton: () => null,
+        }} //não mostra ícone
+      />
+
+      <Screen
+        name="productDetails"
+        component={ProductDetails}
         options={{
           tabBarButton: () => null,
         }} //não mostra ícone
