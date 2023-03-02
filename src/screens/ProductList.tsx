@@ -1,14 +1,19 @@
+import { useState } from 'react'
 import { HomeProduct } from '@components/HomeProduct'
 import { VStack, Text, Divider, HStack, FlatList, Heading } from 'native-base'
 
 import { Group } from '@components/Group'
-import { useState } from 'react'
 
 import { ProductCategory } from '@components/ProductCategory'
 import { useNavigation } from '@react-navigation/native'
 import { AppNavigatorRoutesProps } from '@routes/app.routes'
 
+import { Dimensions } from 'react-native'
+const { width } = Dimensions.get('window')
+
 export function ProductList() {
+  const [activeIndex, setActiveIndex] = useState(0)
+
   const [groups, setGroups] = useState([
     'carnes bovinas',
     'aves',
@@ -51,14 +56,10 @@ export function ProductList() {
         maxH={16}
       />
 
-      <VStack flex={1} px={4}>
-        <HStack justifyContent={'space-between'} mb={5}>
-          <Heading fontSize={'md'} color={'black.200'}>
-            {groups[0]}
-          </Heading>
-
+      <VStack flex={1} px={1}>
+        <HStack justifyContent={'space-between'} ml={2} mb={2}>
           <Text fontSize={'md'} color={'black.200'}>
-            {subCategory.length}
+            Produtos
           </Text>
         </HStack>
 
@@ -68,7 +69,7 @@ export function ProductList() {
           renderItem={({ item }) => <ProductCategory />}
           horizontal
           showsVerticalScrollIndicator={false}
-          _contentContainerStyle={{ paddingBottom: 20 }}
+          _contentContainerStyle={{ paddingBottom: 32 }}
         />
       </VStack>
     </VStack>

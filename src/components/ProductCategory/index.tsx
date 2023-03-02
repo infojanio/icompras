@@ -17,7 +17,7 @@ export function ProductCategory({ ...rest }: Props) {
 
   return (
     <HStack flex="1" pl={1}>
-      <HStack bg="gray.200" px={2} rounded="md" mb="2">
+      <HStack bg="gray.50" rounded="md" mb="2" borderWidth={0.2}>
         <Center>
           <Image
             source={{
@@ -32,20 +32,19 @@ export function ProductCategory({ ...rest }: Props) {
             resizeMode="center"
           />
 
-          <VStack bg="gray.100" rounded="md" pl="1" pr="1" mb="1" ml="160">
-            <Text fontSize="14" color="gray.500" mt={1} numberOfLines={2}>
-              Kg
-            </Text>
-          </VStack>
-          <Center>
+          <Center px={10}>
             <Button title="Adicionar" onPress={handleOpenProductDetails} />
           </Center>
-          <HStack mb="4">
+          <HStack mb="2">
             <Text>R$</Text>
             <Heading ml={2} mr={2} fontSize="lg" color="red.700">
               39,90
             </Heading>
-            <Text>Kg</Text>
+            <VStack bg="red.500" rounded="md" pl="1" pr="1">
+              <Text fontSize="14" color="gray.100" numberOfLines={2}>
+                Kg
+              </Text>
+            </VStack>
           </HStack>
           <Heading fontSize="sm">Paleta Bovina</Heading>
         </Center>
