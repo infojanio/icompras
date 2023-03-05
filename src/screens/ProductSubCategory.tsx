@@ -20,8 +20,7 @@ export function ProductSubCategory() {
   }, [categorySelected])
 
   return (
-    <VStack flex={1}>
-      <HomeProduct name="Açougue e Peixaria" />
+    <VStack flex={1} ml={-6} mt={-6}>
       <SubGroup onSelect={setCategorySelected} selected={categorySelected} />
       <Product subcategory={categorySelected} data={products} />
     </VStack>
