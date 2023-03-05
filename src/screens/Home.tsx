@@ -8,6 +8,7 @@ import { Promotion } from '@components/Promotion'
 import { HomeHeader } from '@components/HomeHeader'
 import { ProductCategory } from '@components/ProductCategory'
 import { Product } from '@components/Product'
+import { ProductSubCategory } from './ProductSubCategory'
 
 export function Home() {
   return (
