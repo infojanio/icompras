@@ -24,13 +24,43 @@ export const categoryList: Category[] = [
   },
   {
     id: '3',
+    title: 'Bebidas',
+    image: DrinkImage,
+  },
+
+  {
+    id: '4',
     title: 'Higiene & Perfumaria',
     image: HygieneImage,
   },
 
   {
-    id: '4',
-    title: 'Bebidas',
-    image: DrinkImage,
+    id: '5',
+    title: 'Higiene & Perfumaria',
+    image: HygieneImage,
+  },
+
+  {
+    id: '6',
+    title: 'Higiene & Perfumaria',
+    image: HygieneImage,
+  },
+
+  {
+    id: '7',
+    title: 'Higiene & Perfumaria',
+    image: HygieneImage,
+  },
+
+  {
+    id: '8',
+    title: 'Higiene & Perfumaria',
+    image: HygieneImage,
+  },
+
+  {
+    id: '9',
+    title: 'Higiene & Perfumaria',
+    image: HygieneImage,
   },
 ]

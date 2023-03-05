@@ -6,8 +6,6 @@ export function ProductDetails() {
   return (
     <VStack flex={1}>
       <HomeScreen title="Detalhes do produto" />
-
-      <ProductSubCategory />
     </VStack>
   )
 }

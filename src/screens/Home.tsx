@@ -27,7 +27,7 @@ export function Home() {
         <SeparatorItem />
         <VStack flex={1} bg={'white'}>
           <Text fontSize={'16'} paddingLeft={4} bg={'gray.100'}>
-            Departamentos
+            Categorias
           </Text>
         </VStack>
         <Department />

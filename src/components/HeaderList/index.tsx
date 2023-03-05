@@ -12,13 +12,14 @@ export function HeaderList({ title, counter }: Props) {
       justifyContent="space-between"
       alignItems="center"
       px={8}
-      mt={6}
+      mt={2}
+      ml={2}
     >
-      <Heading fontFamily="heading" color="gray.200" fontSize="md">
+      <Heading fontFamily="heading" color="gray.800" fontSize="md">
         {title}
       </Heading>
 
-      <Text color="gray.200" fontSize="sm">
+      <Text color="gray.800" fontSize="sm">
         {counter}
       </Text>
     </HStack>

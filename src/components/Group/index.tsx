@@ -1,5 +1,5 @@
 import { ImageSourcePropType, Platform } from 'react-native'
-import { Text, Pressable, IPressableProps } from 'native-base'
+import { Text, Pressable, IPressableProps, Box } from 'native-base'
 
 type Props = IPressableProps & {
   name: string
@@ -8,34 +8,38 @@ type Props = IPressableProps & {
 
 export function Group({ name, isActive, ...rest }: Props) {
   return (
-    <Pressable
-      mr={1}
-      ml={1}
-      mt={2}
-      mb={2}
-      w={32}
-      h={12}
-      bg={'gray.50'}
-      rounded="md"
-      justifyContent="center"
-      alignItems="center"
-      overflow="hidden"
-      isPressed={isActive}
-      _pressed={{
-        bgColor: 'gray.200',
-        borderColor: 'red.500',
-        borderBottomWidth: 2,
-      }}
-      {...rest}
-    >
-      <Text
-        color={isActive ? 'green.700' : 'gray.700'}
-        textTransform="uppercase"
-        fontSize="xs"
-        fontWeight="bold"
+    <Box flex="1" bg={'gray.100'} borderBottomWidth="0.2">
+      <Pressable
+        mr={1}
+        ml={1}
+        mt={2}
+        mb={2}
+        w={32}
+        h={10}
+        bg={'gray.300'}
+        borderWidth="0.3"
+        rounded="md"
+        justifyContent="center"
+        alignItems="center"
+        overflow="hidden"
+        isPressed={isActive}
+        _pressed={{
+          fontWeight: 'bold',
+          bgColor: 'green.600',
+          borderColor: 'green.500',
+          borderWidth: 2,
+        }}
+        {...rest}
       >
-        {name}
-      </Text>
-    </Pressable>
+        <Text
+          color={isActive ? 'gray.100' : 'gray.700'}
+          textTransform="uppercase"
+          fontSize="12"
+          fontWeight={'bold'}
+        >
+          {name}
+        </Text>
+      </Pressable>
+    </Box>
   )
 }

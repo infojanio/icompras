@@ -4,6 +4,7 @@ import { ImageProps } from 'react-native'
 interface ProductProps {
   id: string
   brand: string
+  category: string
   subcategory: string
   name: string
   price: string
@@ -18,9 +19,10 @@ export const PRODUCTS: ProductProps[] = [
   {
     id: '1',
     brand: 'Tang',
+    category: 'Carnes & Peixes',
     subcategory: 'Carnes Bovinas',
     name: 'Refresco para misturar com leite Sabor Morango',
-    price: '8,94',
+    price: '8,99',
     unity: '125G',
     thumb: require('../assets/img/carne.png'),
     image: require('../assets/img/carne.png'),
@@ -32,12 +34,13 @@ export const PRODUCTS: ProductProps[] = [
   {
     id: '2',
     brand: 'Tang',
+    category: 'Carnes & Peixes',
     subcategory: 'Carnes Bovinas',
     name: 'Refresco para misturar com leite Sabor Morango',
-    price: '8,94',
+    price: '5,90',
     unity: '125G',
     thumb: require('../assets/img/carne.png'),
-    image: require('../assets/img/carne.png'),
+    image: require('../assets/img/bebida.png'),
     description:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
     observation:
@@ -46,11 +49,12 @@ export const PRODUCTS: ProductProps[] = [
   {
     id: '3',
     brand: 'Tang',
+    category: 'Carnes & Peixes',
     subcategory: 'Carnes Bovinas',
     name: 'Refresco para misturar com leite Sabor Morango',
-    price: '8,94',
+    price: '8,96',
     unity: '125G',
-    thumb: require('../assets/img/carne.png'),
+    thumb: require('../assets/img/frios.png'),
     image: require('../assets/img/carne.png'),
     description:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
@@ -60,12 +64,13 @@ export const PRODUCTS: ProductProps[] = [
   {
     id: '4',
     brand: 'Tang',
+    category: 'Carnes & Peixes',
     subcategory: 'Carnes Bovinas',
     name: 'Refresco para misturar com leite Sabor Morango',
     price: '8,94',
     unity: '125G',
-    thumb: require('../assets/img/carne.png'),
-    image: require('../assets/img/carne.png'),
+    thumb: require('../assets/img/bebida.png'),
+    image: require('../assets/img/frios.png'),
     description:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
     observation:
@@ -74,6 +79,7 @@ export const PRODUCTS: ProductProps[] = [
   {
     id: '5',
     brand: 'Tang',
+    category: 'Carnes & Peixes',
     subcategory: 'Carnes Bovinas',
     name: 'Refresco para misturar com leite Sabor Morango',
     price: '8,94',
@@ -88,12 +94,13 @@ export const PRODUCTS: ProductProps[] = [
   {
     id: '6',
     brand: 'Tang',
+    category: 'Bebidas',
     subcategory: 'Aves',
     name: 'Refresco para misturar com leite Sabor Morango',
     price: '8,94',
     unity: '125G',
     thumb: require('../assets/img/carne.png'),
-    image: require('../assets/img/carne.png'),
+    image: require('../assets/img/bebida.png'),
     description:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
     observation:
@@ -102,6 +109,7 @@ export const PRODUCTS: ProductProps[] = [
   {
     id: '7',
     brand: 'Tang',
+    category: 'Higiene & Perfumaria',
     subcategory: 'Aves',
     name: 'Refresco para misturar com leite Sabor Morango',
     price: '8,94',
@@ -116,6 +124,7 @@ export const PRODUCTS: ProductProps[] = [
   {
     id: '9',
     brand: 'Tang',
+    category: 'Carnes & Peixes',
     subcategory: 'Peixes',
     name: 'Refresco para misturar com leite Sabor Morango',
     price: '8,94',
@@ -130,12 +139,13 @@ export const PRODUCTS: ProductProps[] = [
   {
     id: '10',
     brand: 'Tang',
+    category: 'Frios & Laticínios',
     subcategory: 'Linguiças',
     name: 'Refresco para misturar com leite Sabor Morango',
     price: '8,94',
     unity: '125G',
-    thumb: require('../assets/img/carne.png'),
-    image: require('../assets/img/carne.png'),
+    thumb: require('../assets/img/frios.png'),
+    image: require('../assets/img/frios.png'),
     description:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
     observation:

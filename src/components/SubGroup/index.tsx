@@ -23,7 +23,7 @@ export function SubGroup({ onSelect, selected }: Props) {
       horizontal
       showsHorizontalScrollIndicator={false}
       _contentContainerStyle={{ px: 8 }}
-      mt={10}
+      mt={8}
       maxH={16}
       minH={16}
     />

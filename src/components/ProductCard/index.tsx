@@ -9,6 +9,7 @@ import { Button } from '@components/Button'
 export type ProductCardProps = {
   id: string
   brand: string
+  category: string
   subcategory: string
   name: string
   price: string
@@ -30,26 +31,27 @@ export function ProductCard({ data, ...rest }: Props) {
     <VStack
       ml={1}
       mt={2}
-      bg="gray.50"
+      bg="white"
       alignItems={'center'}
       w={40}
-      h={240}
+      h={210}
+      minW={24}
       rounded="md"
-      mb="6"
+      mb="2"
       borderWidth={0.2}
     >
       <Center>
         <Image
-          source={data.thumb}
+          source={data.image}
           alt="Imagem do produto"
           w={32}
           h={20}
           rounded="md"
-          mt={4}
+          mt={6}
           mr={2}
           ml={2}
-          p={2}
           m={2}
+          p={2}
           resizeMode="cover"
         />
         <HStack mb="1">
@@ -59,14 +61,14 @@ export function ProductCard({ data, ...rest }: Props) {
           </Heading>
           <Box bg="red.500" rounded="md" pl="1" pr="1" mb={2}>
             <Text fontSize="12" color="gray.100" numberOfLines={1}>
-              Kg
+              {data.unity}
             </Text>
           </Box>
         </HStack>
 
         <Box h={10} w={24}>
           <Text fontSize="12" numberOfLines={2}>
-            {data.description}
+            {data.name}
           </Text>
         </Box>
 

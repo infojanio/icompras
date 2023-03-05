@@ -1,26 +1,34 @@
-import React from 'react'
+import { FlatList } from 'native-base'
 
-import { CategoryItem } from './CategoryItem'
-import { Category, categoryList } from '../../data/CategoryList'
-import { ListRenderItemInfo, TouchableOpacity } from 'react-native'
-import { FlatList, View } from 'native-base'
-import { SeparatorItem } from '../SeparatorItem'
+import { Group } from '@components/Group'
+import { categoryList } from '../../data/category'
+import { GroupCategory } from '@components/GroupCategory'
+import { ImageProps } from 'react-native'
+import { Category } from '@data/CategoryList'
+import { useNavigation } from '@react-navigation/native'
+import { AppNavigatorRoutesProps } from '@routes/app.routes'
 
 export function Department() {
-  function renderItem({ item }: ListRenderItemInfo<Category>) {
-    return <CategoryItem {...item} />
-  }
+  const navigation = useNavigation<AppNavigatorRoutesProps>()
 
   return (
-    <View>
-      <FlatList
-        // ListHeaderComponent={PromotionShow} Aceita outro componente dentro da lista
-        showsVerticalScrollIndicator={false}
-        ItemSeparatorComponent={SeparatorItem}
-        data={categoryList}
-        keyExtractor={(item) => item.id}
-        renderItem={renderItem}
-      />
-    </View>
+    <FlatList
+      data={categoryList}
+      keyExtractor={(item) => item.id}
+      renderItem={({ item }) => (
+        <GroupCategory
+          id={item.id}
+          image={item.image}
+          title={item.title}
+          onPress={() => {
+            navigation.navigate('productDetails')
+          }}
+        />
+      )}
+      showsHorizontalScrollIndicator={false}
+      _contentContainerStyle={{ px: 16 }}
+      mt={4}
+      mb={24}
+    />
   )
 }

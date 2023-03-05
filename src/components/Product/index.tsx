@@ -14,7 +14,7 @@ export function Product({ data, subcategory }: Props) {
   const { navigate } = useNavigation()
 
   return (
-    <VStack flex={1}>
+    <VStack bg={'gray.200'}>
       <HeaderList title={subcategory} counter={PRODUCTS.length} />
 
       <FlatList
@@ -27,7 +27,10 @@ export function Product({ data, subcategory }: Props) {
           />
         )}
         numColumns={2}
-        _contentContainerStyle={{ alignItems: 'center', paddingBottom: 20 }}
+        _contentContainerStyle={{
+          marginLeft: 8,
+          paddingBottom: 32,
+        }}
         showsVerticalScrollIndicator={false}
       />
     </VStack>

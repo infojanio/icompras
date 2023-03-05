@@ -8,29 +8,21 @@ import { SubGroup } from '../components/SubGroup'
 import { Product } from '@components/Product'
 import { ProductCardProps } from '@components/ProductCard'
 
-export function ProductSubCategory() {
-  const [subCategorySelected, setSubCategorySelected] = useState(
-    'Carnes Bovinas',
-  )
+export function ProductCategory() {
+  const [categorySelected, setCategorySelected] = useState('Carnes & Peixes')
   const [products, setProducts] = useState<ProductCardProps[]>([])
 
   useEffect(() => {
     const filtered = PRODUCTS.filter(
-      (product) => product.subcategory === subCategorySelected,
+      (product) => product.category === categorySelected,
     ) as ProductCardProps[]
     setProducts(filtered)
-  }, [subCategorySelected])
+  }, [categorySelected])
 
   return (
-    <VStack flex={1}>
-      <HomeProduct name="Pesquisar..." />
-      <VStack flex={1} ml={-6} mt={-6}>
-        <SubGroup
-          onSelect={setSubCategorySelected}
-          selected={subCategorySelected}
-        />
-        <Product subcategory={subCategorySelected} data={products} />
-      </VStack>
+    <VStack flex={1} ml={-6} mt={-6}>
+      <SubGroup onSelect={setCategorySelected} selected={categorySelected} />
+      <Product subcategory={categorySelected} data={products} />
     </VStack>
   )
 }
