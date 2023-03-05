@@ -1,4 +1,4 @@
-import { VStack, Text } from 'native-base'
+import { VStack, Text, HStack, FlatList } from 'native-base'
 import { ScrollView } from 'react-native-virtualized-view'
 
 import { Filter } from '@components/Filter'
@@ -6,11 +6,13 @@ import { Department } from '@components/Department'
 import { SeparatorItem } from '@components/SeparatorItem'
 import { Promotion } from '@components/Promotion'
 import { HomeHeader } from '@components/HomeHeader'
+import { ProductCategory } from '@components/ProductCategory'
+import { Product } from '@components/Product'
 
 export function Home() {
   return (
     <VStack flex={1}>
-      <HomeHeader/>
+      <HomeHeader />
       <Filter />
 
       <ScrollView showsVerticalScrollIndicator={false}>

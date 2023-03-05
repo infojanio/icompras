@@ -4,7 +4,7 @@ import { VStack, Text, Divider, HStack, FlatList, Heading } from 'native-base'
 
 import { Group } from '@components/Group'
 
-import { ProductCategory } from '@components/ProductCategory'
+import { ProductCategoryVertical } from '@components/ProductCategoryVertical'
 import { useNavigation } from '@react-navigation/native'
 import { AppNavigatorRoutesProps } from '@routes/app.routes'
 
@@ -54,6 +54,7 @@ export function ProductList() {
         showsHorizontalScrollIndicator={false}
         _contentContainerStyle={{ px: 2 }}
         maxH={16}
+        minH={16}
       />
 
       <VStack flex={1} px={1}>
@@ -66,8 +67,7 @@ export function ProductList() {
         <FlatList
           data={subCategory}
           keyExtractor={(item) => item}
-          renderItem={({ item }) => <ProductCategory />}
-          horizontal
+          renderItem={({ item }) => <ProductCategoryVertical />}
           showsVerticalScrollIndicator={false}
           _contentContainerStyle={{ paddingBottom: 32 }}
         />

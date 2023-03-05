@@ -25,52 +25,50 @@ export function ProductCategory({ ...rest }: Props) {
   }
 
   return (
-    <HStack flex="1" pl={1}>
-      <HStack bg="gray.50" rounded="md" mb="6" borderWidth={0.2}>
-        <Center>
-          <Image
-            source={{
-              uri:
-                'https://appmercados.com.br/inc/timthumb.php?w=800&h=800&zc=2&src=%2Fuploads%2Fa7dfd128a12ae1a9986401df2cd1659a.png',
-            }}
-            alt="imagem de carnes"
-            w={24}
-            h={24}
-            rounded="md"
-            mt={4}
-            mr={2}
-            ml={2}
-            resizeMode="center"
-          />
+    <VStack flex="1" ml={1} bg="gray.50" rounded="md" mb="6" borderWidth={0.2}>
+      <Center>
+        <Image
+          source={{
+            uri:
+              'https://appmercados.com.br/inc/timthumb.php?w=800&h=800&zc=2&src=%2Fuploads%2Fa7dfd128a12ae1a9986401df2cd1659a.png',
+          }}
+          alt="imagem de carnes"
+          w={24}
+          h={24}
+          rounded="md"
+          mt={4}
+          mr={2}
+          ml={2}
+          resizeMode="center"
+        />
 
-          <HStack mb="1">
-            <Text>R$</Text>
-            <Heading ml={2} mr={2} mb={1} fontSize="16" color="red.700">
-              39,90
-            </Heading>
-            <Box bg="red.500" rounded="md" pl="1" pr="1" mb={2}>
-              <Text fontSize="12" color="gray.100" numberOfLines={1}>
-                Kg
-              </Text>
-            </Box>
-          </HStack>
-
-          <Box h={10} w={24}>
-            <Text fontSize="14" numberOfLines={2}>
-              Carne Paleta Bovina Congelada
+        <HStack mb="1">
+          <Text>R$</Text>
+          <Heading ml={2} mr={2} mb={1} fontSize="16" color="red.700">
+            39,90
+          </Heading>
+          <Box bg="red.500" rounded="md" pl="1" pr="1" mb={2}>
+            <Text fontSize="12" color="gray.100" numberOfLines={1}>
+              Kg
             </Text>
           </Box>
+        </HStack>
 
-          <Center px={2} mb={8} mt={2}>
-            <Button
-              title="Adicionar"
-              h={10}
-              w={24}
-              onPress={handleOpenProductDetails}
-            />
-          </Center>
+        <Box h={10} w={24}>
+          <Text fontSize="12" numberOfLines={2}>
+            Carne Paleta Bovina Congelada
+          </Text>
+        </Box>
+
+        <Center px={2} mb={16} mt={2}>
+          <Button
+            title="Adicionar"
+            h={9}
+            w={24}
+            onPress={handleOpenProductDetails}
+          />
         </Center>
-      </HStack>
-    </HStack>
+      </Center>
+    </VStack>
   )
 }

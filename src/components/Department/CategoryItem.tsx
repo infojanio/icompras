@@ -14,7 +14,7 @@ export function CategoryItem({ id, title, image }: Category) {
   function handleProduct() {
     const navigation = useNavigation<AppNavigatorRoutesProps>()
 
-    navigation.navigate('productList')
+    navigation.navigate('productDetails')
   }
 
   return (
