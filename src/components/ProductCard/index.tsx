@@ -5,6 +5,8 @@ import {
 } from 'react-native'
 import { VStack, Image, Heading, Text, Center, Box, HStack } from 'native-base'
 import { Button } from '@components/Button'
+import { useNavigation } from '@react-navigation/native'
+import { AppNavigatorRoutesProps } from '@routes/app.routes'
 
 export type ProductCardProps = {
   id: string
@@ -27,6 +29,12 @@ type Props = TouchableOpacityProps & {
 }
 
 export function ProductCard({ data, ...rest }: Props) {
+  const navigation = useNavigation<AppNavigatorRoutesProps>()
+
+  function handleOpenProductDetail() {
+    navigation.navigate('productDetails')
+  }
+
   return (
     <VStack
       ml={1}
@@ -77,7 +85,7 @@ export function ProductCard({ data, ...rest }: Props) {
             title="Adicionar"
             h={9}
             w={24}
-            //  onPress={handleOpenProductDetails}
+            onPress={handleOpenProductDetail}
           />
         </Center>
       </Center>
