@@ -82,9 +82,9 @@ export function ProductCard({ data, ...rest }: Props) {
 
         <Center px={2} mb={16} mt={2}>
           <Button
-            title="Adicionar"
+            title="Adicionar à lista"
             h={9}
-            w={24}
+            w={32}
             onPress={handleOpenProductDetail}
           />
         </Center>

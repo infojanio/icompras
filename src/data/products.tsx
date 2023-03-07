@@ -21,13 +21,13 @@ export const PRODUCTS: ProductProps[] = [
     brand: 'Tang',
     category: 'Carnes & Peixes',
     subcategory: 'Carnes Bovinas',
-    name: 'Refresco para misturar com leite Sabor Morango',
-    price: '8,99',
-    unity: '125G',
+    name: 'Charque Traseiro Bovino Pedaço 500g',
+    price: '21,99',
+    unity: '500 G',
     thumb: require('../assets/img/carne.png'),
     image: require('../assets/img/carne.png'),
     description:
-      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+      'Charque traseiro , corte salgado mais macia e magra. , dessecado e curado ao sol no ponto certo. O charque, sendo Jabá no norte e Carne Seca no sudeste, teve origem no Nordeste do Brasil no fim do século XVII visando a conservação da carne. O traseiro é mais macia e magra.',
     observation:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
   },
