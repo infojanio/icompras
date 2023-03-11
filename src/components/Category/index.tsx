@@ -4,13 +4,11 @@ import { Group } from '@components/Product/Group'
 import { categoryList } from '../../data/categoryData'
 import { GroupCategory } from '@components/Category/GroupCategory'
 import { ImageProps } from 'react-native'
-import { Category } from '@data/CategoryList'
+import { CategoryData } from '@data/categoryData'
 import { useNavigation } from '@react-navigation/native'
 import { AppNavigatorRoutesProps } from '@routes/app.routes'
 
-export function Department() {
-  const navigation = useNavigation<AppNavigatorRoutesProps>()
-
+export function Category() {
   return (
     <FlatList
       data={categoryList}

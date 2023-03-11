@@ -26,7 +26,7 @@ type Props = TouchableOpacityProps & {
   id: string
   title: string
   image: ImageProps['source']
-  data: Category
+  // data: Category
 }
 
 export function GroupCategory({ id, title, image }: Props) {

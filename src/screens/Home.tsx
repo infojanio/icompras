@@ -9,6 +9,7 @@ import { HomeHeader } from '@components/HomeHeader'
 import { ProductCategory } from '@utils/ProductCategory'
 import { Product } from '@components/Product'
 import { ProductSubCategory } from './Product/ProductSubCategory'
+import { Category } from '@components/Category'
 
 export function Home() {
   return (
@@ -30,7 +31,7 @@ export function Home() {
             Categorias
           </Text>
         </VStack>
-        <Department />
+        <Category />
       </ScrollView>
     </VStack>
   )

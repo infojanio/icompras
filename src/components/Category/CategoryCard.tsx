@@ -32,7 +32,7 @@ type Props = TouchableOpacityProps & {
   data: CategoryCardProps
 }
 
-export function GroupCategory({ data, ...rest }: Props) {
+export function CategoryCard({ data, ...rest }: Props) {
   return (
     <TouchableOpacity {...rest}>
       <VStack mb={2}>
