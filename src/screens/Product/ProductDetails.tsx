@@ -15,15 +15,15 @@ import {
   HStack,
 } from 'native-base'
 
-import { useCart } from '../hooks/useCart'
+import { useCart } from '../../hooks/useCart'
 
-import { PRODUCTS } from '../data/products'
-import { Sizes } from '../components/Sizes'
+import { PRODUCTS } from '../../data/products'
+import { Sizes } from '../../components/Sizes'
 
-import { Input } from '../components/Input'
-import { Button } from '../components/Button'
+import { Input } from '../../components/Input'
+import { Button } from '../../components/Button'
 
-import { ProductCardProps } from '../components/ProductCard'
+import { ProductCardProps } from '../../components/Product/ProductCard'
 
 type RouteParamsProps = {
   productId: string

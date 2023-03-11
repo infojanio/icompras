@@ -18,9 +18,9 @@ import { Search } from '@screens/Search'
 import { CartVazio } from '@components/CartVazio'
 import { Request } from '@screens/Request'
 import { Profile } from '@screens/Profile'
-import { ProductList } from '@screens/ProductList'
-import { ProductDetails } from '@screens/ProductDetails'
-import { ProductSubCategory } from '@screens/ProductSubCategory'
+import { ProductList } from '@screens/Product/ProductList'
+import { ProductDetails } from '@screens/Product/ProductDetails'
+import { ProductSubCategory } from '@screens/Product/ProductSubCategory'
 
 type AppRoutes = {
   homeScreen: undefined

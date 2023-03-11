@@ -21,24 +21,21 @@ import {
 
 import { useNavigation } from '@react-navigation/native'
 import { AppNavigatorRoutesProps } from '@routes/app.routes'
-import { ItemClick } from 'native-base/lib/typescript/components/composites/Typeahead/useTypeahead/types'
 
-type Props = TouchableOpacityProps & {
+export type CategoryCardProps = {
   id: string
   title: string
   image: ImageProps['source']
 }
 
-export function GroupCategory({ id, title, image }: Props) {
-  const navigation = useNavigation<AppNavigatorRoutesProps>()
+type Props = TouchableOpacityProps & {
+  data: CategoryCardProps
+}
 
-  function handleProductSubCategory() {
-    navigation.navigate('productSubCategory')
-  }
-
+export function GroupCategory({ data, ...rest }: Props) {
   return (
-    <VStack mb={2}>
-      <TouchableOpacity onPress={handleProductSubCategory}>
+    <TouchableOpacity {...rest}>
+      <VStack mb={2}>
         <HStack
           backgroundColor="white"
           alignItems="center"
@@ -54,10 +51,10 @@ export function GroupCategory({ id, title, image }: Props) {
             ml={2}
             height={16}
             width={24}
-            source={image}
+            source={data.image}
           />
           <Box flex={1} marginLeft={2}>
-            <Text fontSize={16}>{title}</Text>
+            <Text fontSize={16}>{data.title}</Text>
           </Box>
           <Icon
             as={<MaterialIcons name="navigate-next" />}
@@ -72,7 +69,7 @@ export function GroupCategory({ id, title, image }: Props) {
             }}
           />
         </HStack>
-      </TouchableOpacity>
-    </VStack>
+      </VStack>
+    </TouchableOpacity>
   )
 }

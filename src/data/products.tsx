@@ -1,4 +1,4 @@
-import { ProductCardProps } from '@components/ProductCard'
+import { ProductCardProps } from '@components/Product/ProductCard'
 import { ImageProps } from 'react-native'
 
 interface ProductProps {

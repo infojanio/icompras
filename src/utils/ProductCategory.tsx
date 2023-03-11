@@ -1,4 +1,8 @@
-import { TouchableOpacity, TouchableOpacityProps } from 'react-native'
+import {
+  ImageProps,
+  TouchableOpacity,
+  TouchableOpacityProps,
+} from 'react-native'
 import {
   Heading,
   HStack,
@@ -14,16 +18,17 @@ import { AppNavigatorRoutesProps } from '@routes/app.routes'
 import { useNavigation } from '@react-navigation/native'
 import { Button } from '@components/Button'
 
-type Props = TouchableOpacityProps & {}
+export type CategoryCardProps = {
+  id: string
+  title: string
+  image: ImageProps['source']
+}
 
-export function ProductCategory({ ...rest }: Props) {
-  const navigation = useNavigation<AppNavigatorRoutesProps>()
+type Props = TouchableOpacityProps & {
+  data: CategoryCardProps
+}
 
-  //abrir detalhes do produto
-  function handleOpenProductDetails() {
-    navigation.navigate('productDetails')
-  }
-
+export function ProductCategory({ data, ...rest }: Props) {
   return (
     <VStack flex="1" ml={1} bg="gray.50" rounded="md" mb="6" borderWidth={0.2}>
       <Center>
@@ -59,15 +64,6 @@ export function ProductCategory({ ...rest }: Props) {
             Carne Paleta Bovina Congelada
           </Text>
         </Box>
-
-        <Center px={2} mb={16} mt={2}>
-          <Button
-            title="Adicionar"
-            h={9}
-            w={24}
-            onPress={handleOpenProductDetails}
-          />
-        </Center>
       </Center>
     </VStack>
   )

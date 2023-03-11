@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native'
 import { FlatList, VStack } from 'native-base'
 import { HeaderList } from '@components/HeaderList'
 
-import { ProductCard, ProductCardProps } from '@components/ProductCard'
+import { ProductCard, ProductCardProps } from '@components/Product/ProductCard'
 import { PRODUCTS } from '../../data/products'
 
 type Props = {

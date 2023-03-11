@@ -19,14 +19,18 @@ import { Input } from '@components/Input'
 import { AppNavigatorRoutesProps } from '@routes/app.routes'
 import { useNavigation } from '@react-navigation/native'
 
-const LogoImage =
-  'https://play-lh.googleusercontent.com/BbcUGwdG1x5mJc-WXOwIblcYhmpyFPdBaunDHoWgS2L1ZUMeIncz1XZgKt7K1EKFHA=w240-h480'
+import {
+  CategoryCard,
+  CategoryCardProps,
+} from '@components/Category/CategoryCard'
+import { categoryList } from '../../data/category'
 
-interface Props {
-  name: string
+type Props = {
+  category: string
+  data: CategoryCardProps[]
 }
 
-export function HomeProduct({ name }: Props) {
+export function HomeProduct({ ...data }: Props) {
   const navigation = useNavigation<AppNavigatorRoutesProps>()
 
   //definição do tamanho dos ícones
@@ -66,7 +70,7 @@ export function HomeProduct({ name }: Props) {
           />
         </TouchableOpacity>
 
-        <Text>{name}</Text>
+        <Text>{data.category}</Text>
         <Text fontWeight={'bold'} fontSize={16} color="red.600" ml={4}>
           R$ 0,00
         </Text>

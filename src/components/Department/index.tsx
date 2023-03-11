@@ -1,8 +1,8 @@
 import { FlatList } from 'native-base'
 
-import { Group } from '@components/Group'
-import { categoryList } from '../../data/category'
-import { GroupCategory } from '@components/GroupCategory'
+import { Group } from '@components/Product/Group'
+import { categoryList } from '../../data/categoryData'
+import { GroupCategory } from '@components/Category/GroupCategory'
 import { ImageProps } from 'react-native'
 import { Category } from '@data/CategoryList'
 import { useNavigation } from '@react-navigation/native'

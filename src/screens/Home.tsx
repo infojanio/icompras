@@ -6,9 +6,9 @@ import { Department } from '@components/Department'
 import { SeparatorItem } from '@components/SeparatorItem'
 import { Promotion } from '@components/Promotion'
 import { HomeHeader } from '@components/HomeHeader'
-import { ProductCategory } from '@components/ProductCategory'
+import { ProductCategory } from '@utils/ProductCategory'
 import { Product } from '@components/Product'
-import { ProductSubCategory } from './ProductSubCategory'
+import { ProductSubCategory } from './Product/ProductSubCategory'
 
 export function Home() {
   return (

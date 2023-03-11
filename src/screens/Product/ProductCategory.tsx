@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
-import { HomeProduct } from '@components/HomeProduct'
+import { HomeProduct } from '@components/Product/HomeProduct'
 import { VStack } from 'native-base'
 
-import { PRODUCTS } from '../data/products'
+import { PRODUCTS } from '../../data/products'
 
-import { SubGroup } from '../components/SubGroup'
+import { SubGroup } from '../../components/Product/SubGroup'
 import { Product } from '@components/Product'
-import { ProductCardProps } from '@components/ProductCard'
+import { ProductCardProps } from '@components/Product/ProductCard'
 
 export function ProductCategory() {
   const [categorySelected, setCategorySelected] = useState('Carnes & Peixes')

@@ -12,7 +12,7 @@ import {
 } from 'native-base'
 
 import { SeparatorItem } from '@components/SeparatorItem'
-import { Group } from '@components/Group'
+import { Group } from '@components/Product/Group'
 import { AllProduct } from '@components/AllProduct'
 import { HomeScreen } from '@components/HomeScreen'
 import { Market } from '@components/Market'

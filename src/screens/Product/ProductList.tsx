@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import { HomeProduct } from '@components/HomeProduct'
+import { HomeProduct } from '@components/Product/HomeProduct'
 import { VStack, Text, Divider, HStack, FlatList, Heading } from 'native-base'
 
-import { Group } from '@components/Group'
+import { Group } from '@components/Product/Group'
 
-import { ProductCategoryVertical } from '@components/ProductCategoryVertical'
+import { ProductCategoryVertical } from '@utils/ProductCategoryVertical'
 import { useNavigation } from '@react-navigation/native'
 import { AppNavigatorRoutesProps } from '@routes/app.routes'
 
