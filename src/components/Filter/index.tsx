@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button } from 'native-base'
+import { Button, HStack, Stack, VStack } from 'native-base'
 
 import SearchSvg from '@assets/search.svg'
 import { View } from 'native-base'
@@ -11,12 +11,22 @@ export function Filter() {
   const navigation = useNavigation<AppNavigatorRoutesProps>()
 
   return (
-    <View pt="1" pl={2} pr={2} pb="2" bg="gray.100">
+    <Stack
+      marginTop={2}
+      marginLeft={2}
+      marginRight={2}
+      direction={{
+        base: 'column',
+        md: 'row',
+      }}
+      space={8}
+    >
       <Button
         bg="gray.100"
         color="gray.700"
         variant="outline"
-        borderColor="gray.400"
+        borderColor="green.700"
+        justifyContent="flex-start"
         size="lg"
         leftIcon={<SearchSvg height={20} width={20} />}
         onPress={() => {
@@ -28,6 +38,6 @@ export function Filter() {
       >
         Pesquise um produto...
       </Button>
-    </View>
+    </Stack>
   )
 }

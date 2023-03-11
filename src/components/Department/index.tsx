@@ -21,7 +21,7 @@ export function Department() {
           image={item.image}
           title={item.title}
           onPress={() => {
-            navigation.navigate('productDetails')
+            // navigation.navigate('productDetails')
           }}
         />
       )}

@@ -10,6 +10,7 @@ import {
 import { THEME } from './src/theme'
 import { Loading } from '@components/Loading'
 import { Routes } from './src/routes'
+import { CartContextProvider } from '@contexts/CartContext'
 
 export default function App() {
   const [fontsLoaded] = useFonts({ Roboto_400Regular, Roboto_700Bold })
@@ -18,7 +19,9 @@ export default function App() {
     <NativeBaseProvider>
       <StatusBar barStyle="light-content" translucent />
 
-      {fontsLoaded ? <Routes /> : <Loading />}
+      <CartContextProvider>
+        {fontsLoaded ? <Routes /> : <Loading />}
+      </CartContextProvider>
     </NativeBaseProvider>
   )
-}   
+}

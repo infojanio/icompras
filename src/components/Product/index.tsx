@@ -23,7 +23,7 @@ export function Product({ data, subcategory }: Props) {
         renderItem={({ item }) => (
           <ProductCard
             data={item}
-            //onPress={() => navigate('productDetails', { productId: item.id })}
+            onPress={() => navigate('productDetails', { productId: item.id })}
           />
         )}
         numColumns={2}
@@ -36,36 +36,3 @@ export function Product({ data, subcategory }: Props) {
     </VStack>
   )
 }
-
-/*
-import React from 'react'
-
-import { ProductItem } from './ProductItem'
-import { Product, productList } from '../../data/ProductList1'
-import { ListRenderItemInfo, TouchableOpacity } from 'react-native'
-import { FlatList, View } from 'native-base'
-import { SeparatorItem } from '../SeparatorItem'
-
-export function Product() {
-  function renderItem({ item }: ListRenderItemInfo<Product>) {
-    return (
-      <TouchableOpacity>
-        <ProductItem {...item} />
-      </TouchableOpacity>
-    )
-  }
-
-  return (
-    <View>
-      <FlatList
-        // ListHeaderComponent={PromotionShow} Aceita outro componente dentro da lista
-        showsVerticalScrollIndicator={false}
-        ItemSeparatorComponent={SeparatorItem}
-        data={productList}
-        keyExtractor={(item) => item.id}
-        renderItem={renderItem}
-      />
-    </View>
-  )
-}
-*/
