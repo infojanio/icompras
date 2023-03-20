@@ -9,31 +9,32 @@ import { Product } from '@components/Product'
 import { ProductCardProps } from '@components/Product/ProductCard'
 
 export function ProductCategory() {
-  const [categorySelected, setCategorySelected] = useState('Carnes & Peixes')
-
   const [subCategorySelected, setSubCategorySelected] = useState(
     'Carnes Bovinas',
   )
+
+  const [CategorySelected, setCategorySelected] = useState('Carnes & Peixes')
+
   const [products, setProducts] = useState<ProductCardProps[]>([])
 
   useEffect(() => {
-    //filtra subcategoria de acordo a categoria
     const filtered = PRODUCTS.filter(
-      (product) =>
-        product.category &&
-        product.subcategory === categorySelected &&
-        subCategorySelected,
+      (product) => product.subcategory === subCategorySelected,
     ) as ProductCardProps[]
     setProducts(filtered)
-  }, [categorySelected, subCategorySelected])
+  }, [subCategorySelected])
 
   return (
-    <VStack flex={1} ml={-6} mt={-6}>
-      <GroupSubCategory
-        onSelect={setCategorySelected}
-        selected={categorySelected}
-      />
-      <Product subcategory={categorySelected} data={products} />
+    <VStack flex={1}>
+      <HomeProduct />
+
+      <VStack flex={1} ml={-6} mt={-6}>
+        <GroupSubCategory
+          onSelect={setSubCategorySelected}
+          selected={subCategorySelected}
+        />
+        <Product subcategory={subCategorySelected} data={products} />
+      </VStack>
     </VStack>
   )
 }

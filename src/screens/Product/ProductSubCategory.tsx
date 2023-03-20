@@ -4,7 +4,7 @@ import { VStack } from 'native-base'
 
 import { PRODUCTS } from '../../data/products'
 
-import { SubGroup } from '../../components/Product/SubGroup'
+import { GroupSubCategory } from '../../components/Product/GroupSubcategory'
 import { Product } from '@components/Product'
 import { ProductCardProps } from '@components/Product/ProductCard'
 
@@ -12,6 +12,9 @@ export function ProductSubCategory() {
   const [subCategorySelected, setSubCategorySelected] = useState(
     'Carnes Bovinas',
   )
+
+  const [CategorySelected, setCategorySelected] = useState('Carnes & Peixes')
+
   const [products, setProducts] = useState<ProductCardProps[]>([])
 
   useEffect(() => {
@@ -23,9 +26,10 @@ export function ProductSubCategory() {
 
   return (
     <VStack flex={1}>
-      <HomeProduct name="Pesquisar" />
+      <HomeProduct />
+
       <VStack flex={1} ml={-6} mt={-6}>
-        <SubGroup
+        <GroupSubCategory
           onSelect={setSubCategorySelected}
           selected={subCategorySelected}
         />

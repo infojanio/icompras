@@ -4,9 +4,6 @@ import {
   TouchableOpacityProps,
 } from 'react-native'
 import { VStack, Image, Heading, Text, Center, Box, HStack } from 'native-base'
-import { Button } from '@components/Button'
-import { useNavigation } from '@react-navigation/native'
-import { AppNavigatorRoutesProps } from '@routes/app.routes'
 
 export type ProductCardProps = {
   id: string
@@ -29,8 +26,6 @@ type Props = TouchableOpacityProps & {
 }
 
 export function ProductCard({ data, ...rest }: Props) {
-  const navigation = useNavigation<AppNavigatorRoutesProps>()
-
   return (
     <TouchableOpacity {...rest}>
       <VStack

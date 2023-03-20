@@ -1,7 +1,5 @@
 import { HomeScreen } from '@components/HomeScreen'
 
-import { ProductSubCategory } from './ProductSubCategory'
-
 import { Platform } from 'react-native'
 import { useEffect, useState } from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native'
@@ -29,7 +27,7 @@ type RouteParamsProps = {
   productId: string
 }
 
-export function ProductDetails() {
+export function CategoryDetails() {
   const [size, setSize] = useState('35')
   const [quantity, setQuantity] = useState('1')
   const [product, setProduct] = useState<ProductCardProps>(
@@ -93,13 +91,8 @@ export function ProductDetails() {
 
         <VStack p={6}>
           <HStack w="full" justifyContent="space-between" alignItems="center">
-            <VStack flex={1}>
-              <Heading
-                color="gray.700"
-                fontFamily="heading"
-                fontSize="14"
-                mb={2}
-              >
+            <VStack>
+              <Heading color="gray.700" fontFamily="heading" fontSize="14">
                 {product.name}
               </Heading>
 
@@ -109,7 +102,7 @@ export function ProductDetails() {
             </VStack>
 
             <VStack alignItems="flex-end">
-              <Text color="gray.700" fontSize="sm" textAlign="justify" pt={4}>
+              <Text color="gray.700" fontSize="sm" textAlign="justify" pt={2}>
                 Quantidade
               </Text>
 
@@ -118,26 +111,17 @@ export function ProductDetails() {
                 keyboardType="numeric"
                 textAlign="center"
                 value={quantity}
-                w={16}
+                w={14}
               />
             </VStack>
           </HStack>
 
-          <Text
-            color="gray.700"
-            fontSize="md"
-            textAlign="justify"
-            pt={2}
-            mb={2}
-          >
+          <Text color="gray.700" fontSize="md" textAlign="justify" pt={2}>
             {product.description}
           </Text>
 
-          {/*  colocar condição: se if(categoria === sapato)
-
           <Sizes onSelect={setSize} selected={size} />
-          
-          */}
+
           <Button
             title="Adicionar no carrinho"
             onPress={handleAddProductToCart}

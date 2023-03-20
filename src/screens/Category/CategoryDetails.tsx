@@ -1,6 +1,6 @@
 import { HomeScreen } from '@components/HomeScreen'
 
-import { ProductSubCategory } from './ProductSubCategory'
+import { ProductCategory } from './ProductCategory'
 
 import { Platform } from 'react-native'
 import { useEffect, useState } from 'react'
@@ -29,7 +29,7 @@ type RouteParamsProps = {
   productId: string
 }
 
-export function ProductDetails() {
+export function CategoryDetails() {
   const [size, setSize] = useState('35')
   const [quantity, setQuantity] = useState('1')
   const [product, setProduct] = useState<ProductCardProps>(

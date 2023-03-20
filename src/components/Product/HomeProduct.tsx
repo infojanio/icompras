@@ -1,6 +1,11 @@
 import React from 'react'
 
-import { TouchableOpacity } from 'react-native'
+import {
+  ImageProps,
+  ImageSourcePropType,
+  TouchableOpacity,
+  TouchableOpacityProps,
+} from 'react-native'
 import {
   Center,
   HStack,
@@ -19,18 +24,27 @@ import { Input } from '@components/Input'
 import { AppNavigatorRoutesProps } from '@routes/app.routes'
 import { useNavigation } from '@react-navigation/native'
 
-import {
-  CategoryCard,
-  CategoryCardProps,
-} from '@components/Category/CategoryCard'
-import { categoryList } from '../../data/category'
-
-type Props = {
+export type ProductCardProps = {
+  id: string
+  brand: string
+  name: string
+  price: string
   category: string
-  data: CategoryCardProps[]
+  subcategory: string
+  unity: string
+  thumb: ImageSourcePropType
+  image: ImageSourcePropType
+  description: string
+  observation: string
+  quantity: number
+  size: number
 }
 
-export function HomeProduct({ ...data }: Props) {
+type Props = {
+  data: ProductCardProps
+}
+
+export function HomeProduct() {
   const navigation = useNavigation<AppNavigatorRoutesProps>()
 
   //definição do tamanho dos ícones
@@ -70,9 +84,9 @@ export function HomeProduct({ ...data }: Props) {
           />
         </TouchableOpacity>
 
-        <Text>{data.category}</Text>
+        <Text>Categoria</Text>
         <Text fontWeight={'bold'} fontSize={16} color="red.600" ml={4}>
-          R$ 0,00
+          R$ 0,10
         </Text>
 
         <TouchableOpacity>

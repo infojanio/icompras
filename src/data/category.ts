@@ -1,9 +1,7 @@
-import { ImageProps } from 'react-native'
-
-export type CategoryProps = {
+export interface Category {
   id: string
   name: string
-  image: ImageProps['source']
+  image: string
 }
 
 const MeatImage = require('../assets/img/carne.png')
@@ -11,7 +9,7 @@ const IceImage = require('../assets/img/frios.png')
 const HygieneImage = require('../assets/img/higiene.png')
 const DrinkImage = require('../assets/img/bebida.png')
 
-export const CATEGORY: CategoryProps[] = [
+export const categoryList: Category[] = [
   {
     id: '1',
     name: 'Carnes & Peixes',

@@ -1,18 +1,8 @@
 import React from 'react'
-import {
-  Image,
-  FlatList,
-  Text,
-  Box,
-  View,
-  HStack,
-  Icon,
-  VStack,
-} from 'native-base'
+import { Image, Text, Box, HStack, Icon, VStack } from 'native-base'
 
 import { MaterialIcons } from '@expo/vector-icons'
 
-import { Category } from '@data/CategoryList'
 import {
   ImageProps,
   TouchableOpacity,
@@ -21,6 +11,7 @@ import {
 
 import { useNavigation } from '@react-navigation/native'
 import { AppNavigatorRoutesProps } from '@routes/app.routes'
+import { Category } from '@data/CategoryList'
 
 type Props = TouchableOpacityProps & {
   id: string

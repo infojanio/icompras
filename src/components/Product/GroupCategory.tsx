@@ -1,7 +1,7 @@
 import { FlatList, VStack } from 'native-base'
 
 import { Group } from '@components/Product/Group'
-import { SubcategoryList } from '../../data/subcategory'
+import { categoryList } from '../../data/category'
 
 type Props = {
   onSelect: (value: string) => void
@@ -12,13 +12,13 @@ export function SubGroup({ onSelect, selected }: Props) {
   return (
     <VStack>
       <FlatList
-        data={SubcategoryList}
+        data={categoryList}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <Group
-            name={item.title}
-            isActive={selected === item.title}
-            onPress={() => onSelect(item.title)}
+            name={item.name}
+            isActive={selected === item.name}
+            onPress={() => onSelect(item.name)}
           />
         )}
         horizontal

@@ -1,41 +1,28 @@
 import React from 'react'
-import {
-  Image,
-  FlatList,
-  Text,
-  Box,
-  View,
-  HStack,
-  Icon,
-  VStack,
-} from 'native-base'
+import { Image, Text, Box, HStack, Icon, VStack } from 'native-base'
 
 import { MaterialIcons } from '@expo/vector-icons'
 
-import { Category } from '@data/CategoryList'
 import {
-  ImageProps,
+  ImageSourcePropType,
   TouchableOpacity,
   TouchableOpacityProps,
 } from 'react-native'
 
-import { useNavigation } from '@react-navigation/native'
-import { AppNavigatorRoutesProps } from '@routes/app.routes'
-
 export type CategoryCardProps = {
   id: string
-  title: string
-  image: ImageProps['source']
+  name: string
+  image: ImageSourcePropType
 }
 
-type Props = TouchableOpacityProps & {
+export type Props = TouchableOpacityProps & {
   data: CategoryCardProps
 }
 
 export function CategoryCard({ data, ...rest }: Props) {
   return (
-    <TouchableOpacity {...rest}>
-      <VStack mb={2}>
+    <VStack mb={2}>
+      <TouchableOpacity {...rest}>
         <HStack
           backgroundColor="white"
           alignItems="center"
@@ -45,6 +32,7 @@ export function CategoryCard({ data, ...rest }: Props) {
           borderRadius={'xl'}
           minH={'16'}
         >
+          <Text>{data.id}</Text>
           <Image
             alt="produtos"
             alignItems={'center'}
@@ -54,7 +42,7 @@ export function CategoryCard({ data, ...rest }: Props) {
             source={data.image}
           />
           <Box flex={1} marginLeft={2}>
-            <Text fontSize={16}>{data.title}</Text>
+            <Text fontSize={16}>{data.name}</Text>
           </Box>
           <Icon
             as={<MaterialIcons name="navigate-next" />}
@@ -69,7 +57,7 @@ export function CategoryCard({ data, ...rest }: Props) {
             }}
           />
         </HStack>
-      </VStack>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </VStack>
   )
 }
