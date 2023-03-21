@@ -1,4 +1,4 @@
-import { HomeCart } from '@components/HomeCart'
+import { HomeCart } from '@components/Cart/HomeCart'
 import { Box, Center, Text, Image, VStack } from 'native-base'
 
 import CartPng from '@assets/cart.png'
