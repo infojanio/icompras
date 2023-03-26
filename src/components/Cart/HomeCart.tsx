@@ -8,7 +8,7 @@ import { Input } from '@components/Input'
 import { ButtonBack } from '@components/ButtonBack'
 import { Double } from 'react-native/Libraries/Types/CodegenTypes'
 
-interface Props {
+type Props = {
   price: number
   quantity: number
   title: string
@@ -30,16 +30,27 @@ export function HomeCart({ title, price, quantity }: Props) {
       >
         <ButtonBack />
 
-        <Box mr={16}>
+        <HStack mr={16} alignContent="space-between">
           <Text
+            ml={10}
+            fontWeight={'semibold'}
+            fontStyle={'oblique'}
+            fontSize={18}
+            color="black"
+            flexShrink={1}
+          >
+            {title}
+          </Text>
+          <Text
+            ml={16}
             fontWeight={'semibold'}
             fontStyle={'oblique'}
             fontSize={18}
             color="black"
           >
-            {title}
+            R$ {price}
           </Text>
-        </Box>
+        </HStack>
 
         <VStack mr={2} alignItems={'center'} justifyContent={'center'}>
           <Center mr={1} bg={'red.500'} borderRadius="full" padding={1}>

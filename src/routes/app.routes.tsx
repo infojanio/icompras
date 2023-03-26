@@ -20,7 +20,9 @@ import { Request } from '@screens/Request'
 import { Profile } from '@screens/Profile'
 import { ProductList } from '@screens/Product/ProductList'
 import { ProductDetails } from '@screens/Product/ProductDetails'
+
 import { ProductSubCategory } from '@screens/Product/ProductSubCategory'
+import { CategoryDetails } from '@components/Category/CategoryDetails'
 
 type AppRoutes = {
   homeScreen: undefined
@@ -33,6 +35,7 @@ type AppRoutes = {
   signUp: undefined
   productDetails: undefined
   productSubCategory: undefined
+  categoryDetails: undefined
 }
 
 export type AppNavigatorRoutesProps = BottomTabNavigationProp<AppRoutes>
@@ -66,6 +69,7 @@ export function AppRoutes() {
         name="homeScreen"
         component={Home}
         options={{
+          title: 'Home',
           headerShown: false,
           tabBarIcon: ({ color }) => (
             <HomeSvg fill={color} width={iconSize} height={iconSize} />
@@ -76,6 +80,7 @@ export function AppRoutes() {
         name="search"
         component={Search}
         options={{
+          title: 'Pesquisar',
           headerShown: false,
           tabBarIcon: ({ color }) => (
             <SearchSvg fill={color} width={iconSize} height={iconSize} />
@@ -154,6 +159,14 @@ export function AppRoutes() {
       <Screen
         name="productDetails"
         component={ProductDetails}
+        options={{
+          tabBarButton: () => null,
+        }} //não mostra ícone
+      />
+
+      <Screen
+        name="categoryDetails"
+        component={CategoryDetails}
         options={{
           tabBarButton: () => null,
         }} //não mostra ícone

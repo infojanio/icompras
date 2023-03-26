@@ -9,11 +9,7 @@ import { Product } from '@components/Product'
 import { ProductCardProps } from '@components/Product/ProductCard'
 
 export function ProductSubCategory() {
-  const [subCategorySelected, setSubCategorySelected] = useState(
-    'Carnes Bovinas',
-  )
-
-  const [CategorySelected, setCategorySelected] = useState('Carnes & Peixes')
+  const [subCategorySelected, setSubCategorySelected] = useState('Aves')
 
   const [products, setProducts] = useState<ProductCardProps[]>([])
 

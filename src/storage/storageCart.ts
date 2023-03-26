@@ -8,6 +8,7 @@ export type StorageCartProps = {
   name: string
   size: number
   quantity: number
+  price: number
   image: ImageSourcePropType
 }
 

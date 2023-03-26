@@ -10,6 +10,10 @@ import { ProductCategory } from '@utils/ProductCategory'
 import { Product } from '@components/Product'
 import { ProductSubCategory } from './Product/ProductSubCategory'
 import { Category } from '@components/Category'
+import { Sessions } from '@components/Sessions'
+import { Catalog } from '@utils/Catalog'
+import { SliderItem } from '@utils/SliderItem'
+import { ProductCategoryVertical } from '@utils/ProductCategoryVertical'
 
 export function Home() {
   return (

@@ -7,6 +7,7 @@ import { PRODUCTS } from '../../data/products'
 import { GroupSubCategory } from '../../components/Product/GroupSubcategory'
 import { Product } from '@components/Product'
 import { ProductCardProps } from '@components/Product/ProductCard'
+import { CardCategory } from '@components/Category/CardCategory'
 
 export function ProductCategory() {
   const [categorySelected, setCategorySelected] = useState('Carnes & Peixes')
@@ -21,19 +22,19 @@ export function ProductCategory() {
     const filtered = PRODUCTS.filter(
       (product) =>
         product.category &&
-        product.subcategory === categorySelected &&
-        subCategorySelected,
+        product.category === categorySelected &&
+        categorySelected,
     ) as ProductCardProps[]
     setProducts(filtered)
-  }, [categorySelected, subCategorySelected])
+  }, [categorySelected, categorySelected])
 
   return (
     <VStack flex={1} ml={-6} mt={-6}>
-      <GroupSubCategory
+      <CardCategory
         onSelect={setCategorySelected}
         selected={categorySelected}
       />
-      <Product subcategory={categorySelected} data={products} />
+      <Product category={categorySelected} data={products} />
     </VStack>
   )
 }

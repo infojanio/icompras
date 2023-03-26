@@ -1,3 +1,45 @@
+import { useState } from 'react'
+import { FlatList, VStack } from 'native-base'
+
+import { MaterialIcons } from '@expo/vector-icons'
+
+import { CategoryCard } from '@components/Category/CategoryCard'
+import { CATEGORY } from '../../data/categoryData'
+import { useNavigation } from '@react-navigation/native'
+import { AppNavigatorRoutesProps } from '@routes/app.routes'
+
+export function Category() {
+  const [categories, setCategories] = useState([
+    'Carnes & Peixes',
+    'Frios & Laticínios',
+    'Higiene & Perfumaria',
+    'Bebidas',
+  ])
+
+  const navigation = useNavigation<AppNavigatorRoutesProps>()
+
+  function handleOpenCategoryDetails() {
+    navigation.navigate('categoryDetails')
+  }
+
+  return (
+    <VStack>
+      <FlatList
+        data={categories}
+        keyExtractor={(item) => item}
+        renderItem={({ item }) => {
+          return <CategoryCard onPress={handleOpenCategoryDetails} />
+        }}
+        showsHorizontalScrollIndicator={false}
+        _contentContainerStyle={{ px: 16 }}
+        mt={4}
+        mb={24}
+      />
+    </VStack>
+  )
+}
+
+/*
 import { useNavigation } from '@react-navigation/native'
 import { FlatList, VStack } from 'native-base'
 import { HeaderList } from '@components/HeaderList'

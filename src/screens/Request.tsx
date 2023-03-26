@@ -18,7 +18,7 @@ export function Request() {
 
   return (
     <VStack bg={'gray.200'} flex="1">
-      <HomeScreen title="Pedidos" />
+      <HomeScreen title="Histórico de Pedidos" />
 
       <SectionList
         sections={request}

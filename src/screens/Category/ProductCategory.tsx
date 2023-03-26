@@ -9,20 +9,16 @@ import { Product } from '@components/Product'
 import { ProductCardProps } from '@components/Product/ProductCard'
 
 export function ProductCategory() {
-  const [subCategorySelected, setSubCategorySelected] = useState(
-    'Carnes Bovinas',
-  )
-
   const [CategorySelected, setCategorySelected] = useState('Carnes & Peixes')
 
   const [products, setProducts] = useState<ProductCardProps[]>([])
 
   useEffect(() => {
     const filtered = PRODUCTS.filter(
-      (product) => product.subcategory === subCategorySelected,
+      (product) => product.category === CategorySelected,
     ) as ProductCardProps[]
     setProducts(filtered)
-  }, [subCategorySelected])
+  }, [CategorySelected])
 
   return (
     <VStack flex={1}>
@@ -30,10 +26,10 @@ export function ProductCategory() {
 
       <VStack flex={1} ml={-6} mt={-6}>
         <GroupSubCategory
-          onSelect={setSubCategorySelected}
-          selected={subCategorySelected}
+          onSelect={setCategorySelected}
+          selected={CategorySelected}
         />
-        <Product subcategory={subCategorySelected} data={products} />
+        <Product category={CategorySelected} data={products} />
       </VStack>
     </VStack>
   )
