@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 
 import { useNavigation } from '@react-navigation/native'
+import { useForm, Controller } from 'react-hook-form'
+
+import * as yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
 
 import {
   VStack,
@@ -22,19 +26,37 @@ import { Button } from '@components/Button'
 import { SeparatorItem } from '@components/SeparatorItem'
 import { StackNavigatorRoutesProps } from '@routes/stack.routes'
 
-import { useForm, Controller } from 'react-hook-form'
-
 type FormDataProps = {
   name: string
   email: string
   phone: string
   password: string
+  password_confirm: string
   cidade: string
   cep: string
   bairro: string
   rua: string
   complemento: string
 }
+
+const signUpSchema = yup.object({
+  name: yup.string().required('Informe o nome'),
+  email: yup.string().required('Informe o e-mail').email('E-mail inválido'),
+  phone: yup.string().required('Informe n. telefone'),
+  password: yup
+    .string()
+    .required('Informe a senha')
+    .min(6, 'A senha deve conter no mínimo 6 dígitos'),
+
+  password_confirm: yup
+    .string()
+    .required('Confirme a senha')
+    .oneOf([yup.ref('password')], 'A senha digitada não confere!'), //verifica se a senha são iguais
+
+  cidade: yup.string().required('Informe a cidade'),
+  bairro: yup.string().required('Informe o bairro'),
+  rua: yup.string().required('Informe a rua'),
+})
 
 export function SignUp() {
   const navigation = useNavigation<StackNavigatorRoutesProps>()
@@ -46,7 +68,9 @@ export function SignUp() {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormDataProps>()
+  } = useForm<FormDataProps>({
+    resolver: yupResolver(signUpSchema),
+  })
 
   //voltar a tela anterior
   function handleGoBack() {
@@ -58,6 +82,7 @@ export function SignUp() {
     email,
     phone,
     password,
+    password_confirm,
     cidade,
     cep,
     bairro,
@@ -70,6 +95,7 @@ export function SignUp() {
       email,
       phone,
       password,
+      password_confirm,
       cidade,
       cep,
       bairro,
@@ -86,8 +112,8 @@ export function SignUp() {
       <VStack
         space={24}
         direction="row"
-        marginTop="4"
-        marginBottom="4"
+        marginTop="2"
+        marginBottom="2"
         marginLeft="2"
       >
         {['sm'].map((size) => (
@@ -114,7 +140,7 @@ export function SignUp() {
 
       <View marginBottom="2">
         <VStack marginRight="4" marginLeft="4" borderRadius="2xl" bg="gray.50">
-          <Text ml={4} fontSize="16" color="gray.500">
+          <Text ml={4} fontSize="14" color="gray.500">
             Dados pessoais
           </Text>
 
@@ -122,9 +148,6 @@ export function SignUp() {
             <Box w="100%">
               <Controller
                 control={control}
-                rules={{
-                  required: 'Informe o nome!',
-                }}
                 name="name"
                 render={({ field: { onChange, value } }) => (
                   <Input
@@ -160,14 +183,6 @@ export function SignUp() {
               <Controller
                 control={control}
                 name="email"
-                rules={{
-                  required: 'Informe o e-mail!',
-
-                  pattern: {
-                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                    message: 'E-mail inválido',
-                  },
-                }}
                 render={({ field: { onChange, value } }) => (
                   <Input
                     keyboardType="email-address"
@@ -229,6 +244,7 @@ export function SignUp() {
                     }}
                     onChangeText={onChange}
                     value={value}
+                    errorMessage={errors.phone?.message}
                   />
                 )}
               />
@@ -298,6 +314,77 @@ export function SignUp() {
                     }}
                     onChangeText={onChange}
                     value={value}
+                    errorMessage={errors.password?.message}
+                  />
+                )}
+              />
+            </Box>
+
+            <Box w="100%">
+              <Controller
+                control={control}
+                name="password_confirm"
+                render={({ field: { onChange, value } }) => (
+                  <Input
+                    type={show ? 'text' : 'password'}
+                    InputRightElement={
+                      <Stack
+                        maxWidth={32}
+                        direction={{
+                          md: 'row',
+                        }}
+                        space="4"
+                      >
+                        <Button
+                          borderRadius="none"
+                          size={'sm'}
+                          backgroundColor="gray.50"
+                          title=""
+                          ml={1}
+                          onPress={handleClick}
+                          variant="solid"
+                          rightIcon={
+                            <Icon
+                              as={MaterialIcons}
+                              name="visibility"
+                              size="lg"
+                              m={2}
+                              _light={{
+                                color: 'black',
+                              }}
+                              _dark={{
+                                color: 'gray.300',
+                              }}
+                            />
+                          }
+                        >
+                          {show ? 'Hide' : 'Show'}
+                        </Button>
+                      </Stack>
+                    }
+                    InputLeftElement={
+                      <Icon
+                        as={<MaterialIcons name="lock" />}
+                        size="sm"
+                        m={2}
+                        _light={{
+                          color: 'black',
+                        }}
+                        _dark={{
+                          color: 'gray.300',
+                        }}
+                      />
+                    }
+                    placeholder="Confirme a Senha" // mx={4}
+                    _light={{
+                      placeholderTextColor: 'blueGray.400',
+                    }}
+                    _dark={{
+                      placeholderTextColor: 'blueGray.50',
+                    }}
+                    onChangeText={onChange}
+                    value={value}
+                    errorMessage={errors.password_confirm?.message}
                   />
                 )}
               />
@@ -309,7 +396,7 @@ export function SignUp() {
       <View marginBottom="2">
         <SeparatorItem />
         <VStack marginRight="4" marginLeft="4" borderRadius="2xl" bg="gray.50">
-          <Text fontSize="16" color="gray.500" marginLeft="4">
+          <Text fontSize="14" color="gray.500" marginLeft="4">
             Endereço
           </Text>
 
@@ -342,6 +429,7 @@ export function SignUp() {
                     }}
                     onChangeText={onChange}
                     value={value}
+                    errorMessage={errors.cidade?.message}
                   />
                 )}
               />
@@ -377,6 +465,7 @@ export function SignUp() {
                     }}
                     onChangeText={onChange}
                     value={value}
+                    errorMessage={errors.cep?.message}
                   />
                 )}
               />
@@ -410,6 +499,7 @@ export function SignUp() {
                     }}
                     onChangeText={onChange}
                     value={value}
+                    errorMessage={errors.bairro?.message}
                   />
                 )}
               />
@@ -443,6 +533,7 @@ export function SignUp() {
                     }}
                     onChangeText={onChange}
                     value={value}
+                    errorMessage={errors.rua?.message}
                   />
                 )}
               />
