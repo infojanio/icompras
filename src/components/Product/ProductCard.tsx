@@ -56,7 +56,14 @@ export function ProductCard({ data, ...rest }: Props) {
           />
           <HStack mb="1">
             <Text>R$</Text>
-            <Heading ml={2} mr={2} mb={1} fontSize="16" color="red.700">
+            <Heading
+              ml={2}
+              mr={2}
+              mb={1}
+              fontSize="16"
+              color="red.700"
+              fontFamily="heading"
+            >
               {data.price}
             </Heading>
             <Box bg="red.500" rounded="md" pl="1" pr="1" mb={2}>

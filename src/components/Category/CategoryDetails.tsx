@@ -34,7 +34,13 @@ export function CategoryDetails() {
         mb={2}
         alignItems="center"
       >
-        <Heading color="gray.600" fontSize="14" ml={2} flexShrink={1}>
+        <Heading
+          color="gray.600"
+          fontSize="14"
+          ml={2}
+          flexShrink={1}
+          fontFamily="heading"
+        >
           Carnes & Peixes
         </Heading>
 

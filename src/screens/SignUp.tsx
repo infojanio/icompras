@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 
+import { api } from '@services/api'
+import axios from 'axios'
+
 import { useNavigation } from '@react-navigation/native'
 import { useForm, Controller } from 'react-hook-form'
 
@@ -77,31 +80,22 @@ export function SignUp() {
     navigation.goBack()
   }
 
-  function handleSignUp({
-    name,
-    email,
-    phone,
-    password,
-    password_confirm,
-    cidade,
-    cep,
-    bairro,
-    rua,
-    complemento,
-  }: FormDataProps) {
-    //navigation.navigate('localization')}
-    console.log({
-      name,
-      email,
-      phone,
-      password,
-      password_confirm,
-      cidade,
-      cep,
-      bairro,
-      rua,
-      complemento,
-    })
+  async function handleSignUp({ name, email, phone, password }: FormDataProps) {
+    try {
+      const response = await api.post('/users', {
+        name,
+        email,
+        phone,
+        password,
+      })
+      // const address = await api.post('/addresses', {street, email, phone, password })
+
+      console.log(response)
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        console.log(error.response?.data)
+      }
+    }
   }
 
   return (

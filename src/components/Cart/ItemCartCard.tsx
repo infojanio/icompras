@@ -29,7 +29,7 @@ export function ItemCartCard({ data, onRemove }: Props) {
       />
 
       <VStack flex={1} ml={2}>
-        <Heading color="gray.200" fontSize="14">
+        <Heading color="gray.200" fontSize="14" fontFamily="heading">
           R$ 25,50
         </Heading>
         <Heading color="white" fontFamily="heading" fontSize="14" mt={2}>
