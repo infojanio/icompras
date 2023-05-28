@@ -13,11 +13,12 @@ import { SuperMarket } from '@screens/SuperMarket'
 
 type StackRoutes = {
   initial: undefined
+  supermarket: undefined
+  home: undefined
   signin: undefined
   signup: undefined
-  supermarket: undefined
+  // address: undefined
   localization: undefined
-  home: undefined
 }
 
 export type StackNavigatorRoutesProps = NativeStackNavigationProp<StackRoutes>

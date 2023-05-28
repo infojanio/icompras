@@ -25,10 +25,10 @@ import { ProductSubCategory } from '@screens/Product/ProductSubCategory'
 import { CategoryDetails } from '@components/Category/CategoryDetails'
 
 type AppRoutes = {
+  //home: undefined
   homeScreen: undefined
   search: undefined
   cart: undefined
-
   request: undefined
   profile: undefined
   productList: undefined

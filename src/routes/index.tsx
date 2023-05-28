@@ -7,6 +7,7 @@ import { useAuth } from '@hooks/useAuth'
 
 import { StackRoutes } from './stack.routes'
 import { AuthRoutes } from './auth.routes'
+import { AppRoutes } from './app.routes'
 
 export function Routes() {
   const { colors } = useTheme()
@@ -21,8 +22,8 @@ export function Routes() {
     <Box flex={1} bg="green.50">
       {' '}
       {/*garante não aparecer fundo branco na trasição da tela */}
-      <NavigationContainer>
-        <StackRoutes />
+      <NavigationContainer theme={theme}>
+        {user.id ? <AppRoutes /> : <AuthRoutes />}
       </NavigationContainer>
     </Box>
   )

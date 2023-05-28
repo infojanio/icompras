@@ -1,124 +1,43 @@
-import { Platform } from 'react-native'
-import { useTheme } from 'native-base'
-
+import React from 'react'
 import {
-  createBottomTabNavigator,
-  BottomTabNavigationProp,
-} from '@react-navigation/bottom-tabs'
+  createNativeStackNavigator,
+  NativeStackNavigationProp,
+} from '@react-navigation/native-stack'
 
-import HomeSvg from '@assets/home.svg'
-import SearchSvg from '@assets/search.svg'
-import CartSvg from '@assets/cart.svg'
-import RequestSvg from '@assets/request.svg'
-import ProfileSvg from '@assets/profile.svg'
-
-import { Home } from '@screens/Home'
-import { Search } from '@screens/Search'
-import { Cart } from '@screens/Cart'
-import { Request } from '@screens/Request'
-import { Profile } from '@screens/Profile'
-import { SignUp } from '@screens/SignUp'
+import { Initial } from '@screens/Initial'
+import { Localization } from '@screens/Localization'
+import { AppRoutes } from './app.routes'
 import { SignIn } from '@screens/SignIn'
+import { SignUp } from '@screens/SignUp'
+import { SuperMarket } from '@screens/SuperMarket'
 
 type AuthRoutes = {
   initial: undefined
-  address: undefined
-
+  supermarket: undefined
   home: undefined
-  search: undefined
-  cart: undefined
-  request: undefined
-  profile: undefined
-  signUp: undefined
-  signIn: undefined
+  signin: undefined
+  signup: undefined
+  // address: undefined
+  localization: undefined
 }
 
-export type AuthNavigatorRoutesProps = BottomTabNavigationProp<AuthRoutes>
+export type StackNavigatorRoutesProps = NativeStackNavigationProp<AuthRoutes>
 
-const { Navigator, Screen } = createBottomTabNavigator<AuthRoutes>()
+const { Navigator, Screen } = createNativeStackNavigator()
 
-//rotas da aplicação
 export function AuthRoutes() {
-  //definição do tamanho dos ícones
-  const { sizes, colors } = useTheme()
-  const iconSize = sizes[8]
-
   return (
     <Navigator
-      screenOptions={{
-        headerShown: false,
-
-        tabBarActiveTintColor: colors.green[500],
-        tabBarInactiveTintColor: colors.blueGray[600],
-        tabBarStyle: {
-          backgroundColor: colors.gray[100],
-          borderTopWidth: 1,
-          height: Platform.OS === 'android' ? 60 : 96,
-          paddingBottom: sizes[2],
-          paddingTop: sizes[2],
-        },
-      }}
+      initialRouteName="initial"
+      screenOptions={{ headerShown: false }}
     >
-      <Screen
-        name="home"
-        component={Home}
-        options={{
-          tabBarLabel: 'Home',
-          tabBarIcon: ({ color }) => (
-            <HomeSvg fill={color} width={iconSize} height={iconSize} />
-          ),
-        }}
-      />
-      <Screen
-        name="search"
-        component={Search}
-        options={{
-          tabBarLabel: 'Pesquisar',
-          tabBarIcon: ({ color }) => (
-            <SearchSvg fill={color} width={iconSize} height={iconSize} />
-          ),
-        }}
-      />
-
-      <Screen
-        name="cart"
-        component={SignIn}
-        options={{
-          tabBarLabel: 'Carrinho',
-          tabBarIcon: ({ color }) => (
-            <CartSvg fill={color} width={iconSize} height={iconSize} />
-          ),
-        }}
-      />
-      <Screen
-        name="request"
-        component={SignIn}
-        options={{
-          tabBarLabel: 'Pedidos',
-          tabBarIcon: ({ color }) => (
-            <RequestSvg fill={color} width={iconSize} height={iconSize} />
-          ),
-        }}
-      />
-      <Screen
-        name="profile"
-        component={SignIn}
-        options={{
-          tabBarLabel: 'Perfil',
-          tabBarIcon: ({ color }) => (
-            <ProfileSvg fill={color} width={iconSize} height={iconSize} />
-          ),
-        }}
-      />
-
-      {/*  Inserir uma rota pra não aparecer o ícone no tabBar */}
-      <Screen
-        name="signUp"
-        component={SignUp}
-        options={{
-          tabBarButton: () => null,
-        }} //não mostra ícone
-      />
+      <Screen name="initial" component={Initial} />
+      <Screen name="signin" component={SignIn} />
+      <Screen name="signup" component={SignUp} />
+      <Screen name="supermarket" component={SuperMarket} />
+      <Screen name="localization" component={Localization} />
+      <Screen name="home" component={SignIn} />
+      {/* <Screen name="home" component={AppRoutes} /> */}
     </Navigator>
   )
 }
