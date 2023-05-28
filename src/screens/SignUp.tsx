@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React from 'react'
+import { Alert } from 'react-native'
 
 import { api } from '@services/api'
-import axios from 'axios'
 
 import { useNavigation } from '@react-navigation/native'
 import { useForm, Controller } from 'react-hook-form'
@@ -19,6 +19,7 @@ import {
   IconButton,
   Box,
   Stack,
+  useToast,
 } from 'native-base'
 
 import { Feather } from '@expo/vector-icons'
@@ -28,18 +29,26 @@ import { Input } from '@components/Input'
 import { Button } from '@components/Button'
 import { SeparatorItem } from '@components/SeparatorItem'
 import { StackNavigatorRoutesProps } from '@routes/stack.routes'
+import { AppError } from '@utils/AppError'
 
 type FormDataProps = {
+  //dados na tabela users
   name: string
   email: string
   phone: string
   password: string
   password_confirm: string
-  cidade: string
+  //avatar: string
+  //type: string
+  //isAdmin: string
+
+  /*dados na tabela addresses
+  city: string
   cep: string
-  bairro: string
-  rua: string
-  complemento: string
+  district: string
+  street: string
+  complement: string
+  */
 }
 
 const signUpSchema = yup.object({
@@ -56,14 +65,17 @@ const signUpSchema = yup.object({
     .required('Confirme a senha')
     .oneOf([yup.ref('password')], 'A senha digitada não confere!'), //verifica se a senha são iguais
 
-  cidade: yup.string().required('Informe a cidade'),
-  bairro: yup.string().required('Informe o bairro'),
-  rua: yup.string().required('Informe a rua'),
+  /*
+   city: yup.string().required('Informe a cidade'),
+  district: yup.string().required('Informe o bairro'),
+  street: yup.string().required('Informe a rua'),
+  */
 })
 
 export function SignUp() {
   const navigation = useNavigation<StackNavigatorRoutesProps>()
 
+  const toast = useToast()
   const [show, setShow] = React.useState(false) //mostra senha
   const handleClick = () => setShow(!show)
 
@@ -80,21 +92,50 @@ export function SignUp() {
     navigation.goBack()
   }
 
-  async function handleSignUp({ name, email, phone, password }: FormDataProps) {
+  async function handleSignUp({
+    name,
+    email,
+    phone,
+    password,
+  }: /*
+    type,
+    city,
+    cep,
+    district,
+    street,
+    complement,
+    */
+  FormDataProps) {
     try {
       const response = await api.post('/users', {
         name,
         email,
         phone,
         password,
+        // type,
       })
-      // const address = await api.post('/addresses', {street, email, phone, password })
+      console.log(response.data)
 
-      console.log(response)
+      /*
+      const responseAddress = await api.post('/address', {
+        city,
+        cep,
+        district,
+        street,
+        complement,
+      })
+      console.log(responseAddress)
+      */
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        console.log(error.response?.data)
-      }
+      const isAppError = error instanceof AppError
+      const title = isAppError
+        ? error.message
+        : 'Não foi possível criar a conta. Tente novamente mais tarde!'
+      toast.show({
+        title,
+        placement: 'top',
+        bgColor: 'red.500',
+      })
     }
   }
 
@@ -387,6 +428,7 @@ export function SignUp() {
         </VStack>
       </View>
 
+      {/* 
       <View marginBottom="2">
         <SeparatorItem />
         <VStack marginRight="4" marginLeft="4" borderRadius="2xl" bg="gray.50">
@@ -398,7 +440,7 @@ export function SignUp() {
             <Box w="100%">
               <Controller
                 control={control}
-                name="cidade"
+                name="city"
                 render={({ field: { onChange, value } }) => (
                   <Input
                     InputLeftElement={
@@ -423,7 +465,7 @@ export function SignUp() {
                     }}
                     onChangeText={onChange}
                     value={value}
-                    errorMessage={errors.cidade?.message}
+                    errorMessage={errors.city?.message}
                   />
                 )}
               />
@@ -468,7 +510,7 @@ export function SignUp() {
             <Box w="100%">
               <Controller
                 control={control}
-                name="bairro"
+                name="district"
                 render={({ field: { onChange, value } }) => (
                   <Input
                     InputLeftElement={
@@ -493,7 +535,7 @@ export function SignUp() {
                     }}
                     onChangeText={onChange}
                     value={value}
-                    errorMessage={errors.bairro?.message}
+                    errorMessage={errors.district?.message}
                   />
                 )}
               />
@@ -502,7 +544,7 @@ export function SignUp() {
             <Box w="100%">
               <Controller
                 control={control}
-                name="rua"
+                name="street"
                 render={({ field: { onChange, value } }) => (
                   <Input
                     InputLeftElement={
@@ -527,7 +569,7 @@ export function SignUp() {
                     }}
                     onChangeText={onChange}
                     value={value}
-                    errorMessage={errors.rua?.message}
+                    errorMessage={errors.street?.message}
                   />
                 )}
               />
@@ -536,7 +578,7 @@ export function SignUp() {
             <Box w="100%">
               <Controller
                 control={control}
-                name="complemento"
+                name="complement"
                 render={({ field: { onChange, value } }) => (
                   <Input
                     InputLeftElement={
@@ -570,9 +612,10 @@ export function SignUp() {
           </Center>
         </VStack>
       </View>
+*/}
 
       <View marginLeft="4" marginRight="4" marginTop="0.5">
-        <Button title="Cadastrar" onPress={handleSubmit(handleSignUp)} />
+        <Button title="Próximo" onPress={handleSubmit(handleSignUp)} />
       </View>
     </ScrollView>
   )

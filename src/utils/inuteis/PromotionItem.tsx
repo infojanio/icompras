@@ -10,7 +10,7 @@ import {
 } from 'react-native'
 
 import { Box } from 'native-base'
-import { Promotion, promotionList } from '@utils/PromotionList'
+import { Promotion, promotionList } from 'src/descart/PromotionList'
 
 export function PromotionItem({ id, title, image }: Promotion) {
   return <View></View>

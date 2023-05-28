@@ -23,7 +23,7 @@ import { Icon } from 'native-base'
 import { MaterialIcons } from '@expo/vector-icons'
 import {MyLocation} from '@c@utils/Mylocation
 import {MapTypeCard} from '@components/MapTypeCard'
-import {MapType } from '@utils/MapType'
+import {MapType } from 'src/descart/MapType'
 import {NewMarker } from '@components/NewMarker'
 
 import database from '../../components/NewMarker/database'
