@@ -30,6 +30,7 @@ import { Feather } from '@expo/vector-icons'
 import { MaterialIcons } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 import { AppError } from '@utils/AppError'
+import { AuthNavigatorRoutesProps } from '@routes/auth.routes'
 
 type FormDataProps = {
   email: string
@@ -52,7 +53,7 @@ export function SignIn() {
   const [show, setShow] = React.useState(false) //mostra senha
   const handleClick = () => setShow(!show)
 
-  const navigation = useNavigation<StackNavigatorRoutesProps>()
+  const navigation = useNavigation<AuthNavigatorRoutesProps>()
 
   const toast = useToast()
 
@@ -86,13 +87,12 @@ export function SignIn() {
         ? error.message
         : 'Não foi possível entrar. Tente novamente mais tarde!'
 
-      setIsLoading(false) //após mostrar a mensagem
-
       toast.show({
         title,
         placement: 'top',
         bgColor: 'red.500',
       })
+      setIsLoading(false) //após mostrar a mensagem
     }
   }
 
@@ -256,7 +256,7 @@ export function SignIn() {
               title="Entrar"
               fontWeight={'extrabold'}
               onPress={handleSubmit(handleSignIn)}
-              isLoading={isLoading}
+              //isLoading={isLoading}
             />
 
             <Center mt={2}>

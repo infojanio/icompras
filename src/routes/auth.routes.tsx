@@ -21,7 +21,7 @@ type AuthRoutes = {
   localization: undefined
 }
 
-export type StackNavigatorRoutesProps = NativeStackNavigationProp<AuthRoutes>
+export type AuthNavigatorRoutesProps = NativeStackNavigationProp<AuthRoutes>
 
 const { Navigator, Screen } = createNativeStackNavigator()
 
