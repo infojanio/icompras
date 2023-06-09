@@ -31,6 +31,7 @@ import { MaterialIcons } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 import { AppError } from '@utils/AppError'
 import { AuthNavigatorRoutesProps } from '@routes/auth.routes'
+import { Alert } from 'react-native'
 
 type FormDataProps = {
   email: string
@@ -80,6 +81,8 @@ export function SignIn() {
     try {
       setIsLoading(true) //quando a função for chamada
       await signIn(email, password)
+      Alert.alert(email + ' logado')
+      setIsLoading(false)
     } catch (error) {
       const isAppError = error instanceof AppError //verifica se o erro foi tratado
 
@@ -87,12 +90,13 @@ export function SignIn() {
         ? error.message
         : 'Não foi possível entrar. Tente novamente mais tarde!'
 
+      setIsLoading(false) //após mostrar a mensagem
+
       toast.show({
         title,
         placement: 'top',
         bgColor: 'red.500',
       })
-      setIsLoading(false) //após mostrar a mensagem
     }
   }
 
@@ -256,7 +260,7 @@ export function SignIn() {
               title="Entrar"
               fontWeight={'extrabold'}
               onPress={handleSubmit(handleSignIn)}
-              //isLoading={isLoading}
+              isLoading={isLoading}
             />
 
             <Center mt={2}>
