@@ -8,6 +8,7 @@ import {
   Image,
   VStack,
   Text,
+  Heading,
 } from 'native-base'
 import { useNavigation } from '@react-navigation/native'
 
@@ -16,12 +17,17 @@ import MarketPng from '@assets/logoMercado/03.png'
 import { MaterialIcons } from '@expo/vector-icons'
 import LocationSvg from '@assets/location.svg'
 import { StackNavigatorRoutesProps } from '@routes/stack.routes'
+import { useAuth } from '@hooks/useAuth'
+
+import defaultUserPhotoImg from '@assets/userPhotoDefault.png'
 
 const LogoImage =
   'https://xesque.rocketseat.dev/users/avatar/profile-2851c272-858f-4f34-84be-a0f773bffb76-1667218054675.jpg'
 
 export function HomeHeader() {
   const navigation = useNavigation<StackNavigatorRoutesProps>()
+
+  const { user } = useAuth()
 
   //definição do tamanho dos ícones
   const { sizes, colors } = useTheme()
@@ -43,13 +49,16 @@ export function HomeHeader() {
       <VStack>
         <TouchableOpacity onPress={OpenLogo}>
           <UserPhoto
-            source={{ uri: LogoImage }}
+            source={user.avatar ? { uri: user.avatar } : defaultUserPhotoImg}
             alt="Foto do usuário"
             size={20}
             mr={2}
             ml={2}
           />
         </TouchableOpacity>
+        <Text color="gray.100" fontSize={14} left={2}>
+          Olá, {user.name}
+        </Text>
       </VStack>
       <Center flex="1" pr={4} ml="1" mr="2" mt="1" flexDirection="row">
         <Image alt="Logo do mercado" source={MarketPng} h={70} w={160} />

@@ -82,7 +82,6 @@ export function SignIn() {
       setIsLoading(true) //quando a função for chamada
       await signIn(email, password)
       Alert.alert(email + ' logado')
-      setIsLoading(false)
     } catch (error) {
       const isAppError = error instanceof AppError //verifica se o erro foi tratado
 

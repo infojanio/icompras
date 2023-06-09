@@ -5,18 +5,23 @@ import { NavigationContainer, DefaultTheme } from '@react-navigation/native'
 
 import { useAuth } from '@hooks/useAuth'
 
-import { StackRoutes } from './stack.routes'
 import { AuthRoutes } from './auth.routes'
 import { AppRoutes } from './app.routes'
+import { Loading } from '@components/Loading'
 
 export function Routes() {
   const { colors } = useTheme()
-  const { user } = useAuth()
+  const { user, isLoadingUserStorageData } = useAuth()
 
-  console.log('Usuário logado =>', user)
+  // console.log('Usuário logado =>', user)
 
   const theme = DefaultTheme
   theme.colors.background = colors.gray[100]
+
+  //verifica se os dados do user estão sendo carregados
+  if (isLoadingUserStorageData) {
+    return <Loading />
+  }
 
   return (
     <Box flex={1} bg="green.50">

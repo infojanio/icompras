@@ -18,7 +18,7 @@ export default function App() {
 
   return (
     <NativeBaseProvider>
-      <StatusBar barStyle="light-content" translucent />
+      <StatusBar barStyle="dark-content" translucent />
 
       <AuthContextProvider>
         {fontsLoaded ? <Routes /> : <Loading />}
