@@ -1,6 +1,10 @@
 import { ReactNode, createContext, useEffect, useState } from 'react'
 
-import { storageUserSave, storageUserGet } from '@storage/storageUser'
+import {
+  storageUserSave,
+  storageUserGet,
+  storageUserRemove,
+} from '@storage/storageUser'
 
 import { UserDTO } from '@dtos/UserDTO'
 import { api } from '@services/api'
@@ -8,6 +12,7 @@ import { api } from '@services/api'
 export type AuthContextDataProps = {
   user: UserDTO
   signIn: (email: string, password: string) => Promise<void>
+  signOut: () => Promise<void>
   isLoadingUserStorageData: boolean
 }
 
@@ -23,7 +28,7 @@ export const AuthContext = createContext<AuthContextDataProps>(
 export function AuthContextProvider({ children }: AuthContextProviderProps) {
   //armazenamos os dados em um estado
   const [user, setUser] = useState<UserDTO>({} as UserDTO)
-  const [isLoadingUserStorageData, setIsLoadingUserStorage] = useState(true)
+  const [isLoadingUserStorageData, setIsLoadingUserStorageData] = useState(true)
 
   //Faz o login no aplicativo
   async function signIn(email: string, password: string) {
@@ -39,6 +44,19 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
     }
   }
 
+  async function signOut() {
+    try {
+      setIsLoadingUserStorageData(true) //ativa o loading
+      setUser({} as UserDTO) //limpa o estado de usuário logado
+
+      await storageUserRemove() //remove o usuário do storage
+    } catch (error) {
+      throw error
+    } finally {
+      setIsLoadingUserStorageData(false)
+    }
+  }
+
   //retorna os dados do usuário logado
   async function loadUserData() {
     try {
@@ -50,7 +68,7 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
     } catch (error) {
       throw error
     } finally {
-      setIsLoadingUserStorage(false)
+      setIsLoadingUserStorageData(false)
     }
   }
 
@@ -63,6 +81,7 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
       value={{
         user,
         signIn,
+        signOut,
         isLoadingUserStorageData,
       }}
     >

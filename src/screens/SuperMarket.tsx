@@ -1,15 +1,6 @@
 import React, { useState } from 'react'
 import { ScrollView } from 'react-native-virtualized-view'
-import {
-  VStack,
-  Text,
-  Divider,
-  HStack,
-  FlatList,
-  View,
-  Center,
-  Box,
-} from 'native-base'
+import { VStack, Text, FlatList, Center } from 'native-base'
 
 import { SeparatorItem } from '@components/SeparatorItem'
 import { Group } from '@components/Product/Group'

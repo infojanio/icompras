@@ -8,26 +8,17 @@ import {
   Image,
   VStack,
   Text,
-  Heading,
 } from 'native-base'
-import { useNavigation } from '@react-navigation/native'
 
 import { UserPhoto } from './UserPhoto'
 import MarketPng from '@assets/logoMercado/03.png'
 import { MaterialIcons } from '@expo/vector-icons'
-import LocationSvg from '@assets/location.svg'
-import { StackNavigatorRoutesProps } from '@routes/stack.routes'
 import { useAuth } from '@hooks/useAuth'
 
 import defaultUserPhotoImg from '@assets/userPhotoDefault.png'
 
-const LogoImage =
-  'https://xesque.rocketseat.dev/users/avatar/profile-2851c272-858f-4f34-84be-a0f773bffb76-1667218054675.jpg'
-
 export function HomeHeader() {
-  const navigation = useNavigation<StackNavigatorRoutesProps>()
-
-  const { user } = useAuth()
+  const { user, signOut } = useAuth()
 
   //definição do tamanho dos ícones
   const { sizes, colors } = useTheme()
@@ -56,7 +47,7 @@ export function HomeHeader() {
             ml={2}
           />
         </TouchableOpacity>
-        <Text color="gray.100" fontSize={14} left={2}>
+        <Text color="gray.100" fontSize={14} left={2} size={12}>
           Olá, {user.name}
         </Text>
       </VStack>
@@ -64,7 +55,7 @@ export function HomeHeader() {
         <Image alt="Logo do mercado" source={MarketPng} h={70} w={160} />
       </Center>
 
-      <TouchableOpacity onPress={() => navigation.navigate('initial')}>
+      <TouchableOpacity onPress={signOut}>
         <Center alignItems={'center'} p="1" mr={2} borderRadius={2}>
           <Icon
             as={<MaterialIcons name="logout" />}

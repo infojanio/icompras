@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Alert } from 'react-native'
 
 import { api } from '@services/api'
@@ -27,9 +27,9 @@ import { MaterialIcons } from '@expo/vector-icons'
 
 import { Input } from '@components/Input'
 import { Button } from '@components/Button'
-import { SeparatorItem } from '@components/SeparatorItem'
 import { StackNavigatorRoutesProps } from '@routes/stack.routes'
 import { AppError } from '@utils/AppError'
+import { useAuth } from '@hooks/useAuth'
 
 type FormDataProps = {
   //dados na tabela users
@@ -73,12 +73,14 @@ const signUpSchema = yup.object({
 })
 
 export function SignUp() {
-  const navigation = useNavigation<StackNavigatorRoutesProps>()
+  const [isLoading, setIsLoading] = useState(false)
 
   const toast = useToast()
-  const [show, setShow] = React.useState(false) //mostra senha
+  const { signIn } = useAuth()
+
   const handleClick = () => setShow(!show)
 
+  const [show, setShow] = React.useState(false) //mostra senha
   const {
     control,
     handleSubmit,
@@ -86,6 +88,8 @@ export function SignUp() {
   } = useForm<FormDataProps>({
     resolver: yupResolver(signUpSchema),
   })
+
+  const navigation = useNavigation()
 
   //voltar a tela anterior
   function handleGoBack() {
@@ -107,14 +111,17 @@ export function SignUp() {
     */
   FormDataProps) {
     try {
-      const response = await api.post('/users', {
+      setIsLoading(true)
+
+      await api.post('/users', {
         name,
         email,
         phone,
         password,
         // type,
       })
-      console.log(response.data)
+
+      await signIn(email, password) //loga no app após cadastro
 
       /*
       const responseAddress = await api.post('/address', {
@@ -127,6 +134,8 @@ export function SignUp() {
       console.log(responseAddress)
       */
     } catch (error) {
+      setIsLoading(false)
+
       const isAppError = error instanceof AppError
       const title = isAppError
         ? error.message
@@ -428,7 +437,19 @@ export function SignUp() {
         </VStack>
       </View>
 
-      {/* 
+      <View marginLeft="4" marginRight="4" marginTop="0.5">
+        <Button
+          title="Próximo"
+          onPress={handleSubmit(handleSignUp)}
+          isLoading={isLoading}
+        />
+      </View>
+    </ScrollView>
+  )
+}
+
+{
+  /* 
       <View marginBottom="2">
         <SeparatorItem />
         <VStack marginRight="4" marginLeft="4" borderRadius="2xl" bg="gray.50">
@@ -612,11 +633,5 @@ export function SignUp() {
           </Center>
         </VStack>
       </View>
-*/}
-
-      <View marginLeft="4" marginRight="4" marginTop="0.5">
-        <Button title="Próximo" onPress={handleSubmit(handleSignUp)} />
-      </View>
-    </ScrollView>
-  )
+*/
 }
