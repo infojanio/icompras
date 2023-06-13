@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   VStack,
   Image,
@@ -7,18 +7,49 @@ import {
   Box,
   Select,
   CheckIcon,
+  useToast,
 } from 'native-base'
 
+import { api } from '@services/api'
+
+import { AuthNavigatorRoutesProps } from '@routes/auth.routes'
+
 import { Button } from '@components/Button'
-import { StackNavigatorRoutesProps } from '@routes/stack.routes'
 import LogoPng from '@assets/logoInitial.png'
 
 import { useNavigation } from '@react-navigation/native'
 import { TouchableOpacity } from 'react-native'
+import { AppError } from '@utils/AppError'
 
 export function Initial() {
-  const [service, setService] = useState('')
-  const navigation = useNavigation<StackNavigatorRoutesProps>()
+  const [cities, setCities] = useState('')
+
+  // const [service, setService] = useState('')
+
+  const toast = useToast()
+  const navigation = useNavigation<AuthNavigatorRoutesProps>()
+
+  async function fetchCities() {
+    try {
+      const response = await api.get('/cities')
+      console.log(response.data)
+    } catch (error) {
+      const isAppError = error instanceof AppError
+      const title = isAppError
+        ? error.message
+        : 'Não foi possível carregar as cidades cadastradas'
+
+      toast.show({
+        title,
+        placement: 'top',
+        bgColor: 'red.500',
+      })
+    }
+  }
+
+  useEffect(() => {
+    fetchCities()
+  }, [])
 
   return (
     <VStack bg={'gray.50'} flex={1}>
@@ -35,7 +66,7 @@ export function Initial() {
         marginTop={2}
       >
         <Text color={'blue.700'} fontWeight={'bold'} fontSize={'24'}>
-          Click Fácil
+          @iCompras
         </Text>
 
         <Text color={'blue.700'} fontSize={'16'}>
@@ -53,7 +84,7 @@ export function Initial() {
         padding={2}
       >
         <Select
-          selectedValue={service}
+          selectedValue={cities}
           minWidth="200"
           accessibilityLabel="Choose Service"
           alignContent={'center'}
@@ -65,7 +96,7 @@ export function Initial() {
             endIcon: <CheckIcon size="4" />,
           }}
           mt={4}
-          onValueChange={(itemValue) => setService(itemValue)}
+          onValueChange={(itemValue) => setCities(itemValue)}
         >
           <Select.Item label="Campos Belos - GO" value="cb" />
           <Select.Item label="Monte Alegre - GO" value="ma" />
