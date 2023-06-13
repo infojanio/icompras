@@ -1,6 +1,12 @@
 import { ReactNode, createContext, useEffect, useState } from 'react'
 
 import {
+  storageAuthTokenSave,
+  storageAuthTokenGet,
+  storageAuthTokenRemove,
+} from '@storage/storageAuthToken'
+
+import {
   storageUserSave,
   storageUserGet,
   storageUserRemove,
@@ -30,26 +36,19 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
   const [user, setUser] = useState<UserDTO>({} as UserDTO)
   const [isLoadingUserStorageData, setIsLoadingUserStorageData] = useState(true)
 
-  //Faz o login no aplicativo
-  async function signIn(email: string, password: string) {
-    try {
-      const { data } = await api.post('/sessions', { email, password })
-
-      if (data.user) {
-        setUser(data.user)
-        storageUserSave(data.user) // salva os dados no dispositivo
-      }
-    } catch (error) {
-      throw error
-    }
+  //atualiza o token do cabeçalho e salva dados do usuário no estado
+  async function userAndTokenUpdate(userData: UserDTO, token: string) {
+    api.defaults.headers.common['Authorization'] = `Bearer ${token}` //o backend procura o token
+    setUser(userData)
   }
 
-  async function signOut() {
+  //salva as informações no dispositivo
+  async function storageUserAndTokenSave(userData: UserDTO, token: string) {
     try {
-      setIsLoadingUserStorageData(true) //ativa o loading
-      setUser({} as UserDTO) //limpa o estado de usuário logado
+      setIsLoadingUserStorageData(true)
 
-      await storageUserRemove() //remove o usuário do storage
+      await storageUserSave(userData)
+      await storageAuthTokenSave(token)
     } catch (error) {
       throw error
     } finally {
@@ -57,13 +56,48 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
     }
   }
 
-  //retorna os dados do usuário logado
+  //Faz a autenticação no aplicativo
+  async function signIn(email: string, password: string) {
+    try {
+      const { data } = await api.post('/sessions', { email, password })
+      // console.log(data)
+
+      if (data.user && data.token) {
+        await storageUserAndTokenSave(data.user, data.token)
+        userAndTokenUpdate(data.user, data.token) // atualiza o estado e o token
+      }
+    } catch (error) {
+      throw error
+    } finally {
+      setIsLoadingUserStorageData(false)
+    }
+  }
+
+  //deslogar o usuário
+  async function signOut() {
+    try {
+      setIsLoadingUserStorageData(true) //ativa o loading
+      setUser({} as UserDTO) //limpa o estado de usuário logado
+
+      await storageUserRemove() //remove o usuário do storage
+      await storageAuthTokenRemove() //remove o token
+    } catch (error) {
+      throw error
+    } finally {
+      setIsLoadingUserStorageData(false)
+    }
+  }
+
+  //retorna os dados do token e do usuário logado
   async function loadUserData() {
     try {
-      const userLogged = await storageUserGet()
+      setIsLoadingUserStorageData(true)
 
-      if (userLogged) {
-        setUser(userLogged)
+      const userLogged = await storageUserGet()
+      const token = await storageAuthTokenGet()
+
+      if (token && userLogged) {
+        userAndTokenUpdate(userLogged, token) //atualiza o estado e coloca o token no cabeçalho
       }
     } catch (error) {
       throw error

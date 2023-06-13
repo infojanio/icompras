@@ -8,6 +8,7 @@ import {
   Image,
   VStack,
   Text,
+  Box,
 } from 'native-base'
 
 import { UserPhoto } from './UserPhoto'
@@ -29,46 +30,50 @@ export function HomeHeader() {
   }
 
   return (
-    <HStack
-      bg="green.500"
-      paddingBottom={4}
-      borderRadius={4}
-      paddingTop={4}
-      justifyContent="space-between"
-      alignItems="center"
-    >
-      <VStack>
-        <TouchableOpacity onPress={OpenLogo}>
-          <UserPhoto
-            source={user.avatar ? { uri: user.avatar } : defaultUserPhotoImg}
-            alt="Foto do usuário"
-            size={20}
-            mr={2}
-            ml={2}
-          />
-        </TouchableOpacity>
-        <Text color="gray.100" fontSize={14} left={2} size={12}>
-          Olá, {user.name}
-        </Text>
-      </VStack>
-      <Center flex="1" pr={4} ml="1" mr="2" mt="1" flexDirection="row">
-        <Image alt="Logo do mercado" source={MarketPng} h={70} w={160} />
-      </Center>
-
-      <TouchableOpacity onPress={signOut}>
-        <Center alignItems={'center'} p="1" mr={2} borderRadius={2}>
-          <Icon
-            as={<MaterialIcons name="logout" />}
-            size={6}
-            _light={{
-              color: 'red.100',
-            }}
-            _dark={{
-              color: 'red.700',
-            }}
-          />
+    <VStack bg="green.500">
+      <HStack
+        bg="green.500"
+        paddingBottom={4}
+        borderRadius={4}
+        paddingTop={4}
+        justifyContent="space-between"
+        alignItems="center"
+      >
+        <VStack>
+          <TouchableOpacity onPress={OpenLogo}>
+            <UserPhoto
+              source={user.avatar ? { uri: user.avatar } : defaultUserPhotoImg}
+              alt="Foto do usuário"
+              size={20}
+              mr={2}
+              ml={2}
+            />
+          </TouchableOpacity>
+        </VStack>
+        <Center flex="1" pr={4} ml="1" mr="2" mt="1" flexDirection="row">
+          <Image alt="Logo do mercado" source={MarketPng} h={70} w={160} />
         </Center>
-      </TouchableOpacity>
-    </HStack>
+
+        <TouchableOpacity onPress={signOut}>
+          <Center alignItems={'center'} p="1" mr={2} borderRadius={2}>
+            <Icon
+              as={<MaterialIcons name="logout" />}
+              size={6}
+              _light={{
+                color: 'red.100',
+              }}
+              _dark={{
+                color: 'red.700',
+              }}
+            />
+          </Center>
+        </TouchableOpacity>
+      </HStack>
+      <Box bg={'gray.100'}>
+        <Text color="gray.700" fontSize={16} left={2}>
+          Olá! {user.name}
+        </Text>
+      </Box>
+    </VStack>
   )
 }
