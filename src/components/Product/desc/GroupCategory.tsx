@@ -1,14 +1,14 @@
 import { FlatList, VStack } from 'native-base'
 
-import { categoryList } from '../../data/category'
-import { Card } from './Card'
+import { Card } from '@components/Category/desc/Card'
+import { categoryList } from '../../../data/category'
 
 type Props = {
   onSelect: (value: string) => void
   selected: string
 }
 
-export function CardCategory({ onSelect, selected }: Props) {
+export function GroupCategory({ onSelect, selected }: Props) {
   return (
     <VStack>
       <FlatList

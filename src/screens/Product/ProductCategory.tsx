@@ -4,10 +4,10 @@ import { VStack } from 'native-base'
 
 import { PRODUCTS } from '../../data/products'
 
-import { GroupSubCategory } from '../../components/Product/GroupSubcategory'
+import { GroupSubCategory } from '../../components/Product/desc/GroupSubcategory'
 import { Product } from '@components/Product'
 import { ProductCardProps } from '@components/Product/ProductCard'
-import { CardCategory } from '@components/Category/CardCategory'
+import { CardCategory } from '@components/Category/desc/CardCategory'
 
 export function ProductCategory() {
   const [categorySelected, setCategorySelected] = useState('Carnes & Peixes')

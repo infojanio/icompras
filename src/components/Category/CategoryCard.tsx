@@ -13,9 +13,10 @@ const MeatImage = require('../../assets/img/carne.png')
 
 export type Props = TouchableOpacityProps & {
   name: string
+  image: string
 }
 
-export function CategoryCard({ name, ...rest }: Props) {
+export function CategoryCard({ name, image, ...rest }: Props) {
   return (
     <VStack mb={2}>
       <TouchableOpacity {...rest}>

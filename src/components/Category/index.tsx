@@ -3,15 +3,15 @@ import { FlatList, VStack, useToast } from 'native-base'
 
 import { api } from '@services/api'
 import { AppError } from '@utils/AppError'
-import { MaterialIcons } from '@expo/vector-icons'
 
 import { CategoryCard } from '@components/Category/CategoryCard'
-import { CATEGORY } from '../../data/categoryData'
+
 import { useNavigation } from '@react-navigation/native'
 import { AppNavigatorRoutesProps } from '@routes/app.routes'
+import { CategoryDTO } from '@dtos/CategoryDTO'
 
 export function Category() {
-  const [categories, setCategories] = useState(['Peixes', 'Carnes'])
+  const [categories, setCategories] = useState<CategoryDTO[]>([])
 
   const navigation = useNavigation<AppNavigatorRoutesProps>()
   const toast = useToast()
@@ -24,8 +24,8 @@ export function Category() {
   async function fetchCategories() {
     try {
       const response = await api.get('/categories')
-      setCategories(response.data.name)
-      console.log(response.data.name)
+      setCategories(response.data)
+      console.log(response.data)
     } catch (error) {
       const isAppError = error instanceof AppError
       const title = isAppError
@@ -48,10 +48,14 @@ export function Category() {
     <VStack>
       <FlatList
         data={categories}
-        keyExtractor={(item) => item}
+        keyExtractor={(item) => item.id}
         renderItem={({ item }) => {
           return (
-            <CategoryCard name={item} onPress={handleOpenCategoryDetails} />
+            <CategoryCard
+              name={item.name}
+              image={item.image}
+              onPress={handleOpenCategoryDetails}
+            />
           )
         }}
         showsHorizontalScrollIndicator={false}

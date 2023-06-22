@@ -6,9 +6,9 @@ import { TouchableOpacity, TouchableOpacityProps } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { CardCategory } from './CardCategory'
 
-import { PRODUCTS } from '../../data/products'
+import { PRODUCTS } from '../../../data/products'
 
-import { GroupSubCategory } from '../../components/Product/GroupSubcategory'
+import { GroupSubCategory } from '../../Product/desc/GroupSubcategory'
 import { Product } from '@components/Product'
 import { ProductCardProps } from '@components/Product/ProductCard'
 

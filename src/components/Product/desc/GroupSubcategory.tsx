@@ -1,3 +1,4 @@
+/*
 import { Box, FlatList, VStack } from 'native-base'
 
 import { Group } from '@components/Product/Group'
@@ -31,3 +32,5 @@ export function GroupSubCategory({ onSelect, selected }: Props) {
     </VStack>
   )
 }
+
+*/

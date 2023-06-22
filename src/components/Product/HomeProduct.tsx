@@ -104,12 +104,11 @@ export function HomeProduct() {
         </TouchableOpacity>
       </HStack>
 
-      <Center flex={1} pr={4} ml="2" mr="2" mt="4" flexDirection="row">
+      <Center pr={4} ml="2" mr="2" mt="2" flexDirection="row">
         <Input
-          flex={1}
           borderRadius="md"
-          borderBottomWidth={2}
-          size="md"
+          borderBottomWidth={1}
+          size="xl"
           placeholder="Buscar produtos"
           _light={{
             placeholderTextColor: 'blueGray.500',

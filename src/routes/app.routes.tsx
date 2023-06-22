@@ -22,7 +22,7 @@ import { ProductList } from '@screens/Product/ProductList'
 import { ProductDetails } from '@screens/Product/ProductDetails'
 
 import { ProductSubCategory } from '@screens/Product/ProductSubCategory'
-import { CategoryDetails } from '@components/Category/CategoryDetails'
+import { CategoryDetails } from '@components/Category/desc/CategoryDetails'
 
 type AppRoutes = {
   //home: undefined

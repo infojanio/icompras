@@ -8,7 +8,7 @@ import { CategoryDTO } from '@dtos/CategoryDTO'
 
 import { PRODUCTS } from '../../data/products'
 
-import { GroupSubCategory } from '../../components/Product/GroupSubcategory'
+import { GroupSubCategory } from '../../components/Product/desc/GroupSubcategory'
 import { Product } from '@components/Product'
 import { ProductCardProps } from '@components/Product/ProductCard'
 import { Group } from '@components/Product/Group'
