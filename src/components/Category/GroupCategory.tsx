@@ -12,15 +12,16 @@ import {
 import { useNavigation } from '@react-navigation/native'
 import { AppNavigatorRoutesProps } from '@routes/app.routes'
 import { Category } from '@data/CategoryList'
+import { CategoryDTO } from '@dtos/CategoryDTO'
 
 type Props = TouchableOpacityProps & {
-  id: string
-  title: string
-  image: ImageProps['source']
-  // data: Category
+  //id: string
+  //title: string
+  //image: ImageProps['source']
+  data: CategoryDTO
 }
 
-export function GroupCategory({ id, title, image }: Props) {
+export function GroupCategory({ data, ...rest }: Props) {
   const navigation = useNavigation<AppNavigatorRoutesProps>()
 
   function handleProductSubCategory() {
@@ -45,10 +46,10 @@ export function GroupCategory({ id, title, image }: Props) {
             ml={2}
             height={16}
             width={24}
-            source={image}
+            source={data.image}
           />
           <Box flex={1} marginLeft={2}>
-            <Text fontSize={16}>{title}</Text>
+            <Text fontSize={16}>{data.name}</Text>
           </Box>
           <Icon
             as={<MaterialIcons name="navigate-next" />}

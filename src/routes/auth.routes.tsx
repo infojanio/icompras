@@ -10,6 +10,7 @@ import { AppRoutes } from './app.routes'
 import { SignIn } from '@screens/SignIn'
 import { SignUp } from '@screens/SignUp'
 import { SuperMarket } from '@screens/SuperMarket'
+import { CitySelect } from '@screens/CitySelect'
 
 type AuthRoutes = {
   initial: undefined
@@ -17,6 +18,7 @@ type AuthRoutes = {
   home: undefined
   signin: undefined
   signup: undefined
+  cityselect: undefined
   // address: undefined
   localization: undefined
 }
@@ -35,6 +37,7 @@ export function AuthRoutes() {
       <Screen name="signin" component={SignIn} />
       <Screen name="signup" component={SignUp} />
       <Screen name="supermarket" component={SuperMarket} />
+      <Screen name="cityselect" component={CitySelect} />
       <Screen name="localization" component={Localization} />
       <Screen name="home" component={SignIn} />
       {/* <Screen name="home" component={AppRoutes} /> */}

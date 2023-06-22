@@ -1,6 +1,8 @@
-import { useState } from 'react'
-import { FlatList, VStack } from 'native-base'
+import { useEffect, useState } from 'react'
+import { FlatList, VStack, useToast } from 'native-base'
 
+import { api } from '@services/api'
+import { AppError } from '@utils/AppError'
 import { MaterialIcons } from '@expo/vector-icons'
 
 import { CategoryCard } from '@components/Category/CategoryCard'
@@ -9,18 +11,38 @@ import { useNavigation } from '@react-navigation/native'
 import { AppNavigatorRoutesProps } from '@routes/app.routes'
 
 export function Category() {
-  const [categories, setCategories] = useState([
-    'Carnes & Peixes',
-    'Frios & Laticínios',
-    'Higiene & Perfumaria',
-    'Bebidas',
-  ])
+  const [categories, setCategories] = useState(['Peixes', 'Carnes'])
 
   const navigation = useNavigation<AppNavigatorRoutesProps>()
+  const toast = useToast()
 
   function handleOpenCategoryDetails() {
     navigation.navigate('categoryDetails')
   }
+
+  //listar as categorias
+  async function fetchCategories() {
+    try {
+      const response = await api.get('/categories')
+      setCategories(response.data.name)
+      console.log(response.data.name)
+    } catch (error) {
+      const isAppError = error instanceof AppError
+      const title = isAppError
+        ? error.message
+        : 'Não foi possível carregar as cidades atendidas'
+
+      toast.show({
+        title,
+        placement: 'top',
+        bgColor: 'red.500',
+      })
+    }
+  }
+
+  useEffect(() => {
+    fetchCategories()
+  }, [])
 
   return (
     <VStack>
@@ -28,7 +50,9 @@ export function Category() {
         data={categories}
         keyExtractor={(item) => item}
         renderItem={({ item }) => {
-          return <CategoryCard onPress={handleOpenCategoryDetails} />
+          return (
+            <CategoryCard name={item} onPress={handleOpenCategoryDetails} />
+          )
         }}
         showsHorizontalScrollIndicator={false}
         _contentContainerStyle={{ px: 16 }}

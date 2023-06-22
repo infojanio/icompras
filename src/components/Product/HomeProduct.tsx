@@ -104,7 +104,7 @@ export function HomeProduct() {
         </TouchableOpacity>
       </HStack>
 
-      <Center pr={4} ml="2" mr="2" mt="4" flexDirection="row">
+      <Center flex={1} pr={4} ml="2" mr="2" mt="4" flexDirection="row">
         <Input
           flex={1}
           borderRadius="md"

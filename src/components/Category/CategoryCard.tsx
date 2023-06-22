@@ -11,9 +11,11 @@ import {
 
 const MeatImage = require('../../assets/img/carne.png')
 
-export type Props = TouchableOpacityProps & {}
+export type Props = TouchableOpacityProps & {
+  name: string
+}
 
-export function CategoryCard({ ...rest }: Props) {
+export function CategoryCard({ name, ...rest }: Props) {
   return (
     <VStack mb={2}>
       <TouchableOpacity {...rest}>
@@ -36,7 +38,7 @@ export function CategoryCard({ ...rest }: Props) {
             source={MeatImage}
           />
           <Box flex={1} marginLeft={2}>
-            <Text fontSize={16}>"Carnes & Peixes"</Text>
+            <Text fontSize={16}>{name}</Text>
           </Box>
           <Icon
             as={<MaterialIcons name="navigate-next" />}
