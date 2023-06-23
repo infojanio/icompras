@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { HomeProduct } from '@components/Product/HomeProduct'
 import { Box, FlatList, HStack, VStack, useToast } from 'native-base'
+
+import { useFocusEffect } from '@react-navigation/native'
 
 import { AppError } from '@utils/AppError'
 import { api } from '@services/api'
 import { PRODUCTS } from '../../data/products'
 
-import { GroupSubCategory } from '../../components/Product/desc/GroupSubcategory'
 import { Product } from '@components/Product'
 import { ProductCardProps } from '@components/Product/ProductCard'
 import { Group } from '@components/Product/Group'
@@ -14,7 +15,7 @@ import { SubCategoryDTO } from '@dtos/SubCategoryDTO'
 
 export function ProductSubCategory() {
   const [subCategories, setSubCategories] = useState<SubCategoryDTO[]>([])
-  const [subCategorySelected, setSubCategorySelected] = useState('Peixes')
+  const [subCategorySelected, setSubCategorySelected] = useState('Detergentes')
 
   const [products, setProducts] = useState<ProductCardProps[]>([])
 
@@ -30,7 +31,7 @@ export function ProductSubCategory() {
   const toast = useToast()
 
   //listar as subcategories no select
-  async function fetchCategories() {
+  async function fetchSubCategories() {
     try {
       const response = await api.get('/subcategories')
       setSubCategories(response.data)
@@ -50,8 +51,40 @@ export function ProductSubCategory() {
   }
 
   useEffect(() => {
-    fetchCategories()
+    fetchSubCategories()
   }, [])
+
+  //listar as subcategories no select
+  async function fetchProductsBySubcategory() {
+    try {
+      const response = await api.get(
+        `/products/bysubcategory/${subCategorySelected}`,
+      )
+      // setSubCategories(response.data)
+      console.log(response.data)
+    } catch (error) {
+      const isAppError = error instanceof AppError
+      const title = isAppError
+        ? error.message
+        : 'Não foi possível carregar os produtos'
+
+      toast.show({
+        title,
+        placement: 'top',
+        bgColor: 'red.500',
+      })
+    }
+  }
+
+  useEffect(() => {
+    fetchSubCategories()
+  }, [])
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchProductsBySubcategory()
+    }, [subCategorySelected]),
+  )
 
   return (
     <VStack flex={1}>
