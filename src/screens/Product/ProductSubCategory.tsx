@@ -1,23 +1,44 @@
 import { useCallback, useEffect, useState } from 'react'
 import { HomeProduct } from '@components/Product/HomeProduct'
-import { Box, FlatList, HStack, VStack, useToast } from 'native-base'
+import {
+  Text,
+  Box,
+  FlatList,
+  HStack,
+  Heading,
+  VStack,
+  useToast,
+} from 'native-base'
 
-import { useFocusEffect } from '@react-navigation/native'
+import { useFocusEffect, useNavigation } from '@react-navigation/native'
 
 import { AppError } from '@utils/AppError'
 import { api } from '@services/api'
 import { PRODUCTS } from '../../data/products'
 
 import { Product } from '@components/Product'
-import { ProductCardProps } from '@components/Product/ProductCard'
+
 import { Group } from '@components/Product/Group'
+
+import { ProductDTO } from '@dtos/ProductDTO'
 import { SubCategoryDTO } from '@dtos/SubCategoryDTO'
+import { HeaderList } from '@components/HeaderList'
+import { ProductCard } from '@components/Product/ProductCard'
+
+type Props = {
+  subcategory: string
+  data: ProductDTO[]
+}
 
 export function ProductSubCategory() {
   const [subCategories, setSubCategories] = useState<SubCategoryDTO[]>([])
-  const [subCategorySelected, setSubCategorySelected] = useState('Detergentes')
+  const [products, setProducts] = useState<ProductDTO[]>([])
 
-  const [products, setProducts] = useState<ProductCardProps[]>([])
+  const [subCategorySelected, setSubCategorySelected] = useState(
+    'Refrigerantes',
+  )
+
+  const { navigate } = useNavigation()
 
   /*
   useEffect(() => {
@@ -35,7 +56,7 @@ export function ProductSubCategory() {
     try {
       const response = await api.get('/subcategories')
       setSubCategories(response.data)
-      console.log(response.data)
+      // console.log(response.data)
     } catch (error) {
       const isAppError = error instanceof AppError
       const title = isAppError
@@ -50,17 +71,14 @@ export function ProductSubCategory() {
     }
   }
 
-  useEffect(() => {
-    fetchSubCategories()
-  }, [])
-
   //listar as subcategories no select
   async function fetchProductsBySubcategory() {
     try {
       const response = await api.get(
-        `/products/bysubcategory/${subCategorySelected}`,
+        //'/products',
+        `/products/:name${subCategorySelected}`,
       )
-      // setSubCategories(response.data)
+      setProducts(response.data)
       console.log(response.data)
     } catch (error) {
       const isAppError = error instanceof AppError
@@ -114,7 +132,38 @@ export function ProductSubCategory() {
           minH={10}
         />
 
-        <Product subcategory={subCategorySelected} data={products} />
+        <VStack flex={1} px={2} bg={'gray.200'}>
+          <VStack flex={1} px={6} bg={'gray.200'}>
+            <HStack justifyContent="space-between" mb={5}>
+              <Heading color={'gray.700'} fontSize={'md'}>
+                SubCategorias
+              </Heading>
+
+              <Text color="gray.700" fontSize={'md'}>
+                {products.length}
+              </Text>
+            </HStack>
+          </VStack>
+
+          <FlatList
+            data={products}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <ProductCard
+                data={item}
+                onPress={() =>
+                  navigate('productDetails', { productId: item.id })
+                }
+              />
+            )}
+            numColumns={2}
+            _contentContainerStyle={{
+              marginLeft: 8,
+              paddingBottom: 32,
+            }}
+            showsVerticalScrollIndicator={false}
+          />
+        </VStack>
       </Box>
     </VStack>
   )

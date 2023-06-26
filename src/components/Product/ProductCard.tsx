@@ -4,25 +4,11 @@ import {
   TouchableOpacityProps,
 } from 'react-native'
 import { VStack, Image, Heading, Text, Center, Box, HStack } from 'native-base'
-
-export type ProductCardProps = {
-  id: string
-  brand: string
-  name: string
-  price: string
-  category: string
-  subcategory: string
-  unity: string
-  thumb: ImageSourcePropType
-  image: ImageSourcePropType
-  description: string
-  observation: string
-  quantity: number
-  size: number
-}
+import { ProductDTO } from '@dtos/ProductDTO'
 
 type Props = TouchableOpacityProps & {
-  data: ProductCardProps
+  data: ProductDTO
+  // image: ImageSourcePropType
 }
 
 export function ProductCard({ data, ...rest }: Props) {
@@ -41,21 +27,8 @@ export function ProductCard({ data, ...rest }: Props) {
         borderWidth={0.2}
       >
         <Center>
-          <Image
-            source={data.image}
-            alt="Imagem do produto"
-            w={32}
-            h={20}
-            rounded="md"
-            mt={6}
-            mr={2}
-            ml={2}
-            m={2}
-            p={2}
-            resizeMode="cover"
-          />
           <HStack mb="1">
-            <Text>R$</Text>
+            <Text>R$ {data.price}</Text>
             <Heading
               ml={2}
               mr={2}
@@ -68,7 +41,7 @@ export function ProductCard({ data, ...rest }: Props) {
             </Heading>
             <Box bg="red.500" rounded="md" pl="1" pr="1" mb={2}>
               <Text fontSize="12" color="gray.100" numberOfLines={1}>
-                {data.unity}
+                {data.quantity}
               </Text>
             </Box>
           </HStack>
@@ -83,3 +56,20 @@ export function ProductCard({ data, ...rest }: Props) {
     </TouchableOpacity>
   )
 }
+
+/*
+ <Image
+            source={image}
+            alt="Imagem do produto"
+            w={32}
+            h={20}
+            rounded="md"
+            mt={6}
+            mr={2}
+            ml={2}
+            m={2}
+            p={2}
+            resizeMode="cover"
+          />
+
+          */
