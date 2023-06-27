@@ -123,7 +123,7 @@ export function ProductSubCategory() {
                 subCategorySelected.toLocaleUpperCase() ===
                 item.name.toLocaleUpperCase()
               }
-              onPress={() => setSubCategorySelected(item.id)} //o segredo tá aqui, passando id = subcategory_id
+              onPress={() => setSubCategorySelected(item.name)} //o segredo tá aqui, passando id = subcategory_id
             />
           )}
           horizontal
@@ -139,7 +139,7 @@ export function ProductSubCategory() {
           <VStack px={6} bg={'gray.200'}>
             <HStack justifyContent="space-between" mb={5}>
               <Heading color={'gray.700'} fontSize={'md'}>
-                {'Produtos'}
+                {subCategorySelected}
               </Heading>
 
               <Text color="gray.700" fontSize={'md'}>
