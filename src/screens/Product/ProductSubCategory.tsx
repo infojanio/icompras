@@ -56,7 +56,7 @@ export function ProductSubCategory() {
     try {
       const response = await api.get('/subcategories')
       setSubCategories(response.data)
-      // console.log(response.data)
+      console.log(response.data)
     } catch (error) {
       const isAppError = error instanceof AppError
       const title = isAppError
@@ -75,8 +75,10 @@ export function ProductSubCategory() {
   async function fetchProductsBySubcategory() {
     try {
       const response = await api.get(
-        //'/products',
-        `/products/:name${subCategorySelected}`,
+        `/products/subcategory/?subcategory_id=${subCategorySelected}`,
+        // `/products/subcategory/?subcategory_id=${subCategorySelected}`,
+
+        //'/products/subcategory/:name',
       )
       setProducts(response.data)
       console.log(response.data)
@@ -115,12 +117,13 @@ export function ProductSubCategory() {
           renderItem={({ item }) => (
             <Group
               name={item.name}
+              subcategory={item.id}
               isActive={
                 //subCategorySelected === item.name
                 subCategorySelected.toLocaleUpperCase() ===
                 item.name.toLocaleUpperCase()
               }
-              onPress={() => setSubCategorySelected(item.name)}
+              onPress={() => setSubCategorySelected(item.id)} //o segredo tá aqui, passando id = subcategory_id
             />
           )}
           horizontal
@@ -133,10 +136,10 @@ export function ProductSubCategory() {
         />
 
         <VStack flex={1} px={2} bg={'gray.200'}>
-          <VStack flex={1} px={6} bg={'gray.200'}>
+          <VStack px={6} bg={'gray.200'}>
             <HStack justifyContent="space-between" mb={5}>
               <Heading color={'gray.700'} fontSize={'md'}>
-                SubCategorias
+                {'Produtos'}
               </Heading>
 
               <Text color="gray.700" fontSize={'md'}>

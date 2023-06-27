@@ -37,7 +37,7 @@ export function ProductCard({ data, ...rest }: Props) {
               color="red.700"
               fontFamily="heading"
             >
-              {data.price}
+              {data.name}
             </Heading>
             <Box bg="red.500" rounded="md" pl="1" pr="1" mb={2}>
               <Text fontSize="12" color="gray.100" numberOfLines={1}>
@@ -48,7 +48,7 @@ export function ProductCard({ data, ...rest }: Props) {
 
           <Box h={10} w={24}>
             <Text fontSize="12" numberOfLines={2}>
-              {data.name}
+              {data.subcategory_id}
             </Text>
           </Box>
         </Center>

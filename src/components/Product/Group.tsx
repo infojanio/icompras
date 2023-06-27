@@ -1,12 +1,15 @@
 import { ImageSourcePropType, Platform } from 'react-native'
 import { Text, Pressable, IPressableProps, Box } from 'native-base'
+import { ProductDTO } from '@dtos/ProductDTO'
+import { SubCategoryDTO } from '@dtos/SubCategoryDTO'
 
 type Props = IPressableProps & {
   name: string
+  subcategory: string
   isActive: boolean
 }
 
-export function Group({ name, isActive, ...rest }: Props) {
+export function Group({ name, subcategory, isActive, ...rest }: Props) {
   return (
     <Box flex="1" bg={'gray.100'} borderBottomWidth="0.2">
       <Pressable
