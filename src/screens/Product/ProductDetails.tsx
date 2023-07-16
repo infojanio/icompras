@@ -15,16 +15,18 @@ import {
   VStack,
   useToast,
   HStack,
+  Center,
+  Box,
 } from 'native-base'
 
 import { useCart } from '../../hooks/useCart'
 
-import { ProductDTO } from '@dtos/ProductDTO'
-
 import { Input } from '../../components/Input'
 import { Button } from '../../components/Button'
 import { AppError } from '@utils/AppError'
+
 import { api } from '@services/api'
+import { ProductDTO } from '@dtos/ProductDTO'
 
 type RouteParamsProps = {
   productId: string
@@ -79,8 +81,8 @@ export function ProductDetails() {
         id: product.id,
         name: product.name,
         image: product.image,
-        quantity: Number(quantity),
-        price: Number(quantity),
+        quantity: Number(product.quantity),
+        price: Number(product.price),
         //size: product.size,
       })
 
@@ -100,49 +102,50 @@ export function ProductDetails() {
     }
   }
 
-  useFocusEffect(
-    useCallback(() => {
-      fetchProductDetails()
-    }, [productSelected]),
-  )
+  useEffect(() => {
+    fetchProductDetails()
+  }, [productId])
 
   return (
     <VStack flex={1}>
       <HomeScreen title="Detalhes do produto" />
 
       <ScrollView>
-        <Image
-          key={String(new Date().getTime())}
-          source={{
-            uri: product.image, //busca a URL da imagem
-            //uri: `${api.defaults.baseURL}/images/thumb/${data.image}`, //busca o arquivo salvo no banco
-          }}
-          w={56}
-          h={56}
-          resizeMode={Platform.OS === 'android' ? 'contain' : 'cover'}
-          alt="Imagem do produto"
-          alignSelf="center"
-        />
+        <Center mt={4}>
+          <Heading color="green.700" fontFamily="body" fontSize="18" mb={2}>
+            {product.name}
+          </Heading>
+        </Center>
+        <Box alignItems={'center'} rounded="lg" mb={2} overflow={'hidden'}>
+          <Image
+            key={String(new Date().getTime())}
+            source={{
+              uri: product.image, //busca a URL da imagem
+              //uri: `${api.defaults.baseURL}/images/thumb/${data.image}`, //busca o arquivo salvo no banco
+            }}
+            w={48}
+            h={48}
+            resizeMode={Platform.OS === 'android' ? 'contain' : 'cover'}
+            alt="Imagem do produto"
+            rounded={'lg'}
+          />
+        </Box>
 
-        <VStack p={6}>
-          <HStack w="full" justifyContent="space-between" alignItems="center">
-            <VStack flex={1}>
-              <Heading
-                color="gray.700"
+        <VStack ml={4} mr={4}>
+          <VStack w="full" justifyContent="space-between" alignItems="center">
+            <VStack padding={4}>
+              <Text
+                color="red.500"
+                fontSize="18"
                 fontFamily="heading"
-                fontSize="14"
-                mb={2}
+                fontWeight={'bold'}
               >
-                {product.name}
-              </Heading>
-
-              <Text color="gray.700" fontSize="md" fontFamily="heading">
                 R$ {product.price}
               </Text>
             </VStack>
 
             <VStack alignItems="flex-end">
-              <Text color="gray.700" fontSize="sm" textAlign="justify" pt={4}>
+              <Text color="gray.700" fontSize="16" textAlign="justify" pt={2}>
                 Quantidade
               </Text>
 
@@ -151,10 +154,10 @@ export function ProductDetails() {
                 keyboardType="numeric"
                 textAlign="center"
                 value={quantity}
-                w={16}
+                w={24}
               />
             </VStack>
-          </HStack>
+          </VStack>
 
           <Text
             color="gray.700"
