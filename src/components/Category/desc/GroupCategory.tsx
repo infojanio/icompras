@@ -24,13 +24,13 @@ type Props = TouchableOpacityProps & {
 export function GroupCategory({ data, ...rest }: Props) {
   const navigation = useNavigation<AppNavigatorRoutesProps>()
 
-  function handleProductSubCategory() {
-    navigation.navigate('productSubCategory')
+  function handleProductBySubCategory() {
+    navigation.navigate('ProductBySubCategory')
   }
 
   return (
     <VStack mb={2}>
-      <TouchableOpacity onPress={handleProductSubCategory}>
+      <TouchableOpacity onPress={handleProductBySubCategory}>
         <HStack
           backgroundColor="white"
           alignItems="center"

@@ -1,22 +1,21 @@
 import React from 'react'
-import { Image, Text, Box, HStack, Icon, VStack } from 'native-base'
-
-import { MaterialIcons } from '@expo/vector-icons'
 
 import {
-  ImageSourcePropType,
   TouchableOpacity,
   TouchableOpacityProps,
 } from 'react-native'
 
-const MeatImage = require('../../assets/img/carne.png')
+import { Image, Text, Box, HStack, Icon, VStack } from 'native-base'
+
+import { MaterialIcons } from '@expo/vector-icons'
+
+import { CategoryDTO } from '@dtos/CategoryDTO'
 
 export type Props = TouchableOpacityProps & {
-  name: string
-  image: string
+  data: CategoryDTO
 }
 
-export function CategoryCard({ name, image, ...rest }: Props) {
+export function CategoryCard({ data, ...rest }: Props) {
   return (
     <VStack mb={2}>
       <TouchableOpacity {...rest}>
@@ -29,17 +28,23 @@ export function CategoryCard({ name, image, ...rest }: Props) {
           borderRadius={'xl'}
           minH={'16'}
         >
-          <Image
-            alt="produtos"
-            alignItems={'center'}
-            ml={2}
-            height={16}
-            width={24}
-            resizeMode="center"
-            source={MeatImage}
-          />
+          <Box rounded="lg" mb={3} overflow="hidden">
+            <Image
+              w={16}
+              h={16}
+              source={{
+                uri: data.image, //busca a URL da imagem
+                //uri: `${api.defaults.baseURL}/images/thumb/${data.image}`, //busca o arquivo salvo no banco
+              }}
+              alt="Imagem"
+              rounded="md"
+              mr={4}
+              resizeMode="cover"
+            />
+          </Box>
+
           <Box flex={1} marginLeft={2}>
-            <Text fontSize={16}>{name}</Text>
+            <Text fontSize={16}>{data.name}</Text>
           </Box>
           <Icon
             as={<MaterialIcons name="navigate-next" />}

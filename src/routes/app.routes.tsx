@@ -21,20 +21,23 @@ import { Profile } from '@screens/Profile'
 import { ProductList } from '@screens/Product/ProductList'
 import { ProductDetails } from '@screens/Product/ProductDetails'
 
-import { ProductSubCategory } from '@screens/Product/ProductSubCategory'
+import { ProductBySubCategory } from '@screens/Product/ProductBySubCategory'
 import { CategoryDetails } from '@components/Category/desc/CategoryDetails'
 
 type AppRoutes = {
   //home: undefined
   homeScreen: undefined
   search: undefined
+  category: {
+    categoryId: string
+  }
   cart: undefined
   request: undefined
   profile: undefined
   productList: undefined
   signUp: undefined
-  productDetails: undefined
-  productSubCategory: undefined
+  productDetails: { productId: string }
+  ProductBySubCategory: undefined
   categoryDetails: undefined
 }
 
@@ -173,8 +176,8 @@ export function AppRoutes() {
       />
 
       <Screen
-        name="productSubCategory"
-        component={ProductSubCategory}
+        name="ProductBySubCategory"
+        component={ProductBySubCategory}
         options={{
           tabBarButton: () => null,
         }} //não mostra ícone

@@ -43,12 +43,16 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
   }
 
   //salva as informações no dispositivo
-  async function storageUserAndTokenSave(userData: UserDTO, token: string) {
+  async function storageUserAndTokenSave(
+    userData: UserDTO,
+    token: string,
+    refresh_token: string,
+  ) {
     try {
       setIsLoadingUserStorageData(true)
 
       await storageUserSave(userData)
-      await storageAuthTokenSave(token)
+      await storageAuthTokenSave({ token, refresh_token })
     } catch (error) {
       throw error
     } finally {
@@ -62,8 +66,8 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
       const { data } = await api.post('/sessions', { email, password })
       // console.log(data)
 
-      if (data.user && data.token) {
-        await storageUserAndTokenSave(data.user, data.token)
+      if (data.user && data.token && data.refresh_token) {
+        await storageUserAndTokenSave(data.user, data.token, data.refresh_token)
         userAndTokenUpdate(data.user, data.token) // atualiza o estado e o token
       }
     } catch (error) {
@@ -94,7 +98,7 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
       setIsLoadingUserStorageData(true)
 
       const userLogged = await storageUserGet()
-      const token = await storageAuthTokenGet()
+      const { token } = await storageAuthTokenGet()
 
       if (token && userLogged) {
         userAndTokenUpdate(userLogged, token) //atualiza o estado e coloca o token no cabeçalho

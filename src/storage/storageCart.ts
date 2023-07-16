@@ -1,15 +1,15 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { ImageSourcePropType } from 'react-native'
 
-const CART_STORAGE = '@IGNITESHOES_CART'
+const CART_STORAGE = '@ICOMPRAS_CART'
 
 export type StorageCartProps = {
   id: string
   name: string
-  size: number
+  //size: number
   quantity: number
   price: number
-  image: ImageSourcePropType
+  image: string
 }
 
 export async function storageProductGetAll() {

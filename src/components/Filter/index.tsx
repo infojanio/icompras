@@ -30,7 +30,7 @@ export function Filter() {
         size="lg"
         leftIcon={<SearchSvg height={20} width={20} />}
         onPress={() => {
-          navigation.navigate('productSubCategory')
+          navigation.navigate('ProductBySubCategory')
         }}
         _text={{
           color: 'gray.500',

@@ -9,20 +9,24 @@ import { CategoryCard } from '@components/Category/CategoryCard'
 import { useNavigation } from '@react-navigation/native'
 import { AppNavigatorRoutesProps } from '@routes/app.routes'
 import { CategoryDTO } from '@dtos/CategoryDTO'
+import { Loading } from '@components/Loading'
 
 export function Category() {
   const [categories, setCategories] = useState<CategoryDTO[]>([])
+  const [isLoading, setIsLoading] = useState(true)
 
   const navigation = useNavigation<AppNavigatorRoutesProps>()
   const toast = useToast()
 
-  function handleOpenCategoryDetails() {
-    navigation.navigate('categoryDetails')
+  function handleOpenCategoryDetails(categoryId: string) {
+    navigation.navigate('category', { categoryId })
   }
 
   //listar as categorias
   async function fetchCategories() {
     try {
+      setIsLoading(true)
+
       const response = await api.get('/categories')
       setCategories(response.data)
       console.log(response.data)
@@ -30,13 +34,15 @@ export function Category() {
       const isAppError = error instanceof AppError
       const title = isAppError
         ? error.message
-        : 'Não foi possível carregar as cidades atendidas'
+        : 'Não foi possível carregar as categorias cadastradas'
 
       toast.show({
         title,
         placement: 'top',
         bgColor: 'red.500',
       })
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -46,23 +52,26 @@ export function Category() {
 
   return (
     <VStack>
-      <FlatList
-        data={categories}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => {
-          return (
-            <CategoryCard
-              name={item.name}
-              image={item.image}
-              onPress={handleOpenCategoryDetails}
-            />
-          )
-        }}
-        showsHorizontalScrollIndicator={false}
-        _contentContainerStyle={{ px: 16 }}
-        mt={4}
-        mb={24}
-      />
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <VStack>
+          <FlatList
+            data={categories}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <CategoryCard
+                data={item}
+                onPress={() => handleOpenCategoryDetails(item.id)}
+              />
+            )}
+            showsHorizontalScrollIndicator={false}
+            _contentContainerStyle={{ px: 16 }}
+            mt={4}
+            mb={24}
+          />
+        </VStack>
+      )}
     </VStack>
   )
 }
@@ -91,7 +100,7 @@ export function Category() {
           <CategoryCard
             data={item}
             onPress={() =>
-              navigate('productSubCategory', { categoryId: item.id })
+              navigate('ProductBySubCategory', { categoryId: item.id })
             }
           />
         )}

@@ -1,10 +1,12 @@
 import { HomeScreen } from '@components/HomeScreen'
 
-import { ProductSubCategory } from './ProductSubCategory'
-
 import { Platform } from 'react-native'
-import { useEffect, useState } from 'react'
-import { useNavigation, useRoute } from '@react-navigation/native'
+import { useCallback, useEffect, useState } from 'react'
+import {
+  useFocusEffect,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native'
 import {
   Heading,
   Image,
@@ -17,40 +19,69 @@ import {
 
 import { useCart } from '../../hooks/useCart'
 
-import { PRODUCTS } from '../../data/products'
-import { Sizes } from '../../components/Sizes'
+import { ProductDTO } from '@dtos/ProductDTO'
 
 import { Input } from '../../components/Input'
 import { Button } from '../../components/Button'
-
-import { ProductCardProps } from '../../components/Product/ProductCard'
+import { AppError } from '@utils/AppError'
+import { api } from '@services/api'
 
 type RouteParamsProps = {
   productId: string
 }
 
 export function ProductDetails() {
+  const [isLoading, setIsLoading] = useState(true)
   const [size, setSize] = useState('35')
   const [quantity, setQuantity] = useState('1')
-  const [product, setProduct] = useState<ProductCardProps>(
-    {} as ProductCardProps,
-  )
+  const [product, setProduct] = useState<ProductDTO>({} as ProductDTO)
+
+  const [productSelected, setProductSelected] = useState(product.id)
 
   const toast = useToast()
-  const route = useRoute()
   const { navigate } = useNavigation()
   const { addProductCart } = useCart()
 
+  const route = useRoute()
   const { productId } = route.params as RouteParamsProps
+  console.log('ID =>', productId)
+
+  //listar as subcategories no select
+  async function fetchProductDetails() {
+    try {
+      setIsLoading(true)
+
+      const response = await api.get(
+        //'/products',
+        `/products/${productId}`,
+      )
+      setProduct(response.data)
+      console.log(response.data)
+    } catch (error) {
+      const isAppError = error instanceof AppError
+      const title = isAppError
+        ? error.message
+        : 'Não foi possível carregar os detalhes do produto'
+
+      toast.show({
+        title,
+        placement: 'top',
+        bgColor: 'red.500',
+      })
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   async function handleAddProductToCart() {
     try {
       await addProductCart({
         id: product.id,
         name: product.name,
-        image: product.thumb,
+        image: product.image,
         quantity: Number(quantity),
-        size: product.size,
+        price: Number(quantity),
+        //size: product.size,
       })
 
       toast.show({
@@ -69,12 +100,11 @@ export function ProductDetails() {
     }
   }
 
-  useEffect(() => {
-    const selected = PRODUCTS.filter(
-      (item) => item.id === productId,
-    )[0] as ProductCardProps
-    setProduct(selected)
-  }, [productId])
+  useFocusEffect(
+    useCallback(() => {
+      fetchProductDetails()
+    }, [productSelected]),
+  )
 
   return (
     <VStack flex={1}>
@@ -83,7 +113,10 @@ export function ProductDetails() {
       <ScrollView>
         <Image
           key={String(new Date().getTime())}
-          source={product.image}
+          source={{
+            uri: product.image, //busca a URL da imagem
+            //uri: `${api.defaults.baseURL}/images/thumb/${data.image}`, //busca o arquivo salvo no banco
+          }}
           w={56}
           h={56}
           resizeMode={Platform.OS === 'android' ? 'contain' : 'cover'}
@@ -130,7 +163,7 @@ export function ProductDetails() {
             pt={2}
             mb={2}
           >
-            {product.description}
+            {productSelected /*product.available*/}
           </Text>
 
           {/*  colocar condição: se if(categoria === sapato)

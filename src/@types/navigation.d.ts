@@ -4,7 +4,7 @@ export declare global {
       cart: undefined
       products: undefined
       productDetails: { productId: string }
-      productSubCategory: { categoryId: string }
+      ProductBySubCategory: { categoryId: string }
     }
   }
 }

@@ -19,6 +19,9 @@ import { Button } from '@components/Button'
 import * as ImagePicker from 'expo-image-picker'
 import * as FileSystem from 'expo-file-system'
 
+import { useAuth } from '@hooks/useAuth'
+import { api } from '@services/api'
+
 const PHOTO_SIZE = 32
 
 export function Profile() {
@@ -28,6 +31,7 @@ export function Profile() {
   )
 
   const toast = useToast()
+  const { user } = useAuth()
 
   async function handleUserPhotoSelect() {
     setPhotoIsLoading(true)
@@ -38,7 +42,7 @@ export function Profile() {
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         quality: 1,
         aspect: [4, 4], //foto 4/4
-        allowsEditing: true, //edição
+        allowsEditing: true, //edição da foto, recorte
       })
 
       if (photoSelected.canceled) {
@@ -60,7 +64,30 @@ export function Profile() {
           })
         }
 
-        setUserPhoto(photoSelected.assets[0].uri)
+        // setUserPhoto(photoSelected.assets[0].uri)
+        const fileExtension = photoSelected.assets[0].uri?.split('.').pop() //retorna a extensão da imagem
+
+        const photoFile = {
+          name: `${user.name}.${fileExtension}`.toLowerCase(), //intepolar o nome ao arquivo com letras minúscula
+          uri: photoSelected.assets[0].uri,
+          type: `${photoSelected.assets[0].type}/${fileExtension}`,
+        } as any
+        // console.log(photoFile)
+
+        const userPhotoUploadForm = new FormData()
+        userPhotoUploadForm.append('avatar', photoFile) //avatar foi definido na rota do backend
+
+        await api.patch('/users/avatar', userPhotoUploadForm, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        })
+
+        toast.show({
+          title: 'Foto Atualizada!',
+          placement: 'top',
+          bgColor: 'green.500',
+        })
       }
 
       //atualiza a foto
@@ -76,6 +103,7 @@ export function Profile() {
       setPhotoIsLoading(false)
     }
   }
+
   return (
     <VStack>
       <HomeScreen title="Perfil" />

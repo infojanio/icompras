@@ -90,7 +90,7 @@ import { GroupSubCategory } from '../../components/Product/GroupSubcategory'
 import { Product } from '@components/Product'
 import { ProductCardProps } from '@components/Product/ProductCard'
 
-export function ProductSubCategory() {
+export function ProductBySubCategory() {
   const [subCategorySelected, setSubCategorySelected] = useState('Aves')
   const [products, setProducts] = useState<ProductCardProps[]>([])
 

@@ -14,23 +14,22 @@ import { useFocusEffect, useNavigation } from '@react-navigation/native'
 
 import { AppError } from '@utils/AppError'
 import { api } from '@services/api'
-import { PRODUCTS } from '../../data/products'
-
-import { Product } from '@components/Product'
 
 import { Group } from '@components/Product/Group'
 
 import { ProductDTO } from '@dtos/ProductDTO'
 import { SubCategoryDTO } from '@dtos/SubCategoryDTO'
-import { HeaderList } from '@components/HeaderList'
 import { ProductCard } from '@components/Product/ProductCard'
+import { Loading } from '@components/Loading'
+import { AppNavigatorRoutesProps } from '@routes/app.routes'
 
 type Props = {
   subcategory: string
   data: ProductDTO[]
 }
 
-export function ProductSubCategory() {
+export function ProductBySubCategory() {
+  const [isLoading, setIsLoading] = useState(true)
   const [subCategories, setSubCategories] = useState<SubCategoryDTO[]>([])
   const [products, setProducts] = useState<ProductDTO[]>([])
 
@@ -38,25 +37,19 @@ export function ProductSubCategory() {
     'Refrigerantes',
   )
 
-  const { navigate } = useNavigation()
-
-  /*
-  useEffect(() => {
-    const filtered = PRODUCTS.filter(
-      (product) => product.subcategory === subCategorySelected,
-    ) as ProductCardProps[]
-    setProducts(filtered)
-  }, [subCategorySelected])
-*/
-
   const toast = useToast()
+  const navigation = useNavigation<AppNavigatorRoutesProps>()
+
+  function handleOpenProductDetails(productId: string) {
+    navigation.navigate('productDetails', { productId })
+  }
 
   //listar as subcategories no select
   async function fetchSubCategories() {
     try {
       const response = await api.get('/subcategories')
       setSubCategories(response.data)
-      console.log(response.data)
+      //console.log(response.data)
     } catch (error) {
       const isAppError = error instanceof AppError
       const title = isAppError
@@ -74,14 +67,13 @@ export function ProductSubCategory() {
   //listar as subcategories no select
   async function fetchProductsBySubcategory() {
     try {
+      setIsLoading(true)
+
       const response = await api.get(
         `/products/subcategory/?subcategory_id=${subCategorySelected}`,
-        // `/products/subcategory/?subcategory_id=${subCategorySelected}`,
-
-        //'/products/subcategory/:name',
       )
       setProducts(response.data)
-      console.log(response.data)
+      // console.log(response.data)
     } catch (error) {
       const isAppError = error instanceof AppError
       const title = isAppError
@@ -93,6 +85,8 @@ export function ProductSubCategory() {
         placement: 'top',
         bgColor: 'red.500',
       })
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -135,38 +129,40 @@ export function ProductSubCategory() {
           minH={10}
         />
 
-        <VStack flex={1} px={2} bg={'gray.200'}>
-          <VStack px={6} bg={'gray.200'}>
-            <HStack justifyContent="space-between" mb={5}>
-              <Heading color={'gray.700'} fontSize={'md'}>
-                {subCategorySelected}
-              </Heading>
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <VStack flex={1} px={2} bg={'gray.200'}>
+            <VStack px={6} bg={'gray.200'}>
+              <HStack justifyContent="space-between" mb={5}>
+                <Heading color={'gray.700'} fontSize={'md'}>
+                  {subCategorySelected}
+                </Heading>
 
-              <Text color="gray.700" fontSize={'md'}>
-                {products.length}
-              </Text>
-            </HStack>
+                <Text color="gray.700" fontSize={'md'}>
+                  {products.length}
+                </Text>
+              </HStack>
+            </VStack>
+
+            <FlatList
+              data={products}
+              keyExtractor={(item) => item.id}
+              renderItem={({ item }) => (
+                <ProductCard
+                  data={item}
+                  onPress={() => handleOpenProductDetails(item.id)}
+                />
+              )}
+              numColumns={2}
+              _contentContainerStyle={{
+                marginLeft: 8,
+                paddingBottom: 32,
+              }}
+              showsVerticalScrollIndicator={false}
+            />
           </VStack>
-
-          <FlatList
-            data={products}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => (
-              <ProductCard
-                data={item}
-                onPress={() =>
-                  navigate('productDetails', { productId: item.id })
-                }
-              />
-            )}
-            numColumns={2}
-            _contentContainerStyle={{
-              marginLeft: 8,
-              paddingBottom: 32,
-            }}
-            showsVerticalScrollIndicator={false}
-          />
-        </VStack>
+        )}
       </Box>
     </VStack>
   )

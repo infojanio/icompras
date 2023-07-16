@@ -70,7 +70,7 @@ export function HomeHeader() {
         </TouchableOpacity>
       </HStack>
       <Box bg={'gray.100'}>
-        <Text color="gray.700" fontSize={16} left={2}>
+        <Text color="gray.700" fontSize={16} left={2} numberOfLines={1}>
           Olá! {user.name}
         </Text>
       </Box>
