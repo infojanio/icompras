@@ -19,7 +19,7 @@ export function CitySelect() {
           justifyContent={'space-between'}
         >
           <Text color={'gray.600'} ml={'4'} mr={'32'} fontSize={16}>
-            Selecione a cidade
+            Encontre por cidade
           </Text>
 
           <Box alignItems={'center'} p="1" mr={2} borderRadius={2}>

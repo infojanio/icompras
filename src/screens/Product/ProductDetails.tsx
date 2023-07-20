@@ -27,6 +27,7 @@ import { AppError } from '@utils/AppError'
 
 import { api } from '@services/api'
 import { ProductDTO } from '@dtos/ProductDTO'
+import { Loading } from '@components/Loading'
 
 type RouteParamsProps = {
   productId: string
@@ -53,10 +54,7 @@ export function ProductDetails() {
     try {
       setIsLoading(true)
 
-      const response = await api.get(
-        //'/products',
-        `/products/${productId}`,
-      )
+      const response = await api.get(`/products/${productId}`)
       setProduct(response.data)
       console.log(response.data)
     } catch (error) {
@@ -110,76 +108,80 @@ export function ProductDetails() {
     <VStack flex={1}>
       <HomeScreen title="Detalhes do produto" />
 
-      <ScrollView>
-        <Center mt={4}>
-          <Heading color="green.700" fontFamily="body" fontSize="18" mb={2}>
-            {product.name}
-          </Heading>
-        </Center>
-        <Box alignItems={'center'} rounded="lg" mb={2} overflow={'hidden'}>
-          <Image
-            key={String(new Date().getTime())}
-            source={{
-              uri: product.image, //busca a URL da imagem
-              //uri: `${api.defaults.baseURL}/images/thumb/${data.image}`, //busca o arquivo salvo no banco
-            }}
-            w={48}
-            h={48}
-            resizeMode={Platform.OS === 'android' ? 'contain' : 'cover'}
-            alt="Imagem do produto"
-            rounded={'lg'}
-          />
-        </Box>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <ScrollView>
+          <Center mt={4}>
+            <Heading color="green.700" fontFamily="body" fontSize="18" mb={2}>
+              {product.name}
+            </Heading>
+          </Center>
+          <Box alignItems={'center'} rounded="lg" mb={2} overflow={'hidden'}>
+            <Image
+              key={String(new Date().getTime())}
+              source={{
+                uri: product.image, //busca a URL da imagem
+                //uri: `${api.defaults.baseURL}/images/thumb/${data.image}`, //busca o arquivo salvo no banco
+              }}
+              w={48}
+              h={48}
+              resizeMode={Platform.OS === 'android' ? 'contain' : 'cover'}
+              alt="Imagem do produto"
+              rounded={'lg'}
+            />
+          </Box>
 
-        <VStack ml={4} mr={4}>
-          <VStack w="full" justifyContent="space-between" alignItems="center">
-            <VStack padding={4}>
-              <Text
-                color="red.500"
-                fontSize="18"
-                fontFamily="heading"
-                fontWeight={'bold'}
-              >
-                R$ {product.price}
-              </Text>
+          <VStack ml={4} mr={4}>
+            <VStack w="full" justifyContent="space-between" alignItems="center">
+              <VStack padding={4}>
+                <Text
+                  color="red.500"
+                  fontSize="18"
+                  fontFamily="heading"
+                  fontWeight={'bold'}
+                >
+                  R$ {product.price}
+                </Text>
+              </VStack>
+
+              <VStack alignItems="flex-end">
+                <Text color="gray.700" fontSize="16" textAlign="justify" pt={2}>
+                  Quantidade
+                </Text>
+
+                <Input
+                  onChangeText={setQuantity}
+                  keyboardType="numeric"
+                  textAlign="center"
+                  value={quantity}
+                  w={24}
+                />
+              </VStack>
             </VStack>
 
-            <VStack alignItems="flex-end">
-              <Text color="gray.700" fontSize="16" textAlign="justify" pt={2}>
-                Quantidade
-              </Text>
+            <Text
+              color="gray.700"
+              fontSize="md"
+              textAlign="justify"
+              pt={2}
+              mb={2}
+            >
+              {productSelected /*product.available*/}
+            </Text>
 
-              <Input
-                onChangeText={setQuantity}
-                keyboardType="numeric"
-                textAlign="center"
-                value={quantity}
-                w={24}
-              />
-            </VStack>
-          </VStack>
-
-          <Text
-            color="gray.700"
-            fontSize="md"
-            textAlign="justify"
-            pt={2}
-            mb={2}
-          >
-            {productSelected /*product.available*/}
-          </Text>
-
-          {/*  colocar condição: se if(categoria === sapato)
+            {/*  colocar condição: se if(categoria === sapato)
 
           <Sizes onSelect={setSize} selected={size} />
           
           */}
-          <Button
-            title="Adicionar no carrinho"
-            onPress={handleAddProductToCart}
-          />
-        </VStack>
-      </ScrollView>
+            <Button
+              title="Adicionar ao carrinho"
+              onPress={handleAddProductToCart}
+            />
+          </VStack>
+        </ScrollView>
+      )}
     </VStack>
   )
 }

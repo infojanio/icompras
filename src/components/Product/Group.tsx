@@ -1,7 +1,4 @@
-import { ImageSourcePropType, Platform } from 'react-native'
 import { Text, Pressable, IPressableProps, Box } from 'native-base'
-import { ProductDTO } from '@dtos/ProductDTO'
-import { SubCategoryDTO } from '@dtos/SubCategoryDTO'
 
 type Props = IPressableProps & {
   name: string

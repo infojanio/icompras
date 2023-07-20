@@ -1,22 +1,34 @@
-import React, { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { FlatList, HStack, VStack, useToast } from 'native-base'
+
 import { api } from '@services/api'
 import { AppError } from '@utils/AppError'
 
-import { Box, Text, VStack, FlatList, useToast } from 'native-base'
-import { HomeScreen } from '@components/HomeScreen'
-import { GroupCity } from '@components/CitySelect/GroupCity'
-import { Group } from '@components/CitySelect/Group'
+import { CityCard } from '@components/CitySelect/CityCard'
+
+import { useNavigation } from '@react-navigation/native'
+import { AppNavigatorRoutesProps } from '@routes/app.routes'
 import { CityDTO } from '@dtos/CityDTO'
+import { Loading } from '@components/Loading'
+import { HomeHeader } from '@components/HomeHeader'
+import { HomeScreen } from '@components/HomeScreen'
 
 export function CitySelect() {
   const [cities, setCities] = useState<CityDTO[]>([])
-  const [citySelected, setCitySelected] = useState('novo alegre')
+  const [isLoading, setIsLoading] = useState(true)
 
+  const navigation = useNavigation<AppNavigatorRoutesProps>()
   const toast = useToast()
 
-  //listar as cidades no select
+  function handleOpenSubCities(cityId: string) {
+    // navigation.navigate('CompanyByCity', { cityId })
+  }
+
+  //listar as citias
   async function fetchCities() {
     try {
+      setIsLoading(true)
+
       const response = await api.get('/cities')
       setCities(response.data)
       console.log(response.data)
@@ -24,13 +36,15 @@ export function CitySelect() {
       const isAppError = error instanceof AppError
       const title = isAppError
         ? error.message
-        : 'Não foi possível carregar as cidades atendidas'
+        : 'Não foi possível carregar as cidades cadastradas'
 
       toast.show({
         title,
         placement: 'top',
         bgColor: 'red.500',
       })
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -39,60 +53,30 @@ export function CitySelect() {
   }, [])
 
   return (
-    <VStack flex={1} bg={'gray.200'}>
-      <HomeScreen title="Escolha a cidade" />
-
-      <FlatList
-        data={cities}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <Group
-            name={item.name}
-            isActive={
-              //citySelected === item.name
-              citySelected.toLocaleUpperCase() === item.name.toLocaleUpperCase()
-            }
-            onPress={() => setCitySelected(item.name)}
-          />
+    <VStack>
+      <HomeScreen title="Cidades" />
+      <VStack>
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <VStack>
+            <FlatList
+              data={cities}
+              keyExtractor={(item) => item.id}
+              renderItem={({ item }) => (
+                <CityCard
+                  data={item}
+                  onPress={() => handleOpenSubCities(item.id)}
+                />
+              )}
+              showsHorizontalScrollIndicator={false}
+              _contentContainerStyle={{ px: 2 }}
+              mt={4}
+              mb={24}
+            />
+          </VStack>
         )}
-        showsHorizontalScrollIndicator={false}
-        _contentContainerStyle={{ px: 2 }}
-        mt={10}
-        //maxH={10}
-        minH={460}
-      />
-
-      <GroupCity selected={citySelected} onSelect={setCitySelected} />
+      </VStack>
     </VStack>
   )
 }
-
-/*
-  <Select
-          selectedValue={cities}
-          minWidth="200"
-          accessibilityLabel="Escolha a cidade"
-          alignContent={'center'}
-          placeholderTextColor={'gray.400'}
-          fontSize={'16'}
-          placeholder="Escolha a cidade"
-          _selectedItem={{
-            bg: 'blue.100',
-            endIcon: <CheckIcon size="4" />,
-          }}
-          mt={4}
-          onValueChange={(itemValue) => setCities(itemValue)}
-        >
-          <Select.Item label="Campos Belos - GO" value="cb" />
-          <Select.Item label="Monte Alegre - GO" value="ma" />
-          <Select.Item label="Alto Paraíso - GO" value="ap" />
-          <Select.Item label="Arraias - TO" value="ar" />
-          <Select.Item label="Novo Alegre - TO" value="na" />
-          <Select.Item label="Posse - GO" value="po" />
-          <Select.Item label="São Domingos - GO" value="sd" />
-          <Select.Item label="Iaciara - GO" value="ia" />
-          <Select.Item label="Cavalcante - GO" value="ca" />
-          <Select.Item label="Teresina - GO" value="te" />
-          <Select.Item label="Taguatinga - TO" value="ta" />
-        </Select>
-*/

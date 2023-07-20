@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { FlatList, VStack, useToast } from 'native-base'
+import { FlatList, HStack, VStack, useToast } from 'native-base'
 
 import { api } from '@services/api'
 import { AppError } from '@utils/AppError'
@@ -18,8 +18,8 @@ export function Category() {
   const navigation = useNavigation<AppNavigatorRoutesProps>()
   const toast = useToast()
 
-  function handleOpenCategoryDetails(categoryId: string) {
-    navigation.navigate('category', { categoryId })
+  function handleOpenSubCategories(categoryId: string) {
+    navigation.navigate('ProductBySubCategory', { categoryId })
   }
 
   //listar as categorias
@@ -51,7 +51,7 @@ export function Category() {
   }, [])
 
   return (
-    <VStack>
+    <HStack>
       {isLoading ? (
         <Loading />
       ) : (
@@ -62,79 +62,17 @@ export function Category() {
             renderItem={({ item }) => (
               <CategoryCard
                 data={item}
-                onPress={() => handleOpenCategoryDetails(item.id)}
+                onPress={() => handleOpenSubCategories(item.id)}
               />
             )}
+            horizontal
             showsHorizontalScrollIndicator={false}
-            _contentContainerStyle={{ px: 16 }}
+            _contentContainerStyle={{ px: 2 }}
             mt={4}
             mb={24}
           />
         </VStack>
       )}
-    </VStack>
+    </HStack>
   )
 }
-
-/*
-import { useNavigation } from '@react-navigation/native'
-import { FlatList, VStack } from 'native-base'
-import { HeaderList } from '@components/HeaderList'
-
-import {
-  CategoryCard,
-  CategoryCardProps,
-} from '@components/Category/CategoryCard'
-import { CATEGORY } from '../../data/categoryData'
-import { Alert } from 'react-native'
-
-export function Category() {
-  const { navigate } = useNavigation()
-
-  return (
-    <VStack>
-      <FlatList
-        data={CATEGORY}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <CategoryCard
-            data={item}
-            onPress={() =>
-              navigate('ProductBySubCategory', { categoryId: item.id })
-            }
-          />
-        )}
-        showsHorizontalScrollIndicator={false}
-        _contentContainerStyle={{ px: 16 }}
-        mt={4}
-        mb={24}
-      />
-    </VStack>
-  )
-}
-
-/*
-import { FlatList } from 'native-base'
-
-import { CATEGORY } from '../../data/categoryData'
-import { GroupCategory } from '@components/Category/GroupCategory'
-
-export function Category() {
-  return (
-    <FlatList
-      data={CATEGORY}
-      keyExtractor={(item) => item.id}
-      renderItem={({ item }) => (
-        <GroupCategory id={item.id} image={item.image} title={item.name} />
-      )}
-      showsHorizontalScrollIndicator={false}
-      _contentContainerStyle={{ px: 16 }}
-      mt={4}
-      mb={24}
-    />
-  )
-}
-
-
-
-*/

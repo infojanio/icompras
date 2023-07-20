@@ -4,18 +4,18 @@ import { TouchableOpacity, TouchableOpacityProps } from 'react-native'
 
 import { Image, Text, Box, HStack, Icon, VStack, Center } from 'native-base'
 
-import { CategoryDTO } from '@dtos/CategoryDTO'
+import { CityDTO } from '@dtos/CityDTO'
 
 export type Props = TouchableOpacityProps & {
-  data: CategoryDTO
+  data: CityDTO
 }
 
-export function CategoryCard({ data, ...rest }: Props) {
+export function CityCard({ data, ...rest }: Props) {
   return (
     <VStack flex={1} mb={2}>
       <TouchableOpacity {...rest}>
         <Box
-          size={24}
+          padding={2}
           backgroundColor="white"
           alignItems="center"
           marginLeft={2}
@@ -24,25 +24,12 @@ export function CategoryCard({ data, ...rest }: Props) {
           borderRadius={'xl'}
           minH={'16'}
         >
-          <Image
-            w={16}
-            h={16}
-            source={{
-              uri: data.image, //busca a URL da imagem
-              //uri: `${api.defaults.baseURL}/images/thumb/${data.image}`, //busca o arquivo salvo no banco
-            }}
-            alt="Imagem"
-            rounded="md"
-            mr={4}
-            resizeMode="cover"
-          />
-
           <HStack flex={1}>
             <Center>
               <Text
                 textAlign={'center'}
                 justifyContent={'center'}
-                fontSize={12}
+                fontSize={16}
                 numberOfLines={2}
               >
                 {data.name}

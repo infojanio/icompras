@@ -37,7 +37,7 @@ type AppRoutes = {
   productList: undefined
   signUp: undefined
   productDetails: { productId: string }
-  ProductBySubCategory: undefined
+  ProductBySubCategory: { categoryId: string }
   categoryDetails: undefined
 }
 

@@ -76,20 +76,3 @@ export function ProductCard({ data, ...rest }: Props) {
     </TouchableOpacity>
   )
 }
-
-/*
- <Image
-            source={image}
-            alt="Imagem do produto"
-            w={32}
-            h={20}
-            rounded="md"
-            mt={6}
-            mr={2}
-            ml={2}
-            m={2}
-            p={2}
-            resizeMode="cover"
-          />
-
-          */

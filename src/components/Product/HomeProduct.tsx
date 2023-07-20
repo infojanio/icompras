@@ -1,47 +1,17 @@
 import React from 'react'
 
-import {
-  ImageProps,
-  ImageSourcePropType,
-  TouchableOpacity,
-  TouchableOpacityProps,
-} from 'react-native'
-import {
-  Center,
-  HStack,
-  Icon,
-  useTheme,
-  Text,
-  Button,
-  Alert,
-  Stack,
-  VStack,
-} from 'native-base'
+import { TouchableOpacity } from 'react-native'
+import { Center, HStack, Icon, useTheme, Text, VStack } from 'native-base'
 
 import { MaterialIcons } from '@expo/vector-icons'
-import LocationSvg from '@assets/location.svg'
+
 import { Input } from '@components/Input'
 import { AppNavigatorRoutesProps } from '@routes/app.routes'
 import { useNavigation } from '@react-navigation/native'
-
-export type ProductCardProps = {
-  id: string
-  brand: string
-  name: string
-  price: string
-  category: string
-  subcategory: string
-  unity: string
-  thumb: ImageSourcePropType
-  image: ImageSourcePropType
-  description: string
-  observation: string
-  quantity: number
-  size: number
-}
+import { ProductDTO } from '@dtos/ProductDTO'
 
 type Props = {
-  data: ProductCardProps
+  data: ProductDTO[]
 }
 
 export function HomeProduct() {
@@ -84,14 +54,13 @@ export function HomeProduct() {
           />
         </TouchableOpacity>
 
-        <Text>Categoria</Text>
-        <Text fontWeight={'bold'} fontSize={16} color="red.600" ml={4}>
-          R$ 0,10
-        </Text>
+        <TouchableOpacity onPress={() => navigation.navigate('')}>
+          <Text fontSize={16}>Categoria</Text>
+        </TouchableOpacity>
 
         <TouchableOpacity>
           <Icon
-            as={<MaterialIcons name="shopping-cart" />}
+            as={<MaterialIcons name="keyboard-arrow-down" />}
             size={6}
             mr={6}
             _light={{

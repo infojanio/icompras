@@ -30,14 +30,15 @@ export function HomeHeader() {
   }
 
   return (
-    <VStack bg="green.500">
+    <VStack bg="gray.100" padding={1}>
       <HStack
         bg="green.500"
         paddingBottom={4}
-        borderRadius={4}
+        borderRadius={'full'}
         paddingTop={4}
         justifyContent="space-between"
         alignItems="center"
+        padding={2}
       >
         <VStack>
           <TouchableOpacity onPress={OpenLogo}>
@@ -69,11 +70,18 @@ export function HomeHeader() {
           </Center>
         </TouchableOpacity>
       </HStack>
-      <Box bg={'gray.100'}>
-        <Text color="gray.700" fontSize={16} left={2} numberOfLines={1}>
+      {/* 
+      <Box mr={32} bg={'gray.100'}>
+        <Text
+          color="gray.700"
+          fontWeight={'bold'}
+          fontSize={14}
+          numberOfLines={1}
+        >
           Olá! {user.name}
         </Text>
       </Box>
+      */}
     </VStack>
   )
 }

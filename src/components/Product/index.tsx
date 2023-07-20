@@ -2,12 +2,13 @@ import { useNavigation } from '@react-navigation/native'
 import { FlatList, VStack } from 'native-base'
 import { HeaderList } from '@components/HeaderList'
 
-import { ProductCard, ProductCardProps } from '@components/Product/ProductCard'
-import { PRODUCTS } from '../../data/products'
+import { ProductCard } from '@components/Product/ProductCard'
+//import { PRODUCTS } from '../../data/products'
+import { ProductDTO } from '@dtos/ProductDTO'
 
 type Props = {
   subcategory: string
-  data: ProductCardProps[]
+  data: ProductDTO[]
 }
 
 export function Product({ data, subcategory }: Props) {
@@ -15,7 +16,7 @@ export function Product({ data, subcategory }: Props) {
 
   return (
     <VStack bg={'gray.200'}>
-      <HeaderList title={subcategory} counter={PRODUCTS.length} />
+      <HeaderList title={subcategory} counter={subcategory.length} />
 
       <FlatList
         data={data}

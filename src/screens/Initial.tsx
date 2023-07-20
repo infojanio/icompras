@@ -1,4 +1,4 @@
-import { VStack, Image, Center, Text, Box } from 'native-base'
+import { VStack, Image, Center, Text, Box, useDisclose } from 'native-base'
 
 import { AuthNavigatorRoutesProps } from '@routes/auth.routes'
 
