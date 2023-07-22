@@ -13,6 +13,7 @@ import { Loading } from '@components/Loading'
 import { HomeHeader } from '@components/HomeHeader'
 import { HomeScreen } from '@components/HomeScreen'
 import { CompanyDTO } from '@dtos/CompanyDTO'
+import { CompanyCard } from '@components/Company/CompanyCard'
 
 type RouteParamsProps = {
   cityId: string
@@ -102,7 +103,7 @@ export function CompanyByCity() {
               data={companies}
               keyExtractor={(item) => item.id}
               renderItem={({ item }) => (
-                <CityCard
+                <CompanyCard
                   data={item}
                   //  onPress={() => handleOpenCompanies(item.id)}
                 />
