@@ -22,22 +22,23 @@ import { ProductList } from '@screens/Product/ProductList'
 import { ProductDetails } from '@screens/Product/ProductDetails'
 
 import { ProductBySubCategory } from '@screens/Product/ProductBySubCategory'
+import { CompanyByCity } from '@screens/Company/CompanyByCity'
 import { CategoryDetails } from '@components/Category/desc/CategoryDetails'
 
 type AppRoutes = {
   //home: undefined
   homeScreen: undefined
   search: undefined
-  category: {
-    categoryId: string
-  }
+
   cart: undefined
   request: undefined
   profile: undefined
   productList: undefined
   signUp: undefined
   productDetails: { productId: string }
-  ProductBySubCategory: { categoryId: string }
+
+  productBySubCategory: { categoryId: string }
+
   categoryDetails: undefined
 }
 
@@ -176,7 +177,7 @@ export function AppRoutes() {
       />
 
       <Screen
-        name="ProductBySubCategory"
+        name="productBySubCategory"
         component={ProductBySubCategory}
         options={{
           tabBarButton: () => null,

@@ -19,7 +19,7 @@ export function Category() {
   const toast = useToast()
 
   function handleOpenSubCategories(categoryId: string) {
-    navigation.navigate('ProductBySubCategory', { categoryId })
+    navigation.navigate('productBySubCategory', { categoryId })
   }
 
   //listar as categorias

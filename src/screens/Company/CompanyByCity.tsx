@@ -6,31 +6,42 @@ import { AppError } from '@utils/AppError'
 
 import { CityCard } from '@components/CitySelect/CityCard'
 
-import { useNavigation } from '@react-navigation/native'
-import { AuthNavigatorRoutesProps } from '@routes/auth.routes'
+import { useNavigation, useRoute } from '@react-navigation/native'
+import { AppNavigatorRoutesProps } from '@routes/app.routes'
 import { CityDTO } from '@dtos/CityDTO'
 import { Loading } from '@components/Loading'
 import { HomeHeader } from '@components/HomeHeader'
 import { HomeScreen } from '@components/HomeScreen'
+import { CompanyDTO } from '@dtos/CompanyDTO'
 
-export function CitySelect() {
-  const [cities, setCities] = useState<CityDTO[]>([])
+type RouteParamsProps = {
+  cityId: string
+}
+
+export function CompanyByCity() {
+  const [companies, setCompanies] = useState<CompanyDTO[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
-  const navigation = useNavigation<AuthNavigatorRoutesProps>()
+  const navigation = useNavigation<AppNavigatorRoutesProps>()
   const toast = useToast()
 
+  /*
   function handleOpenCompanies(cityId: string) {
     navigation.navigate('companyByCity', { cityId })
   }
+  */
+
+  const route = useRoute()
+  const { cityId } = route.params as RouteParamsProps
+  console.log('ID city=>', cityId)
 
   //listar as citias
   async function fetchCities() {
     try {
       setIsLoading(true)
-
-      const response = await api.get('/cities')
-      setCities(response.data)
+      const response = await api.get(`/cities/${cityId}`)
+      // const response = await api.get('/companies')
+      setCompanies(response.data)
       console.log(response.data)
     } catch (error) {
       const isAppError = error instanceof AppError
@@ -48,25 +59,52 @@ export function CitySelect() {
     }
   }
 
+  //listar as subcategories no select
+  async function fetchCompanies() {
+    try {
+      setIsLoading(true)
+      //const response = await api.get('/companies')
+      const response = await api.get(`/companies/city/?city_id=${cityId}`)
+
+      console.log(response.data)
+      setCompanies(response.data)
+    } catch (error) {
+      const isAppError = error instanceof AppError
+      const title = isAppError
+        ? error.message
+        : 'Não foi possível carregar as empresas'
+      console.log('Não foi possível carregar as empresas')
+
+      toast.show({
+        title,
+        placement: 'top',
+        bgColor: 'red.500',
+      })
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   useEffect(() => {
     fetchCities()
-  }, [])
+    fetchCompanies()
+  }, [cityId])
 
   return (
     <VStack>
-      <HomeScreen title="Cidades" />
+      <HomeScreen title="Empresas" />
       <VStack>
         {isLoading ? (
           <Loading />
         ) : (
           <VStack>
             <FlatList
-              data={cities}
+              data={companies}
               keyExtractor={(item) => item.id}
               renderItem={({ item }) => (
                 <CityCard
                   data={item}
-                  onPress={() => handleOpenCompanies(item.id)}
+                  //  onPress={() => handleOpenCompanies(item.id)}
                 />
               )}
               showsHorizontalScrollIndicator={false}
