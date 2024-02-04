@@ -4,7 +4,10 @@ export declare global {
       cart: undefined
       products: undefined
       productDetails: { productId: string }
-      ProductBySubCategory: { categoryId: string }
+      productBySubCategory: { categoryId: string }
+      tenantsByCity: { cityId: string }
+      companiesByTenant: { tenantId: string }
+      home: { companyId: string }
     }
   }
 }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { FlatList, HStack, VStack, useToast } from 'native-base'
+import { Text, Center, FlatList, HStack, VStack, useToast } from 'native-base'
 
 import { api } from '@services/api'
 import { AppError } from '@utils/AppError'
@@ -7,48 +7,52 @@ import { AppError } from '@utils/AppError'
 import { CityCard } from '@components/CitySelect/CityCard'
 
 import { useNavigation, useRoute } from '@react-navigation/native'
-import { AppNavigatorRoutesProps } from '@routes/app.routes'
+import { AuthNavigatorRoutesProps } from '@routes/auth.routes'
 import { CityDTO } from '@dtos/CityDTO'
 import { Loading } from '@components/Loading'
 import { HomeHeader } from '@components/HomeHeader'
 import { HomeScreen } from '@components/HomeScreen'
 import { CompanyDTO } from '@dtos/CompanyDTO'
 import { CompanyCard } from '@components/Company/CompanyCard'
+import { TenantDTO } from '@dtos/TenantDTO'
 
 type RouteParamsProps = {
-  cityId: string
+  tenantId: string
 }
 
-export function CompanyByCity() {
+type Props = {
+  tenant: string
+  data: CompanyDTO[]
+}
+
+export function CompaniesByTenant() {
   const [companies, setCompanies] = useState<CompanyDTO[]>([])
+  const [tenants, setTenants] = useState<TenantDTO[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
-  const navigation = useNavigation<AppNavigatorRoutesProps>()
+  const navigation = useNavigation<AuthNavigatorRoutesProps>()
   const toast = useToast()
 
-  /*
-  function handleOpenCompanies(cityId: string) {
-    navigation.navigate('companyByCity', { cityId })
+  function handleOpenHome(companyId: string) {
+    navigation.navigate('home', { companyId })
   }
-  */
 
   const route = useRoute()
-  const { cityId } = route.params as RouteParamsProps
-  console.log('ID city=>', cityId)
+  const { tenantId } = route.params as RouteParamsProps
+  console.log('ID tenant=>', tenantId)
 
-  //listar as citias
-  async function fetchCities() {
+  //listar os tipos de empresa
+  async function fetchTenants() {
     try {
       setIsLoading(true)
-      const response = await api.get(`/cities/${cityId}`)
+      const response = await api.get(`/tenants/${tenantId}`)
       // const response = await api.get('/companies')
       setCompanies(response.data)
-      console.log(response.data)
     } catch (error) {
       const isAppError = error instanceof AppError
       const title = isAppError
         ? error.message
-        : 'Não foi possível carregar as cidades cadastradas'
+        : 'Não foi possível carregar as lojas cadastradas'
 
       toast.show({
         title,
@@ -65,8 +69,7 @@ export function CompanyByCity() {
     try {
       setIsLoading(true)
       //const response = await api.get('/companies')
-      const response = await api.get(`/companies/city/?city_id=${cityId}`)
-
+      const response = await api.get(`/companies/tenant/?tenant_id=${tenantId}`)
       console.log(response.data)
       setCompanies(response.data)
     } catch (error) {
@@ -87,9 +90,11 @@ export function CompanyByCity() {
   }
 
   useEffect(() => {
-    fetchCities()
+    fetchTenants()
     fetchCompanies()
-  }, [cityId])
+  }, [tenantId])
+
+  const firstCompany = companies.length > 0 ? companies[0] : null
 
   return (
     <VStack>
@@ -99,20 +104,28 @@ export function CompanyByCity() {
           <Loading />
         ) : (
           <VStack>
-            <FlatList
-              data={companies}
-              keyExtractor={(item) => item.id}
-              renderItem={({ item }) => (
-                <CompanyCard
-                  data={item}
-                  //  onPress={() => handleOpenCompanies(item.id)}
-                />
-              )}
-              showsHorizontalScrollIndicator={false}
-              _contentContainerStyle={{ px: 2 }}
-              mt={4}
-              mb={24}
-            />
+            {firstCompany ? (
+              <FlatList
+                data={companies}
+                keyExtractor={(item) => item.id}
+                renderItem={({ item }) => (
+                  <CompanyCard
+                    data={item}
+                    onPress={() => handleOpenHome(item.id)}
+                  />
+                )}
+                showsHorizontalScrollIndicator={false}
+                _contentContainerStyle={{ px: 2 }}
+                mt={4}
+                mb={24}
+              />
+            ) : (
+              <Center mt={6} mb={2}>
+                <Text color={'red.600'} fontSize={14}>
+                  Nenhuma empresa encontrada!
+                </Text>
+              </Center>
+            )}
           </VStack>
         )}
       </VStack>

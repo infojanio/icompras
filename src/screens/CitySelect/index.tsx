@@ -21,7 +21,7 @@ export function CitySelect() {
   const toast = useToast()
 
   function handleOpenCompanies(cityId: string) {
-    navigation.navigate('companyByCity', { cityId })
+    navigation.navigate('tenantsByCity', { cityId })
   }
 
   //listar as citias

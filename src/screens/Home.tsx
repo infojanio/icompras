@@ -6,7 +6,6 @@ import { Filter } from '@components/Filter'
 import { SeparatorItem } from '@components/SeparatorItem'
 import { Promotion } from '@components/Promotion'
 import { HomeHeader } from '@components/HomeHeader'
-
 import { Category } from '@components/Category'
 
 export function Home() {

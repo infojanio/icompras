@@ -7,7 +7,9 @@ import { useAuth } from '@hooks/useAuth'
 
 import { AuthRoutes } from './auth.routes'
 import { AppRoutes } from './app.routes'
+import { BottomRoutes } from './bottom.routes'
 import { Loading } from '@components/Loading'
+import { StackRoutes } from './stack.routes'
 
 export function Routes() {
   const { colors } = useTheme()
@@ -28,7 +30,7 @@ export function Routes() {
       {' '}
       {/*garante não aparecer fundo branco na trasição da tela */}
       <NavigationContainer theme={theme}>
-        {user.id ? <AppRoutes /> : <AuthRoutes />}
+        {user.id ? <AppRoutes /> : <StackRoutes />}
       </NavigationContainer>
     </Box>
   )

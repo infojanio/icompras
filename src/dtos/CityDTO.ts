@@ -1,6 +1,5 @@
 export type CityDTO = {
-    id: string
-    name: string
-
-  }
-  
+  id: string
+  name: string
+  uf: string
+}

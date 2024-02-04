@@ -89,7 +89,9 @@ export function SignUp() {
     resolver: yupResolver(signUpSchema),
   })
 
-  const navigation = useNavigation()
+  const navigation = useNavigation<StackNavigatorRoutesProps>()
+
+  //  const navigation = useNavigation()
 
   //voltar a tela anterior
   function handleGoBack() {
@@ -122,6 +124,9 @@ export function SignUp() {
       })
 
       await signIn(email, password) //loga no app após cadastro
+
+      // direciona para a tela inicial
+      navigation.navigate('initial')
 
       /*
       const responseAddress = await api.post('/address', {

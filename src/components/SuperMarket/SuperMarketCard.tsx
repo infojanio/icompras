@@ -4,45 +4,45 @@ import { TouchableOpacity, TouchableOpacityProps } from 'react-native'
 
 import { Image, Text, Box, HStack, Icon, VStack, Center } from 'native-base'
 
-import { CategoryDTO } from '@dtos/CategoryDTO'
+import { CompanyDTO } from '@dtos/CompanyDTO'
 
 export type Props = TouchableOpacityProps & {
-  data: CategoryDTO
+  data: CompanyDTO
 }
 
-export function CategoryCard({ data, ...rest }: Props) {
+export function SuperMarketCard({ data, ...rest }: Props) {
   return (
     <VStack flex={1} mb={2}>
       <TouchableOpacity {...rest}>
         <Box
-          size={24}
+          padding={2}
           backgroundColor="white"
           alignItems="center"
           marginLeft={2}
           marginRight={2}
           pb={2}
-          pt={2}
           borderRadius={'xl'}
-          minH={'16'}
+          minH={'24'}
         >
-          <Image
-            w={20}
-            h={16}
-            source={{
-              uri: data.image, //busca a URL da imagem
-              //uri: `${api.defaults.baseURL}/images/thumb/${data.image}`, //busca o arquivo salvo no banco
-            }}
-            alt="Imagem"
-            rounded="md"
-            resizeMode="cover"
-          />
+          <VStack w={64} alignItems={'center'}>
+            <Image
+              w={64}
+              h={32}
+              source={{
+                uri: data.logo, //busca a URL da imagem
+                //uri: `${api.defaults.baseURL}/images/thumb/${data.image}`, //busca o arquivo salvo no banco
+              }}
+              alt="Imagem"
+              rounded="md"
+              resizeMode="cover"
+            />
 
-          <HStack flex={1}>
             <Center>
               <Text
                 textAlign={'center'}
                 justifyContent={'center'}
-                fontSize={12}
+                fontSize={18}
+                fontWeight={'bold'}
                 numberOfLines={2}
               >
                 {data.name}
@@ -65,7 +65,7 @@ export function CategoryCard({ data, ...rest }: Props) {
               />
             </Center>
             */}
-          </HStack>
+          </VStack>
         </Box>
       </TouchableOpacity>
     </VStack>

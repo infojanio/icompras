@@ -18,7 +18,7 @@ import { useForm, Controller } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 
-import { StackNavigatorRoutesProps } from '@routes/stack.routes'
+//import { StackNavigatorRoutesProps } from '@routes/stack.routes'
 
 import { useAuth } from '@hooks/useAuth'
 

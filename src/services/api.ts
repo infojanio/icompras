@@ -2,8 +2,8 @@ import axios from 'axios'
 import { AppError } from '../utils/AppError'
 
 const api = axios.create({
-  baseURL: 'http://10.0.0.20:3333',
-  //'http://192.168.1.33:3333'
+  //'http://10.0.0.20:3333', //monte alegre
+  baseURL: 'http://192.168.1.49:3333',
   timeout: 6000, // quantidade de tempo em milissegundos
 })
 
@@ -41,6 +41,6 @@ const interceptTokenManager = api.interceptors.response.use(
       return Promise.reject(error)
     }
   },
-) protocolo oi: 2023020380394
+) 
 
 */

@@ -7,16 +7,26 @@ import {
 import { Initial } from '@screens/Initial'
 import { Localization } from '@screens/Localization'
 import { AppRoutes } from './app.routes'
+import { BottomRoutes } from './bottom.routes'
 import { SignIn } from '@screens/SignIn'
 import { SignUp } from '@screens/SignUp'
-import { SuperMarket } from '@screens/SuperMarket'
+
+import { CitySelect } from '@screens/CitySelect'
+import { CompaniesByTenant } from '@screens/Company/CompaniesByTenant'
+import { TenantsByCity } from '@screens/Tenant/TenantsByCity'
+import { Home } from '@screens/Home'
 
 type StackRoutes = {
   initial: undefined
-  supermarket: undefined
-  home: undefined
+  cityselect: undefined
+  tenantsByCity: { cityId: string }
+  companiesByTenant: { tenantId: string }
+  home: { companyId: string }
   signin: undefined
   signup: undefined
+
+  //supermarket: undefined
+  //forgotPassword: undefined
   // address: undefined
   localization: undefined
 }
@@ -34,9 +44,13 @@ export function StackRoutes() {
       <Screen name="initial" component={Initial} />
       <Screen name="signin" component={SignIn} />
       <Screen name="signup" component={SignUp} />
-      <Screen name="supermarket" component={SuperMarket} />
+
+      <Screen name="cityselect" component={CitySelect} />
+      <Screen name="tenantsByCity" component={TenantsByCity} />
+      <Screen name="companiesByTenant" component={CompaniesByTenant} />
+
       <Screen name="localization" component={Localization} />
-      <Screen name="home" component={AppRoutes} />
+      <Screen name="home" component={Home} />
     </Navigator>
   )
 }

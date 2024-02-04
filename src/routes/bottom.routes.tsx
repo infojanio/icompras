@@ -25,7 +25,7 @@ import { ProductBySubCategory } from '@screens/Product/ProductBySubCategory'
 
 import { CategoryDetails } from '@components/Category/desc/CategoryDetails'
 
-type AppRoutes = {
+type BottomRoutes = {
   //home: undefined
   homeScreen: { companyId: string } // undefined
   search: undefined
@@ -39,12 +39,12 @@ type AppRoutes = {
   categoryDetails: undefined
 }
 
-export type AppNavigatorRoutesProps = BottomTabNavigationProp<AppRoutes>
+export type BottomNavigatorRoutesProps = BottomTabNavigationProp<BottomRoutes>
 
-const { Navigator, Screen } = createBottomTabNavigator<AppRoutes>()
+const { Navigator, Screen } = createBottomTabNavigator<BottomRoutes>()
 
 //rotas da aplicação
-export function AppRoutes() {
+export function BottomRoutes() {
   //definição do tamanho dos ícones
   const { sizes, colors } = useTheme()
   const iconSize = sizes[8]

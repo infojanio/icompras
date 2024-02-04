@@ -6,7 +6,7 @@ import { SeparatorItem } from '@components/SeparatorItem'
 import { Group } from '@components/Product/Group'
 import { AllProduct } from '@components/AllProduct'
 import { HomeScreen } from '@components/HomeScreen'
-import { Market } from '@components/Market'
+import { Market } from '@components/SuperMarket'
 
 export function SuperMarket() {
   const [markets, setMarkets] = useState<string[]>([
