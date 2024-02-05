@@ -50,7 +50,7 @@ export function Initial() {
         <Box mt={4}>
           <Button
             title="Pesquisar cadastrados"
-            onPress={() => navigation.navigate('supermarket')}
+            onPress={() => navigation.navigate('cityselect')}
           />{' '}
         </Box>
       </VStack>

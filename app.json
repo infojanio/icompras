@@ -6,6 +6,10 @@
     "assetBundlePatterns": ["**/*"]
   },
 
+  "runtimeVersion": {
+    "policy": "sdkVersion"
+  },
+
   "plugins": [
     [
       "expo-image-picker",
