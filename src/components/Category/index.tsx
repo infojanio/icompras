@@ -37,8 +37,8 @@ export function Category() {
   async function fetchCompanies() {
     try {
       setIsLoading(true)
-      const response = await api.get(`/companies/${companyId}`)
-      // const response = await api.get('/companies')
+      //const response = await api.get(`/companies/${companyId}`)
+      const response = await api.get('/companies')
       setCompanies(response.data)
     } catch (error) {
       const isAppError = error instanceof AppError

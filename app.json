@@ -3,13 +3,16 @@
     "name": "icompras",
     "slug": "icompras",
     "version": "1.0.0",
-    "assetBundlePatterns": ["**/*"]
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "plugins": [
+      "expo-font"
+    ]
   },
-
   "runtimeVersion": {
     "policy": "sdkVersion"
   },
-
   "plugins": [
     [
       "expo-image-picker",
