@@ -33,8 +33,6 @@ export function CompaniesByTenant() {
   const navigation = useNavigation<AuthNavigatorRoutesProps>()
   const toast = useToast()
 
-  //
-
   function handleOpenHome(companyId: string) {
     navigation.navigate('home', { companyId })
   }

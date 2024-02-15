@@ -13,7 +13,13 @@ import { Loading } from '@components/Loading'
 import { CompanyDTO } from '@dtos/CompanyDTO'
 
 type RouteParamsProps = {
-  companyId: string
+  categoryId: string
+  //  companyId: string
+}
+
+type Props = {
+  category: string
+  data: TenantDTO[]
 }
 
 export function Category() {
@@ -30,15 +36,18 @@ export function Category() {
   }
 
   const route = useRoute()
-  const { companyId } = route.params as RouteParamsProps
-  console.log('ID company=>', companyId)
+  const { categoryId } = route.params as RouteParamsProps
+  console.log('ID category=>', categoryId)
 
-  //listar os tipos de empresa
+  //const { companyId } = route.params as RouteParamsProps
+  //console.log('ID company=>', companyId)
+
+  /*listar os tipos de empresa
   async function fetchCompanies() {
     try {
       setIsLoading(true)
-      //const response = await api.get(`/companies/${companyId}`)
-      const response = await api.get('/companies')
+      //const response = await api.get(`/categories/${categoryId}`)
+      const response = await api.get(`/companies/${companyId}`)
       setCompanies(response.data)
     } catch (error) {
       const isAppError = error instanceof AppError
@@ -55,15 +64,17 @@ export function Category() {
       setIsLoading(false)
     }
   }
+  */
 
   //listar as categorias
   async function fetchCategories() {
     try {
       setIsLoading(true)
-      const response = await api.get(
-        `/companies/company/?company_id=${companyId}`,
-      )
-      //const response = await api.get('/categories')
+      //const response = await api.get(`/companies/company/?company_id=${companyId}`,
+      const response = await api.get(`/categories`)
+
+      //const response = await api.get('/categories/category/?category_id=${categoryId}')
+
       setCategories(response.data)
       console.log(response.data)
     } catch (error) {
@@ -83,9 +94,9 @@ export function Category() {
   }
 
   useEffect(() => {
-    fetchCompanies()
+    //fetchCompanies()
     fetchCategories()
-  }, [companyId])
+  }, [categoryId])
 
   return (
     <HStack>
