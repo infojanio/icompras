@@ -1,37 +1,71 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   VStack,
-  Image,
   Center,
   Text,
-  Heading,
   View,
   ScrollView,
   IconButton,
   Box,
   Icon,
   Divider,
-  Flex,
   Stack,
+  useToast,
 } from 'native-base'
 
-import { StackNavigatorRoutesProps } from '@routes/stack.routes'
+import { useForm, Controller } from 'react-hook-form'
+
+import * as yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
+
+//import { StackNavigatorRoutesProps } from '@routes/stack.routes'
+
+import { useAuth } from '@hooks/useAuth'
+
 import LogoSvg from '@assets/logomarca.svg'
-import GoogleSvg from '../../assets/google.svg'
 
 import { Input } from '@components/Input'
 import { Button } from '@components/Button'
 import { Feather } from '@expo/vector-icons'
 import { MaterialIcons } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
+import { AppError } from '@utils/AppError'
+import { AuthNavigatorRoutesProps } from '@routes/auth.routes'
+import { Alert } from 'react-native'
 
-//import BackgoundImg from '@assets/background.png'
+type FormDataProps = {
+  email: string
+  password: string
+}
+
+const signInSchema = yup.object({
+  email: yup.string().required('Informe o email'),
+  password: yup
+    .string()
+    .required('Informe a senha')
+    .min(6, ' Estão faltando caracteres!'),
+})
 
 export function SignIn() {
+  const [isLoading, setIsLoading] = useState(false)
+
+  const { signIn } = useAuth()
+
   const [show, setShow] = React.useState(false) //mostra senha
   const handleClick = () => setShow(!show)
 
-  const navigation = useNavigation<StackNavigatorRoutesProps>()
+  const navigation = useNavigation<AuthNavigatorRoutesProps>()
+
+  const toast = useToast()
+
+  //criando controle para o formulário
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormDataProps>({
+    resolver: yupResolver(signInSchema),
+  })
 
   //Criar nova conta
   function handleNewAccount() {
@@ -41,6 +75,28 @@ export function SignIn() {
   //voltar a tela anterior
   function handleGoBack() {
     navigation.goBack()
+  }
+
+  async function handleSignIn({ email, password }: FormDataProps) {
+    try {
+      setIsLoading(true) //quando a função for chamada
+      await signIn(email, password)
+      Alert.alert(email + ' logado')
+    } catch (error) {
+      const isAppError = error instanceof AppError //verifica se o erro foi tratado
+
+      const title = isAppError
+        ? error.message
+        : 'Não foi possível entrar. Tente novamente mais tarde!'
+
+      setIsLoading(false) //após mostrar a mensagem
+
+      toast.show({
+        title,
+        placement: 'top',
+        bgColor: 'red.500',
+      })
+    }
   }
 
   return (
@@ -94,121 +150,143 @@ export function SignIn() {
         <VStack marginRight="4" marginLeft="4" borderRadius="2xl" bg="gray.50">
           <Center marginTop="2" marginBottom="2" marginRight="2" marginLeft="2">
             <Box w="100%">
-              <Input
-                keyboardType="phone-pad"
-                InputLeftElement={
-                  <Icon
-                    as={<MaterialIcons name="phone" />}
-                    size="sm"
-                    m={2}
+              <Controller
+                control={control}
+                name="email"
+                render={({ field: { onChange, value } }) => (
+                  <Input
+                    keyboardType="email-address"
+                    InputLeftElement={
+                      <Icon
+                        as={<MaterialIcons name="email" />}
+                        size="sm"
+                        m={2}
+                        _light={{
+                          color: 'black',
+                        }}
+                        _dark={{
+                          color: 'gray.400',
+                        }}
+                      />
+                    }
+                    placeholder="icompras@gmail.com" // mx={4}
                     _light={{
-                      color: 'black',
+                      placeholderTextColor: 'blueGray.400',
                     }}
                     _dark={{
-                      color: 'gray.400',
+                      placeholderTextColor: 'blueGray.50',
                     }}
+                    onChangeText={onChange}
+                    value={value}
+                    errorMessage={errors.email?.message}
                   />
-                }
-                placeholder="(62) 0 0000-0000" // mx={4}
-                _light={{
-                  placeholderTextColor: 'blueGray.400',
-                }}
-                _dark={{
-                  placeholderTextColor: 'blueGray.50',
-                }}
+                )}
               />
             </Box>
 
             <Box w="100%">
-              <Input
-                type={show ? 'text' : 'password'}
-                InputRightElement={
-                  <Stack
-                    maxWidth={32}
-                    direction={{
-                      md: 'row',
-                    }}
-                    space="4"
-                  >
-                    <Button
-                      borderRadius="none"
-                      size={'sm'}
-                      backgroundColor="gray.50"
-                      title=""
-                      ml={1}
-                      onPress={handleClick}
-                      variant="solid"
-                      rightIcon={
-                        <Icon
-                          as={MaterialIcons}
-                          name="visibility"
-                          size="lg"
-                          m={2}
-                          _light={{
-                            color: 'black',
-                          }}
-                          _dark={{
-                            color: 'gray.300',
-                          }}
-                        />
-                      }
-                    >
-                      {show ? 'Hide' : 'Show'}
-                    </Button>
-                  </Stack>
-                }
-                InputLeftElement={
-                  <Icon
-                    as={<MaterialIcons name="lock" />}
-                    size="sm"
-                    m={2}
+              <Controller
+                control={control}
+                name="password"
+                render={({ field: { onChange, value } }) => (
+                  <Input
+                    type={show ? 'text' : 'password'}
+                    InputRightElement={
+                      <Stack
+                        maxWidth={32}
+                        direction={{
+                          md: 'row',
+                        }}
+                        space="4"
+                      >
+                        <Button
+                          borderRadius="none"
+                          size={'sm'}
+                          backgroundColor="gray.50"
+                          title=""
+                          ml={1}
+                          onPress={handleClick}
+                          variant="solid"
+                          rightIcon={
+                            <Icon
+                              as={MaterialIcons}
+                              name="visibility"
+                              size="lg"
+                              m={2}
+                              _light={{
+                                color: 'black',
+                              }}
+                              _dark={{
+                                color: 'gray.300',
+                              }}
+                            />
+                          }
+                        >
+                          {show ? 'Hide' : 'Show'}
+                        </Button>
+                      </Stack>
+                    }
+                    InputLeftElement={
+                      <Icon
+                        as={<MaterialIcons name="lock" />}
+                        size="sm"
+                        m={2}
+                        _light={{
+                          color: 'black',
+                        }}
+                        _dark={{
+                          color: 'gray.300',
+                        }}
+                      />
+                    }
+                    placeholder="Senha" // mx={4}
                     _light={{
-                      color: 'black',
+                      placeholderTextColor: 'blueGray.400',
                     }}
                     _dark={{
-                      color: 'gray.300',
+                      placeholderTextColor: 'blueGray.50',
                     }}
+                    onChangeText={onChange}
+                    value={value}
+                    errorMessage={errors.password?.message}
                   />
-                }
-                placeholder="Senha" // mx={4}
-                _light={{
-                  placeholderTextColor: 'blueGray.400',
-                }}
-                _dark={{
-                  placeholderTextColor: 'blueGray.50',
-                }}
+                )}
               />
             </Box>
             <View alignSelf={'flex-start'} mt="0" marginBottom="2"></View>
 
-            <Button title="Entrar" fontWeight={'extrabold'} />
+            <Button
+              title="Entrar"
+              fontWeight={'extrabold'}
+              onPress={handleSubmit(handleSignIn)}
+              isLoading={isLoading}
+            />
 
             <Center mt={2}>
-              <Text mb="2" color="green.700" fontSize="sm">
+              <Text mb="2" color="red.700" fontSize="md">
                 Esqueci a minha senha
               </Text>
 
               <Box w="324">
-                <Divider my={8} bgColor="gray.50" borderBottomWidth="0.8" />
+                <Divider my={10} bgColor="green.50" borderBottomWidth="0.2" />
               </Box>
 
               <Text
-                color="green.700"
+                color="gray.700"
                 fontSize="md"
                 fontWeight="bold"
                 mt={4}
                 mb={2}
                 fontFamily="body"
               >
-                Ainda não tenho cadastro
+                Ainda não tem acesso?
               </Text>
             </Center>
 
             <Button
-              title="Criar Conta"
+              title="Cadastra-se"
               color={'white'}
-              variant="outline"
-              bg="gray.100"
+              variant="solid"
               onPress={handleNewAccount}
             />
           </Center>
@@ -222,7 +300,7 @@ export function SignIn() {
             fontSize="lg"
             fontStyle="italic"
           >
-            Compre Fácil
+            @iCompras
           </Text>
         </Center>
       </View>

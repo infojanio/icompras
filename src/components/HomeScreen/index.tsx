@@ -27,7 +27,7 @@ export function HomeScreen({ title }: Props) {
         borderBottomWidth={0.2}
       >
         <ButtonBack />
-        <Center mr={160} marginBottom={4}>
+        <Center mr={120} marginBottom={4}>
           <Text fontSize={16} fontWeight={'bold'}>
             {title}
           </Text>

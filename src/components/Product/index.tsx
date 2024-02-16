@@ -2,12 +2,13 @@ import { useNavigation } from '@react-navigation/native'
 import { FlatList, VStack } from 'native-base'
 import { HeaderList } from '@components/HeaderList'
 
-import { ProductCard, ProductCardProps } from '@components/ProductCard'
-import { PRODUCTS } from '../../data/products'
+import { ProductCard } from '@components/Product/ProductCard'
+//import { PRODUCTS } from '../../data/products'
+import { ProductDTO } from '@dtos/ProductDTO'
 
 type Props = {
   subcategory: string
-  data: ProductCardProps[]
+  data: ProductDTO[]
 }
 
 export function Product({ data, subcategory }: Props) {
@@ -15,7 +16,7 @@ export function Product({ data, subcategory }: Props) {
 
   return (
     <VStack bg={'gray.200'}>
-      <HeaderList title={subcategory} counter={PRODUCTS.length} />
+      <HeaderList title={subcategory} counter={subcategory.length} />
 
       <FlatList
         data={data}
@@ -23,7 +24,7 @@ export function Product({ data, subcategory }: Props) {
         renderItem={({ item }) => (
           <ProductCard
             data={item}
-            //onPress={() => navigate('productDetails', { productId: item.id })}
+            onPress={() => navigate('productDetails', { productId: item.id })}
           />
         )}
         numColumns={2}
@@ -36,36 +37,3 @@ export function Product({ data, subcategory }: Props) {
     </VStack>
   )
 }
-
-/*
-import React from 'react'
-
-import { ProductItem } from './ProductItem'
-import { Product, productList } from '../../data/ProductList1'
-import { ListRenderItemInfo, TouchableOpacity } from 'react-native'
-import { FlatList, View } from 'native-base'
-import { SeparatorItem } from '../SeparatorItem'
-
-export function Product() {
-  function renderItem({ item }: ListRenderItemInfo<Product>) {
-    return (
-      <TouchableOpacity>
-        <ProductItem {...item} />
-      </TouchableOpacity>
-    )
-  }
-
-  return (
-    <View>
-      <FlatList
-        // ListHeaderComponent={PromotionShow} Aceita outro componente dentro da lista
-        showsVerticalScrollIndicator={false}
-        ItemSeparatorComponent={SeparatorItem}
-        data={productList}
-        keyExtractor={(item) => item.id}
-        renderItem={renderItem}
-      />
-    </View>
-  )
-}
-*/

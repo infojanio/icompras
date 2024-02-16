@@ -18,7 +18,7 @@ import { InfoAdd } from '@components/InfoAdd'
 import database from '@components/NewMarker/database'
 
 import PhotoPng from '@assets/UserLocal.png'
-import MapType from '@utils/MapType'
+import MapType from 'src/descart/MapType'
 
 export function MapClient() {
   const [showMarkerSetter, setShowMarkerSetter] = useState(false)

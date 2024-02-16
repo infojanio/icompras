@@ -12,7 +12,7 @@ import {
   TextInput,
 } from 'react-native'
 
-import { token } from '@utils/key'
+import { token } from 'src/descart/key'
 
 export function AllProduct() {
   const [users, setUsers] = useState([])

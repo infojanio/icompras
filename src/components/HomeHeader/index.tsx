@@ -8,20 +8,18 @@ import {
   Image,
   VStack,
   Text,
+  Box,
 } from 'native-base'
-import { useNavigation } from '@react-navigation/native'
 
 import { UserPhoto } from './UserPhoto'
 import MarketPng from '@assets/logoMercado/03.png'
 import { MaterialIcons } from '@expo/vector-icons'
-import LocationSvg from '@assets/location.svg'
-import { StackNavigatorRoutesProps } from '@routes/stack.routes'
+import { useAuth } from '@hooks/useAuth'
 
-const LogoImage =
-  'https://xesque.rocketseat.dev/users/avatar/profile-2851c272-858f-4f34-84be-a0f773bffb76-1667218054675.jpg'
+import defaultUserPhotoImg from '@assets/userPhotoDefault.png'
 
 export function HomeHeader() {
-  const navigation = useNavigation<StackNavigatorRoutesProps>()
+  const { user, signOut } = useAuth()
 
   //definição do tamanho dos ícones
   const { sizes, colors } = useTheme()
@@ -32,43 +30,58 @@ export function HomeHeader() {
   }
 
   return (
-    <HStack
-      bg="green.500"
-      paddingBottom={4}
-      borderRadius={4}
-      paddingTop={4}
-      justifyContent="space-between"
-      alignItems="center"
-    >
-      <VStack>
-        <TouchableOpacity onPress={OpenLogo}>
-          <UserPhoto
-            source={{ uri: LogoImage }}
-            alt="Foto do usuário"
-            size={20}
-            mr={2}
-            ml={2}
-          />
-        </TouchableOpacity>
-      </VStack>
-      <Center flex="1" pr={4} ml="1" mr="2" mt="1" flexDirection="row">
-        <Image alt="Logo do mercado" source={MarketPng} h={70} w={160} />
-      </Center>
-
-      <TouchableOpacity onPress={() => navigation.navigate('initial')}>
-        <Center alignItems={'center'} p="1" mr={2} borderRadius={2}>
-          <Icon
-            as={<MaterialIcons name="logout" />}
-            size={6}
-            _light={{
-              color: 'red.100',
-            }}
-            _dark={{
-              color: 'red.700',
-            }}
-          />
+    <VStack bg="gray.100" padding={1}>
+      <HStack
+        bg="green.500"
+        paddingBottom={4}
+        borderRadius={'full'}
+        paddingTop={4}
+        justifyContent="space-between"
+        alignItems="center"
+        padding={2}
+      >
+        <VStack>
+          <TouchableOpacity onPress={OpenLogo}>
+            <UserPhoto
+              source={user.avatar ? { uri: user.avatar } : defaultUserPhotoImg}
+              alt="Foto do usuário"
+              size={20}
+              mr={2}
+              ml={2}
+            />
+          </TouchableOpacity>
+        </VStack>
+        <Center flex="1" pr={4} ml="1" mr="2" mt="1" flexDirection="row">
+          <Image alt="Logo do mercado" source={MarketPng} h={70} w={160} />
         </Center>
-      </TouchableOpacity>
-    </HStack>
+
+        <TouchableOpacity onPress={signOut}>
+          <Center alignItems={'center'} p="1" mr={2} borderRadius={2}>
+            <Icon
+              as={<MaterialIcons name="logout" />}
+              size={6}
+              _light={{
+                color: 'red.100',
+              }}
+              _dark={{
+                color: 'red.700',
+              }}
+            />
+          </Center>
+        </TouchableOpacity>
+      </HStack>
+      {/* 
+      <Box mr={32} bg={'gray.100'}>
+        <Text
+          color="gray.700"
+          fontWeight={'bold'}
+          fontSize={14}
+          numberOfLines={1}
+        >
+          Olá! {user.name}
+        </Text>
+      </Box>
+      */}
+    </VStack>
   )
 }

@@ -15,24 +15,28 @@ import ProfileSvg from '@assets/profile.svg'
 import { Home } from '@screens/Home'
 import { Search } from '@screens/Search'
 
-import { CartVazio } from '@components/CartVazio'
+import { Cart } from '@screens/Cart'
 import { Request } from '@screens/Request'
 import { Profile } from '@screens/Profile'
-import { ProductList } from '@screens/ProductList'
-import { ProductDetails } from '@screens/ProductDetails'
-import { ProductSubCategory } from '@screens/ProductSubCategory'
+import { ProductList } from '@screens/Product/ProductList'
+import { ProductDetails } from '@screens/Product/ProductDetails'
+
+import { ProductBySubCategory } from '@screens/Product/ProductBySubCategory'
+
+import { CategoryDetails } from '@components/Category/desc/CategoryDetails'
 
 type AppRoutes = {
-  homeScreen: undefined
+  //home: undefined
+  homeScreen: { companyId: string } // undefined
   search: undefined
   cart: undefined
-  cartVazio: undefined
   request: undefined
   profile: undefined
   productList: undefined
   signUp: undefined
-  productDetails: undefined
-  productSubCategory: undefined
+  productDetails: { productId: string }
+  productBySubCategory: { categoryId: string }
+  categoryDetails: undefined
 }
 
 export type AppNavigatorRoutesProps = BottomTabNavigationProp<AppRoutes>
@@ -66,6 +70,7 @@ export function AppRoutes() {
         name="homeScreen"
         component={Home}
         options={{
+          title: 'Home',
           headerShown: false,
           tabBarIcon: ({ color }) => (
             <HomeSvg fill={color} width={iconSize} height={iconSize} />
@@ -76,6 +81,7 @@ export function AppRoutes() {
         name="search"
         component={Search}
         options={{
+          title: 'Pesquisar',
           headerShown: false,
           tabBarIcon: ({ color }) => (
             <SearchSvg fill={color} width={iconSize} height={iconSize} />
@@ -84,8 +90,8 @@ export function AppRoutes() {
       />
 
       <Screen
-        name="cartVazio"
-        component={CartVazio}
+        name="cart"
+        component={Cart}
         options={{
           title: 'Carrinho',
           headerStyle: {
@@ -160,8 +166,16 @@ export function AppRoutes() {
       />
 
       <Screen
-        name="productSubCategory"
-        component={ProductSubCategory}
+        name="categoryDetails"
+        component={CategoryDetails}
+        options={{
+          tabBarButton: () => null,
+        }} //não mostra ícone
+      />
+
+      <Screen
+        name="productBySubCategory"
+        component={ProductBySubCategory}
         options={{
           tabBarButton: () => null,
         }} //não mostra ícone

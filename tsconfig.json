@@ -10,7 +10,7 @@
       "@data/*": ["./src/data/*"],
       "@screens/*": ["./src/screens/*"],
       "@storage/*": ["./src/storage/*"],
-      "@utils/*": ["./src/utils/*"],
+      "@utils/*": ["src/utils/*"],
       "@services/*": ["./src/services/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@contexts/*": ["./src/contexts/*"],

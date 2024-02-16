@@ -26,4 +26,26 @@ export const SubcategoryList: SubCategory[] = [
     title: 'Linguiças',
     CategoryId: '1',
   },
+
+  {
+    id: '5',
+    title: 'Água Mineral',
+    CategoryId: '2',
+  },
+  {
+    id: '6',
+    title: 'Refrigerante',
+    CategoryId: '2',
+  },
+  {
+    id: '7',
+    title: 'Cerveja',
+    CategoryId: '2',
+  },
+
+  {
+    id: '8',
+    title: 'Bebidas quentes',
+    CategoryId: '2',
+  },
 ]
