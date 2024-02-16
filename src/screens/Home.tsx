@@ -9,6 +9,7 @@ import { HomeHeader } from '@components/HomeHeader'
 import { Category } from '@components/Category'
 import { useAuth } from '@hooks/useAuth'
 import { useCity } from '@hooks/useCity'
+import { Department } from '@components/Department'
 
 export function Home() {
   const { user } = useAuth()
@@ -40,6 +41,7 @@ export function Home() {
           <Text fontSize={'16'} paddingLeft={4} bg={'gray.100'}>
             Categorias
           </Text>
+          <Department />
         </VStack>
       </ScrollView>
     </VStack>

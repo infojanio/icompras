@@ -32,9 +32,9 @@ export function Routes() {
       <NavigationContainer theme={theme}>
         {
           user.id ? (
-            <AppRoutes />
-          ) : (
             <StackRoutes />
+          ) : (
+            <AppRoutes />
           ) /*se não tiver logado vai p/ rota StackRoutes*/
         }
       </NavigationContainer>
