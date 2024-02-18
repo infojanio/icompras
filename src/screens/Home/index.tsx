@@ -55,11 +55,16 @@ export function Home() {
 
         <SeparatorItem />
         <VStack flex={1} bg={'white'}>
-          <Text fontSize={'16'} paddingLeft={4} bg={'gray.100'}>
-            Onde comprar
-          </Text>
+          <Box bg={'green.300'} borderRadius={'2'}>
+            <Text fontSize={'16'} paddingLeft={4} bg={'white'}>
+              Onde comprar
+            </Text>
+          </Box>
           <Department />
           <SeparatorItem />
+          <Text fontSize={'16'} paddingLeft={4} bg={'white'}>
+            Estabelecimentos
+          </Text>
           <Company />
         </VStack>
       </ScrollView>

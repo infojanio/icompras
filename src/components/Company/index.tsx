@@ -75,7 +75,7 @@ export function Company() {
       {isLoading ? (
         <Loading />
       ) : (
-        <VStack>
+        <VStack flex={1}>
           <FlatList
             data={companies}
             keyExtractor={(item) => item.id}
@@ -89,7 +89,7 @@ export function Company() {
             showsHorizontalScrollIndicator={false}
             _contentContainerStyle={{ px: 2 }}
             mt={4}
-            mb={14}
+            mb={4}
           />
         </VStack>
       )}
