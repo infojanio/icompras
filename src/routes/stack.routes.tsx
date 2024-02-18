@@ -19,9 +19,8 @@ import { Home } from '@screens/Home'
 type StackRoutes = {
   initial: undefined
   cityselect: undefined
-  tenantsByCity: { cityId: string }
-  companiesByTenant: { tenantId: string }
-  home: { companyId: string }
+
+  home: { name: string }
   signin: undefined
   signup: undefined
 
@@ -46,8 +45,6 @@ export function StackRoutes() {
       <Screen name="signup" component={SignUp} />
 
       <Screen name="cityselect" component={CitySelect} />
-      <Screen name="tenantsByCity" component={TenantsByCity} />
-      <Screen name="companiesByTenant" component={CompaniesByTenant} />
 
       <Screen name="localization" component={Localization} />
       <Screen name="home" component={Home} />

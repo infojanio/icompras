@@ -11,6 +11,7 @@ import { AppNavigatorRoutesProps } from '@routes/app.routes'
 import { CategoryDTO } from '@dtos/CategoryDTO'
 import { Loading } from '@components/Loading'
 import { CompanyDTO } from '@dtos/CompanyDTO'
+import { TenantDTO } from '@dtos/TenantDTO'
 
 type RouteParamsProps = {
   categoryId: string

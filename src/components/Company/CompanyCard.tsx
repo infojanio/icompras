@@ -14,9 +14,9 @@ export function CompanyCard({ data, ...rest }: Props) {
   return (
     <VStack flex={1} mb={2}>
       <TouchableOpacity {...rest}>
-        <Box
+        <HStack
           padding={2}
-          backgroundColor="white"
+          backgroundColor="gray.100"
           alignItems="center"
           marginLeft={2}
           marginRight={2}
@@ -37,36 +37,18 @@ export function CompanyCard({ data, ...rest }: Props) {
             resizeMode="cover"
           />
 
-          <HStack flex={1}>
-            <Center>
-              <Text
-                textAlign={'center'}
-                justifyContent={'center'}
-                fontSize={16}
-                numberOfLines={2}
-              >
-                {data.name}
-              </Text>
-            </Center>
+          <Center>
+            <Text justifyContent={'flex-start'} fontSize={14} numberOfLines={2}>
+              {data.name}
+            </Text>
+          </Center>
 
-            {/*   
-            <Center>
-              <Icon
-                as={<MaterialIcons name="navigate-next" />}
-                size={6}
-                ml={2}
-                mr={2}
-                _light={{
-                  color: 'gray.500',
-                }}
-                _dark={{
-                  color: 'gray.200',
-                }}
-              />
-            </Center>
-            */}
-          </HStack>
-        </Box>
+          {
+            <Box>
+              <Text color={'green.500'}>Aberto</Text>
+            </Box>
+          }
+        </HStack>
       </TouchableOpacity>
     </VStack>
   )

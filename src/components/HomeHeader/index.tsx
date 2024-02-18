@@ -18,6 +18,10 @@ import { useAuth } from '@hooks/useAuth'
 
 import defaultUserPhotoImg from '@assets/userPhotoDefault.png'
 
+interface Props {
+  city_id: string
+}
+
 export function HomeHeader() {
   const { user, signOut } = useAuth()
 

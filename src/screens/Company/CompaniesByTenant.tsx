@@ -98,7 +98,10 @@ export function CompaniesByTenant() {
 
   return (
     <VStack>
+      {/*
       <HomeScreen title="Empresas" />
+  */}
+      <Text left={5}>Estabelecimentos</Text>
       <VStack>
         {isLoading ? (
           <Loading />

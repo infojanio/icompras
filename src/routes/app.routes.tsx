@@ -24,16 +24,22 @@ import { ProductDetails } from '@screens/Product/ProductDetails'
 import { ProductBySubCategory } from '@screens/Product/ProductBySubCategory'
 
 import { CategoryDetails } from '@components/Category/desc/CategoryDetails'
+import { Department } from '@components/Department'
+import { CompaniesByTenant } from '@screens/Company/CompaniesByTenant'
+import { TenantsByCity } from '@screens/Tenant/TenantsByCity'
 
 type AppRoutes = {
   //home: undefined
-  homeScreen: { companyId: string } // undefined
+  home: { cityId: string }
+  department: { cityId: string }
   search: undefined
   cart: undefined
   request: undefined
   profile: undefined
   productList: undefined
   signUp: undefined
+  companiesByTenant: { tenantId: string }
+  tenantsByCity: { cityId: string }
   productDetails: { productId: string }
   productBySubCategory: { categoryId: string }
   categoryDetails: undefined
@@ -51,7 +57,7 @@ export function AppRoutes() {
 
   return (
     <Navigator
-      initialRouteName="homeScreen"
+      initialRouteName="home"
       screenOptions={{
         headerShown: false,
         //  tabBarShowLabel: true,
@@ -67,7 +73,7 @@ export function AppRoutes() {
       }}
     >
       <Screen
-        name="homeScreen"
+        name="home"
         component={Home}
         options={{
           title: 'Home',
@@ -133,7 +139,7 @@ export function AppRoutes() {
           title: 'Perfil',
 
           headerStyle: {
-            backgroundColor: '#c6c9c1',
+            backgroundColor: '#688633',
           },
 
           headerTintColor: '#272525',
@@ -147,6 +153,22 @@ export function AppRoutes() {
             <ProfileSvg fill={color} width={iconSize} height={iconSize} />
           ),
         }}
+      />
+
+      <Screen
+        name="department"
+        component={Department}
+        options={{
+          tabBarButton: () => null,
+        }} //não mostra ícone
+      />
+
+      <Screen
+        name="tenantsByCity"
+        component={TenantsByCity}
+        options={{
+          tabBarButton: () => null,
+        }} //não mostra ícone
       />
 
       <Screen
@@ -168,6 +190,14 @@ export function AppRoutes() {
       <Screen
         name="categoryDetails"
         component={CategoryDetails}
+        options={{
+          tabBarButton: () => null,
+        }} //não mostra ícone
+      />
+
+      <Screen
+        name="companiesByTenant"
+        component={CompaniesByTenant}
         options={{
           tabBarButton: () => null,
         }} //não mostra ícone

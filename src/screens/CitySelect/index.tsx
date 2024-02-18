@@ -7,24 +7,25 @@ import { AppError } from '@utils/AppError'
 import { CityCard } from '@components/CitySelect/CityCard'
 
 import { useNavigation } from '@react-navigation/native'
-import { AuthNavigatorRoutesProps } from '@routes/auth.routes'
+import { AppNavigatorRoutesProps } from '@routes/app.routes'
 import { CityDTO } from '@dtos/CityDTO'
 import { Loading } from '@components/Loading'
 import { HomeHeader } from '@components/HomeHeader'
 import { HomeScreen } from '@components/HomeScreen'
+import { TenantDTO } from '@dtos/TenantDTO'
 
 export function CitySelect() {
   const [cities, setCities] = useState<CityDTO[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
-  const navigation = useNavigation<AuthNavigatorRoutesProps>()
+  const navigation = useNavigation<AppNavigatorRoutesProps>()
   const toast = useToast()
 
-  function handleOpenCompanies(cityId: string) {
-    navigation.navigate('tenantsByCity', { cityId })
+  function handleOpenHome(cityId: string) {
+    navigation.navigate('home', { cityId })
   }
 
-  //listar as citias
+  //listar as cities
   async function fetchCities() {
     try {
       setIsLoading(true)
@@ -64,10 +65,7 @@ export function CitySelect() {
               data={cities}
               keyExtractor={(item) => item.id}
               renderItem={({ item }) => (
-                <CityCard
-                  data={item}
-                  onPress={() => handleOpenCompanies(item.id)}
-                />
+                <CityCard data={item} onPress={() => handleOpenHome(item.id)} />
               )}
               showsHorizontalScrollIndicator={false}
               _contentContainerStyle={{ px: 2 }}

@@ -15,7 +15,7 @@ export function Routes() {
   const { colors } = useTheme()
   const { user, isLoadingUserStorageData } = useAuth()
 
-  // console.log('Usuário logado =>', user)
+  console.log('Usuário logado =>', user)
 
   const theme = DefaultTheme
   theme.colors.background = colors.gray[100]
@@ -32,10 +32,10 @@ export function Routes() {
       <NavigationContainer theme={theme}>
         {
           user.id ? (
-            <StackRoutes />
-          ) : (
             <AppRoutes />
-          ) /*se não tiver logado vai p/ rota StackRoutes*/
+          ) : (
+            <StackRoutes />
+          ) /*se não tiver logado vai p/ rota */
         }
       </NavigationContainer>
     </Box>

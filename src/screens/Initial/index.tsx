@@ -8,6 +8,7 @@ import LogoPng from '@assets/logoInitial.png'
 import { useNavigation } from '@react-navigation/native'
 import { TouchableOpacity } from 'react-native'
 import { CitySelect } from '@components/CitySelect'
+import { CityModal } from '@components/CityModal'
 
 export function Initial() {
   const navigation = useNavigation<AuthNavigatorRoutesProps>()
@@ -49,7 +50,7 @@ export function Initial() {
 
         <Box mt={4}>
           <Button
-            title="Pesquisar cadastrados"
+            title="Entrar como visitante"
             onPress={() => navigation.navigate('cityselect')}
           />{' '}
         </Box>
