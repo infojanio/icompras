@@ -33,7 +33,7 @@ export function TenantsByCity() {
   const toast = useToast()
 
   function handleOpenCompanies(tenantId: string) {
-    navigation.navigate('companiesByTenant', { tenantId })
+    navigation.navigate('companiesByDepartment', { tenantId })
   }
 
   const route = useRoute()
@@ -64,11 +64,11 @@ export function TenantsByCity() {
     }
   }
 
-  //listar as subcategories no select
+  //listar ramos de atividades por cidade
   async function fetchTenants() {
     try {
       setIsLoading(true)
-      //const response = await api.get('/companies')
+      //const response = await api.get('/tenants')
       const response = await api.get(`/tenants/city/?city_id=${cityId}`)
 
       console.log(response.data)
@@ -77,7 +77,7 @@ export function TenantsByCity() {
       const isAppError = error instanceof AppError
       const title = isAppError
         ? error.message
-        : 'Não foi possível carregar as empresas'
+        : 'Não foi possível carregar as empresas por ramo de atividade'
       console.log('Não foi possível carregar as empresas por ramo de atividade')
 
       toast.show({
@@ -91,7 +91,7 @@ export function TenantsByCity() {
   }
 
   useEffect(() => {
-    fetchCities()
+    // fetchCities()
     fetchTenants()
   }, [cityId])
 

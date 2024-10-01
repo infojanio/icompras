@@ -34,7 +34,7 @@ export function Routes() {
           user.id ? (
             <AppRoutes />
           ) : (
-            <StackRoutes />
+            <AuthRoutes />
           ) /*se não tiver logado vai p/ rota */
         }
       </NavigationContainer>

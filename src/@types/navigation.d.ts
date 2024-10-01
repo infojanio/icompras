@@ -7,7 +7,8 @@ export declare global {
       productBySubCategory: { categoryId: string }
       tenantsByCity: { cityId: string }
       companiesByTenant: { tenantId: string }
-      home: { name: string }
+      home: { cityId: string }
+      company: { tenantId: string }
       department: { cityId: string } // posso passar o nome também
     }
   }

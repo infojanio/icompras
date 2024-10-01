@@ -20,7 +20,7 @@ type StackRoutes = {
   initial: undefined
   cityselect: undefined
 
-  home: { name: string }
+  homeScreen: { cityId: string }
   signin: undefined
   signup: undefined
 
@@ -45,9 +45,9 @@ export function StackRoutes() {
       <Screen name="signup" component={SignUp} />
 
       <Screen name="cityselect" component={CitySelect} />
+      <Screen name="homeScreen" component={AppRoutes} />
 
       <Screen name="localization" component={Localization} />
-      <Screen name="home" component={Home} />
     </Navigator>
   )
 }

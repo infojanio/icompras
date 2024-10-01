@@ -33,38 +33,15 @@ export function CompaniesByTenant() {
   const navigation = useNavigation<AuthNavigatorRoutesProps>()
   const toast = useToast()
 
-  function handleOpenHome(companyId: string) {
-    navigation.navigate('home', { companyId })
+  function handleOpenHome(cityId: string) {
+    navigation.navigate('home', { cityId })
   }
 
   const route = useRoute()
   const { tenantId } = route.params as RouteParamsProps
   console.log('ID tenant=>', tenantId)
 
-  //listar os tipos de empresa
-  async function fetchTenants() {
-    try {
-      setIsLoading(true)
-      const response = await api.get(`/tenants/${tenantId}`)
-      // const response = await api.get('/companies')
-      setCompanies(response.data)
-    } catch (error) {
-      const isAppError = error instanceof AppError
-      const title = isAppError
-        ? error.message
-        : 'Não foi possível carregar as lojas cadastradas'
-
-      toast.show({
-        title,
-        placement: 'top',
-        bgColor: 'red.500',
-      })
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
-  //listar as subcategories no select
+  //listar os estabelecimentos por Ramo de atividade, ex: Farmácias
   async function fetchCompanies() {
     try {
       setIsLoading(true)
@@ -90,7 +67,7 @@ export function CompaniesByTenant() {
   }
 
   useEffect(() => {
-    fetchTenants()
+    // fetchTenants()
     fetchCompanies()
   }, [tenantId])
 

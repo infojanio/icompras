@@ -13,12 +13,13 @@ import { Loading } from '@components/Loading'
 import { HomeHeader } from '@components/HomeHeader'
 import { HomeScreen } from '@components/HomeScreen'
 import { TenantDTO } from '@dtos/TenantDTO'
+import { AuthNavigatorRoutesProps } from '@routes/auth.routes'
 
 export function CitySelect() {
   const [cities, setCities] = useState<CityDTO[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
-  const navigation = useNavigation<AppNavigatorRoutesProps>()
+  const navigation = useNavigation<AuthNavigatorRoutesProps>()
   const toast = useToast()
 
   function handleOpenHome(cityId: string) {

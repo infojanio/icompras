@@ -7,7 +7,7 @@ import { AppError } from '@utils/AppError'
 import { DepartmentCard } from '@components/Department/DepartmentCard'
 
 import { useNavigation, useRoute } from '@react-navigation/native'
-import { AppNavigatorRoutesProps } from '@routes/app.routes'
+import { AuthNavigatorRoutesProps } from '@routes/auth.routes'
 import { TenantDTO } from '@dtos/TenantDTO'
 import { Loading } from '@components/Loading'
 import { CompanyDTO } from '@dtos/CompanyDTO'
@@ -25,15 +25,14 @@ type Props = {
 
 export function Department() {
   const [tenants, setTenants] = useState<TenantDTO[]>([])
-
   const [companies, setCompanies] = useState<CompanyDTO[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
-  const navigation = useNavigation<AppNavigatorRoutesProps>()
+  const navigation = useNavigation<AuthNavigatorRoutesProps>()
   const toast = useToast()
 
   function handleOpenCompanies(tenantId: string) {
-    navigation.navigate('companiesByTenant', { tenantId })
+    navigation.navigate('companiesByDepartment', { tenantId })
   }
 
   const route = useRoute()
@@ -43,40 +42,15 @@ export function Department() {
   const { companyId } = route.params as RouteParamsProps
   console.log('ID company=>', companyId)
 
-  //listar os tipos de empresa
-  async function fetchCompanies() {
-    try {
-      setIsLoading(true)
-      //const response = await api.get(`/categories/${categoryId}`)
-      const response = await api.get(`/companies/${companyId}`)
-      setCompanies(response.data)
-    } catch (error) {
-      const isAppError = error instanceof AppError
-      const title = isAppError
-        ? error.message
-        : 'Não foi possível carregar as lojas cadastradas'
-
-      toast.show({
-        title,
-        placement: 'top',
-        bgColor: 'red.500',
-      })
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
-  //listar as categorias
+  //listar os departamentos
   async function fetchDepartments() {
     try {
       setIsLoading(true)
-      //const response = await api.get(`/companies/company/?company_id=${companyId}`,
+      //const response = await api.get(`/tenants`)
       const response = await api.get(`/tenants/city/?city_id=${cityId}`)
-
       //const response = await api.get('/categories/category/?category_id=${categoryId}')
-
-      setTenants(response.data)
       console.log(response.data)
+      setTenants(response.data)
     } catch (error) {
       const isAppError = error instanceof AppError
       const title = isAppError

@@ -18,15 +18,6 @@ import { Search } from '@screens/Search'
 import { Cart } from '@screens/Cart'
 import { Request } from '@screens/Request'
 import { Profile } from '@screens/Profile'
-import { ProductList } from '@screens/Product/ProductList'
-import { ProductDetails } from '@screens/Product/ProductDetails'
-
-import { ProductBySubCategory } from '@screens/Product/ProductBySubCategory'
-
-import { CategoryDetails } from '@components/Category/desc/CategoryDetails'
-import { Department } from '@components/Department'
-import { CompaniesByTenant } from '@screens/Company/CompaniesByTenant'
-import { TenantsByCity } from '@screens/Tenant/TenantsByCity'
 
 type AppRoutes = {
   //home: undefined
@@ -153,62 +144,6 @@ export function AppRoutes() {
             <ProfileSvg fill={color} width={iconSize} height={iconSize} />
           ),
         }}
-      />
-
-      <Screen
-        name="department"
-        component={Department}
-        options={{
-          tabBarButton: () => null,
-        }} //não mostra ícone
-      />
-
-      <Screen
-        name="tenantsByCity"
-        component={TenantsByCity}
-        options={{
-          tabBarButton: () => null,
-        }} //não mostra ícone
-      />
-
-      <Screen
-        name="productList"
-        component={ProductList}
-        options={{
-          tabBarButton: () => null,
-        }} //não mostra ícone
-      />
-
-      <Screen
-        name="productDetails"
-        component={ProductDetails}
-        options={{
-          tabBarButton: () => null,
-        }} //não mostra ícone
-      />
-
-      <Screen
-        name="categoryDetails"
-        component={CategoryDetails}
-        options={{
-          tabBarButton: () => null,
-        }} //não mostra ícone
-      />
-
-      <Screen
-        name="companiesByTenant"
-        component={CompaniesByTenant}
-        options={{
-          tabBarButton: () => null,
-        }} //não mostra ícone
-      />
-
-      <Screen
-        name="productBySubCategory"
-        component={ProductBySubCategory}
-        options={{
-          tabBarButton: () => null,
-        }} //não mostra ícone
       />
     </Navigator>
   )
