@@ -54,15 +54,15 @@ export function Home() {
         */}
 
         <SeparatorItem />
-        <VStack flex={1} bg={'gray.100'}>
+        <VStack flex={1} bg={'white'}>
           <Box bg={'green.300'} borderRadius={'2'}>
-            <Text fontSize={'16'} paddingLeft={4} bg={'gray.100'}>
+            <Text fontSize={'16'} paddingLeft={4} bg={'white'}>
               Onde comprar
             </Text>
           </Box>
           <Department />
           <SeparatorItem />
-          <Text fontSize={'16'} paddingLeft={4} bg={'gray.100'}>
+          <Text fontSize={'16'} paddingLeft={4} bg={'white'}>
             Estabelecimentos
           </Text>
           <Company />
