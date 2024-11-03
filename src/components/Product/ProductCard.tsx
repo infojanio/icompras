@@ -1,5 +1,7 @@
 import { TouchableOpacity, TouchableOpacityProps } from 'react-native'
 import { VStack, Image, Heading, Text, Center, Box, HStack } from 'native-base'
+
+import { api } from '@services/api'
 import { ProductDTO } from '@dtos/ProductDTO'
 
 type Props = TouchableOpacityProps & {

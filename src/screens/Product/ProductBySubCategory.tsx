@@ -64,7 +64,8 @@ export function ProductBySubCategory() {
   async function fetchCategories() {
     try {
       setIsLoading(true)
-      const response = await api.get(`/categories/${categoryId}`)
+      const response = await api.get('/categories')
+      //const response = await api.get(`/categories/${categoryId}`)
       setCategories(response.data)
       //  console.log(response.data)
     } catch (error) {

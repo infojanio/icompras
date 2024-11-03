@@ -19,7 +19,7 @@ type RouteParamsProps = {
 
 type Props = {
   category: string
-  data: TenantDTO[]
+  data: CategoryDTO[]
 }
 
 export function Category() {

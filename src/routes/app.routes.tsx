@@ -24,18 +24,21 @@ import { ProductDetails } from '@screens/Product/ProductDetails'
 import { ProductBySubCategory } from '@screens/Product/ProductBySubCategory'
 
 import { CategoryDetails } from '@components/Category/desc/CategoryDetails'
+import { Category } from '@components/Category'
 
 type AppRoutes = {
-  //home: undefined
-  homeScreen: { companyId: string } // undefined
+  home: { UserId: string }
+  //homeScreen: { UserId: string } // undefined
   search: undefined
   cart: undefined
   request: undefined
   profile: undefined
   productList: undefined
   signUp: undefined
+
   productDetails: { productId: string }
   productBySubCategory: { categoryId: string }
+  category: undefined
   categoryDetails: undefined
 }
 
@@ -51,7 +54,7 @@ export function AppRoutes() {
 
   return (
     <Navigator
-      initialRouteName="homeScreen"
+      initialRouteName="home"
       screenOptions={{
         headerShown: false,
         //  tabBarShowLabel: true,
@@ -67,7 +70,7 @@ export function AppRoutes() {
       }}
     >
       <Screen
-        name="homeScreen"
+        name="home"
         component={Home}
         options={{
           title: 'Home',
@@ -168,6 +171,14 @@ export function AppRoutes() {
       <Screen
         name="categoryDetails"
         component={CategoryDetails}
+        options={{
+          tabBarButton: () => null,
+        }} //não mostra ícone
+      />
+
+      <Screen
+        name="category"
+        component={Category}
         options={{
           tabBarButton: () => null,
         }} //não mostra ícone

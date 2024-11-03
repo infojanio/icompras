@@ -3,7 +3,7 @@ import { AppError } from '../utils/AppError'
 
 const api = axios.create({
   //'http://10.0.0.20:3333', //monte alegre
-  baseURL: 'http://192.168.1.49:3333',
+  baseURL: 'http://192.168.1.70:3333',
   timeout: 6000, // quantidade de tempo em milissegundos
 })
 

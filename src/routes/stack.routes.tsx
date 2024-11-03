@@ -18,9 +18,7 @@ import { Home } from '@screens/Home'
 
 type StackRoutes = {
   initial: undefined
-  cityselect: undefined
-  tenantsByCity: { cityId: string }
-  companiesByTenant: { tenantId: string }
+
   home: { companyId: string }
   signin: undefined
   signup: undefined
@@ -37,17 +35,10 @@ const { Navigator, Screen } = createNativeStackNavigator()
 
 export function StackRoutes() {
   return (
-    <Navigator
-      initialRouteName="initial"
-      screenOptions={{ headerShown: false }}
-    >
-      <Screen name="initial" component={Initial} />
+    <Navigator initialRouteName="home" screenOptions={{ headerShown: false }}>
+      <Screen name="home" component={Initial} />
       <Screen name="signin" component={SignIn} />
       <Screen name="signup" component={SignUp} />
-
-      <Screen name="cityselect" component={CitySelect} />
-      <Screen name="tenantsByCity" component={TenantsByCity} />
-      <Screen name="companiesByTenant" component={CompaniesByTenant} />
 
       <Screen name="localization" component={Localization} />
       <Screen name="home" component={Home} />

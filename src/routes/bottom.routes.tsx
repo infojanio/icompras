@@ -27,7 +27,7 @@ import { CategoryDetails } from '@components/Category/desc/CategoryDetails'
 
 type BottomRoutes = {
   //home: undefined
-  homeScreen: { companyId: string } // undefined
+  homeScreen: { userId: string } // undefined
   search: undefined
   cart: undefined
   request: undefined

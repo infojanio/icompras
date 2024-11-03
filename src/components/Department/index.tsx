@@ -13,7 +13,7 @@ import { Loading } from '@components/Loading'
 import { CompanyDTO } from '@dtos/CompanyDTO'
 
 type RouteParamsProps = {
-  tenantId: string
+  userId: string
   //  companyId: string
 }
 
@@ -36,8 +36,8 @@ export function Department() {
   }
 
   const route = useRoute()
-  const { tenantId } = route.params as RouteParamsProps
-  console.log('ID department=>', tenantId)
+  const { userId } = route.params as RouteParamsProps
+  console.log('ID usuário=>', userId)
 
   //const { companyId } = route.params as RouteParamsProps
   //console.log('ID company=>', companyId)
@@ -96,7 +96,7 @@ export function Department() {
   useEffect(() => {
     //fetchCompanies()
     fetchDepartments()
-  }, [tenantId])
+  }, [userId])
 
   return (
     <HStack>
