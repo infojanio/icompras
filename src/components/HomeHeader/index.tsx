@@ -52,7 +52,7 @@ export function HomeHeader() {
           </TouchableOpacity>
         </VStack>
         <Center flex="1" pr={4} ml="1" mr="2" mt="1" flexDirection="row">
-          <Image alt="Logo do mercado" source={MarketPng} h={70} w={160} />
+          <Image alt="Logo do mercado" source={MarketPng} h={70} w={120} />
         </Center>
 
         <TouchableOpacity onPress={signOut}>
@@ -70,18 +70,19 @@ export function HomeHeader() {
           </Center>
         </TouchableOpacity>
       </HStack>
-      {/* 
-      <Box mr={32} bg={'gray.100'}>
-        <Text
-          color="gray.700"
-          fontWeight={'bold'}
-          fontSize={14}
-          numberOfLines={1}
-        >
-          Olá! {user.name}
-        </Text>
-      </Box>
-      */}
+      <HStack bg={'gray.100'} marginTop={2}></HStack>
+      {
+        <Box ml={4} mr={32} bg={'gray.100'}>
+          <Text
+            color="gray.700"
+            fontWeight={'bold'}
+            fontSize={14}
+            numberOfLines={1}
+          >
+            {user.name}
+          </Text>
+        </Box>
+      }
     </VStack>
   )
 }

@@ -35,6 +35,7 @@ export function Category() {
     navigation.navigate('productBySubCategory', { categoryId })
   }
 
+  /*
   const route = useRoute()
   const { categoryId } = route.params as RouteParamsProps
   console.log('ID category=>', categoryId)
@@ -93,10 +94,15 @@ export function Category() {
     }
   }
 
-  useEffect(() => {
-    //fetchCompanies()
-    fetchCategories()
-  }, [categoryId])
+  useEffect(
+    () => {
+      //fetchCompanies()
+      fetchCategories()
+    },
+    [
+      /*categoryId*/
+    ],
+  )
 
   return (
     <HStack>

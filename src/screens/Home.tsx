@@ -19,6 +19,7 @@ import {
 
 import { AppError } from '@utils/AppError'
 import { api } from '@services/api'
+import { useAuth } from '@hooks/useAuth'
 
 import { Group } from '@components/Product/Group'
 
@@ -28,6 +29,11 @@ import { ProductCard } from '@components/Product/ProductCard'
 import { Loading } from '@components/Loading'
 import { AppNavigatorRoutesProps } from '@routes/app.routes'
 import { CategoryDTO } from '@dtos/CategoryDTO'
+import { HomeHeader } from '@components/HomeHeader'
+import { Category } from '@components/Category'
+import { Promotion } from '@components/Promotion'
+import { ProductBySubCategory } from './Product/ProductBySubCategory'
+import { Department } from '@components/Departments'
 
 type RouteParamsProps = {
   categoryId: string
@@ -39,6 +45,8 @@ type Props = {
 }
 
 export function Home() {
+  const { user } = useAuth()
+
   const [isLoading, setIsLoading] = useState(true)
   // const [categories, setCategories] = useState<CategoryDTO[]>([])
 
@@ -46,7 +54,7 @@ export function Home() {
   const [products, setProducts] = useState<ProductDTO[]>([])
 
   //const [categorySelected, setCategorySelected] = useState(categoryId)
-  const [subCategorySelected, setSubCategorySelected] = useState('')
+  const [subCategorySelected, setSubCategorySelected] = useState('Detergentes')
 
   const navigation = useNavigation<AppNavigatorRoutesProps>()
 
@@ -69,6 +77,30 @@ export function Home() {
       const title = isAppError
         ? error.message
         : 'Não foi possível carregar as subcategorias'
+
+      toast.show({
+        title,
+        placement: 'top',
+        bgColor: 'red.500',
+      })
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  //listar as subcategories no select
+  async function fetchProducts() {
+    try {
+      setIsLoading(true)
+      const response = await api.get('/products')
+
+      console.log(response.data)
+      setSubCategories(response.data)
+    } catch (error) {
+      const isAppError = error instanceof AppError
+      const title = isAppError
+        ? error.message
+        : 'Não foi possível carregar os produtos'
 
       toast.show({
         title,
@@ -107,6 +139,8 @@ export function Home() {
 
   useEffect(() => {
     fetchSubCategories()
+
+    //
   }, [subCategorySelected])
 
   const firstSubCategory = subCategories.length > 0 ? subCategories[0] : null
@@ -119,7 +153,8 @@ export function Home() {
 
   return (
     <VStack flex={1}>
-      <HomeProduct />
+      <HomeHeader />
+      <Category />
 
       <Box flex={1} ml={-6} mt={-6}>
         {firstSubCategory ? (
