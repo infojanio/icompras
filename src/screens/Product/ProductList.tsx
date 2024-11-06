@@ -1,6 +1,14 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { HomeProduct } from '@components/Product/HomeProduct'
-import { VStack, Text, Divider, HStack, FlatList, Heading } from 'native-base'
+import {
+  VStack,
+  Text,
+  Divider,
+  HStack,
+  FlatList,
+  Heading,
+  useToast,
+} from 'native-base'
 
 import { Group } from '@components/Product/Group'
 
@@ -9,67 +17,76 @@ import { useNavigation } from '@react-navigation/native'
 import { AppNavigatorRoutesProps } from '@routes/app.routes'
 
 import { Dimensions } from 'react-native'
+import { ProductDTO } from '@dtos/ProductDTO'
+import { api } from '@services/api'
+import { AppError } from '@utils/AppError'
+import { ProductCard } from '@components/Product/ProductCard'
 const { width } = Dimensions.get('window')
 
 export function ProductList() {
   const [activeIndex, setActiveIndex] = useState(0)
+  const [products, setProducts] = useState<ProductDTO[]>([])
+  const [isLoading, setIsLoading] = useState<boolean>(true)
 
-  const [groups, setGroups] = useState([
-    'carnes bovinas',
-    'aves',
-    'Peixes',
-    'linguiças',
-  ])
+  const navigation = useNavigation<AppNavigatorRoutesProps>()
 
-  const [subCategory, setSubCategory] = useState([
-    'Filé Mignon',
-    'Picanha',
-    'Fraudinha',
-    'Contra filé',
-    'Filé Mignonn',
-    'Picanhan',
-    'Fraudinhan',
-    'Contra filén',
-  ])
+  const toast = useToast()
 
-  const [groupSelected, setGroupSelected] = useState('Carnes bovinas')
+  function handleOpenProductDetails(productId: string) {
+    navigation.navigate('productDetails', { productId })
+  }
+
+  //listar as subcategories no select
+  async function fetchProductsList() {
+    try {
+      setIsLoading(true)
+
+      const response = await api.get('/products')
+      setProducts(response.data)
+    } catch (error) {
+      const isAppError = error instanceof AppError
+      const title = isAppError
+        ? error.message
+        : 'Não foi possível carregar os produtos'
+
+      toast.show({
+        title,
+        placement: 'top',
+        bgColor: 'red.500',
+      })
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    fetchProductsList()
+  }, [])
 
   return (
-    <VStack flex={1}>
-      <HomeProduct name="Açougue e Peixaria" />
-
-      <FlatList
-        data={groups}
-        keyExtractor={(item) => item}
-        renderItem={({ item }) => (
-          <Group
-            name={item}
-            isActive={
-              groupSelected.toLocaleUpperCase() === item.toLocaleUpperCase()
-            }
-            onPress={() => setGroupSelected(item)}
-          />
-        )}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        _contentContainerStyle={{ px: 2 }}
-        maxH={16}
-        minH={16}
-      />
-
+    <VStack flex={1} bg={'gray.300'} alignItems={'center'} alignSelf={''}>
       <VStack flex={1} px={1}>
         <HStack justifyContent={'space-between'} ml={2} mb={2}>
           <Text fontSize={'md'} color={'black.200'}>
-            Produtos
+            Ofertas
           </Text>
         </HStack>
 
         <FlatList
-          data={subCategory}
-          keyExtractor={(item) => item}
-          renderItem={({ item }) => <ProductCategoryVertical />}
+          data={products}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <ProductCard
+              product={item}
+              onPress={() => handleOpenProductDetails(item.id)}
+            />
+          )}
+          numColumns={2}
+          _contentContainerStyle={{
+            marginLeft: 8,
+            paddingBottom: 32,
+          }}
           showsVerticalScrollIndicator={false}
-          _contentContainerStyle={{ paddingBottom: 32 }}
         />
       </VStack>
     </VStack>

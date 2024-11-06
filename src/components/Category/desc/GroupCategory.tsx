@@ -25,7 +25,7 @@ export function GroupCategory({ data, ...rest }: Props) {
   const navigation = useNavigation<AppNavigatorRoutesProps>()
 
   function handleProductBySubCategory() {
-    navigation.navigate('ProductBySubCategory')
+    navigation.navigate('productBySubCategory')
   }
 
   return (

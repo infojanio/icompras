@@ -34,6 +34,10 @@ import { Category } from '@components/Category'
 import { Promotion } from '@components/Promotion'
 import { ProductBySubCategory } from './Product/ProductBySubCategory'
 import { Department } from '@components/Departments'
+import { Product } from '@components/Product'
+import { ProductList } from './Product/ProductList'
+import { ProductCategory } from './Product/ProductCategory'
+import { Catalog } from '@utils/inuteis/Catalog'
 
 type RouteParamsProps = {
   categoryId: string
@@ -152,77 +156,12 @@ export function Home() {
   )
 
   return (
-    <VStack flex={1}>
+    <VStack flex={1} bg={'gray.200'}>
       <HomeHeader />
-      <Category />
-
-      <Box flex={1} ml={-6} mt={-6}>
-        {firstSubCategory ? (
-          <FlatList
-            data={subCategories}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => (
-              <Group
-                name={item.name}
-                subcategory={item.id}
-                isActive={
-                  subCategorySelected.toLocaleUpperCase() ===
-                  item.name.toLocaleUpperCase()
-                }
-                onPress={() => setSubCategorySelected(item.name)} //o segredo tá aqui, passando id = subcategory_id
-              />
-            )}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            _contentContainerStyle={{ px: 8 }}
-            mt={6}
-            mb={2}
-            maxH={12}
-            minH={10}
-          />
-        ) : (
-          <Center mt={6} mb={2}>
-            <Text color={'red.600'} fontSize={14}>
-              Nenhuma subcategoria encontrada!
-            </Text>
-          </Center>
-        )}
-
-        {isLoading ? (
-          <Loading />
-        ) : (
-          <VStack flex={1} px={2} bg={'gray.200'}>
-            <VStack px={6} bg={'gray.200'}>
-              <HStack justifyContent="space-between" mb={5}>
-                <Heading color={'gray.700'} fontSize={'md'}>
-                  {subCategorySelected}
-                </Heading>
-
-                <Text color="gray.700" fontSize={'md'}>
-                  {products.length}
-                </Text>
-              </HStack>
-            </VStack>
-
-            <FlatList
-              data={products}
-              keyExtractor={(item) => item.id}
-              renderItem={({ item }) => (
-                <ProductCard
-                  data={item}
-                  onPress={() => handleOpenProductDetails(item.id)}
-                />
-              )}
-              numColumns={2}
-              _contentContainerStyle={{
-                marginLeft: 8,
-                paddingBottom: 32,
-              }}
-              showsVerticalScrollIndicator={false}
-            />
-          </VStack>
-        )}
-      </Box>
+      <VStack flex={1} pt={2} bg={'gray.400'}>
+        <Category />
+        <ProductList />
+      </VStack>
     </VStack>
   )
 }

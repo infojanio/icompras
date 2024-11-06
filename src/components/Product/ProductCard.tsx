@@ -4,11 +4,11 @@ import { VStack, Image, Heading, Text, Center, Box, HStack } from 'native-base'
 import { api } from '@services/api'
 import { ProductDTO } from '@dtos/ProductDTO'
 
-type Props = TouchableOpacityProps & {
-  data: ProductDTO
+export type ProductCardProps = TouchableOpacityProps & {
+  product: ProductDTO
 }
 
-export function ProductCard({ data, ...rest }: Props) {
+export function ProductCard({ product, ...rest }: ProductCardProps) {
   return (
     <TouchableOpacity {...rest}>
       <VStack
@@ -35,20 +35,20 @@ export function ProductCard({ data, ...rest }: Props) {
                 fontFamily="heading"
                 numberOfLines={1}
               >
-                {data.name}
+                {product.name}
               </Heading>
             </Center>
           </VStack>
 
           <Box bg="red.500" rounded="md" pl="1" pr="1" mb={2}>
             <Text fontSize="14" color="gray.100" numberOfLines={1}>
-              {data.quantity} unidades
+              {product.quantity} unidades
             </Text>
           </Box>
 
           <Image
             source={{
-              uri: data.image, //busca a URL da imagem
+              uri: product.image, //busca a URL da imagem
               //uri: `${api.defaults.baseURL}/images/thumb/${data.image}`, //busca o arquivo salvo no banco
             }}
             alt="Imagem do produto"
@@ -70,7 +70,7 @@ export function ProductCard({ data, ...rest }: Props) {
               fontSize="16"
               numberOfLines={2}
             >
-              R$ {data.price}
+              R$ {product.price}
             </Text>
           </Center>
         </Center>

@@ -109,7 +109,7 @@ export function Category() {
       {isLoading ? (
         <Loading />
       ) : (
-        <VStack>
+        <VStack flex={1}>
           <FlatList
             data={categories}
             keyExtractor={(item) => item.id}
