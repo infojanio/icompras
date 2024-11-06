@@ -50,7 +50,7 @@ const { Navigator, Screen } = createBottomTabNavigator<AppRoutes>()
 export function AppRoutes() {
   //definição do tamanho dos ícones
   const { sizes, colors } = useTheme()
-  const iconSize = sizes[8]
+  const iconSize = sizes[6]
 
   return (
     <Navigator
@@ -63,9 +63,9 @@ export function AppRoutes() {
         tabBarStyle: {
           backgroundColor: colors.gray[100],
           borderTopWidth: 1,
-          height: Platform.OS === 'android' ? 'auto' : 96,
-          paddingBottom: sizes[8],
-          paddingTop: sizes[6],
+          height: Platform.OS === 'android' ? 'auto' : 60,
+          paddingBottom: sizes[2],
+          paddingTop: sizes[2],
         },
       }}
     >

@@ -16,13 +16,13 @@ export function CategoryCard({ data, ...rest }: Props) {
       <TouchableOpacity {...rest}>
         <Box
           size={24}
-          backgroundColor="white"
+          backgroundColor="gray.100"
           alignItems="center"
-          marginLeft={2}
-          marginRight={2}
-          pb={2}
-          pt={2}
-          borderRadius={'xl'}
+          marginLeft={1}
+          marginRight={1}
+          pb={1}
+          pt={1}
+          borderRadius={'full'}
           minH={'16'}
         >
           <Image

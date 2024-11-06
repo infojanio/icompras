@@ -12,7 +12,7 @@ import {
 } from 'native-base'
 
 import { UserPhoto } from './UserPhoto'
-import MarketPng from '@assets/logoMercado/03.png'
+import MarketPng from '@assets/Lamar01.png'
 import { MaterialIcons } from '@expo/vector-icons'
 import { useAuth } from '@hooks/useAuth'
 
@@ -52,7 +52,7 @@ export function HomeHeader() {
           </TouchableOpacity>
         </VStack>
         <Center flex="1" pr={4} ml="1" mr="2" mt="1" flexDirection="row">
-          <Image alt="Logo do mercado" source={MarketPng} h={70} w={120} />
+          <Image alt="Logo da Loja" source={MarketPng} h={20} w={120} />
         </Center>
 
         <TouchableOpacity onPress={signOut}>
@@ -79,7 +79,7 @@ export function HomeHeader() {
             fontSize={14}
             numberOfLines={1}
           >
-            {user.name}
+            Bem vindo, {user.name}!
           </Text>
         </Box>
       }

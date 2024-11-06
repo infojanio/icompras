@@ -122,8 +122,8 @@ export function Category() {
             horizontal
             showsHorizontalScrollIndicator={false}
             _contentContainerStyle={{ px: 2 }}
-            mt={4}
-            mb={24}
+            mt={2}
+            mb={2}
           />
         </VStack>
       )}
