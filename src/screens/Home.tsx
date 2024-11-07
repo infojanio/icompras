@@ -156,9 +156,9 @@ export function Home() {
   )
 
   return (
-    <VStack flex={1} bg={'gray.200'}>
+    <VStack flex={1} bg={'gray.100'}>
       <HomeHeader />
-      <VStack flex={1} pt={2} bg={'gray.100'}>
+      <VStack flex={1} pt={1} bg={'gray.200'}>
         <Category />
         <ProductList />
       </VStack>

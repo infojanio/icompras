@@ -78,14 +78,14 @@ export function HomeHeader() {
       </HStack>
       <HStack bg={'gray.100'} marginTop={2}></HStack>
       {
-        <Box ml={4} mr={32} bg={'gray.200'}>
+        <Box ml={4} mr={44} bg={'gray.200'}>
           <Text
-            color="gray.700"
+            color="black"
             fontWeight={'bold'}
-            fontSize={14}
+            fontSize={16}
             numberOfLines={1}
           >
-            Bem vindo, {user.name}!
+            {user.name}, seu saldo em cashback: 30,00
           </Text>
         </Box>
       }

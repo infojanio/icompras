@@ -17,7 +17,7 @@ export function ProductCard({ product, ...rest }: ProductCardProps) {
         bg="white"
         alignItems={'center'}
         w={40}
-        h={210}
+        h={180}
         minW={24}
         rounded="md"
         mb="2"
@@ -42,7 +42,7 @@ export function ProductCard({ product, ...rest }: ProductCardProps) {
 
           <Box bg="red.500" rounded="md" pl="1" pr="1" mb={2}>
             <Text fontSize="14" color="gray.100" numberOfLines={1}>
-              {product.quantity} unidades
+              {product.quantity} % cashback
             </Text>
           </Box>
 
@@ -59,18 +59,18 @@ export function ProductCard({ product, ...rest }: ProductCardProps) {
             mr={2}
             ml={2}
             m={2}
-            p={10}
+            p={8}
             resizeMode="cover"
           />
 
-          <Center h={10} w={24}>
+          <Center h={8} w={32}>
             <Text
-              color={'green.600'}
+              color={'black'}
               fontWeight={'bold'}
-              fontSize="16"
+              fontSize="14"
               numberOfLines={2}
             >
-              R$ {product.price}
+              Ganhe R$ {product.price}
             </Text>
           </Center>
         </Center>
