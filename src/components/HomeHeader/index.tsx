@@ -12,7 +12,7 @@ import {
 } from 'native-base'
 
 import { UserPhoto } from './UserPhoto'
-import MarketPng from '@assets/Lamar01.png'
+import MarketPng from '@assets/lojas_ramar.png'
 import { MaterialIcons } from '@expo/vector-icons'
 import { useAuth } from '@hooks/useAuth'
 
@@ -30,9 +30,9 @@ export function HomeHeader() {
   }
 
   return (
-    <VStack bg="gray.100" padding={1}>
+    <VStack bg="gray.200" padding={1}>
       <HStack
-        bg="green.500"
+        bg="red.500"
         paddingBottom={4}
         borderRadius={'full'}
         paddingTop={4}
@@ -51,8 +51,14 @@ export function HomeHeader() {
             />
           </TouchableOpacity>
         </VStack>
-        <Center flex="1" pr={4} ml="1" mr="2" mt="1" flexDirection="row">
-          <Image alt="Logo da Loja" source={MarketPng} h={20} w={120} />
+        <Center flex="1" pr={2} ml="1" mr="2" mt="1" flexDirection="column">
+          <Image
+            alt="Logo da Loja"
+            source={MarketPng}
+            h={20}
+            w={80}
+            borderRadius={'full'}
+          />
         </Center>
 
         <TouchableOpacity onPress={signOut}>
@@ -72,7 +78,7 @@ export function HomeHeader() {
       </HStack>
       <HStack bg={'gray.100'} marginTop={2}></HStack>
       {
-        <Box ml={4} mr={32} bg={'gray.100'}>
+        <Box ml={4} mr={32} bg={'gray.200'}>
           <Text
             color="gray.700"
             fontWeight={'bold'}

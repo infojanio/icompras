@@ -64,7 +64,7 @@ export function ProductList() {
   }, [])
 
   return (
-    <VStack flex={1} bg={'gray.300'} alignItems={'center'} alignSelf={''}>
+    <VStack flex={1} bg={'gray.200'} alignItems={'center'}>
       <VStack flex={1} px={1}>
         <HStack justifyContent={'space-between'} ml={2} mb={2}>
           <Text fontSize={'md'} color={'black.200'}>
@@ -83,7 +83,7 @@ export function ProductList() {
           )}
           numColumns={2}
           _contentContainerStyle={{
-            marginLeft: 8,
+            marginLeft: 2,
             paddingBottom: 32,
           }}
           showsVerticalScrollIndicator={false}

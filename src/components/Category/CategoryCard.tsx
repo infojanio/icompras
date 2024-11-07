@@ -22,7 +22,7 @@ export function CategoryCard({ data, ...rest }: Props) {
           marginRight={1}
           pb={1}
           pt={1}
-          borderRadius={'full'}
+          borderRadius={'md'}
           minH={'16'}
         >
           <Image
