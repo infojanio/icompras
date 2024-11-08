@@ -8,10 +8,10 @@ import { ProductDTO } from '@dtos/ProductDTO'
 
 type Props = {
   subcategory: string
-  data: ProductDTO[]
+  product: ProductDTO[]
 }
 
-export function Product({ data, subcategory }: Props) {
+export function Product({ product, subcategory }: Props) {
   const { navigate } = useNavigation()
 
   return (
@@ -19,7 +19,7 @@ export function Product({ data, subcategory }: Props) {
       <HeaderList title={subcategory} counter={subcategory.length} />
 
       <FlatList
-        data={data}
+        data={product}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <ProductCard

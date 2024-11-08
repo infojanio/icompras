@@ -23,7 +23,7 @@ import { ProductDetails } from '@screens/Product/ProductDetails'
 
 import { ProductBySubCategory } from '@screens/Product/ProductBySubCategory'
 
-import { CategoryDetails } from '@utils/inuteis/descCategory/CategoryDetails'
+import { CategoryDetails } from '@utils/inuteis/CategoryDetails'
 
 type BottomRoutes = {
   //home: undefined

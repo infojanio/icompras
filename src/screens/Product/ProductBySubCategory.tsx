@@ -205,7 +205,7 @@ export function ProductBySubCategory() {
               keyExtractor={(item) => item.id}
               renderItem={({ item }) => (
                 <ProductCard
-                  data={item}
+                  product={item}
                   onPress={() => handleOpenProductDetails(item.id)}
                 />
               )}

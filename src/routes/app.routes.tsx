@@ -23,7 +23,6 @@ import { ProductDetails } from '@screens/Product/ProductDetails'
 
 import { ProductBySubCategory } from '@screens/Product/ProductBySubCategory'
 
-import { CategoryDetails } from '@utils/inuteis/descCategory/CategoryDetails'
 import { Category } from '@components/Category'
 
 type AppRoutes = {
@@ -39,7 +38,6 @@ type AppRoutes = {
   productDetails: { productId: string }
   productBySubCategory: { categoryId: string }
   category: undefined
-  categoryDetails: undefined
 }
 
 export type AppNavigatorRoutesProps = BottomTabNavigationProp<AppRoutes>
@@ -163,14 +161,6 @@ export function AppRoutes() {
       <Screen
         name="productDetails"
         component={ProductDetails}
-        options={{
-          tabBarButton: () => null,
-        }} //não mostra ícone
-      />
-
-      <Screen
-        name="categoryDetails"
-        component={CategoryDetails}
         options={{
           tabBarButton: () => null,
         }} //não mostra ícone
