@@ -7,7 +7,7 @@ import { FlatList, Box, View, Image } from 'native-base'
 import MeatImage from '../../assets/banner01.png'
 import IceImage from '../../assets/banner02.png'
 import HygieneImage from '../../assets/banner03.png'
-import DrinkImage from '../../assets/acougue.png'
+//import DrinkImage from '../../assets/acougue.png'
 
 const images = [
   {
@@ -23,11 +23,6 @@ const images = [
   {
     id: 3,
     image: HygieneImage,
-  },
-
-  {
-    id: 4,
-    image: DrinkImage,
   },
 ]
 

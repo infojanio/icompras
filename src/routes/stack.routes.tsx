@@ -11,7 +11,7 @@ import { BottomRoutes } from './bottom.routes'
 import { SignIn } from '@screens/SignIn'
 import { SignUp } from '@screens/SignUp'
 
-import { CitySelect } from '@screens/CitySelect'
+import { CitySelect } from '@utils/inuteis/CitySelect'
 import { CompaniesByTenant } from '@screens/Company/CompaniesByTenant'
 import { TenantsByCity } from '@screens/Tenant/TenantsByCity'
 import { Home } from '@screens/Home'

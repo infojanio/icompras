@@ -4,7 +4,7 @@ import { FlatList, HStack, VStack, useToast } from 'native-base'
 import { api } from '@services/api'
 import { AppError } from '@utils/AppError'
 
-import { CityCard } from '@components/CitySelect/CityCard'
+import { CityCard } from '@utils/CitySelect/CityCard'
 
 import { useNavigation } from '@react-navigation/native'
 import { AuthNavigatorRoutesProps } from '@routes/auth.routes'

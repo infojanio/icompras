@@ -7,7 +7,7 @@ import LogoPng from '@assets/logoInitial.png'
 
 import { useNavigation } from '@react-navigation/native'
 import { TouchableOpacity } from 'react-native'
-import { CitySelect } from '@components/CitySelect'
+import { CitySelect } from '@utils/CitySelect'
 
 export function Initial() {
   const navigation = useNavigation<AuthNavigatorRoutesProps>()

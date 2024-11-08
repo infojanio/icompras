@@ -11,7 +11,7 @@ import {
 
 import { useNavigation } from '@react-navigation/native'
 import { AppNavigatorRoutesProps } from '@routes/app.routes'
-import { Category } from '@data/CategoryList'
+import { Category } from '@utils/inuteis/CategoryList'
 import { CategoryDTO } from '@dtos/CategoryDTO'
 
 type Props = TouchableOpacityProps & {

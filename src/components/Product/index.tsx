@@ -23,7 +23,7 @@ export function Product({ data, subcategory }: Props) {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <ProductCard
-            data={item}
+            product={item}
             onPress={() => navigate('productDetails', { productId: item.id })}
           />
         )}

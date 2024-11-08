@@ -3,7 +3,7 @@ import { Image, FlatList, Text, Box, View, HStack, Icon } from 'native-base'
 
 import { MaterialIcons } from '@expo/vector-icons'
 
-import { Category } from '@data/CategoryList'
+import { Category } from '@utils/inuteis/CategoryList'
 import { TouchableOpacity } from 'react-native'
 
 import { useNavigation } from '@react-navigation/native'

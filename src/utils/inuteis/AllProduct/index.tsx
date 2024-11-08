@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import { FlatList, View, Text, Image, Container, HStack } from 'native-base'
 
-import { SeparatorItem } from '../SeparatorItem'
+import { SeparatorItem } from '../../../components/SeparatorItem'
 import {
   TouchableOpacity,
   SafeAreaView,

@@ -1,7 +1,7 @@
 import { FlatList, VStack } from 'native-base'
 
-import { Card } from '@components/Category/desc/Card'
-import { categoryList } from '../../../data/category'
+import { Card } from '@utils/inuteis/descCategory/Card'
+import { categoryList } from '../category'
 
 type Props = {
   onSelect: (value: string) => void

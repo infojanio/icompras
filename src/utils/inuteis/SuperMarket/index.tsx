@@ -4,9 +4,9 @@ import { VStack, Text, FlatList, Center } from 'native-base'
 
 import { SeparatorItem } from '@components/SeparatorItem'
 import { Group } from '@components/Product/Group'
-import { AllProduct } from '@components/AllProduct'
+import { AllProduct } from '@utils/inuteis/AllProduct'
 import { HomeScreen } from '@components/HomeScreen'
-import { Market } from '@components/SuperMarket'
+import { Market } from '@utils/inuteis/SuperMarket1'
 
 export function SuperMarket() {
   const [markets, setMarkets] = useState<string[]>([

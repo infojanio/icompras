@@ -17,7 +17,7 @@ export function Sessions() {
 
   //Criar nova conta, preciso fazer ajustes no routes/index.tsx , acertar a navegação auth
   function handleNewAccount() {
-    navigation.navigate('signUp')
+    navigation.navigate('signup')
   }
 
   return (

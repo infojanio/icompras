@@ -4,7 +4,7 @@ import { Text, Center, FlatList, HStack, VStack, useToast } from 'native-base'
 import { api } from '@services/api'
 import { AppError } from '@utils/AppError'
 
-import { CityCard } from '@components/CitySelect/CityCard'
+import { CityCard } from '@utils/CitySelect/CityCard'
 
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { AuthNavigatorRoutesProps } from '@routes/auth.routes'
@@ -13,7 +13,7 @@ import { Loading } from '@components/Loading'
 import { HomeHeader } from '@components/HomeHeader'
 import { HomeScreen } from '@components/HomeScreen'
 import { TenantDTO } from '@dtos/TenantDTO'
-import { TenantCard } from '@components/Tenant/TenantCard'
+import { TenantCard } from '@utils/inuteis/Tenant/TenantCard'
 
 type RouteParamsProps = {
   cityId: string
