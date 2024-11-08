@@ -13,7 +13,7 @@ export function ProductCard({ product, ...rest }: ProductCardProps) {
     <TouchableOpacity {...rest}>
       <VStack
         ml={1}
-        mt={2}
+        mt={1}
         bg="white"
         alignItems={'center'}
         w={40}

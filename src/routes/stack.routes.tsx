@@ -13,7 +13,7 @@ import { SignUp } from '@screens/SignUp'
 
 import { CitySelect } from '@utils/inuteis/CitySelect'
 import { CompaniesByTenant } from '@screens/Company/CompaniesByTenant'
-import { TenantsByCity } from '@screens/Tenant/TenantsByCity'
+import { TenantsByCity } from '@utils/Tenant/TenantsByCity'
 import { Home } from '@screens/Home'
 
 type StackRoutes = {

@@ -31,7 +31,7 @@ export function SuperMarket() {
               subTitle="Horário de Atendimento"
               hour_week="Seg/Sáb (07:00 - 19:00)"
               hour_weekend="Dom (07:00 - 12:00)"
-              isActive={marketSelected === item}
+              // isActive={marketSelected === item}
               onPress={() => setMarketSelected(item)}
             />
           )}
@@ -42,7 +42,7 @@ export function SuperMarket() {
               </Text>
             </Center>
           )}
-          _contentContainerStyle={{ px: 2 } && { flex: 1 }}
+          // _contentContainerStyle={{ px: 2 } && { flex: 1 }}
         />
       </Center>
     </VStack>

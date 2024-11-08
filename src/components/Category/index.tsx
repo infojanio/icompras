@@ -35,38 +35,6 @@ export function Category() {
     navigation.navigate('productBySubCategory', { categoryId })
   }
 
-  /*
-  const route = useRoute()
-  const { categoryId } = route.params as RouteParamsProps
-  console.log('ID category=>', categoryId)
-
-  //const { companyId } = route.params as RouteParamsProps
-  //console.log('ID company=>', companyId)
-
-  /*listar os tipos de empresa
-  async function fetchCompanies() {
-    try {
-      setIsLoading(true)
-      //const response = await api.get(`/categories/${categoryId}`)
-      const response = await api.get(`/companies/${companyId}`)
-      setCompanies(response.data)
-    } catch (error) {
-      const isAppError = error instanceof AppError
-      const title = isAppError
-        ? error.message
-        : 'Não foi possível carregar as lojas cadastradas'
-
-      toast.show({
-        title,
-        placement: 'top',
-        bgColor: 'red.500',
-      })
-    } finally {
-      setIsLoading(false)
-    }
-  }
-  */
-
   //listar as categorias
   async function fetchCategories() {
     try {
@@ -94,15 +62,9 @@ export function Category() {
     }
   }
 
-  useEffect(
-    () => {
-      //fetchCompanies()
-      fetchCategories()
-    },
-    [
-      /*categoryId*/
-    ],
-  )
+  useEffect(() => {
+    fetchCategories()
+  }, [])
 
   return (
     <HStack>

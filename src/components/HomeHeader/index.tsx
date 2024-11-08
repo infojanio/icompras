@@ -34,11 +34,10 @@ export function HomeHeader() {
       <HStack
         bg="red.500"
         paddingBottom={4}
-        borderRadius={'full'}
         paddingTop={4}
         justifyContent="space-between"
         alignItems="center"
-        padding={2}
+        padding={0}
       >
         <VStack>
           <TouchableOpacity onPress={OpenLogo}>
@@ -78,7 +77,7 @@ export function HomeHeader() {
       </HStack>
       <HStack bg={'gray.100'} marginTop={2}></HStack>
       {
-        <Box ml={4} mr={44} bg={'gray.200'}>
+        <Box ml={2} mr={44} bg={'gray.200'}>
           <Text
             color="black"
             fontWeight={'bold'}

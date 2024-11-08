@@ -42,7 +42,8 @@ export function CategoryCard({ data, ...rest }: Props) {
               <Text
                 textAlign={'center'}
                 justifyContent={'center'}
-                fontSize={12}
+                fontSize={14}
+                fontWeight={'semibold'}
                 numberOfLines={2}
               >
                 {data.name}
