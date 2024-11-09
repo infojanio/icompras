@@ -64,16 +64,16 @@ export function ProductList() {
   }, [])
 
   return (
-    <VStack flex={1} bg={'gray.200'} alignItems={'initial'}>
-      <VStack flex={1} px={1}>
-        <HStack justifyContent={'space-between'} ml={2} mb={2}>
+    <VStack flex={1} bg={'gray.200'} alignItems={'center'}>
+      <VStack>
+        <HStack justifyContent={'space-between'} ml={1} mb={1}>
           <Text
             fontSize={'md'}
             color={'black.200'}
-            fontWeight={'bold'}
+            fontWeight={'semibold'}
             ml={'2'}
           >
-            Produtos
+            Mais Cashback
           </Text>
         </HStack>
 

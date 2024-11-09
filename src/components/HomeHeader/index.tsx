@@ -17,6 +17,7 @@ import { MaterialIcons } from '@expo/vector-icons'
 import { useAuth } from '@hooks/useAuth'
 
 import defaultUserPhotoImg from '@assets/userPhotoDefault.png'
+import { Saldo } from './Saldo'
 
 export function HomeHeader() {
   const { user, signOut } = useAuth()
@@ -30,16 +31,24 @@ export function HomeHeader() {
   }
 
   return (
-    <VStack bg="gray.200" padding={1}>
+    <VStack
+      bg="green.200"
+      padding={1}
+      borderTopWidth={0.23}
+      borderBottomWidth={0.25}
+      borderBottomColor={'blue.300'}
+    >
       <HStack
-        bg="red.500"
-        paddingBottom={4}
-        paddingTop={4}
+        bg="green.200"
+        paddingBottom={1}
+        paddingTop={1}
         justifyContent="space-between"
         alignItems="center"
-        padding={0}
+        padding={1}
       >
         <VStack>
+          <Saldo />
+          {/*}
           <TouchableOpacity onPress={OpenLogo}>
             <UserPhoto
               source={user.avatar ? { uri: user.avatar } : defaultUserPhotoImg}
@@ -49,6 +58,8 @@ export function HomeHeader() {
               ml={2}
             />
           </TouchableOpacity>
+
+          */}
         </VStack>
         <Center flex="1" pr={2} ml="1" mr="2" mt="1" flexDirection="column">
           <Image
@@ -64,9 +75,9 @@ export function HomeHeader() {
           <Center alignItems={'center'} p="1" mr={2} borderRadius={2}>
             <Icon
               as={<MaterialIcons name="logout" />}
-              size={6}
+              size={7}
               _light={{
-                color: 'red.100',
+                color: 'red.600',
               }}
               _dark={{
                 color: 'red.700',
@@ -75,19 +86,39 @@ export function HomeHeader() {
           </Center>
         </TouchableOpacity>
       </HStack>
-      <HStack bg={'gray.100'} marginTop={2}></HStack>
-      {
-        <Box ml={2} mr={44} bg={'gray.200'}>
-          <Text
-            color="black"
-            fontWeight={'bold'}
-            fontSize={16}
-            numberOfLines={1}
-          >
-            {user.name}, seu saldo em cashback: 30,00
-          </Text>
-        </Box>
-      }
+
+      {/*
+        <HStack
+          bg="red.300"
+          paddingBottom={1}
+          paddingTop={1}
+          justifyContent="space-between"
+          alignItems="center"
+          padding={1}
+        >
+          <Box>
+            <Text
+              color="black"
+              fontWeight={'normal'}
+              fontSize={16}
+              numberOfLines={1}
+            >
+              {user.name},
+            </Text>{' '}
+          </Box>
+          <Box ml={24}>
+            <Text
+              color="gray.600"
+              fontWeight={'bold'}
+              fontSize={16}
+              numberOfLines={1}
+            >
+              {' '}
+              Saldo: R$ 30,00
+            </Text>
+          </Box>
+        </HStack>
+        */}
     </VStack>
   )
 }

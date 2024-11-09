@@ -15,7 +15,7 @@ export function Product({ product, subcategory }: Props) {
   const { navigate } = useNavigation()
 
   return (
-    <VStack bg={'gray.200'}>
+    <VStack bg={'gray.100'}>
       <HeaderList title={subcategory} counter={subcategory.length} />
 
       <FlatList

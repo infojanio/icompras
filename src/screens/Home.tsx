@@ -38,6 +38,7 @@ import { Product } from '@components/Product'
 import { ProductList } from './Product/ProductList'
 import { ProductCategory } from './Product/ProductCategory'
 import { Catalog } from '@utils/inuteis/Catalog'
+import { SeparatorItem } from '@components/SeparatorItem'
 
 type RouteParamsProps = {
   categoryId: string
@@ -157,9 +158,14 @@ export function Home() {
 
   return (
     <VStack flex={1} bg={'gray.100'}>
-      <HomeHeader />
-      <VStack flex={1} pt={1} bg={'gray.200'}>
+      <Box>
+        <HomeHeader />
+      </Box>
+
+      <VStack flex={1} pt={1} bg={'gray.100'}>
         <Category />
+        <ProductList />
+        <SeparatorItem />
         <ProductList />
       </VStack>
     </VStack>

@@ -16,12 +16,13 @@ export function ProductCard({ product, ...rest }: ProductCardProps) {
         mt={1}
         bg="white"
         alignItems={'center'}
-        w={40}
+        w={32}
         h={180}
         minW={24}
         rounded="md"
         mb="2"
-        borderWidth={0.2}
+        borderWidth={1.3}
+        borderColor={'blue.200'}
       >
         <Center>
           <VStack mb="1">
@@ -52,21 +53,17 @@ export function ProductCard({ product, ...rest }: ProductCardProps) {
               //uri: `${api.defaults.baseURL}/images/thumb/${data.image}`, //busca o arquivo salvo no banco
             }}
             alt="Imagem do produto"
-            w={30}
-            h={20}
-            rounded="md"
-            mt={2}
-            mr={2}
-            ml={2}
-            m={2}
-            p={8}
+            w={20}
+            h={90}
+            rounded="2xl"
+            p={6}
             resizeMode="cover"
           />
 
           <Center h={8} w={32}>
             <Text
               color={'black'}
-              fontWeight={'bold'}
+              fontWeight={'normal'}
               fontSize="14"
               numberOfLines={2}
             >
