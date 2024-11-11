@@ -12,7 +12,7 @@ import {
 } from 'native-base'
 
 import { UserPhoto } from './UserPhoto'
-import MarketPng from '@assets/lojas_ramar.png'
+import MarketPng from '@assets/lojas_ramar-removebg-preview.png'
 import { MaterialIcons } from '@expo/vector-icons'
 import { useAuth } from '@hooks/useAuth'
 
@@ -32,14 +32,14 @@ export function HomeHeader() {
 
   return (
     <VStack
-      bg="green.200"
+      bg="green.300"
       padding={1}
       borderTopWidth={0.23}
       borderBottomWidth={0.25}
       borderBottomColor={'blue.300'}
     >
       <HStack
-        bg="green.200"
+        bg="green.300"
         paddingBottom={1}
         paddingTop={1}
         justifyContent="space-between"
