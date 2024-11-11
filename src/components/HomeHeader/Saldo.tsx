@@ -5,13 +5,13 @@ export function Saldo() {
   const { user } = useAuth()
   return (
     <VStack
-      bg="green.200"
+      bg="green.300"
       paddingBottom={3}
       paddingTop={3}
       justifyContent="space-between"
       alignItems="center"
       borderRadius={'3xl'}
-      borderWidth={0.25}
+      borderWidth={0.24}
       padding={1}
     >
       <Box>

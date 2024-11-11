@@ -1,30 +1,16 @@
 import { useEffect, useState } from 'react'
 import { HomeProduct } from '@components/Product/HomeProduct'
-import {
-  VStack,
-  Text,
-  Divider,
-  HStack,
-  FlatList,
-  Heading,
-  useToast,
-} from 'native-base'
+import { VStack, Text, FlatList, useToast, Box } from 'native-base'
 
-import { Group } from '@components/Product/Group'
-
-import { ProductCategoryVertical } from '@utils/ProductCategoryVertical'
 import { useNavigation } from '@react-navigation/native'
 import { AppNavigatorRoutesProps } from '@routes/app.routes'
 
-import { Dimensions } from 'react-native'
 import { ProductDTO } from '@dtos/ProductDTO'
 import { api } from '@services/api'
 import { AppError } from '@utils/AppError'
 import { ProductCard } from '@components/Product/ProductCard'
-const { width } = Dimensions.get('window')
 
 export function ProductList() {
-  const [activeIndex, setActiveIndex] = useState(0)
   const [products, setProducts] = useState<ProductDTO[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
@@ -64,18 +50,23 @@ export function ProductList() {
   }, [])
 
   return (
-    <VStack flex={1} bg={'gray.200'} alignItems={'center'}>
+    <VStack flex={1} bg={'gray.100'} alignItems={'center'} h={220}>
       <VStack>
-        <HStack justifyContent={'space-between'} ml={1} mb={1}>
-          <Text
-            fontSize={'md'}
-            color={'black.200'}
-            fontWeight={'semibold'}
-            ml={'2'}
-          >
-            Mais Cashback
-          </Text>
-        </HStack>
+        <VStack justifyContent={'space-between'} ml={1} mb={1}>
+          <Box>
+            <Text
+              fontSize={'sm'}
+              color={'black.200'}
+              fontWeight={'semibold'}
+              ml={'2'}
+            >
+              Mais Cashback
+            </Text>
+          </Box>
+          <Box ml={2} width={8} height={1} bg={'yellow.300'}>
+            {''}
+          </Box>
+        </VStack>
 
         <FlatList
           data={products}

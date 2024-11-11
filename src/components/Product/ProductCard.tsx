@@ -20,7 +20,7 @@ export function ProductCard({ product, ...rest }: ProductCardProps) {
         h={180}
         minW={24}
         rounded="md"
-        mb="2"
+        mb="1"
         borderWidth={1.3}
         borderColor={'blue.200'}
       >
@@ -31,7 +31,7 @@ export function ProductCard({ product, ...rest }: ProductCardProps) {
                 ml={2}
                 mr={2}
                 mb={1}
-                fontSize="16"
+                fontSize="14"
                 color="red.700"
                 fontFamily="heading"
                 numberOfLines={1}
@@ -40,12 +40,6 @@ export function ProductCard({ product, ...rest }: ProductCardProps) {
               </Heading>
             </Center>
           </VStack>
-
-          <Box bg="red.500" rounded="md" pl="1" pr="1" mb={2}>
-            <Text fontSize="14" color="gray.100" numberOfLines={1}>
-              {product.quantity} % cashback
-            </Text>
-          </Box>
 
           <Image
             source={{
@@ -60,6 +54,11 @@ export function ProductCard({ product, ...rest }: ProductCardProps) {
             resizeMode="cover"
           />
 
+          <Box bg="red.500" rounded="md" pl="1" pr="1" mt={2} mb={1}>
+            <Text fontSize="14" color="gray.100" numberOfLines={1}>
+              {product.quantity} % cashback
+            </Text>
+          </Box>
           <Center h={8} w={32}>
             <Text
               color={'black'}

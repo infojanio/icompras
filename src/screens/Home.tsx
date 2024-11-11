@@ -9,6 +9,7 @@ import {
   VStack,
   useToast,
   Center,
+  ScrollView,
 } from 'native-base'
 
 import {
@@ -161,13 +162,16 @@ export function Home() {
       <Box>
         <HomeHeader />
       </Box>
+      <ScrollView w={['380', '600']} h="120">
+        <VStack flex={1} pt={1} bg={'gray.100'}>
+          <Category />
+          <Promotion />
+          <ProductList />
 
-      <VStack flex={1} pt={1} bg={'gray.100'}>
-        <Category />
-        <ProductList />
-        <SeparatorItem />
-        <ProductList />
-      </VStack>
+          <ProductList />
+          <ProductList />
+        </VStack>
+      </ScrollView>
     </VStack>
   )
 }
