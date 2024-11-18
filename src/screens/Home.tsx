@@ -1,8 +1,28 @@
 import { useCallback, useEffect, useState } from 'react'
+<<<<<<< HEAD
 
 import { Box, VStack, useToast, ScrollView } from 'native-base'
 
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
+=======
+import { HomeProduct } from '@components/Product/HomeProduct'
+import {
+  Text,
+  Box,
+  FlatList,
+  HStack,
+  Heading,
+  VStack,
+  useToast,
+  Center,
+} from 'native-base'
+
+import {
+  useFocusEffect,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native'
+>>>>>>> parent of bfeca9e... Lista de produtos
 
 import { AppError } from '@utils/AppError'
 import { api } from '@services/api'
@@ -139,6 +159,7 @@ export function Home() {
       <Box>
         <HomeHeader />
       </Box>
+<<<<<<< HEAD
       <ScrollView w={['380', '600']} h="120">
         <VStack flex={1} pt={1} bg={'gray.100'}>
           <Category />
@@ -147,6 +168,15 @@ export function Home() {
           <ProductList />
         </VStack>
       </ScrollView>
+=======
+
+      <VStack flex={1} pt={1} bg={'gray.100'}>
+        <Category />
+        <ProductList />
+        <SeparatorItem />
+        <ProductList />
+      </VStack>
+>>>>>>> parent of bfeca9e... Lista de produtos
     </VStack>
   )
 }

@@ -21,7 +21,7 @@ export function CategoryCard({ data, ...rest }: Props) {
       <TouchableOpacity {...rest}>
         <Box
           size={24}
-          backgroundColor="gray.50"
+          backgroundColor="gray.100"
           alignItems="center"
           marginLeft={1}
           marginRight={1}
