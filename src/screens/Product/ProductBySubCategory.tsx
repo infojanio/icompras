@@ -40,8 +40,8 @@ type Props = {
 
 export function ProductBySubCategory() {
   const [isLoading, setIsLoading] = useState(true)
-
   const [categories, setCategories] = useState<CategoryDTO[]>([])
+
   const [subCategories, setSubCategories] = useState<SubCategoryDTO[]>([])
   const [products, setProducts] = useState<ProductDTO[]>([])
 
@@ -136,7 +136,7 @@ export function ProductBySubCategory() {
   }
 
   useEffect(() => {
-    //fetchCategories()
+    fetchCategories()
     fetchSubCategories()
   }, [categoryId])
 
@@ -205,7 +205,7 @@ export function ProductBySubCategory() {
               keyExtractor={(item) => item.id}
               renderItem={({ item }) => (
                 <ProductCard
-                  data={item}
+                  product={item}
                   onPress={() => handleOpenProductDetails(item.id)}
                 />
               )}

@@ -1,10 +1,13 @@
 import { useCallback, useEffect, useState } from 'react'
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 import { Box, VStack, useToast, ScrollView } from 'native-base'
 
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
 =======
+=======
+>>>>>>> parent of f9fc214... sdk52.0.0
 import { HomeProduct } from '@components/Product/HomeProduct'
 import {
   Text,
@@ -15,6 +18,10 @@ import {
   VStack,
   useToast,
   Center,
+<<<<<<< HEAD
+=======
+  ScrollView,
+>>>>>>> parent of f9fc214... sdk52.0.0
 } from 'native-base'
 
 import {
@@ -22,21 +29,33 @@ import {
   useNavigation,
   useRoute,
 } from '@react-navigation/native'
+<<<<<<< HEAD
 >>>>>>> parent of bfeca9e... Lista de produtos
+=======
+>>>>>>> parent of f9fc214... sdk52.0.0
 
 import { AppError } from '@utils/AppError'
 import { api } from '@services/api'
 import { useAuth } from '@hooks/useAuth'
 
+import { Group } from '@components/Product/Group'
+
 import { ProductDTO } from '@dtos/ProductDTO'
 import { SubCategoryDTO } from '@dtos/SubCategoryDTO'
-
+import { ProductCard } from '@components/Product/ProductCard'
+import { Loading } from '@components/Loading'
 import { AppNavigatorRoutesProps } from '@routes/app.routes'
-
+import { CategoryDTO } from '@dtos/CategoryDTO'
 import { HomeHeader } from '@components/HomeHeader'
 import { Category } from '@components/Category'
-
+import { Promotion } from '@components/Promotion'
+import { ProductBySubCategory } from './Product/ProductBySubCategory'
+import { Department } from '@utils/inuteis/Departments'
+import { Product } from '@components/Product'
 import { ProductList } from './Product/ProductList'
+import { ProductCategory } from './Product/ProductCategory'
+import { Catalog } from '@utils/inuteis/Catalog'
+import { SeparatorItem } from '@components/SeparatorItem'
 
 type RouteParamsProps = {
   categoryId: string
@@ -162,6 +181,7 @@ export function Home() {
 <<<<<<< HEAD
       <ScrollView w={['380', '600']} h="120">
         <VStack flex={1} pt={1} bg={'gray.100'}>
+          <Promotion />
           <Category />
           <ProductList />
           <ProductList />
