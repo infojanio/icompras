@@ -91,7 +91,7 @@ export function ProductList() {
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
             <ProductCard
-              product={item}
+              data={item}
               onPress={() => handleOpenProductDetails(item.id)}
             />
           )}

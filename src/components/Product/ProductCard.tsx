@@ -5,10 +5,10 @@ import { api } from '@services/api'
 import { ProductDTO } from '@dtos/ProductDTO'
 
 export type ProductCardProps = TouchableOpacityProps & {
-  product: ProductDTO
+  data: ProductDTO
 }
 
-export function ProductCard({ product, ...rest }: ProductCardProps) {
+export function ProductCard({ data, ...rest }: ProductCardProps) {
   return (
     <TouchableOpacity {...rest}>
       <VStack
@@ -28,8 +28,8 @@ export function ProductCard({ product, ...rest }: ProductCardProps) {
           <VStack mt="1" mb="1">
             <Image
               source={{
-                uri: product.image, //busca a URL da imagem
-                //uri: `${api.defaults.baseURL}/images/thumb/${data.image}`, //busca o arquivo salvo no banco
+                uri: data.image, //busca a URL da imagem
+                // uri: `${api.defaults.baseURL}/images/thumb/${data.image}`, //busca o arquivo salvo no banco
               }}
               alt="Imagem do produto"
               w={20}
@@ -48,13 +48,13 @@ export function ProductCard({ product, ...rest }: ProductCardProps) {
               fontFamily="heading"
               numberOfLines={1}
             >
-              {product.name}
+              {data.name}
             </Text>
           </Center>
 
           <Box bg="red.500" rounded="md" pl="1" pr="1" mb={'2'}>
             <Text fontSize="14" color="gray.100" numberOfLines={1}>
-              {product.quantity} % cashback
+              {data.quantity} % cashback
             </Text>
           </Box>
           <Center h={4} w={32}>
@@ -64,7 +64,7 @@ export function ProductCard({ product, ...rest }: ProductCardProps) {
               fontSize="14"
               numberOfLines={2}
             >
-              Ganhe R$ {product.price}
+              Ganhe R$ {data.price}
             </Text>
           </Center>
         </Center>
