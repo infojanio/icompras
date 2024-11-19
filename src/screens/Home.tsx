@@ -167,9 +167,6 @@ export function Home() {
         <VStack flex={1} pt={1} bg={'gray.100'}>
           <Category />
           <ProductList />
-
-          <ProductList />
-          <ProductList />
         </VStack>
       </ScrollView>
     </VStack>

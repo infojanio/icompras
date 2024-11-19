@@ -25,21 +25,32 @@ export function ProductCard({ product, ...rest }: ProductCardProps) {
         borderColor={'blue.200'}
       >
         <Center>
-          <VStack mb="1">
-            <Center>
-              <Heading
-                ml={2}
-                mr={2}
-                mb={1}
-                fontSize="14"
-                color="red.700"
-                fontFamily="heading"
-                numberOfLines={1}
-              >
-                {product.name}
-              </Heading>
-            </Center>
+          <VStack mt="1" mb="1">
+            <Image
+              source={{
+                uri: product.image, //busca a URL da imagem
+                //uri: `${api.defaults.baseURL}/images/thumb/${data.image}`, //busca o arquivo salvo no banco
+              }}
+              alt="Imagem do produto"
+              w={20}
+              h={90}
+              rounded="2xl"
+              p={6}
+              resizeMode="cover"
+            />
           </VStack>
+          <Center>
+            <Text
+              ml={2}
+              mr={2}
+              fontSize="14"
+              color="black"
+              fontFamily="heading"
+              numberOfLines={1}
+            >
+              {product.name}
+            </Text>
+          </Center>
 
           <Image
             source={{
