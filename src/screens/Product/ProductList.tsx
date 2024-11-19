@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { HomeProduct } from '@components/Product/HomeProduct'
-import { VStack, Text, FlatList, useToast, Box, HStack } from 'native-base'
+import { VStack, Text, FlatList, useToast, Box } from 'native-base'
 
 import { Group } from '@components/Product/Group'
 
@@ -13,7 +13,6 @@ import { ProductDTO } from '@dtos/ProductDTO'
 import { api } from '@services/api'
 import { AppError } from '@utils/AppError'
 import { ProductCard } from '@components/Product/ProductCard'
-import { TouchableOpacity } from 'react-native'
 
 export function ProductList() {
   const [activeIndex, setActiveIndex] = useState(0)
@@ -56,10 +55,10 @@ export function ProductList() {
   }, [])
 
   return (
-    <VStack flex={1} bg={'gray.100'} alignItems={'center'} mt={4} h={240}>
+    <VStack flex={1} bg={'gray.100'} alignItems={'center'} h={220}>
       <VStack>
         <VStack justifyContent={'space-between'} ml={1} mb={1}>
-          <HStack justifyContent={'space-between'} mr={2}>
+          <Box>
             <Text
               fontSize={'sm'}
               color={'black.200'}
@@ -68,24 +67,7 @@ export function ProductList() {
             >
               Mais Cashback
             </Text>
-            <TouchableOpacity>
-              <Box
-                mr={2}
-                borderBottomWidth={'3.5'}
-                borderColor={'yellow.300'}
-                borderRadius={'md'}
-              >
-                <Text
-                  fontSize={'sm'}
-                  color={'green.700'}
-                  fontWeight={'semibold'}
-                  ml={'2'}
-                >
-                  Ver todos
-                </Text>
-              </Box>
-            </TouchableOpacity>
-          </HStack>
+          </Box>
           <Box ml={2} width={8} height={1} bg={'yellow.300'}>
             {''}
           </Box>

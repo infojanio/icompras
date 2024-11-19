@@ -17,47 +17,49 @@ export function ProductCard({ product, ...rest }: ProductCardProps) {
         bg="white"
         alignItems={'center'}
         w={32}
-        h={174}
+        h={180}
         minW={24}
         rounded="md"
         mb="1"
-        borderWidth={1.2}
-        borderColor={'green.200'}
+        borderWidth={1.3}
+        borderColor={'blue.200'}
       >
         <Center>
-          <VStack mt="1" mb="1">
-            <Image
-              source={{
-                uri: product.image, //busca a URL da imagem
-                //uri: `${api.defaults.baseURL}/images/thumb/${data.image}`, //busca o arquivo salvo no banco
-              }}
-              alt="Imagem do produto"
-              w={20}
-              h={90}
-              rounded="2xl"
-              p={6}
-              resizeMode="cover"
-            />
+          <VStack mb="1">
+            <Center>
+              <Heading
+                ml={2}
+                mr={2}
+                mb={1}
+                fontSize="14"
+                color="red.700"
+                fontFamily="heading"
+                numberOfLines={1}
+              >
+                {product.name}
+              </Heading>
+            </Center>
           </VStack>
-          <Center>
-            <Text
-              ml={2}
-              mr={2}
-              fontSize="14"
-              color="black"
-              fontFamily="heading"
-              numberOfLines={1}
-            >
-              {product.name}
-            </Text>
-          </Center>
 
-          <Box bg="red.500" rounded="md" pl="1" pr="1" mb={'2'}>
+          <Image
+            source={{
+              uri: product.image, //busca a URL da imagem
+              //uri: `${api.defaults.baseURL}/images/thumb/${data.image}`, //busca o arquivo salvo no banco
+            }}
+            alt="Imagem do produto"
+            w={20}
+            h={90}
+            rounded="2xl"
+            p={6}
+            resizeMode="cover"
+          />
+
+          <Box bg="red.500" rounded="md" pl="1" pr="1" mt={2} mb={1}>
             <Text fontSize="14" color="gray.100" numberOfLines={1}>
               {product.quantity} % cashback
             </Text>
           </Box>
-          <Center h={4} w={32}>
+          <Center h={8} w={32}>
             <Text
               color={'black'}
               fontWeight={'normal'}

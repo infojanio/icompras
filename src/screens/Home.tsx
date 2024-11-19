@@ -166,9 +166,10 @@ export function Home() {
 
       <ScrollView w={['380', '600']} h="120">
         <VStack flex={1} pt={1} bg={'gray.100'}>
-          <Promotion />
           <Category />
+          <Promotion />
           <ProductList />
+
           <ProductList />
           <ProductList />
         </VStack>
