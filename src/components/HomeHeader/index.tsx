@@ -61,7 +61,16 @@ export function HomeHeader() {
 
           */}
         </VStack>
-        <Center flex="1" pr={2} ml="1" mr="2" mt="1" flexDirection="column">
+        <Center
+          flex="1"
+          borderRadius={'lg'}
+          borderColor={'blue.600'}
+          pr={2}
+          ml="1"
+          mr="2"
+          mt="1"
+          flexDirection="column"
+        >
           <Image
             alt="Logo da Loja"
             source={MarketPng}
@@ -75,7 +84,7 @@ export function HomeHeader() {
           <Center alignItems={'center'} p="1" mr={2} borderRadius={2}>
             <Icon
               as={<MaterialIcons name="logout" />}
-              size={7}
+              size={6}
               _light={{
                 color: 'red.600',
               }}

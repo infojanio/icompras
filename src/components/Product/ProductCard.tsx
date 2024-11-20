@@ -12,12 +12,12 @@ export function ProductCard({ product, ...rest }: ProductCardProps) {
   return (
     <TouchableOpacity {...rest}>
       <VStack
-        ml={1}
+        mr={1}
         mt={1}
         bg="white"
         alignItems={'center'}
         w={32}
-        h={174}
+        h={154}
         minW={24}
         rounded="md"
         mb="1"
@@ -32,18 +32,18 @@ export function ProductCard({ product, ...rest }: ProductCardProps) {
                 //uri: `${api.defaults.baseURL}/images/thumb/${data.image}`, //busca o arquivo salvo no banco
               }}
               alt="Imagem do produto"
-              w={20}
-              h={90}
-              rounded="2xl"
-              p={6}
-              resizeMode="cover"
+              w={28}
+              h={70}
+              rounded="3xl"
+              p={10}
+              resizeMode="contain"
             />
           </VStack>
           <Center>
             <Text
               ml={2}
               mr={2}
-              fontSize="14"
+              fontSize="12"
               color="black"
               fontFamily="heading"
               numberOfLines={1}
@@ -52,12 +52,12 @@ export function ProductCard({ product, ...rest }: ProductCardProps) {
             </Text>
           </Center>
 
-          <Box bg="red.500" rounded="md" pl="1" pr="1" mb={'2'}>
-            <Text fontSize="14" color="gray.100" numberOfLines={1}>
+          <Box bg="red.500" rounded="md" pl="1" pr="1">
+            <Text fontSize="13" color="gray.100" numberOfLines={1}>
               {product.quantity} % cashback
             </Text>
           </Box>
-          <Center h={4} w={32}>
+          <Center h={6} w={32}>
             <Text
               color={'black'}
               fontWeight={'normal'}

@@ -56,7 +56,7 @@ export function ProductList() {
   }, [])
 
   return (
-    <VStack flex={1} bg={'gray.100'} alignItems={'center'} mt={4} h={240}>
+    <VStack flex={1} bg={'gray.100'} alignItems={'center'} h={210}>
       <VStack>
         <VStack justifyContent={'space-between'} ml={1} mb={1}>
           <HStack justifyContent={'space-between'} mr={2}>
@@ -70,7 +70,7 @@ export function ProductList() {
             </Text>
             <TouchableOpacity>
               <Box
-                mr={2}
+                mr={6}
                 borderBottomWidth={'3.5'}
                 borderColor={'yellow.300'}
                 borderRadius={'md'}

@@ -5,24 +5,24 @@ export function Saldo() {
   const { user } = useAuth()
   return (
     <VStack
-      bg="green.200"
+      bg="green.300"
       paddingBottom={3}
       paddingTop={3}
       justifyContent="space-between"
       alignItems="center"
-      borderRadius={'3xl'}
-      borderWidth={0.25}
+      borderRadius={'md'}
       padding={1}
     >
       <Box>
         <Text
           color="black"
           fontWeight={'normal'}
-          fontSize={15}
+          fontSize={16}
           numberOfLines={1}
+          borderTopWidth={0.2}
+          borderBottomWidth={0.2}
         >
-          {' '}
-          Seu saldo:
+          Seu saldo
         </Text>
       </Box>
 

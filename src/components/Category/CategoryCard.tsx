@@ -12,29 +12,26 @@ export type Props = TouchableOpacityProps & {
 
 export function CategoryCard({ data, ...rest }: Props) {
   return (
-    <VStack
-      flex={1}
-      backgroundColor={'gray.100'}
-      borderTopWidth={0.23}
-      borderBottomWidth={0.24}
-    >
+    <VStack flex={1} backgroundColor={'gray.100'} borderBottomWidth={0.3}>
       <TouchableOpacity {...rest}>
         <Box
-          size={24}
+          size={20}
+          marginBottom={1}
           backgroundColor="gray.100"
           alignItems="center"
           marginLeft={1}
           marginRight={1}
-          borderWidth={0.3}
-          borderColor={'blue.200'}
+          borderWidth={1}
+          borderColor={'green.300'}
           pb={1}
           pt={1}
           borderRadius={'md'}
           minH={'16'}
         >
           <Image
-            w={20}
-            h={16}
+            marginTop={1}
+            w={16}
+            h={12}
             source={{
               uri: data.image, //busca a URL da imagem
               //uri: `${api.defaults.baseURL}/images/thumb/${data.image}`, //busca o arquivo salvo no banco
@@ -49,7 +46,7 @@ export function CategoryCard({ data, ...rest }: Props) {
               <Text
                 textAlign={'center'}
                 justifyContent={'center'}
-                fontSize={14}
+                fontSize={12}
                 fontWeight={'semibold'}
                 numberOfLines={2}
               >
