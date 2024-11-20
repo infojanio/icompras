@@ -41,6 +41,8 @@ import { ProductCategory } from './Product/ProductCategory'
 import { Catalog } from '@utils/inuteis/Catalog'
 import { SeparatorItem } from '@components/SeparatorItem'
 
+import ExtraDimensions from 'react-native-extra-dimensions-android' //capturar o tamanho da tela do android
+
 type RouteParamsProps = {
   categoryId: string
 }
@@ -166,6 +168,8 @@ export function Home() {
       <ScrollView w={['380', '600']} h="120">
         <VStack flex={1} pt={1} bg={'gray.100'}>
           <Category />
+          <ProductList />
+          <ProductList />
           <ProductList />
         </VStack>
       </ScrollView>

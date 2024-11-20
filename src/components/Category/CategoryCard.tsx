@@ -25,7 +25,7 @@ export function CategoryCard({ data, ...rest }: Props) {
           alignItems="center"
           marginLeft={1}
           marginRight={1}
-          borderWidth={1.3}
+          borderWidth={0.3}
           borderColor={'blue.200'}
           pb={1}
           pt={1}
