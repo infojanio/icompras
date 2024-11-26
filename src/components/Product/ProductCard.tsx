@@ -22,7 +22,7 @@ export function ProductCard({ product, ...rest }: ProductCardProps) {
         rounded="md"
         mb="1"
         borderWidth={1.2}
-        borderColor={'green.200'}
+        borderColor={'gray.100'}
       >
         <Center>
           <VStack mt="1" mb="1">
@@ -60,7 +60,7 @@ export function ProductCard({ product, ...rest }: ProductCardProps) {
           <Center h={6} w={32}>
             <Text
               color={'black'}
-              fontWeight={'normal'}
+              fontWeight={'bold'}
               fontSize="14"
               numberOfLines={2}
             >

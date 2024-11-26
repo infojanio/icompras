@@ -12,7 +12,7 @@ export type Props = TouchableOpacityProps & {
 
 export function CategoryCard({ data, ...rest }: Props) {
   return (
-    <VStack flex={1} backgroundColor={'gray.100'} borderBottomWidth={0.3}>
+    <VStack flex={1} backgroundColor={'gray.100'}>
       <TouchableOpacity {...rest}>
         <Box
           size={20}
@@ -21,8 +21,8 @@ export function CategoryCard({ data, ...rest }: Props) {
           alignItems="center"
           marginLeft={1}
           marginRight={1}
-          borderWidth={1}
-          borderColor={'green.300'}
+          borderWidth={0.8}
+          borderColor={'gray.200'}
           pb={1}
           pt={1}
           borderRadius={'md'}

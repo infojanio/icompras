@@ -22,26 +22,17 @@ import { AppError } from '@utils/AppError'
 import { api } from '@services/api'
 import { useAuth } from '@hooks/useAuth'
 
-import { Group } from '@components/Product/Group'
-
 import { ProductDTO } from '@dtos/ProductDTO'
 import { SubCategoryDTO } from '@dtos/SubCategoryDTO'
-import { ProductCard } from '@components/Product/ProductCard'
-import { Loading } from '@components/Loading'
+
 import { AppNavigatorRoutesProps } from '@routes/app.routes'
-import { CategoryDTO } from '@dtos/CategoryDTO'
+
 import { HomeHeader } from '@components/HomeHeader'
 import { Category } from '@components/Category'
-import { Promotion } from '@components/Promotion'
-import { ProductBySubCategory } from './Product/ProductBySubCategory'
-import { Department } from '@utils/inuteis/Departments'
-import { Product } from '@components/Product'
-import { ProductList } from './Product/ProductList'
-import { ProductCategory } from './Product/ProductCategory'
-import { Catalog } from '@utils/inuteis/Catalog'
-import { SeparatorItem } from '@components/SeparatorItem'
 
-import ExtraDimensions from 'react-native-extra-dimensions-android' //capturar o tamanho da tela do android
+import { ProductList } from './Product/ProductList'
+
+import Promotions from './Promotions'
 
 type RouteParamsProps = {
   categoryId: string
@@ -160,13 +151,14 @@ export function Home() {
   )
 
   return (
-    <VStack flex={1} bg={'gray.100'}>
+    <VStack flex={1} bg={'gray.400'}>
       <Box>
         <HomeHeader />
       </Box>
 
-      <ScrollView w={['380', '600']} h="120">
+      <ScrollView flex={1} showsVerticalScrollIndicator={false}>
         <VStack flex={1} pt={1} bg={'gray.100'}>
+          <Promotions />
           <Category />
           <ProductList />
           <ProductList />
