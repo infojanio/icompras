@@ -30,7 +30,7 @@ const { width } = Dimensions.get('window')
 
 export function Promotion() {
   //barra de itens
-  const [activeIndex, setActiveIndex] = useState(0)
+  const [activeIndex, setActiveIndex] = useState<number>(0)
 
   return (
     <SafeAreaView style={styles.container}>
