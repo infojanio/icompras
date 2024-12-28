@@ -17,8 +17,6 @@ import {
 
 import { useForm, Controller } from 'react-hook-form'
 
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 
@@ -35,12 +33,7 @@ import { MaterialIcons } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 import { AppError } from '@utils/AppError'
 import { AuthNavigatorRoutesProps } from '@routes/auth.routes'
-import {
-  Alert,
-  Keyboard,
-  Platform,
-  TouchableWithoutFeedback,
-} from 'react-native'
+import { Alert, Keyboard, TouchableWithoutFeedback } from 'react-native'
 
 type FormDataProps = {
   email: string

@@ -1,93 +1,94 @@
-import { useEffect, useState } from 'react'
-import { FlatList, HStack, VStack, useToast } from 'native-base'
+import React, { useState } from 'react'
 
-import { api } from '@services/api'
-import { AppError } from '@utils/AppError'
+import { Dimensions, SafeAreaView, StyleSheet } from 'react-native'
 
-import { PromotionCard } from '@components/Promotion/PromotionCard'
+import { FlatList, Box, View, Image } from 'native-base'
 
-import { useNavigation, useRoute } from '@react-navigation/native'
-import { AppNavigatorRoutesProps } from '@routes/app.routes'
-import { PromotionDTO } from '@dtos/PromotionDTO'
-import { Loading } from '@components/Loading'
-import { CompanyDTO } from '@dtos/CompanyDTO'
+import MeatImage from '../../assets/banner01.png'
+import IceImage from '../../assets/banner02.png'
+import HygieneImage from '../../assets/banner03.png'
+//import DrinkImage from '../../assets/acougue.png'
 
-type RouteParamsProps = {
-  promotionId: string
-}
+const images = [
+  {
+    id: 1,
+    image: MeatImage,
+  },
 
-type Props = {
-  promotion: string
-  data: PromotionDTO[]
-}
+  {
+    id: 2,
+    image: IceImage,
+  },
+
+  {
+    id: 3,
+    image: HygieneImage,
+  },
+]
+
+const { width } = Dimensions.get('window')
 
 export function Promotion() {
-  const [promotions, setPromotions] = useState<PromotionDTO[]>([])
-  const [isLoading, setIsLoading] = useState(true)
-
-  const navigation = useNavigation<AppNavigatorRoutesProps>()
-  const toast = useToast()
-
-  /*
-  function handleOpenSubCategories(categoryId: string) {
-    navigation.navigate('productBySubCategory', { categoryId })
-  }
-    */
-
-  //listar as categorias
-  async function fetchPromotions() {
-    try {
-      setIsLoading(true)
-      //const response = await api.get(`/companies/company/?company_id=${companyId}`,
-      const response = await api.get(`/promotions`)
-
-      //const response = await api.get('/categories/category/?category_id=${categoryId}')
-
-      setPromotions(response.data)
-      console.log(response.data)
-    } catch (error) {
-      const isAppError = error instanceof AppError
-      const title = isAppError
-        ? error.message
-        : 'Não foi possível carregar as promoções cadastradas'
-
-      toast.show({
-        title,
-        placement: 'top',
-        bgColor: 'red.500',
-      })
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
-  useEffect(() => {
-    fetchPromotions()
-  }, [])
+  //barra de itens
+  const [activeIndex, setActiveIndex] = useState<number>(0)
 
   return (
-    <HStack>
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <VStack flex={1}>
-          <FlatList
-            data={promotions}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => (
-              <PromotionCard
-                data={item}
-                //onPress={() => handleOpenSubCategories(item.id)}
-              />
-            )}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            _contentContainerStyle={{ px: 2 }}
-            mt={2}
-            mb={2}
+    <SafeAreaView style={styles.container}>
+      <FlatList
+        data={images}
+        style={{ maxHeight: width }}
+        pagingEnabled
+        scrollEnabled
+        initialScrollIndex={1}
+        horizontal
+        onMomentumScrollEnd={(event) => {
+          setActiveIndex(event.nativeEvent.contentOffset.x / width)
+        }}
+        scrollEventThrottle={36}
+        showsHorizontalScrollIndicator={false}
+        keyExtractor={(images) => String(images.id)}
+        renderItem={({ item }) => (
+          <Image
+            alt="promoções"
+            source={item.image}
+            width={width}
+            pt={2}
+            height={130}
+            marginLeft={1}
+            marginRight={1}
+            borderRadius={12}
           />
-        </VStack>
-      )}
-    </HStack>
+        )}
+      />
+
+      {images.length > 1 ? (
+        <Box flexDirection="row" justifyContent="center" marginTop={2}>
+          {images.map((_, i) => (
+            <View
+              key={i}
+              style={[
+                styles.dot,
+                { backgroundColor: i === activeIndex ? 'blue' : 'gray' },
+              ]}
+            />
+          ))}
+        </Box>
+      ) : null}
+    </SafeAreaView>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginTop: 2,
+    marginBottom: 4,
+  },
+
+  dot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    marginHorizontal: 2,
+  },
+})

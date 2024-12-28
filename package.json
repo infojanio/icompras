@@ -45,7 +45,6 @@
     "react-native-swiper": "^1.6.0-nightly.5",
     "react-native-virtualized-view": "^1.0.0",
     "react-native-web": "~0.19.13",
-    "styled-components": "^6.1.13",
     "yup": "^1.0.2"
   },
   "devDependencies": {

@@ -1,11 +1,5 @@
 import React, { useState } from 'react'
-import {
-  Alert,
-  Keyboard,
-  KeyboardAvoidingView,
-  Platform,
-  TouchableWithoutFeedback,
-} from 'react-native'
+import { Alert } from 'react-native'
 
 import { api } from '@services/api'
 
@@ -160,315 +154,302 @@ export function SignUp() {
   }
 
   return (
-    <KeyboardAvoidingView
-      style={{ flex: 1 }}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    <ScrollView
+      contentContainerStyle={{ flexGrow: 1 }}
+      showsVerticalScrollIndicator={false}
     >
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <ScrollView
-          contentContainerStyle={{ flexGrow: 1 }}
-          showsVerticalScrollIndicator={false}
-          keyboardShouldPersistTaps="handled"
-        >
-          <VStack
-            space={24}
-            direction="row"
-            marginTop="2"
-            marginBottom="2"
-            marginLeft="2"
-          >
-            {['sm'].map((size) => (
-              <IconButton
-                key={size}
-                borderRadius="full"
-                size={size}
-                variant="outline"
-                _icon={{
-                  as: Feather,
-                  name: 'chevron-left',
-                }}
-                onPress={handleGoBack}
+      <VStack
+        space={24}
+        direction="row"
+        marginTop="2"
+        marginBottom="2"
+        marginLeft="2"
+      >
+        {['sm'].map((size) => (
+          <IconButton
+            key={size}
+            borderRadius="full"
+            size={size}
+            variant="outline"
+            _icon={{
+              as: Feather,
+              name: 'chevron-left',
+            }}
+            onPress={handleGoBack}
+          />
+        ))}
+
+        <Center color="gray.100" fontSize="2xl" mb={2} paddingTop="0.5">
+          <Text fontSize="14" fontWeight={'bold'}>
+            {' '}
+            CADASTRO
+          </Text>
+        </Center>
+      </VStack>
+
+      <View marginBottom="2">
+        <VStack marginRight="4" marginLeft="4" borderRadius="2xl" bg="gray.50">
+          <Text ml={4} fontSize="14" color="gray.500">
+            Dados pessoais
+          </Text>
+
+          <Center marginRight="2" marginLeft="2">
+            <Box w="100%">
+              <Controller
+                control={control}
+                name="name"
+                render={({ field: { onChange, value } }) => (
+                  <Input
+                    InputLeftElement={
+                      <Icon
+                        as={<MaterialIcons name="person" />}
+                        size="sm"
+                        m={2}
+                        _light={{
+                          color: 'black',
+                        }}
+                        _dark={{
+                          color: 'gray.300',
+                        }}
+                      />
+                    }
+                    placeholder="Nome completo" // mx={4}
+                    _light={{
+                      placeholderTextColor: 'blueGray.400',
+                    }}
+                    _dark={{
+                      placeholderTextColor: 'blueGray.50',
+                    }}
+                    onChangeText={onChange}
+                    value={value}
+                    errorMessage={errors.name?.message}
+                  />
+                )}
               />
-            ))}
+            </Box>
 
-            <Center color="gray.100" fontSize="2xl" mb={2} paddingTop="0.5">
-              <Text fontSize="14" fontWeight={'bold'}>
-                {' '}
-                CADASTRO
-              </Text>
-            </Center>
-          </VStack>
-
-          <View marginBottom="2">
-            <VStack
-              marginRight="4"
-              marginLeft="4"
-              borderRadius="2xl"
-              bg="gray.50"
-            >
-              <Text ml={4} fontSize="14" color="gray.500">
-                Dados pessoais
-              </Text>
-
-              <Center marginRight="2" marginLeft="2">
-                <Box w="100%">
-                  <Controller
-                    control={control}
-                    name="name"
-                    render={({ field: { onChange, value } }) => (
-                      <Input
-                        InputLeftElement={
-                          <Icon
-                            as={<MaterialIcons name="person" />}
-                            size="sm"
-                            m={2}
-                            _light={{
-                              color: 'black',
-                            }}
-                            _dark={{
-                              color: 'gray.300',
-                            }}
-                          />
-                        }
-                        placeholder="Nome completo" // mx={4}
+            <Box w="100%">
+              <Controller
+                control={control}
+                name="email"
+                render={({ field: { onChange, value } }) => (
+                  <Input
+                    keyboardType="email-address"
+                    InputLeftElement={
+                      <Icon
+                        as={<MaterialIcons name="email" />}
+                        size="sm"
+                        m={2}
                         _light={{
-                          placeholderTextColor: 'blueGray.400',
+                          color: 'black',
                         }}
                         _dark={{
-                          placeholderTextColor: 'blueGray.50',
+                          color: 'gray.300',
                         }}
-                        onChangeText={onChange}
-                        value={value}
-                        errorMessage={errors.name?.message}
                       />
-                    )}
+                    }
+                    placeholder="E-mail" // mx={4}
+                    _light={{
+                      placeholderTextColor: 'blueGray.400',
+                    }}
+                    _dark={{
+                      placeholderTextColor: 'blueGray.50',
+                    }}
+                    onChangeText={onChange}
+                    value={value}
+                    errorMessage={errors.email?.message}
                   />
-                </Box>
+                )}
+              />
+            </Box>
 
-                <Box w="100%">
-                  <Controller
-                    control={control}
-                    name="email"
-                    render={({ field: { onChange, value } }) => (
-                      <Input
-                        keyboardType="email-address"
-                        InputLeftElement={
-                          <Icon
-                            as={<MaterialIcons name="email" />}
-                            size="sm"
-                            m={2}
-                            _light={{
-                              color: 'black',
-                            }}
-                            _dark={{
-                              color: 'gray.300',
-                            }}
-                          />
-                        }
-                        placeholder="E-mail" // mx={4}
+            <Box w="100%">
+              <Controller
+                control={control}
+                name="phone"
+                render={({ field: { onChange, value } }) => (
+                  <Input
+                    keyboardType="phone-pad"
+                    autoCapitalize="none"
+                    InputLeftElement={
+                      <Icon
+                        as={<MaterialIcons name="phone" />}
+                        size="sm"
+                        m={2}
                         _light={{
-                          placeholderTextColor: 'blueGray.400',
+                          color: 'black',
                         }}
                         _dark={{
-                          placeholderTextColor: 'blueGray.50',
+                          color: 'gray.300',
                         }}
-                        onChangeText={onChange}
-                        value={value}
-                        errorMessage={errors.email?.message}
                       />
-                    )}
+                    }
+                    placeholder="62999999999" // mx={4}
+                    _light={{
+                      placeholderTextColor: 'blueGray.400',
+                    }}
+                    _dark={{
+                      placeholderTextColor: 'blueGray.50',
+                    }}
+                    onChangeText={onChange}
+                    value={value}
+                    errorMessage={errors.phone?.message}
                   />
-                </Box>
+                )}
+              />
+            </Box>
 
-                <Box w="100%">
-                  <Controller
-                    control={control}
-                    name="phone"
-                    render={({ field: { onChange, value } }) => (
-                      <Input
-                        keyboardType="phone-pad"
-                        autoCapitalize="none"
-                        InputLeftElement={
-                          <Icon
-                            as={<MaterialIcons name="phone" />}
-                            size="sm"
-                            m={2}
-                            _light={{
-                              color: 'black',
-                            }}
-                            _dark={{
-                              color: 'gray.300',
-                            }}
-                          />
-                        }
-                        placeholder="62999999999" // mx={4}
+            <Box w="100%">
+              <Controller
+                control={control}
+                name="password"
+                render={({ field: { onChange, value } }) => (
+                  <Input
+                    type={show ? 'text' : 'password'}
+                    InputRightElement={
+                      <Stack
+                        maxWidth={32}
+                        direction={{
+                          md: 'row',
+                        }}
+                        space="4"
+                      >
+                        <Button
+                          borderRadius="none"
+                          size={'sm'}
+                          backgroundColor="gray.50"
+                          title=""
+                          ml={1}
+                          onPress={handleClick}
+                          variant="solid"
+                          rightIcon={
+                            <Icon
+                              as={MaterialIcons}
+                              name="visibility"
+                              size="lg"
+                              m={2}
+                              _light={{
+                                color: 'black',
+                              }}
+                              _dark={{
+                                color: 'gray.300',
+                              }}
+                            />
+                          }
+                        >
+                          {show ? 'Hide' : 'Show'}
+                        </Button>
+                      </Stack>
+                    }
+                    InputLeftElement={
+                      <Icon
+                        as={<MaterialIcons name="lock" />}
+                        size="sm"
+                        m={2}
                         _light={{
-                          placeholderTextColor: 'blueGray.400',
+                          color: 'black',
                         }}
                         _dark={{
-                          placeholderTextColor: 'blueGray.50',
+                          color: 'gray.300',
                         }}
-                        onChangeText={onChange}
-                        value={value}
-                        errorMessage={errors.phone?.message}
                       />
-                    )}
+                    }
+                    placeholder="Senha" // mx={4}
+                    _light={{
+                      placeholderTextColor: 'blueGray.400',
+                    }}
+                    _dark={{
+                      placeholderTextColor: 'blueGray.50',
+                    }}
+                    onChangeText={onChange}
+                    value={value}
+                    errorMessage={errors.password?.message}
                   />
-                </Box>
+                )}
+              />
+            </Box>
 
-                <Box w="100%">
-                  <Controller
-                    control={control}
-                    name="password"
-                    render={({ field: { onChange, value } }) => (
-                      <Input
-                        type={show ? 'text' : 'password'}
-                        InputRightElement={
-                          <Stack
-                            maxWidth={32}
-                            direction={{
-                              md: 'row',
-                            }}
-                            space="4"
-                          >
-                            <Button
-                              borderRadius="none"
-                              size={'sm'}
-                              backgroundColor="gray.50"
-                              title=""
-                              ml={1}
-                              onPress={handleClick}
-                              variant="solid"
-                              rightIcon={
-                                <Icon
-                                  as={MaterialIcons}
-                                  name="visibility"
-                                  size="lg"
-                                  m={2}
-                                  _light={{
-                                    color: 'black',
-                                  }}
-                                  _dark={{
-                                    color: 'gray.300',
-                                  }}
-                                />
-                              }
-                            >
-                              {show ? 'Hide' : 'Show'}
-                            </Button>
-                          </Stack>
-                        }
-                        InputLeftElement={
-                          <Icon
-                            as={<MaterialIcons name="lock" />}
-                            size="sm"
-                            m={2}
-                            _light={{
-                              color: 'black',
-                            }}
-                            _dark={{
-                              color: 'gray.300',
-                            }}
-                          />
-                        }
-                        placeholder="Senha" // mx={4}
+            <Box w="100%">
+              <Controller
+                control={control}
+                name="password_confirm"
+                render={({ field: { onChange, value } }) => (
+                  <Input
+                    type={show ? 'text' : 'password'}
+                    InputRightElement={
+                      <Stack
+                        maxWidth={32}
+                        direction={{
+                          md: 'row',
+                        }}
+                        space="4"
+                      >
+                        <Button
+                          borderRadius="none"
+                          size={'sm'}
+                          backgroundColor="gray.50"
+                          title=""
+                          ml={1}
+                          onPress={handleClick}
+                          variant="solid"
+                          rightIcon={
+                            <Icon
+                              as={MaterialIcons}
+                              name="visibility"
+                              size="lg"
+                              m={2}
+                              _light={{
+                                color: 'black',
+                              }}
+                              _dark={{
+                                color: 'gray.300',
+                              }}
+                            />
+                          }
+                        >
+                          {show ? 'Hide' : 'Show'}
+                        </Button>
+                      </Stack>
+                    }
+                    InputLeftElement={
+                      <Icon
+                        as={<MaterialIcons name="lock" />}
+                        size="sm"
+                        m={2}
                         _light={{
-                          placeholderTextColor: 'blueGray.400',
+                          color: 'black',
                         }}
                         _dark={{
-                          placeholderTextColor: 'blueGray.50',
+                          color: 'gray.300',
                         }}
-                        onChangeText={onChange}
-                        value={value}
-                        errorMessage={errors.password?.message}
                       />
-                    )}
+                    }
+                    placeholder="Confirme a Senha" // mx={4}
+                    _light={{
+                      placeholderTextColor: 'blueGray.400',
+                    }}
+                    _dark={{
+                      placeholderTextColor: 'blueGray.50',
+                    }}
+                    onChangeText={onChange}
+                    value={value}
+                    errorMessage={errors.password_confirm?.message}
                   />
-                </Box>
+                )}
+              />
+            </Box>
+          </Center>
+        </VStack>
+      </View>
 
-                <Box w="100%">
-                  <Controller
-                    control={control}
-                    name="password_confirm"
-                    render={({ field: { onChange, value } }) => (
-                      <Input
-                        type={show ? 'text' : 'password'}
-                        InputRightElement={
-                          <Stack
-                            maxWidth={32}
-                            direction={{
-                              md: 'row',
-                            }}
-                            space="4"
-                          >
-                            <Button
-                              borderRadius="none"
-                              size={'sm'}
-                              backgroundColor="gray.50"
-                              title=""
-                              ml={1}
-                              onPress={handleClick}
-                              variant="solid"
-                              rightIcon={
-                                <Icon
-                                  as={MaterialIcons}
-                                  name="visibility"
-                                  size="lg"
-                                  m={2}
-                                  _light={{
-                                    color: 'black',
-                                  }}
-                                  _dark={{
-                                    color: 'gray.300',
-                                  }}
-                                />
-                              }
-                            >
-                              {show ? 'Hide' : 'Show'}
-                            </Button>
-                          </Stack>
-                        }
-                        InputLeftElement={
-                          <Icon
-                            as={<MaterialIcons name="lock" />}
-                            size="sm"
-                            m={2}
-                            _light={{
-                              color: 'black',
-                            }}
-                            _dark={{
-                              color: 'gray.300',
-                            }}
-                          />
-                        }
-                        placeholder="Confirme a Senha" // mx={4}
-                        _light={{
-                          placeholderTextColor: 'blueGray.400',
-                        }}
-                        _dark={{
-                          placeholderTextColor: 'blueGray.50',
-                        }}
-                        onChangeText={onChange}
-                        value={value}
-                        errorMessage={errors.password_confirm?.message}
-                      />
-                    )}
-                  />
-                </Box>
-              </Center>
-            </VStack>
-          </View>
-
-          <View marginLeft="4" marginRight="4" marginTop="0.5">
-            <Button
-              title="Próximo"
-              onPress={handleSubmit(handleSignUp)}
-              isLoading={isLoading}
-            />
-          </View>
-        </ScrollView>
-      </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
+      <View marginLeft="4" marginRight="4" marginTop="0.5">
+        <Button
+          title="Próximo"
+          onPress={handleSubmit(handleSignUp)}
+          isLoading={isLoading}
+        />
+      </View>
+    </ScrollView>
   )
 }
 
