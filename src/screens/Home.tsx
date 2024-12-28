@@ -33,7 +33,7 @@ import { Category } from '@components/Category'
 import { ProductList } from './Product/ProductList'
 
 import Promotions from './Promotions'
-import { Promotion } from '@components/Promotion'
+import { Promotion } from '@components/Promotions'
 
 type RouteParamsProps = {
   categoryId: string
@@ -159,7 +159,6 @@ export function Home() {
 
       <ScrollView flex={1} showsVerticalScrollIndicator={false}>
         <VStack flex={1} pt={1} bg={'gray.100'}>
-          <Promotion />
           <Category />
           <ProductList />
           <ProductList />

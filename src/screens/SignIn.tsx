@@ -11,9 +11,12 @@ import {
   Divider,
   Stack,
   useToast,
+  KeyboardAvoidingView,
 } from 'native-base'
 
 import { useForm, Controller } from 'react-hook-form'
+
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -31,7 +34,12 @@ import { MaterialIcons } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 import { AppError } from '@utils/AppError'
 import { AuthNavigatorRoutesProps } from '@routes/auth.routes'
-import { Alert } from 'react-native'
+import {
+  Alert,
+  Keyboard,
+  Platform,
+  TouchableWithoutFeedback,
+} from 'react-native'
 
 type FormDataProps = {
   email: string
@@ -100,10 +108,7 @@ export function SignIn() {
   }
 
   return (
-    <ScrollView
-      contentContainerStyle={{ flexGrow: 1 }}
-      showsVerticalScrollIndicator={false}
-    >
+    <ScrollView showsVerticalScrollIndicator={false}>
       <VStack
         space={2}
         alignItems="center"
@@ -155,6 +160,8 @@ export function SignIn() {
                 name="email"
                 render={({ field: { onChange, value } }) => (
                   <Input
+                    onFocus={() => console.log('Input focado')}
+                    onBlur={() => console.log('Input desfocado')}
                     keyboardType="email-address"
                     InputLeftElement={
                       <Icon
@@ -190,6 +197,8 @@ export function SignIn() {
                 name="password"
                 render={({ field: { onChange, value } }) => (
                   <Input
+                    onFocus={() => console.log('Input focado')}
+                    onBlur={() => console.log('Input desfocado')}
                     type={show ? 'text' : 'password'}
                     InputRightElement={
                       <Stack
