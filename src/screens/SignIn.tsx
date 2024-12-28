@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import {
   VStack,
   Center,
@@ -12,6 +12,7 @@ import {
   Stack,
   useToast,
   KeyboardAvoidingView,
+  NativeBaseProvider,
 } from 'native-base'
 
 import { useForm, Controller } from 'react-hook-form'
@@ -63,6 +64,7 @@ export function SignIn() {
   const handleClick = () => setShow(!show)
 
   const navigation = useNavigation<AuthNavigatorRoutesProps>()
+  const inputRef = useRef(null)
 
   const toast = useToast()
 
@@ -108,211 +110,236 @@ export function SignIn() {
   }
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
-      <VStack
-        space={2}
-        alignItems="center"
-        direction="row"
-        marginTop="2"
-        marginLeft="2"
-      >
-        {['sm'].map((size) => (
-          <IconButton
-            key={size}
-            borderRadius="full"
-            size={size}
-            variant="outline"
-            _icon={{
-              as: Feather,
-              name: 'chevron-left',
-            }}
-            onPress={handleGoBack}
-          />
-        ))}
-      </VStack>
-
-      <View
-        justifyContent="center"
-        color="green.700"
-        fontSize="2xl"
-        mb={4}
-        paddingTop="0.5"
-        paddingLeft="10"
-      >
-        <Text
-          fontFamily="heading"
-          fontWeight="bold"
-          fontSize="3xl"
-          color="green.700"
-        >
-          Olá!
-        </Text>
-
-        <Text>Acesse sua conta ou cadastre-se</Text>
-      </View>
-
-      <View bg="green.500" pt="4" pb="20">
-        <VStack marginRight="4" marginLeft="4" borderRadius="2xl" bg="gray.50">
-          <Center marginTop="2" marginBottom="2" marginRight="2" marginLeft="2">
-            <Box w="100%">
-              <Controller
-                control={control}
-                name="email"
-                render={({ field: { onChange, value } }) => (
-                  <Input
-                    onFocus={() => console.log('Input focado')}
-                    onBlur={() => console.log('Input desfocado')}
-                    keyboardType="email-address"
-                    InputLeftElement={
-                      <Icon
-                        as={<MaterialIcons name="email" />}
-                        size="sm"
-                        m={2}
-                        _light={{
-                          color: 'black',
-                        }}
-                        _dark={{
-                          color: 'gray.400',
-                        }}
-                      />
-                    }
-                    placeholder="icompras@gmail.com" // mx={4}
-                    _light={{
-                      placeholderTextColor: 'blueGray.400',
-                    }}
-                    _dark={{
-                      placeholderTextColor: 'blueGray.50',
-                    }}
-                    onChangeText={onChange}
-                    value={value}
-                    errorMessage={errors.email?.message}
-                  />
-                )}
+    <NativeBaseProvider>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <VStack
+            space={2}
+            alignItems="center"
+            direction="row"
+            marginTop="2"
+            marginLeft="2"
+          >
+            {['sm'].map((size) => (
+              <IconButton
+                key={size}
+                borderRadius="full"
+                size={size}
+                variant="outline"
+                _icon={{
+                  as: Feather,
+                  name: 'chevron-left',
+                }}
+                onPress={handleGoBack}
               />
-            </Box>
+            ))}
+          </VStack>
 
-            <Box w="100%">
-              <Controller
-                control={control}
-                name="password"
-                render={({ field: { onChange, value } }) => (
-                  <Input
-                    onFocus={() => console.log('Input focado')}
-                    onBlur={() => console.log('Input desfocado')}
-                    type={show ? 'text' : 'password'}
-                    InputRightElement={
-                      <Stack
-                        maxWidth={32}
-                        direction={{
-                          md: 'row',
-                        }}
-                        space="4"
-                      >
-                        <Button
-                          borderRadius="none"
-                          size={'sm'}
-                          backgroundColor="gray.50"
-                          title=""
-                          ml={1}
-                          onPress={handleClick}
-                          variant="solid"
-                          rightIcon={
-                            <Icon
-                              as={MaterialIcons}
-                              name="visibility"
-                              size="lg"
-                              m={2}
-                              _light={{
-                                color: 'black',
-                              }}
-                              _dark={{
-                                color: 'gray.300',
-                              }}
-                            />
-                          }
-                        >
-                          {show ? 'Hide' : 'Show'}
-                        </Button>
-                      </Stack>
-                    }
-                    InputLeftElement={
-                      <Icon
-                        as={<MaterialIcons name="lock" />}
-                        size="sm"
-                        m={2}
-                        _light={{
-                          color: 'black',
-                        }}
-                        _dark={{
-                          color: 'gray.300',
-                        }}
-                      />
-                    }
-                    placeholder="Senha" // mx={4}
-                    _light={{
-                      placeholderTextColor: 'blueGray.400',
-                    }}
-                    _dark={{
-                      placeholderTextColor: 'blueGray.50',
-                    }}
-                    onChangeText={onChange}
-                    value={value}
-                    errorMessage={errors.password?.message}
-                  />
-                )}
-              />
-            </Box>
-            <View alignSelf={'flex-start'} mt="0" marginBottom="2"></View>
+          <View
+            justifyContent="center"
+            color="green.700"
+            fontSize="2xl"
+            mb={4}
+            paddingTop="0.5"
+            paddingLeft="10"
+          >
+            <Text
+              fontFamily="heading"
+              fontWeight="bold"
+              fontSize="3xl"
+              color="green.700"
+            >
+              Olá!
+            </Text>
 
-            <Button
-              title="Entrar"
-              fontWeight={'extrabold'}
-              onPress={handleSubmit(handleSignIn)}
-              isLoading={isLoading}
-            />
+            <Text>Acesse sua conta ou cadastre-se</Text>
+          </View>
 
-            <Center mt={2}>
-              <Text mb="2" color="red.700" fontSize="md">
-                Esqueci a minha senha
-              </Text>
-
-              <Box w="324">
-                <Divider my={10} bgColor="green.50" borderBottomWidth="0.2" />
-              </Box>
-
-              <Text
-                color="gray.700"
-                fontSize="md"
-                fontWeight="bold"
-                mt={4}
-                mb={2}
-                fontFamily="body"
+          <View bg="green.500" pt="4" pb="20">
+            <VStack
+              marginRight="4"
+              marginLeft="4"
+              borderRadius="2xl"
+              bg="gray.50"
+            >
+              <Center
+                marginTop="2"
+                marginBottom="2"
+                marginRight="2"
+                marginLeft="2"
               >
-                Ainda não tem acesso?
+                <Box w="100%">
+                  <Controller
+                    control={control}
+                    name="email"
+                    render={({ field: { onChange, value } }) => (
+                      <Input
+                        style={{ zIndex: 1 }} // Garantir que o Input tenha prioridade
+                        onFocus={() => console.log('Input focado')}
+                        onBlur={() => console.log('Input desfocado')}
+                        keyboardType="email-address"
+                        InputLeftElement={
+                          <Icon
+                            as={<MaterialIcons name="email" />}
+                            size="sm"
+                            m={2}
+                            _light={{
+                              color: 'black',
+                            }}
+                            _dark={{
+                              color: 'gray.400',
+                            }}
+                          />
+                        }
+                        placeholder="icompras@gmail.com" // mx={4}
+                        _light={{
+                          placeholderTextColor: 'blueGray.400',
+                        }}
+                        _dark={{
+                          placeholderTextColor: 'blueGray.50',
+                        }}
+                        onChangeText={onChange}
+                        value={value}
+                        errorMessage={errors.email?.message}
+                      />
+                    )}
+                  />
+                </Box>
+
+                <Box w="100%">
+                  <Controller
+                    control={control}
+                    name="password"
+                    render={({ field: { onChange, value } }) => (
+                      <Input
+                        style={{ zIndex: 1 }} // Garantir que o Input tenha prioridade
+                        onFocus={() => console.log('Input focado')}
+                        onBlur={() => console.log('Input desfocado')}
+                        type={show ? 'text' : 'password'}
+                        InputRightElement={
+                          <Stack
+                            maxWidth={32}
+                            direction={{
+                              md: 'row',
+                            }}
+                            space="4"
+                          >
+                            <Button
+                              borderRadius="none"
+                              size={'sm'}
+                              backgroundColor="gray.50"
+                              title=""
+                              ml={1}
+                              onPress={handleClick}
+                              variant="solid"
+                              rightIcon={
+                                <Icon
+                                  as={MaterialIcons}
+                                  name="visibility"
+                                  size="lg"
+                                  m={2}
+                                  _light={{
+                                    color: 'black',
+                                  }}
+                                  _dark={{
+                                    color: 'gray.300',
+                                  }}
+                                />
+                              }
+                            >
+                              {show ? 'Hide' : 'Show'}
+                            </Button>
+                          </Stack>
+                        }
+                        InputLeftElement={
+                          <Icon
+                            as={<MaterialIcons name="lock" />}
+                            size="sm"
+                            m={2}
+                            _light={{
+                              color: 'black',
+                            }}
+                            _dark={{
+                              color: 'gray.300',
+                            }}
+                          />
+                        }
+                        placeholder="Senha" // mx={4}
+                        _light={{
+                          placeholderTextColor: 'blueGray.400',
+                        }}
+                        _dark={{
+                          placeholderTextColor: 'blueGray.50',
+                        }}
+                        onChangeText={onChange}
+                        value={value}
+                        errorMessage={errors.password?.message}
+                      />
+                    )}
+                  />
+                </Box>
+                <View alignSelf={'flex-start'} mt="0" marginBottom="2"></View>
+
+                <Button
+                  title="Entrar"
+                  fontWeight={'extrabold'}
+                  onPress={handleSubmit(handleSignIn)}
+                  isLoading={isLoading}
+                />
+
+                <Center mt={2}>
+                  <Text mb="2" color="red.700" fontSize="md">
+                    Esqueci a minha senha
+                  </Text>
+
+                  <Box w="324">
+                    <Divider
+                      my={10}
+                      bgColor="green.50"
+                      borderBottomWidth="0.2"
+                    />
+                  </Box>
+
+                  <Text
+                    color="gray.700"
+                    fontSize="md"
+                    fontWeight="bold"
+                    mt={4}
+                    mb={2}
+                    fontFamily="body"
+                  >
+                    Ainda não tem acesso?
+                  </Text>
+                </Center>
+
+                <Button
+                  title="Cadastra-se"
+                  color={'white'}
+                  variant="solid"
+                  onPress={handleNewAccount}
+                />
+              </Center>
+            </VStack>
+
+            <Center
+              my="2"
+              flexDirection="row"
+              alignItems="center"
+              marginLeft={2}
+            >
+              <LogoSvg />
+              <Text
+                color="gray.100"
+                fontWeight="extrabold"
+                fontSize="lg"
+                fontStyle="italic"
+              >
+                @iCompras
               </Text>
             </Center>
-
-            <Button
-              title="Cadastra-se"
-              color={'white'}
-              variant="solid"
-              onPress={handleNewAccount}
-            />
-          </Center>
-        </VStack>
-
-        <Center my="2" flexDirection="row" alignItems="center" marginLeft={2}>
-          <LogoSvg />
-          <Text
-            color="gray.100"
-            fontWeight="extrabold"
-            fontSize="lg"
-            fontStyle="italic"
-          >
-            @iCompras
-          </Text>
-        </Center>
-      </View>
-    </ScrollView>
+          </View>
+        </ScrollView>
+      </TouchableWithoutFeedback>
+    </NativeBaseProvider>
   )
 }
