@@ -57,7 +57,6 @@ export function SignIn() {
   const handleClick = () => setShow(!show)
 
   const navigation = useNavigation<AuthNavigatorRoutesProps>()
-  const inputRef = useRef(null)
 
   const toast = useToast()
 

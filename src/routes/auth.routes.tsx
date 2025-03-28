@@ -15,10 +15,6 @@ type AuthRoutes = {
   home: { userId: string }
   signin: undefined
   signup: undefined
-
-  //supermarket: undefined
-  //forgotPassword: undefined
-  // address: undefined
   localization: undefined
 }
 

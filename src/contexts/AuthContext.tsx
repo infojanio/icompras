@@ -17,6 +17,7 @@ import { api } from '@services/api'
 
 export type AuthContextDataProps = {
   user: UserDTO
+  userId: string
   signIn: (email: string, password: string) => Promise<void>
   signOut: () => Promise<void>
   isLoadingUserStorageData: boolean
@@ -30,81 +31,110 @@ export const AuthContext = createContext<AuthContextDataProps>(
   {} as AuthContextDataProps,
 )
 
-//criação de contexto
 export function AuthContextProvider({ children }: AuthContextProviderProps) {
-  //armazenamos os dados em um estado
   const [user, setUser] = useState<UserDTO>({} as UserDTO)
   const [isLoadingUserStorageData, setIsLoadingUserStorageData] = useState(true)
 
-  //atualiza o token do cabeçalho e salva dados do usuário no estado
+  const userId = user?.id ?? ''
+
+  // Atualiza o token no cabeçalho e o estado do usuário
   async function userAndTokenUpdate(userData: UserDTO, token: string) {
-    api.defaults.headers.common['Authorization'] = `Bearer ${token}` //o backend procura o token
+    console.log('[AuthContext] Atualizando usuário e token...', {
+      userData,
+      token,
+    })
+    api.defaults.headers.common['Authorization'] = `Bearer ${token}`
     setUser(userData)
   }
 
-  //salva as informações no dispositivo
+  // Salva as informações no armazenamento local
   async function storageUserAndTokenSave(
     userData: UserDTO,
     token: string,
-    refresh_token: string,
+    refreshToken: string,
   ) {
     try {
-      setIsLoadingUserStorageData(true)
-
+      console.log('[AuthContext] Salvando usuário e token...', {
+        userData,
+        token,
+        refreshToken,
+      })
       await storageUserSave(userData)
-      await storageAuthTokenSave({ token, refresh_token })
+      await storageAuthTokenSave({ token, refreshToken })
     } catch (error) {
+      console.error('[AuthContext] Erro ao salvar usuário e token:', error)
       throw error
-    } finally {
-      setIsLoadingUserStorageData(false)
     }
   }
 
-  //Faz a autenticação no aplicativo
+  // Autenticação do usuário
   async function signIn(email: string, password: string) {
     try {
-      const { data } = await api.post('/sessions', { email, password })
-      // console.log(data)
+      console.log('[AuthContext] Fazendo login...')
 
-      if (data.user && data.token && data.refresh_token) {
-        await storageUserAndTokenSave(data.user, data.token, data.refresh_token)
-        userAndTokenUpdate(data.user, data.token) // atualiza o estado e o token
+      const { data } = await api.post('/sessions', { email, password })
+      console.log('[AuthContext] Resposta da API:', data)
+
+      if (data.user && data.accessToken && data.refreshToken) {
+        await storageUserAndTokenSave(
+          data.user,
+          data.accessToken,
+          data.refreshToken,
+        )
+        await userAndTokenUpdate(data.user, data.accessToken)
+      } else {
+        console.error('[AuthContext] Dados inválidos retornados da API!')
       }
     } catch (error) {
+      console.error('[AuthContext] Erro ao fazer login:', error)
       throw error
     } finally {
       setIsLoadingUserStorageData(false)
     }
   }
 
-  //deslogar o usuário
+  // Faz logout do usuário
   async function signOut() {
     try {
-      setIsLoadingUserStorageData(true) //ativa o loading
-      setUser({} as UserDTO) //limpa o estado de usuário logado
+      console.log('[AuthContext] Fazendo logout...')
+      setIsLoadingUserStorageData(true)
 
-      await storageUserRemove() //remove o usuário do storage
-      await storageAuthTokenRemove() //remove o token
+      setUser({} as UserDTO)
+      await storageUserRemove()
+      await storageAuthTokenRemove()
+      delete api.defaults.headers.common['Authorization']
+
+      console.log('[AuthContext] Logout realizado com sucesso!')
     } catch (error) {
+      console.error('[AuthContext] Erro ao fazer logout:', error)
       throw error
     } finally {
       setIsLoadingUserStorageData(false)
     }
   }
 
-  //retorna os dados do token e do usuário logado
+  // Carrega os dados do usuário do armazenamento local
   async function loadUserData() {
     try {
       setIsLoadingUserStorageData(true)
+      console.log('[AuthContext] Carregando dados do usuário...')
 
       const userLogged = await storageUserGet()
-      const { token } = await storageAuthTokenGet()
+      const storedToken = await storageAuthTokenGet()
 
-      if (token && userLogged) {
-        userAndTokenUpdate(userLogged, token) //atualiza o estado e coloca o token no cabeçalho
+      console.log('[AuthContext] Dados do AsyncStorage:', {
+        userLogged,
+        storedToken,
+      })
+
+      if (storedToken?.token && userLogged?.id) {
+        await userAndTokenUpdate(userLogged, storedToken.token)
+      } else {
+        console.warn('[AuthContext] Nenhum usuário logado encontrado!')
+        setUser({} as UserDTO)
       }
     } catch (error) {
-      throw error
+      console.error('[AuthContext] Erro ao carregar usuário:', error)
     } finally {
       setIsLoadingUserStorageData(false)
     }
@@ -118,6 +148,7 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
     <AuthContext.Provider
       value={{
         user,
+        userId,
         signIn,
         signOut,
         isLoadingUserStorageData,

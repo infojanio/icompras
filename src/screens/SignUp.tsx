@@ -30,6 +30,7 @@ import { Button } from '@components/Button'
 import { StackNavigatorRoutesProps } from '@routes/stack.routes'
 import { AppError } from '@utils/AppError'
 import { useAuth } from '@hooks/useAuth'
+import { SeparatorItem } from '@components/SeparatorItem'
 
 type FormDataProps = {
   //dados na tabela users
@@ -38,17 +39,18 @@ type FormDataProps = {
   phone: string
   password: string
   password_confirm: string
-  //avatar: string
+  avatar: string
   //type: string
   //isAdmin: string
 
-  /*dados na tabela addresses
-  city: string
-  cep: string
-  district: string
-  street: string
-  complement: string
-  */
+  /*dados na tabela addresses*/
+  address: {
+    street: string
+    city: string
+    state: string
+    postalCode: string
+    user_id: string
+  }
 }
 
 const signUpSchema = yup.object({
@@ -65,11 +67,10 @@ const signUpSchema = yup.object({
     .required('Confirme a senha')
     .oneOf([yup.ref('password')], 'A senha digitada não confere!'), //verifica se a senha são iguais
 
-  /*
-   city: yup.string().required('Informe a cidade'),
-  district: yup.string().required('Informe o bairro'),
   street: yup.string().required('Informe a rua'),
-  */
+  city: yup.string().required('Informe a cidade'),
+  state: yup.string().required('Informe o bairro'),
+  postalCode: yup.string().required('Informe o CEP'),
 })
 
 export function SignUp() {
@@ -103,15 +104,8 @@ export function SignUp() {
     email,
     phone,
     password,
-  }: /*
-    type,
-    city,
-    cep,
-    district,
-    street,
-    complement,
-    */
-  FormDataProps) {
+    address: { street, city, state, postalCode },
+  }: FormDataProps) {
     try {
       setIsLoading(true)
 
@@ -120,7 +114,12 @@ export function SignUp() {
         email,
         phone,
         password,
-        // type,
+        address: {
+          street,
+          city,
+          state,
+          postalCode,
+        },
       })
 
       await signIn(email, password) //loga no app após cadastro
@@ -442,19 +441,6 @@ export function SignUp() {
         </VStack>
       </View>
 
-      <View marginLeft="4" marginRight="4" marginTop="0.5">
-        <Button
-          title="Próximo"
-          onPress={handleSubmit(handleSignUp)}
-          isLoading={isLoading}
-        />
-      </View>
-    </ScrollView>
-  )
-}
-
-{
-  /* 
       <View marginBottom="2">
         <SeparatorItem />
         <VStack marginRight="4" marginLeft="4" borderRadius="2xl" bg="gray.50">
@@ -466,7 +452,7 @@ export function SignUp() {
             <Box w="100%">
               <Controller
                 control={control}
-                name="city"
+                name="address.city"
                 render={({ field: { onChange, value } }) => (
                   <Input
                     InputLeftElement={
@@ -491,7 +477,7 @@ export function SignUp() {
                     }}
                     onChangeText={onChange}
                     value={value}
-                    errorMessage={errors.city?.message}
+                    errorMessage={errors.address?.message}
                   />
                 )}
               />
@@ -500,7 +486,7 @@ export function SignUp() {
             <Box w="100%">
               <Controller
                 control={control}
-                name="cep"
+                name="address.postalCode"
                 render={({ field: { onChange, value } }) => (
                   <Input
                     keyboardType="phone-pad"
@@ -527,7 +513,7 @@ export function SignUp() {
                     }}
                     onChangeText={onChange}
                     value={value}
-                    errorMessage={errors.cep?.message}
+                    errorMessage={errors.address?.message}
                   />
                 )}
               />
@@ -536,12 +522,14 @@ export function SignUp() {
             <Box w="100%">
               <Controller
                 control={control}
-                name="district"
+                name="address.state"
                 render={({ field: { onChange, value } }) => (
                   <Input
+                    keyboardType="phone-pad"
+                    autoCapitalize="none"
                     InputLeftElement={
                       <Icon
-                        as={<MaterialIcons name="content-paste" />}
+                        as={<MaterialIcons name="post-add" />}
                         size="sm"
                         m={2}
                         _light={{
@@ -552,7 +540,7 @@ export function SignUp() {
                         }}
                       />
                     }
-                    placeholder="Bairro" // mx={4}
+                    placeholder="Goiás" // mx={4}
                     _light={{
                       placeholderTextColor: 'blueGray.400',
                     }}
@@ -561,7 +549,7 @@ export function SignUp() {
                     }}
                     onChangeText={onChange}
                     value={value}
-                    errorMessage={errors.district?.message}
+                    errorMessage={errors.address?.message}
                   />
                 )}
               />
@@ -570,7 +558,7 @@ export function SignUp() {
             <Box w="100%">
               <Controller
                 control={control}
-                name="street"
+                name="address.street"
                 render={({ field: { onChange, value } }) => (
                   <Input
                     InputLeftElement={
@@ -595,42 +583,7 @@ export function SignUp() {
                     }}
                     onChangeText={onChange}
                     value={value}
-                    errorMessage={errors.street?.message}
-                  />
-                )}
-              />
-            </Box>
-
-            <Box w="100%">
-              <Controller
-                control={control}
-                name="complement"
-                render={({ field: { onChange, value } }) => (
-                  <Input
-                    InputLeftElement={
-                      <Icon
-                        as={<MaterialIcons name="perm-device-info" />}
-                        size="sm"
-                        m={2}
-                        _light={{
-                          color: 'black',
-                        }}
-                        _dark={{
-                          color: 'gray.300',
-                        }}
-                      />
-                    }
-                    placeholder="Complemento" // mx={4}
-                    _light={{
-                      placeholderTextColor: 'blueGray.400',
-                    }}
-                    _dark={{
-                      placeholderTextColor: 'blueGray.50',
-                    }}
-                    onChangeText={onChange}
-                    value={value}
-                    onSubmitEditing={handleSubmit(handleSignUp)}
-                    returnKeyType="send"
+                    errorMessage={errors.address?.message}
                   />
                 )}
               />
@@ -638,5 +591,14 @@ export function SignUp() {
           </Center>
         </VStack>
       </View>
-*/
+
+      <View marginLeft="4" marginRight="4" marginTop="0.5">
+        <Button
+          title="Próximo"
+          onPress={handleSubmit(handleSignUp)}
+          isLoading={isLoading}
+        />
+      </View>
+    </ScrollView>
+  )
 }

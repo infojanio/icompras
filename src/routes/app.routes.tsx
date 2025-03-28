@@ -26,7 +26,7 @@ import { ProductBySubCategory } from '@screens/Product/ProductBySubCategory'
 import { Category } from '@components/Category'
 
 type AppRoutes = {
-  home: { UserId: string }
+  home: { userId: string }
   //homeScreen: { UserId: string } // undefined
   search: undefined
   cart: undefined
