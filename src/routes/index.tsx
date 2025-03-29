@@ -19,7 +19,7 @@ export function Routes() {
   theme.colors.background = colors.gray[100]
 
   useEffect(() => {
-    console.log('Usuário logado =>', user)
+    console.log('Usuário logado =>', user.name)
   }, [user])
 
   //verifica se os dados do user estão sendo carregados

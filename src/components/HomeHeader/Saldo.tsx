@@ -28,8 +28,7 @@ export function Saldo() {
 
       <Box>
         <Text color="black" fontWeight={'bold'} fontSize={24} numberOfLines={1}>
-          {/*'R$ {user.name} '*/}
-          R$ 0,00
+          R$ {(Number(user.balance) || 0).toFixed(2)}
         </Text>
       </Box>
     </VStack>

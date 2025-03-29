@@ -54,7 +54,7 @@ export function Home() {
   const [products, setProducts] = useState<ProductDTO[]>([])
 
   //const [categorySelected, setCategorySelected] = useState(categoryId)
-  const [subCategorySelected, setSubCategorySelected] = useState('Detergentes')
+  const [subCategorySelected, setSubCategorySelected] = useState('categoryId')
 
   const navigation = useNavigation<AppNavigatorRoutesProps>()
 
@@ -62,6 +62,30 @@ export function Home() {
 
   function handleOpenProductDetails(productId: string) {
     navigation.navigate('productDetails', { productId })
+  }
+
+  //listar as categories no select
+  async function fetchCategories() {
+    try {
+      setIsLoading(true)
+      const response = await api.get('/categories')
+
+      console.log(response.data)
+      setSubCategories(response.data)
+    } catch (error) {
+      const isAppError = error instanceof AppError
+      const title = isAppError
+        ? error.message
+        : 'Não foi possível carregar as subcategorias'
+
+      toast.show({
+        title,
+        placement: 'top',
+        bgColor: 'red.500',
+      })
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   //listar as subcategories no select
@@ -117,9 +141,9 @@ export function Home() {
     try {
       setIsLoading(true)
 
-      const response = await api.get(
-        `/products/subcategory/?subcategory_id=${subCategorySelected}`,
-      )
+      if (!subCategorySelected) return // Evita requisições desnecessárias
+
+      const response = await api.get(`/products/${subCategorySelected}`)
       setProducts(response.data)
     } catch (error) {
       const isAppError = error instanceof AppError
@@ -138,7 +162,7 @@ export function Home() {
   }
 
   useEffect(() => {
-    fetchSubCategories()
+    fetchCategories()
 
     //
   }, [subCategorySelected])
@@ -147,7 +171,10 @@ export function Home() {
 
   useFocusEffect(
     useCallback(() => {
-      fetchProductsBySubcategory()
+      if (subCategorySelected) {
+        //fetchProductsBySubcategory()
+        fetchProducts()
+      }
     }, [subCategorySelected]),
   )
 
@@ -161,8 +188,6 @@ export function Home() {
         <VStack flex={1} pt={1} bg={'gray.100'}>
           <Promotion />
           <Category />
-          <ProductList />
-          <ProductList />
           <ProductList />
         </VStack>
       </ScrollView>

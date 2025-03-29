@@ -24,8 +24,6 @@ type Props = {
 
 export function Category() {
   const [categories, setCategories] = useState<CategoryDTO[]>([])
-
-  const [companies, setCompanies] = useState<CompanyDTO[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
   const navigation = useNavigation<AppNavigatorRoutesProps>()

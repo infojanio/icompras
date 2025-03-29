@@ -162,10 +162,9 @@ export function ProductBySubCategory() {
                 name={item.name}
                 subcategory={item.id}
                 isActive={
-                  subCategorySelected.toLocaleUpperCase() ===
-                  item.name.toLocaleUpperCase()
+                  subCategorySelected.toLocaleUpperCase() === item.id //item.name.toLocaleUpperCase()
                 }
-                onPress={() => setSubCategorySelected(item.name)} //o segredo tá aqui, passando id = subcategory_id
+                onPress={() => setSubCategorySelected(item.id)} //o segredo tá aqui, passando id = subcategory_id ->setSubCategorySelected(item.name)}
               />
             )}
             horizontal

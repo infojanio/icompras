@@ -1,11 +1,12 @@
 export type ProductDTO = {
   id: string
   name: string
+  description: string
   price: number
   quantity: number
-  available: boolean
-  subcategory_id: string
-  company_id: string
-  tenant_id: string
   image: string
+  cashbackPercentage: number
+  store_id: string
+  subcategory_id: string
+  status: boolean
 }

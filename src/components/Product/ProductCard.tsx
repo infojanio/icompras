@@ -54,18 +54,24 @@ export function ProductCard({ product, ...rest }: ProductCardProps) {
 
           <Box bg="red.500" rounded="md" pl="1" pr="1">
             <Text fontSize="13" color="gray.100" numberOfLines={1}>
-              {product.quantity} % cashback
+              {product.quantity} unidades
             </Text>
           </Box>
-          <Center h={6} w={32}>
+          <Center h={10} w={32}>
             <Text
               color={'black'}
               fontWeight={'bold'}
-              fontSize="14"
+              fontSize="16"
               numberOfLines={2}
             >
-              Ganhe R$ {product.price}
+              R$ {product.price}
             </Text>
+
+            <Box bg="green.500" rounded="md" pl="1" pr="1">
+              <Text fontSize="13" color="gray.100" numberOfLines={1}>
+                {product.cashbackPercentage} %
+              </Text>
+            </Box>
           </Center>
         </Center>
       </VStack>
