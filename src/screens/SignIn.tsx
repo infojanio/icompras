@@ -143,7 +143,6 @@ export function SignIn() {
             >
               Olá!
             </Text>
-
             <Text>Acesse sua conta ou cadastre-se</Text>
           </View>
 

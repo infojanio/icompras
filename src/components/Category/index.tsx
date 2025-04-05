@@ -10,7 +10,6 @@ import { useNavigation, useRoute } from '@react-navigation/native'
 import { AppNavigatorRoutesProps } from '@routes/app.routes'
 import { CategoryDTO } from '@dtos/CategoryDTO'
 import { Loading } from '@components/Loading'
-import { CompanyDTO } from '@dtos/CompanyDTO'
 
 type RouteParamsProps = {
   categoryId: string
@@ -30,7 +29,7 @@ export function Category() {
   const toast = useToast()
 
   function handleOpenSubCategories(categoryId: string) {
-    navigation.navigate('productBySubCategory', { categoryId })
+    navigation.navigate('productsBySubCategory', { categoryId })
   }
 
   //listar as categorias

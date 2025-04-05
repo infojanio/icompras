@@ -24,6 +24,7 @@ import { ProductDetails } from '@screens/Product/ProductDetails'
 import { ProductBySubCategory } from '@screens/Product/ProductBySubCategory'
 
 import { Category } from '@components/Category'
+import { ProductsBySubCategory } from '@screens/Product/ProductsBySubCategory'
 
 type AppRoutes = {
   home: { userId: string }
@@ -37,6 +38,7 @@ type AppRoutes = {
 
   productDetails: { productId: string }
   productBySubCategory: { categoryId: string }
+  productsBySubCategory: { categoryId: string }
   category: undefined
 }
 
@@ -169,6 +171,14 @@ export function AppRoutes() {
       <Screen
         name="category"
         component={Category}
+        options={{
+          tabBarButton: () => null,
+        }} //não mostra ícone
+      />
+
+      <Screen
+        name="productsBySubCategory"
+        component={ProductsBySubCategory}
         options={{
           tabBarButton: () => null,
         }} //não mostra ícone

@@ -15,7 +15,7 @@ export function CategoryCard({ data, ...rest }: Props) {
     <VStack flex={1} backgroundColor={'gray.100'}>
       <TouchableOpacity {...rest}>
         <Box
-          size={20}
+          size={24}
           marginBottom={1}
           backgroundColor="gray.100"
           alignItems="center"
@@ -29,7 +29,7 @@ export function CategoryCard({ data, ...rest }: Props) {
           minH={'16'}
         >
           <Image
-            marginTop={1}
+            marginTop={2}
             w={16}
             h={12}
             source={{
@@ -37,8 +37,7 @@ export function CategoryCard({ data, ...rest }: Props) {
               //uri: `${api.defaults.baseURL}/images/thumb/${data.image}`, //busca o arquivo salvo no banco
             }}
             alt="Imagem"
-            rounded="md"
-            resizeMode="cover"
+            resizeMode="center"
           />
 
           <HStack flex={1}>

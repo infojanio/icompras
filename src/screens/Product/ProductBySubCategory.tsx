@@ -10,18 +10,14 @@ import {
   useToast,
   Center,
 } from 'native-base'
-
 import {
   useFocusEffect,
   useNavigation,
   useRoute,
 } from '@react-navigation/native'
-
 import { AppError } from '@utils/AppError'
 import { api } from '@services/api'
-
 import { Group } from '@components/Product/Group'
-
 import { ProductDTO } from '@dtos/ProductDTO'
 import { SubCategoryDTO } from '@dtos/SubCategoryDTO'
 import { ProductCard } from '@components/Product/ProductCard'
@@ -47,27 +43,25 @@ export function ProductBySubCategory() {
 
   const route = useRoute()
   const { categoryId } = route.params as RouteParamsProps
-  console.log('ID =>', categoryId)
 
+  console.log('ID =>', categoryId)
   //const [categorySelected, setCategorySelected] = useState(categoryId)
   const [subCategorySelected, setSubCategorySelected] = useState('')
 
   const navigation = useNavigation<AppNavigatorRoutesProps>()
-
   const toast = useToast()
 
   function handleOpenProductDetails(productId: string) {
     navigation.navigate('productDetails', { productId })
   }
 
-  //listar as subcategories no select
   async function fetchCategories() {
     try {
       setIsLoading(true)
-      const response = await api.get('/categories')
-      //const response = await api.get(`/categories/${categoryId}`)
+      //      const response = await api.get(`/categories/${categoryId}`)
+      const response = await api.get(`/categories/${categoryId}`)
       setCategories(response.data)
-      //  console.log(response.data)
+      console.log(response.data)
     } catch (error) {
       const isAppError = error instanceof AppError
       const title = isAppError
@@ -84,24 +78,30 @@ export function ProductBySubCategory() {
     }
   }
 
-  //listar as subcategories no select
+  // Buscar subcategorias da categoria selecionada
   async function fetchSubCategories() {
     try {
       setIsLoading(true)
-      const response = await api.get(
-        `/subcategories/category/?category_id=${categoryId}`,
-      )
-
-      console.log(response.data)
+      console.log('Buscando subcategorias para a categoria:', categoryId)
+      const response = await api.get('/subcategories')
+      // const response = await api.get(`/subcategories/category/${categoryId}`) // CORRIGIDO
       setSubCategories(response.data)
+      console.log('subcategorias carregadas no estado:', subCategories)
+      if (response.data.length > 0) {
+        setSubCategorySelected(response.data[0].id) // Seleciona a primeira subcategoria automaticamente
+        console.log(
+          'Subcategoria selecionada automaticamente:',
+          response.data[0]?.id,
+        )
+      } else {
+        setSubCategorySelected('') // Evita problemas caso não existam subcategorias
+      }
     } catch (error) {
-      const isAppError = error instanceof AppError
-      const title = isAppError
-        ? error.message
-        : 'Não foi possível carregar as subcategorias'
-
       toast.show({
-        title,
+        title:
+          error instanceof AppError
+            ? error.message
+            : 'Erro ao carregar subcategorias',
         placement: 'top',
         bgColor: 'red.500',
       })
@@ -110,24 +110,56 @@ export function ProductBySubCategory() {
     }
   }
 
-  //listar as subcategories no select
-  async function fetchProductsBySubcategory() {
+  // Buscar subcategorias da categoria selecionada
+  async function fetchSubCategoriesByCategory() {
     try {
       setIsLoading(true)
+      console.log('Buscando subcategorias para a categoria:', categoryId)
+      //http://localhost:3333/subcategories/category?categoryId=41302d8e-8660-47c6-a604-4908aea64e35
+      const response = await api.get(
+        `/subcategories/category/?category_id=${categoryId}`,
+      )
+      setSubCategories(response.data)
 
+      if (response.data.length > 0) {
+        setSubCategorySelected(response.data[0].id) // Seleciona a primeira subcategoria automaticamente
+        console.log('Subcategoria inicial:', response.data[0]?.id)
+      } else {
+        setSubCategorySelected('') // Evita problemas caso não existam subcategorias
+      }
+    } catch (error) {
+      toast.show({
+        title:
+          error instanceof AppError
+            ? error.message
+            : 'Erro ao carregar subcategorias',
+        placement: 'top',
+        bgColor: 'red.500',
+      })
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  // Buscar produtos da subcategoria selecionada
+  async function fetchProductsBySubcategory() {
+    // if (!subCategorySelected) return
+    try {
+      setIsLoading(true)
       const response = await api.get(
         `/products/subcategory/?subcategory_id=${subCategorySelected}`,
       )
       setProducts(response.data)
+      console.log('Produtos', response.data)
     } catch (error) {
       const isAppError = error instanceof AppError
       const title = isAppError
         ? error.message
-        : 'Não foi possível carregar os produtos'
+        : 'Não foi possível carregar os exercícios'
 
       toast.show({
         title,
-        placement: 'top',
+        placement: 'bottom-left',
         bgColor: 'red.500',
       })
     } finally {
@@ -135,13 +167,18 @@ export function ProductBySubCategory() {
     }
   }
 
+  // Atualiza as subcategorias sempre que a categoria mudar
   useEffect(() => {
-    fetchCategories()
-    fetchSubCategories()
+    if (categoryId) {
+      fetchCategories()
+      //fetchSubCategories()
+      fetchSubCategoriesByCategory()
+    }
   }, [categoryId])
 
   const firstSubCategory = subCategories.length > 0 ? subCategories[0] : null
 
+  // Atualiza os produtos quando a subcategoria mudar
   useFocusEffect(
     useCallback(() => {
       fetchProductsBySubcategory()
@@ -153,7 +190,7 @@ export function ProductBySubCategory() {
       <HomeProduct />
 
       <Box flex={1} ml={-6} mt={-6}>
-        {firstSubCategory ? (
+        {subCategories.length > 0 ? (
           <FlatList
             data={subCategories}
             keyExtractor={(item) => item.id}
@@ -161,10 +198,8 @@ export function ProductBySubCategory() {
               <Group
                 name={item.name}
                 subcategory={item.id}
-                isActive={
-                  subCategorySelected.toLocaleUpperCase() === item.id //item.name.toLocaleUpperCase()
-                }
-                onPress={() => setSubCategorySelected(item.id)} //o segredo tá aqui, passando id = subcategory_id ->setSubCategorySelected(item.name)}
+                isActive={subCategorySelected === item.id}
+                onPress={() => setSubCategorySelected(item.id)}
               />
             )}
             horizontal
@@ -190,7 +225,8 @@ export function ProductBySubCategory() {
             <VStack px={6} bg={'gray.200'}>
               <HStack justifyContent="space-between" mb={5}>
                 <Heading color={'gray.700'} fontSize={'md'}>
-                  {subCategorySelected}
+                  {subCategories.find((sub) => sub.id === subCategorySelected)
+                    ?.name || 'Selecionar'}
                 </Heading>
 
                 <Text color="gray.700" fontSize={'md'}>

@@ -11,12 +11,10 @@ import {
   Box,
 } from 'native-base'
 
-import { UserPhoto } from './UserPhoto'
-import MarketPng from '@assets/lojas_ramar-removebg-preview.png'
+import MarketPng from '@assets/rahdar.png'
 import { MaterialIcons } from '@expo/vector-icons'
 import { useAuth } from '@hooks/useAuth'
 
-import defaultUserPhotoImg from '@assets/userPhotoDefault.png'
 import { Saldo } from './Saldo'
 
 export function HomeHeader() {
@@ -48,8 +46,9 @@ export function HomeHeader() {
       >
         <VStack>
           <Saldo />
-          {/*}
-          <TouchableOpacity onPress={OpenLogo}>
+
+          {/* 
+                    <TouchableOpacity onPress={OpenLogo}>
             <UserPhoto
               source={user.avatar ? { uri: user.avatar } : defaultUserPhotoImg}
               alt="Foto do usuário"
@@ -58,7 +57,6 @@ export function HomeHeader() {
               ml={2}
             />
           </TouchableOpacity>
-
           */}
         </VStack>
         <Center
@@ -74,9 +72,9 @@ export function HomeHeader() {
           <Image
             alt="Logo da Loja"
             source={MarketPng}
-            h={20}
-            w={80}
-            borderRadius={'full'}
+            h={30}
+            w={160}
+            borderRadius={'sm'}
           />
         </Center>
 

@@ -1,5 +1,5 @@
 import { TouchableOpacity, TouchableOpacityProps } from 'react-native'
-import { VStack, Image, Heading, Text, Center, Box, HStack } from 'native-base'
+import { VStack, Image, Text, Center, Box } from 'native-base'
 
 import { api } from '@services/api'
 import { ProductDTO } from '@dtos/ProductDTO'
@@ -15,9 +15,9 @@ export function ProductCard({ product, ...rest }: ProductCardProps) {
         mr={1}
         mt={1}
         bg="white"
-        alignItems={'center'}
+        alignItems={'normal'}
         w={32}
-        h={154}
+        h={172}
         minW={24}
         rounded="md"
         mb="1"
@@ -27,23 +27,23 @@ export function ProductCard({ product, ...rest }: ProductCardProps) {
         <Center>
           <VStack mt="1" mb="1">
             <Image
+              marginTop={1}
+              w={90}
+              h={70}
               source={{
                 uri: product.image, //busca a URL da imagem
                 //uri: `${api.defaults.baseURL}/images/thumb/${data.image}`, //busca o arquivo salvo no banco
               }}
-              alt="Imagem do produto"
-              w={28}
-              h={70}
+              alt="Imagem"
               rounded="3xl"
-              p={10}
-              resizeMode="contain"
+              resizeMode="stretch"
             />
           </VStack>
           <Center>
             <Text
               ml={2}
               mr={2}
-              fontSize="12"
+              fontSize="14"
               color="black"
               fontFamily="heading"
               numberOfLines={1}
@@ -68,8 +68,8 @@ export function ProductCard({ product, ...rest }: ProductCardProps) {
             </Text>
 
             <Box bg="green.500" rounded="md" pl="1" pr="1">
-              <Text fontSize="13" color="gray.100" numberOfLines={1}>
-                {product.cashbackPercentage} %
+              <Text fontSize="14" color="gray.100" numberOfLines={1}>
+                {product.cashbackPercentage}% cashback
               </Text>
             </Box>
           </Center>
