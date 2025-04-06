@@ -57,7 +57,7 @@ export function AppRoutes() {
       initialRouteName="home"
       screenOptions={{
         headerShown: false,
-        //  tabBarShowLabel: true,
+        tabBarShowLabel: false,
         tabBarActiveTintColor: colors.green[500],
         tabBarInactiveTintColor: colors.blueGray[800],
         tabBarStyle: {

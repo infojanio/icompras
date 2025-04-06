@@ -144,7 +144,7 @@ export function ProductsBySubCategory() {
   useEffect(() => {
     if (categoryId) {
       console.log('Chamando fetchSubCategories com ID:', categoryId)
-      fetchCategories()
+      //  fetchCategories()
       fetchSubCategories()
     }
   }, [categoryId])

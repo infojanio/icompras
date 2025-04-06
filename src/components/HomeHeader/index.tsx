@@ -81,8 +81,8 @@ export function HomeHeader() {
         <TouchableOpacity onPress={signOut}>
           <Center alignItems={'center'} p="1" mr={2} borderRadius={2}>
             <Icon
-              as={<MaterialIcons name="logout" />}
-              size={6}
+              as={<MaterialIcons name="settings-power" />}
+              size={9}
               _light={{
                 color: 'red.600',
               }}
@@ -90,6 +90,9 @@ export function HomeHeader() {
                 color: 'red.700',
               }}
             />
+            <Text color="red.600" fontSize="md">
+              Sair
+            </Text>
           </Center>
         </TouchableOpacity>
       </HStack>

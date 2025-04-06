@@ -1,11 +1,11 @@
 import { ReactNode, createContext, useEffect, useState } from 'react'
+import { setSignOutCallback } from '@services/authHelpers'
 
 import {
   storageAuthTokenSave,
   storageAuthTokenGet,
   storageAuthTokenRemove,
 } from '@storage/storageAuthToken'
-
 import {
   storageUserSave,
   storageUserGet,
@@ -14,12 +14,14 @@ import {
 
 import { UserDTO } from '@dtos/UserDTO'
 import { api } from '@services/api'
+import { useAuth } from '@hooks/useAuth'
 
 export type AuthContextDataProps = {
   user: UserDTO
   userId: string
   signIn: (email: string, password: string) => Promise<void>
   signOut: () => Promise<void>
+
   isLoadingUserStorageData: boolean
 }
 
@@ -141,6 +143,7 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
   }
 
   useEffect(() => {
+    setSignOutCallback(signOut)
     loadUserData()
   }, [])
 
