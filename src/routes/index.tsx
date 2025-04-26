@@ -33,19 +33,11 @@ export function Routes() {
       {/*garante não aparecer fundo branco na trasição da tela */}
       <NavigationContainer theme={theme}>
         {
-<<<<<<< HEAD
-          user.id ? (
-            <AppRoutes />
-          ) : (
-            <AuthRoutes />
-          ) /*se não tiver logado vai p/ rota */
-=======
           user && user.id ? (
             <AppRoutes />
           ) : (
             <AuthRoutes />
           ) /*se não tiver logado vai p/ rota StackRoutes*/
->>>>>>> loja
         }
       </NavigationContainer>
     </Box>

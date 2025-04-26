@@ -18,14 +18,8 @@ import { Home } from '@screens/Home'
 
 type StackRoutes = {
   initial: undefined
-<<<<<<< HEAD
-  cityselect: undefined
-
-  homeScreen: { cityId: string }
-=======
 
   home: { companyId: string }
->>>>>>> loja
   signin: undefined
   signup: undefined
 
@@ -46,12 +40,6 @@ export function StackRoutes() {
       <Screen name="signin" component={SignIn} />
       <Screen name="signup" component={SignUp} />
 
-<<<<<<< HEAD
-      <Screen name="cityselect" component={CitySelect} />
-      <Screen name="homeScreen" component={AppRoutes} />
-
-=======
->>>>>>> loja
       <Screen name="localization" component={Localization} />
     </Navigator>
   )

@@ -10,11 +10,6 @@ import { useNavigation, useRoute } from '@react-navigation/native'
 import { AppNavigatorRoutesProps } from '@routes/app.routes'
 import { CategoryDTO } from '@dtos/CategoryDTO'
 import { Loading } from '@components/Loading'
-<<<<<<< HEAD
-import { CompanyDTO } from '@dtos/CompanyDTO'
-import { TenantDTO } from '@dtos/TenantDTO'
-=======
->>>>>>> loja
 
 type RouteParamsProps = {
   categoryId: string

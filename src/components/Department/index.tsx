@@ -13,13 +13,8 @@ import { Loading } from '@components/Loading'
 import { CompanyDTO } from '@dtos/CompanyDTO'
 
 type RouteParamsProps = {
-<<<<<<< HEAD
-  cityId: string
-  companyId: string
-=======
   userId: string
   //  companyId: string
->>>>>>> loja
 }
 
 type Props = {
@@ -41,10 +36,6 @@ export function Department() {
   }
 
   const route = useRoute()
-<<<<<<< HEAD
-  const { cityId } = route.params as RouteParamsProps
-  console.log('cidade=>', cityId)
-=======
   const { userId } = route.params as RouteParamsProps
   console.log('ID usuário=>', userId)
 
@@ -63,7 +54,6 @@ export function Department() {
       const title = isAppError
         ? error.message
         : 'Não foi possível carregar as lojas cadastradas'
->>>>>>> loja
 
   const { companyId } = route.params as RouteParamsProps
   console.log('ID company=>', companyId)
@@ -96,11 +86,7 @@ export function Department() {
   useEffect(() => {
     // fetchCompanies()
     fetchDepartments()
-<<<<<<< HEAD
-  }, [cityId])
-=======
   }, [userId])
->>>>>>> loja
 
   return (
     <HStack>

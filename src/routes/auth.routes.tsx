@@ -15,31 +15,14 @@ import { ProductDetails } from '@screens/Product/ProductDetails'
 
 import { ProductBySubCategory } from '@screens/Product/ProductBySubCategory'
 
-import { CategoryDetails } from '@components/Category/desc/CategoryDetails'
 import { Department } from '@components/Department'
 import { CompanyByDepartment } from '@components/CompanyByDepartment'
 
 type AuthRoutes = {
-<<<<<<< HEAD
-  initial: undefined
-  cityselect: undefined
-  home: { cityId: string }
-  signin: undefined
-  signup: undefined
-  localization: undefined
-  companiesByDepartment: { tenantId: string }
-
-  //  tenantsByCity: { cityId: string }
-  //  companiesByTenant: { tenantId: string }
-  //supermarket: undefined
-  //forgotPassword: undefined
-  // address: undefined
-=======
   home: { userId: string }
   signin: undefined
   signup: undefined
   localization: undefined
->>>>>>> loja
 }
 
 export type AuthNavigatorRoutesProps = NativeStackNavigationProp<AuthRoutes>
@@ -51,12 +34,8 @@ export function AuthRoutes() {
     <Navigator initialRouteName="signin" screenOptions={{ headerShown: false }}>
       <Screen name="signin" component={SignIn} />
       <Screen name="signup" component={SignUp} />
-<<<<<<< HEAD
-      <Screen name="cityselect" component={CitySelect} />
-=======
 
       <Screen name="localization" component={Localization} />
->>>>>>> loja
       <Screen name="home" component={Home} />
       <Screen name="localization" component={Localization} />
       <Screen name="companiesByDepartment" component={CompanyByDepartment} />

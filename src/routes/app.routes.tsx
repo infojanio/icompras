@@ -18,13 +18,6 @@ import { Search } from '@screens/Search'
 import { Cart } from '@screens/Cart'
 import { Request } from '@screens/Request'
 import { Profile } from '@screens/Profile'
-<<<<<<< HEAD
-
-type AppRoutes = {
-  //home: undefined
-  home: { cityId: string }
-  department: { cityId: string }
-=======
 import { ProductList } from '@screens/Product/ProductList'
 import { ProductDetails } from '@screens/Product/ProductDetails'
 
@@ -36,19 +29,12 @@ import { ProductsBySubCategory } from '@screens/Product/ProductsBySubCategory'
 type AppRoutes = {
   home: { userId: string }
   //homeScreen: { UserId: string } // undefined
->>>>>>> loja
   search: undefined
   cart: undefined
   request: undefined
   profile: undefined
   productList: undefined
   signUp: undefined
-<<<<<<< HEAD
-  companiesByTenant: { tenantId: string }
-  tenantsByCity: { cityId: string }
-=======
-
->>>>>>> loja
   productDetails: { productId: string }
   productBySubCategory: { categoryId: string }
   productsBySubCategory: { categoryId: string }
@@ -164,8 +150,6 @@ export function AppRoutes() {
           ),
         }}
       />
-<<<<<<< HEAD
-=======
 
       <Screen
         name="productList"
@@ -206,7 +190,6 @@ export function AppRoutes() {
           tabBarButton: () => null,
         }} //não mostra ícone
       />
->>>>>>> loja
     </Navigator>
   )
 }
