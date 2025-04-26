@@ -7,8 +7,12 @@ import LogoPng from '@assets/logoInitial.png'
 
 import { useNavigation } from '@react-navigation/native'
 import { TouchableOpacity } from 'react-native'
+<<<<<<< HEAD:src/screens/Initial/index.tsx
 import { CitySelect } from '@components/CitySelect'
 import { CityModal } from '@components/CityModal'
+=======
+import { CitySelect } from '@utils/CitySelect'
+>>>>>>> loja:src/screens/Initial.tsx
 
 export function Initial() {
   const navigation = useNavigation<AuthNavigatorRoutesProps>()

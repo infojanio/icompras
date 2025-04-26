@@ -10,7 +10,6 @@ import {
 import { THEME } from './src/theme'
 import { Loading } from '@components/Loading'
 import { Routes } from './src/routes'
-
 import { AuthContextProvider } from '@contexts/AuthContext'
 
 export default function App() {

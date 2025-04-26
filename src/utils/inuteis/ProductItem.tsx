@@ -3,7 +3,7 @@ import { Image, FlatList, Text, Box, View, VStack, Icon } from 'native-base'
 
 import { MaterialIcons } from '@expo/vector-icons'
 
-import { Product } from '@data/ProductList1'
+import { Product } from '@utils/inuteis/ProductList1'
 
 export function ProductItem({
   id,

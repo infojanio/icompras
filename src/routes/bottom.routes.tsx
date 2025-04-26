@@ -23,11 +23,11 @@ import { ProductDetails } from '@screens/Product/ProductDetails'
 
 import { ProductBySubCategory } from '@screens/Product/ProductBySubCategory'
 
-import { CategoryDetails } from '@components/Category/desc/CategoryDetails'
+import { CategoryDetails } from '@utils/inuteis/CategoryDetails'
 
 type BottomRoutes = {
   //home: undefined
-  homeScreen: { companyId: string } // undefined
+  homeScreen: { userId: string } // undefined
   search: undefined
   cart: undefined
   request: undefined

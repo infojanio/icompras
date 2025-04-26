@@ -1,21 +1,15 @@
 import { useEffect, useState } from 'react'
-import { HomeProduct } from '@components/Product/HomeProduct'
+
 import { VStack, Text, FlatList, useToast, Box, HStack } from 'native-base'
-
-import { Group } from '@components/Product/Group'
-
-import { ProductCategoryVertical } from '@utils/ProductCategoryVertical'
 import { useNavigation } from '@react-navigation/native'
 import { AppNavigatorRoutesProps } from '@routes/app.routes'
-
-import { Dimensions } from 'react-native'
 import { ProductDTO } from '@dtos/ProductDTO'
 import { api } from '@services/api'
 import { AppError } from '@utils/AppError'
 import { ProductCard } from '@components/Product/ProductCard'
 import { TouchableOpacity } from 'react-native'
 
-export function ProductList() {
+export function ProductCashback() {
   const [activeIndex, setActiveIndex] = useState(0)
   const [products, setProducts] = useState<ProductDTO[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
@@ -29,17 +23,17 @@ export function ProductList() {
   }
 
   //listar as subcategories no select
-  async function fetchProductsList() {
+  async function fetchProductsByCasback() {
     try {
       setIsLoading(true)
 
-      const response = await api.get('/products')
+      const response = await api.get('/products/cashback')
       setProducts(response.data)
     } catch (error) {
       const isAppError = error instanceof AppError
       const title = isAppError
         ? error.message
-        : 'Não foi possível carregar os produtos'
+        : 'Não foi possível carregar os produtos com cashback'
 
       toast.show({
         title,
@@ -52,21 +46,21 @@ export function ProductList() {
   }
 
   useEffect(() => {
-    fetchProductsList()
+    fetchProductsByCasback()
   }, [])
 
   return (
-    <VStack flex={1} bg={'gray.100'} alignItems={'center'} h={210}>
+    <VStack flex={1} bg={'gray.100'} alignItems={'initial'} h={240}>
       <VStack>
         <VStack justifyContent={'space-between'} ml={1} mb={1}>
           <HStack justifyContent={'space-between'} mr={2}>
             <Text
-              fontSize={'sm'}
+              fontSize={'md'}
               color={'black.200'}
               fontWeight={'semibold'}
               ml={'2'}
             >
-              Mais Cashback
+              Maiores Cashback
             </Text>
             <TouchableOpacity>
               <Box
@@ -86,7 +80,7 @@ export function ProductList() {
               </Box>
             </TouchableOpacity>
           </HStack>
-          <Box ml={2} width={8} height={1} bg={'yellow.300'}>
+          <Box ml={2} width={24} height={1} bg={'yellow.300'}>
             {''}
           </Box>
         </VStack>

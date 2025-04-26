@@ -18,22 +18,41 @@ import { Search } from '@screens/Search'
 import { Cart } from '@screens/Cart'
 import { Request } from '@screens/Request'
 import { Profile } from '@screens/Profile'
+<<<<<<< HEAD
 
 type AppRoutes = {
   //home: undefined
   home: { cityId: string }
   department: { cityId: string }
+=======
+import { ProductList } from '@screens/Product/ProductList'
+import { ProductDetails } from '@screens/Product/ProductDetails'
+
+import { ProductBySubCategory } from '@screens/Product/ProductBySubCategory'
+
+import { Category } from '@components/Category'
+import { ProductsBySubCategory } from '@screens/Product/ProductsBySubCategory'
+
+type AppRoutes = {
+  home: { userId: string }
+  //homeScreen: { UserId: string } // undefined
+>>>>>>> loja
   search: undefined
   cart: undefined
   request: undefined
   profile: undefined
   productList: undefined
   signUp: undefined
+<<<<<<< HEAD
   companiesByTenant: { tenantId: string }
   tenantsByCity: { cityId: string }
+=======
+
+>>>>>>> loja
   productDetails: { productId: string }
   productBySubCategory: { categoryId: string }
-  categoryDetails: undefined
+  productsBySubCategory: { categoryId: string }
+  category: undefined
 }
 
 export type AppNavigatorRoutesProps = BottomTabNavigationProp<AppRoutes>
@@ -44,22 +63,22 @@ const { Navigator, Screen } = createBottomTabNavigator<AppRoutes>()
 export function AppRoutes() {
   //definição do tamanho dos ícones
   const { sizes, colors } = useTheme()
-  const iconSize = sizes[8]
+  const iconSize = sizes[6]
 
   return (
     <Navigator
       initialRouteName="home"
       screenOptions={{
         headerShown: false,
-        //  tabBarShowLabel: true,
+        tabBarShowLabel: false,
         tabBarActiveTintColor: colors.green[500],
         tabBarInactiveTintColor: colors.blueGray[800],
         tabBarStyle: {
           backgroundColor: colors.gray[100],
           borderTopWidth: 1,
-          height: Platform.OS === 'android' ? 'auto' : 96,
-          paddingBottom: sizes[8],
-          paddingTop: sizes[6],
+          height: Platform.OS === 'android' ? 'auto' : 48,
+          paddingBottom: sizes[6],
+          paddingTop: sizes[4],
         },
       }}
     >
@@ -145,6 +164,49 @@ export function AppRoutes() {
           ),
         }}
       />
+<<<<<<< HEAD
+=======
+
+      <Screen
+        name="productList"
+        component={ProductList}
+        options={{
+          tabBarButton: () => null,
+        }} //não mostra ícone
+      />
+
+      <Screen
+        name="productDetails"
+        component={ProductDetails}
+        options={{
+          tabBarButton: () => null,
+        }} //não mostra ícone
+      />
+
+      <Screen
+        name="category"
+        component={Category}
+        options={{
+          tabBarButton: () => null,
+        }} //não mostra ícone
+      />
+
+      <Screen
+        name="productsBySubCategory"
+        component={ProductsBySubCategory}
+        options={{
+          tabBarButton: () => null,
+        }} //não mostra ícone
+      />
+
+      <Screen
+        name="productBySubCategory"
+        component={ProductBySubCategory}
+        options={{
+          tabBarButton: () => null,
+        }} //não mostra ícone
+      />
+>>>>>>> loja
     </Navigator>
   )
 }

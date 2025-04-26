@@ -1,75 +1,77 @@
 import { TouchableOpacity, TouchableOpacityProps } from 'react-native'
-import { VStack, Image, Heading, Text, Center, Box, HStack } from 'native-base'
+import { VStack, Image, Text, Center, Box } from 'native-base'
+
+import { api } from '@services/api'
 import { ProductDTO } from '@dtos/ProductDTO'
 
-type Props = TouchableOpacityProps & {
-  data: ProductDTO
+export type ProductCardProps = TouchableOpacityProps & {
+  product: ProductDTO
 }
 
-export function ProductCard({ data, ...rest }: Props) {
+export function ProductCard({ product, ...rest }: ProductCardProps) {
   return (
     <TouchableOpacity {...rest}>
       <VStack
-        ml={1}
-        mt={2}
+        mr={1}
+        mt={1}
         bg="white"
-        alignItems={'center'}
-        w={40}
-        h={210}
+        alignItems={'normal'}
+        w={32}
+        h={172}
         minW={24}
         rounded="md"
-        mb="2"
-        borderWidth={0.2}
+        mb="1"
+        borderWidth={1.2}
+        borderColor={'gray.100'}
       >
         <Center>
-          <VStack mb="1">
-            <Center>
-              <Heading
-                ml={2}
-                mr={2}
-                mb={1}
-                fontSize="16"
-                color="red.700"
-                fontFamily="heading"
-                numberOfLines={1}
-              >
-                {data.name}
-              </Heading>
-            </Center>
+          <VStack mt="1" mb="1">
+            <Image
+              marginTop={1}
+              w={90}
+              h={70}
+              source={{
+                uri: product.image, //busca a URL da imagem
+                //uri: `${api.defaults.baseURL}/images/thumb/${data.image}`, //busca o arquivo salvo no banco
+              }}
+              alt="Imagem"
+              rounded="3xl"
+              resizeMode="stretch"
+            />
           </VStack>
+          <Center>
+            <Text
+              ml={2}
+              mr={2}
+              fontSize="14"
+              color="black"
+              fontFamily="heading"
+              numberOfLines={1}
+            >
+              {product.name}
+            </Text>
+          </Center>
 
-          <Box bg="red.500" rounded="md" pl="1" pr="1" mb={2}>
-            <Text fontSize="14" color="gray.100" numberOfLines={1}>
-              {data.quantity} unidades
+          <Box bg="red.500" rounded="md" pl="1" pr="1">
+            <Text fontSize="13" color="gray.100" numberOfLines={1}>
+              {product.quantity} unidades
             </Text>
           </Box>
-
-          <Image
-            source={{
-              uri: data.image, //busca a URL da imagem
-              //uri: `${api.defaults.baseURL}/images/thumb/${data.image}`, //busca o arquivo salvo no banco
-            }}
-            alt="Imagem do produto"
-            w={30}
-            h={20}
-            rounded="md"
-            mt={2}
-            mr={2}
-            ml={2}
-            m={2}
-            p={10}
-            resizeMode="cover"
-          />
-
-          <Center h={10} w={24}>
+          <Center h={10} w={32}>
             <Text
-              color={'green.600'}
+              color={'black'}
               fontWeight={'bold'}
               fontSize="16"
               numberOfLines={2}
             >
-              R$ {data.price}
+              R$ {product.price}
             </Text>
+
+            <Box bg="green.500" rounded="md" pl="1" pr="1">
+              <Text fontSize="14" color="gray.100" numberOfLines={1}>
+                {product.cashbackPercentage}% cashback
+              </Text>
+            </Box>
           </Center>
         </Center>
       </VStack>

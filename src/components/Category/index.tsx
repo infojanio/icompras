@@ -10,8 +10,11 @@ import { useNavigation, useRoute } from '@react-navigation/native'
 import { AppNavigatorRoutesProps } from '@routes/app.routes'
 import { CategoryDTO } from '@dtos/CategoryDTO'
 import { Loading } from '@components/Loading'
+<<<<<<< HEAD
 import { CompanyDTO } from '@dtos/CompanyDTO'
 import { TenantDTO } from '@dtos/TenantDTO'
+=======
+>>>>>>> loja
 
 type RouteParamsProps = {
   categoryId: string
@@ -20,52 +23,19 @@ type RouteParamsProps = {
 
 type Props = {
   category: string
-  data: TenantDTO[]
+  data: CategoryDTO[]
 }
 
 export function Category() {
   const [categories, setCategories] = useState<CategoryDTO[]>([])
-
-  const [companies, setCompanies] = useState<CompanyDTO[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
   const navigation = useNavigation<AppNavigatorRoutesProps>()
   const toast = useToast()
 
   function handleOpenSubCategories(categoryId: string) {
-    navigation.navigate('productBySubCategory', { categoryId })
+    navigation.navigate('productsBySubCategory', { categoryId })
   }
-
-  const route = useRoute()
-  const { categoryId } = route.params as RouteParamsProps
-  console.log('ID category=>', categoryId)
-
-  //const { companyId } = route.params as RouteParamsProps
-  //console.log('ID company=>', companyId)
-
-  /*listar os tipos de empresa
-  async function fetchCompanies() {
-    try {
-      setIsLoading(true)
-      //const response = await api.get(`/categories/${categoryId}`)
-      const response = await api.get(`/companies/${companyId}`)
-      setCompanies(response.data)
-    } catch (error) {
-      const isAppError = error instanceof AppError
-      const title = isAppError
-        ? error.message
-        : 'Não foi possível carregar as lojas cadastradas'
-
-      toast.show({
-        title,
-        placement: 'top',
-        bgColor: 'red.500',
-      })
-    } finally {
-      setIsLoading(false)
-    }
-  }
-  */
 
   //listar as categorias
   async function fetchCategories() {
@@ -95,16 +65,15 @@ export function Category() {
   }
 
   useEffect(() => {
-    //fetchCompanies()
     fetchCategories()
-  }, [categoryId])
+  }, [])
 
   return (
     <HStack>
       {isLoading ? (
         <Loading />
       ) : (
-        <VStack>
+        <VStack flex={1}>
           <FlatList
             data={categories}
             keyExtractor={(item) => item.id}
@@ -117,8 +86,8 @@ export function Category() {
             horizontal
             showsHorizontalScrollIndicator={false}
             _contentContainerStyle={{ px: 2 }}
-            mt={4}
-            mb={24}
+            mt={2}
+            mb={2}
           />
         </VStack>
       )}

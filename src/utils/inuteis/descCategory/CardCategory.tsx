@@ -1,6 +1,6 @@
 import { FlatList, VStack } from 'native-base'
 
-import { categoryList } from '../../../data/category'
+import { categoryList } from '../category'
 import { Card } from './Card'
 
 type Props = {

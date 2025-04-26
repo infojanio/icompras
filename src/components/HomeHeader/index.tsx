@@ -11,12 +11,11 @@ import {
   Box,
 } from 'native-base'
 
-import { UserPhoto } from './UserPhoto'
-import MarketPng from '@assets/logoMercado/03.png'
+import MarketPng from '@assets/rahdar.png'
 import { MaterialIcons } from '@expo/vector-icons'
 import { useAuth } from '@hooks/useAuth'
 
-import defaultUserPhotoImg from '@assets/userPhotoDefault.png'
+import { Saldo } from './Saldo'
 
 interface Props {
   city_id: string
@@ -34,18 +33,26 @@ export function HomeHeader() {
   }
 
   return (
-    <VStack bg="gray.100" padding={1}>
+    <VStack
+      bg="green.300"
+      padding={1}
+      borderTopWidth={0.23}
+      borderBottomWidth={0.25}
+      borderBottomColor={'blue.300'}
+    >
       <HStack
-        bg="green.500"
-        paddingBottom={4}
-        borderRadius={'full'}
-        paddingTop={4}
+        bg="green.300"
+        paddingBottom={1}
+        paddingTop={1}
         justifyContent="space-between"
         alignItems="center"
-        padding={2}
+        padding={1}
       >
         <VStack>
-          <TouchableOpacity onPress={OpenLogo}>
+          <Saldo />
+
+          {/* 
+                    <TouchableOpacity onPress={OpenLogo}>
             <UserPhoto
               source={user.avatar ? { uri: user.avatar } : defaultUserPhotoImg}
               alt="Foto do usuário"
@@ -54,38 +61,78 @@ export function HomeHeader() {
               ml={2}
             />
           </TouchableOpacity>
+          */}
         </VStack>
-        <Center flex="1" pr={4} ml="1" mr="2" mt="1" flexDirection="row">
-          <Image alt="Logo do mercado" source={MarketPng} h={70} w={160} />
+        <Center
+          flex="1"
+          borderRadius={'lg'}
+          borderColor={'blue.600'}
+          pr={2}
+          ml="1"
+          mr="2"
+          mt="1"
+          flexDirection="column"
+        >
+          <Image
+            alt="Logo da Loja"
+            source={MarketPng}
+            h={30}
+            w={160}
+            borderRadius={'sm'}
+          />
         </Center>
 
         <TouchableOpacity onPress={signOut}>
           <Center alignItems={'center'} p="1" mr={2} borderRadius={2}>
             <Icon
-              as={<MaterialIcons name="logout" />}
-              size={6}
+              as={<MaterialIcons name="settings-power" />}
+              size={9}
               _light={{
-                color: 'red.100',
+                color: 'red.600',
               }}
               _dark={{
                 color: 'red.700',
               }}
             />
+            <Text color="red.600" fontSize="md">
+              Sair
+            </Text>
           </Center>
         </TouchableOpacity>
       </HStack>
-      {/* 
-      <Box mr={32} bg={'gray.100'}>
-        <Text
-          color="gray.700"
-          fontWeight={'bold'}
-          fontSize={14}
-          numberOfLines={1}
+
+      {/*
+        <HStack
+          bg="red.300"
+          paddingBottom={1}
+          paddingTop={1}
+          justifyContent="space-between"
+          alignItems="center"
+          padding={1}
         >
-          Olá! {user.name}
-        </Text>
-      </Box>
-      */}
+          <Box>
+            <Text
+              color="black"
+              fontWeight={'normal'}
+              fontSize={16}
+              numberOfLines={1}
+            >
+              {user.name},
+            </Text>{' '}
+          </Box>
+          <Box ml={24}>
+            <Text
+              color="gray.600"
+              fontWeight={'bold'}
+              fontSize={16}
+              numberOfLines={1}
+            >
+              {' '}
+              Saldo: R$ 30,00
+            </Text>
+          </Box>
+        </HStack>
+        */}
     </VStack>
   )
 }

@@ -4,15 +4,11 @@ import {
   NativeStackNavigationProp,
 } from '@react-navigation/native-stack'
 
-import { Initial } from '@screens/Initial'
 import { Localization } from '@screens/Localization'
 import { AppRoutes } from './app.routes'
 import { SignIn } from '@screens/SignIn'
 import { SignUp } from '@screens/SignUp'
 
-import { CitySelect } from '@screens/CitySelect'
-import { CompaniesByTenant } from '@screens/Company/CompaniesByTenant'
-import { TenantsByCity } from '@screens/Tenant/TenantsByCity'
 import { Home } from '@screens/Home'
 import { ProductList } from '@screens/Product/ProductList'
 import { ProductDetails } from '@screens/Product/ProductDetails'
@@ -24,6 +20,7 @@ import { Department } from '@components/Department'
 import { CompanyByDepartment } from '@components/CompanyByDepartment'
 
 type AuthRoutes = {
+<<<<<<< HEAD
   initial: undefined
   cityselect: undefined
   home: { cityId: string }
@@ -37,6 +34,12 @@ type AuthRoutes = {
   //supermarket: undefined
   //forgotPassword: undefined
   // address: undefined
+=======
+  home: { userId: string }
+  signin: undefined
+  signup: undefined
+  localization: undefined
+>>>>>>> loja
 }
 
 export type AuthNavigatorRoutesProps = NativeStackNavigationProp<AuthRoutes>
@@ -45,14 +48,15 @@ const { Navigator, Screen } = createNativeStackNavigator()
 
 export function AuthRoutes() {
   return (
-    <Navigator
-      initialRouteName="initial"
-      screenOptions={{ headerShown: false }}
-    >
-      <Screen name="initial" component={Initial} />
+    <Navigator initialRouteName="signin" screenOptions={{ headerShown: false }}>
       <Screen name="signin" component={SignIn} />
       <Screen name="signup" component={SignUp} />
+<<<<<<< HEAD
       <Screen name="cityselect" component={CitySelect} />
+=======
+
+      <Screen name="localization" component={Localization} />
+>>>>>>> loja
       <Screen name="home" component={Home} />
       <Screen name="localization" component={Localization} />
       <Screen name="companiesByDepartment" component={CompanyByDepartment} />

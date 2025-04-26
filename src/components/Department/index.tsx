@@ -13,8 +13,13 @@ import { Loading } from '@components/Loading'
 import { CompanyDTO } from '@dtos/CompanyDTO'
 
 type RouteParamsProps = {
+<<<<<<< HEAD
   cityId: string
   companyId: string
+=======
+  userId: string
+  //  companyId: string
+>>>>>>> loja
 }
 
 type Props = {
@@ -36,8 +41,29 @@ export function Department() {
   }
 
   const route = useRoute()
+<<<<<<< HEAD
   const { cityId } = route.params as RouteParamsProps
   console.log('cidade=>', cityId)
+=======
+  const { userId } = route.params as RouteParamsProps
+  console.log('ID usuário=>', userId)
+
+  //const { companyId } = route.params as RouteParamsProps
+  //console.log('ID company=>', companyId)
+
+  /*listar os tipos de empresa
+  async function fetchCompanies() {
+    try {
+      setIsLoading(true)
+      //const response = await api.get(`/categories/${categoryId}`)
+      const response = await api.get(`/companies/${companyId}`)
+      setCompanies(response.data)
+    } catch (error) {
+      const isAppError = error instanceof AppError
+      const title = isAppError
+        ? error.message
+        : 'Não foi possível carregar as lojas cadastradas'
+>>>>>>> loja
 
   const { companyId } = route.params as RouteParamsProps
   console.log('ID company=>', companyId)
@@ -70,7 +96,11 @@ export function Department() {
   useEffect(() => {
     // fetchCompanies()
     fetchDepartments()
+<<<<<<< HEAD
   }, [cityId])
+=======
+  }, [userId])
+>>>>>>> loja
 
   return (
     <HStack>

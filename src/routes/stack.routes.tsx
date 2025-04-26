@@ -11,16 +11,21 @@ import { BottomRoutes } from './bottom.routes'
 import { SignIn } from '@screens/SignIn'
 import { SignUp } from '@screens/SignUp'
 
-import { CitySelect } from '@screens/CitySelect'
+import { CitySelect } from '@utils/inuteis/CitySelect'
 import { CompaniesByTenant } from '@screens/Company/CompaniesByTenant'
-import { TenantsByCity } from '@screens/Tenant/TenantsByCity'
+import { TenantsByCity } from '@utils/Tenant/TenantsByCity'
 import { Home } from '@screens/Home'
 
 type StackRoutes = {
   initial: undefined
+<<<<<<< HEAD
   cityselect: undefined
 
   homeScreen: { cityId: string }
+=======
+
+  home: { companyId: string }
+>>>>>>> loja
   signin: undefined
   signup: undefined
 
@@ -36,17 +41,17 @@ const { Navigator, Screen } = createNativeStackNavigator()
 
 export function StackRoutes() {
   return (
-    <Navigator
-      initialRouteName="initial"
-      screenOptions={{ headerShown: false }}
-    >
-      <Screen name="initial" component={Initial} />
+    <Navigator initialRouteName="home" screenOptions={{ headerShown: false }}>
+      <Screen name="home" component={Initial} />
       <Screen name="signin" component={SignIn} />
       <Screen name="signup" component={SignUp} />
 
+<<<<<<< HEAD
       <Screen name="cityselect" component={CitySelect} />
       <Screen name="homeScreen" component={AppRoutes} />
 
+=======
+>>>>>>> loja
       <Screen name="localization" component={Localization} />
     </Navigator>
   )

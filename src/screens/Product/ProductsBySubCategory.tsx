@@ -34,21 +34,22 @@ type RouteParamsProps = {
 }
 
 type Props = {
-  products: string
+  subcategory: string
   data: ProductDTO[]
 }
 
-export function ProductCategory() {
+export function ProductsBySubCategory() {
   const [isLoading, setIsLoading] = useState(true)
   const [categories, setCategories] = useState<CategoryDTO[]>([])
 
+  const [subCategories, setSubCategories] = useState<SubCategoryDTO[]>([])
   const [products, setProducts] = useState<ProductDTO[]>([])
 
   const route = useRoute()
   const { categoryId } = route.params as RouteParamsProps
   console.log('ID =>', categoryId)
 
-  const [categorySelected, setCategorySelected] = useState(categoryId)
+  //const [categorySelected, setCategorySelected] = useState(categoryId)
   const [subCategorySelected, setSubCategorySelected] = useState('')
 
   const navigation = useNavigation<AppNavigatorRoutesProps>()
@@ -60,13 +61,70 @@ export function ProductCategory() {
   }
 
   //listar as subcategories no select
-  async function fetchProducts() {
+  async function fetchCategories() {
     try {
       setIsLoading(true)
-      const response = await api.get('/products')
-      //const response = await api.get(`/categories/${categoryId}`)
+      const response = await api.get(`/categories/${categoryId}`)
       setCategories(response.data)
-      //  console.log(response.data)
+      console.log('categoria', response.data.category)
+    } catch (error) {
+      const isAppError = error instanceof AppError
+      const title = isAppError
+        ? error.message
+        : 'Não foi possível carregar a categoria'
+
+      toast.show({
+        title,
+        placement: 'top',
+        bgColor: 'red.500',
+      })
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  //listar as subcategories no select
+  async function fetchSubCategories() {
+    try {
+      setIsLoading(true)
+
+      //console.log('URL:', `/subcategories/category?categoryId=${categoryId}`)
+      const response = await api.get(
+        `/subcategories/category?categoryId=${categoryId}`,
+      )
+
+      console.log(response.data)
+      setSubCategories(response.data)
+      console.log('Subcategorias recebidas:', response.data)
+      console.log('Estado atual de subcategories:', subCategories)
+    } catch (error) {
+      const isAppError = error instanceof AppError
+      const title = isAppError
+        ? error.message
+        : 'Não foi possível carregar as subcategorias'
+
+      toast.show({
+        title,
+        placement: 'top',
+        bgColor: 'red.500',
+      })
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  //listar as subcategories no select
+  async function fetchProductsBySubcategory() {
+    try {
+      setIsLoading(true)
+
+      const response = await api.get(
+        `/products/subcategory?subcategoryId=${subCategorySelected}`,
+        //  `/products/subcategory/?subcategory_id=${subCategorySelected}`,
+      )
+      console.log('selecionada', subCategorySelected)
+      setProducts(response.data)
+      console.log('Produtos', response.data)
     } catch (error) {
       const isAppError = error instanceof AppError
       const title = isAppError
@@ -84,29 +142,36 @@ export function ProductCategory() {
   }
 
   useEffect(() => {
-    fetchProducts()
-  }, [])
+    if (categoryId) {
+      console.log('Chamando fetchSubCategories com ID:', categoryId)
+      //  fetchCategories()
+      fetchSubCategories()
+    }
+  }, [categoryId])
 
-  const firstProduct = products.length > 0 ? products[0] : null
+  const firstSubCategory = subCategories.length > 0 ? subCategories[0] : null
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchProductsBySubcategory()
+    }, [subCategorySelected]),
+  )
 
   return (
     <VStack flex={1}>
       <HomeProduct />
 
       <Box flex={1} ml={-6} mt={-6}>
-        {firstProduct ? (
+        {firstSubCategory ? (
           <FlatList
-            data={products}
+            data={subCategories}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
               <Group
                 name={item.name}
                 subcategory={item.id}
-                isActive={
-                  subCategorySelected.toLocaleUpperCase() ===
-                  item.name.toLocaleUpperCase()
-                }
-                onPress={() => setSubCategorySelected(item.name)} //o segredo tá aqui, passando id = subcategory_id
+                isActive={subCategorySelected === item.id}
+                onPress={() => setSubCategorySelected(item.id)} //o segredo tá aqui, passando id = subcategory_id
               />
             )}
             horizontal
@@ -143,7 +208,7 @@ export function ProductCategory() {
 
             <FlatList
               data={products}
-              keyExtractor={(item) => item.id}
+              keyExtractor={(item) => item.name}
               renderItem={({ item }) => (
                 <ProductCard
                   product={item}

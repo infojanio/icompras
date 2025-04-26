@@ -54,7 +54,7 @@ export function HomeProduct() {
           />
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => navigation.navigate('')}>
+        <TouchableOpacity onPress={() => navigation.navigate('signUp')}>
           <Text fontSize={16}>Categoria</Text>
         </TouchableOpacity>
 
