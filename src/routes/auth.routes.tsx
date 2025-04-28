@@ -5,18 +5,10 @@ import {
 } from '@react-navigation/native-stack'
 
 import { Localization } from '@screens/Localization'
-import { AppRoutes } from './app.routes'
 import { SignIn } from '@screens/SignIn'
 import { SignUp } from '@screens/SignUp'
 
 import { Home } from '@screens/Home'
-import { ProductList } from '@screens/Product/ProductList'
-import { ProductDetails } from '@screens/Product/ProductDetails'
-
-import { ProductBySubCategory } from '@screens/Product/ProductBySubCategory'
-
-import { Department } from '@components/Department'
-import { CompanyByDepartment } from '@components/CompanyByDepartment'
 
 type AuthRoutes = {
   home: { userId: string }
@@ -35,10 +27,8 @@ export function AuthRoutes() {
       <Screen name="signin" component={SignIn} />
       <Screen name="signup" component={SignUp} />
 
-      <Screen name="localization" component={Localization} />
       <Screen name="home" component={Home} />
       <Screen name="localization" component={Localization} />
-      <Screen name="companiesByDepartment" component={CompanyByDepartment} />
     </Navigator>
   )
 }

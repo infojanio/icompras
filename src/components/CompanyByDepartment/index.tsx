@@ -4,7 +4,7 @@ import { FlatList, HStack, VStack, useToast } from 'native-base'
 import { api } from '@services/api'
 import { AppError } from '@utils/AppError'
 
-import { CompanyCard } from '@components/Company/CompanyCard'
+import { CompanyCard } from './CompanyCard'
 
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { AppNavigatorRoutesProps } from '@routes/app.routes'
@@ -33,10 +33,6 @@ export function CompanyByDepartment() {
 
   const navigation = useNavigation<AppNavigatorRoutesProps>()
   const toast = useToast()
-
-  function handleOpenCompanies(tenantId: string) {
-    navigation.navigate('companiesByTenant', { tenantId })
-  }
 
   const route = useRoute()
   const { tenantId } = route.params as RouteParamsProps
@@ -108,7 +104,9 @@ export function CompanyByDepartment() {
             renderItem={({ item }) => (
               <CompanyCard
                 data={item}
-                onPress={() => handleOpenCompanies(item.id)}
+                onPress={() => {
+                  console.log('abriu')
+                }}
               />
             )}
             //horizontal

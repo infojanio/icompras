@@ -1,5 +1,8 @@
 {
   "expo": {
+    "web": {
+      "bundler": "metro"
+    },
     "newArchEnabled": true,
     "name": "icompras",
     "slug": "icompras",

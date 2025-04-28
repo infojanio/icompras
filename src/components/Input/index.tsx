@@ -1,38 +1,101 @@
-import { Input as NativeBaseInput, IInputProps, FormControl } from 'native-base' //renomeia o Input para não dar conflito as NativeBaseInput
+import React, { forwardRef } from 'react'
+import { TextInput, View, Text, StyleSheet, TextInputProps } from 'react-native'
+import { MaterialIcons } from '@expo/vector-icons' // ou qualquer ícone que você use
 
-type Props = IInputProps & {
-  errorMessage?: string | null
-}
+type InputProps = {
+  label?: string
+  icon?: React.ReactNode
+  leftIcon?: JSX.Element
+  rightIcon?: JSX.Element
 
-export function Input({ errorMessage = null, isInvalid, ...rest }: Props) {
-  const invalid = !!errorMessage || isInvalid
+  value: string
+  onChangeText: (text: string) => void
+  placeholder: string
+  secureTextEntry?: boolean
+  errorMessage?: string
+  onFocus?: () => void
+  keyboardType?:
+    | 'default'
+    | 'email-address'
+    | 'numeric'
+    | 'phone-pad'
+    | 'decimal-pad'
+  autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters'
+  returnKeyType?: 'done' | 'next' | 'go' | 'search' | 'send'
+  onSubmitEditing?: () => void
+} & React.ComponentProps<typeof TextInput>
 
-  return (
-    <FormControl isInvalid={invalid} mb={2}>
-      <FormControl.ErrorMessage>{errorMessage}</FormControl.ErrorMessage>
-      <NativeBaseInput
-        variant="underlined"
-        bg="gray.50"
-        h={10}
-        px={4}
-        borderBottomWidth="2"
-        fontSize="md"
-        color="gray.700"
-        fontFamily="body"
-        placeholderTextColor="gray.400"
-        fontWeight="normal"
-        isInvalid={invalid}
-        _invalid={{
-          borderWidth: 1,
-          borderColor: 'red.500',
-        }}
-        _focus={{
-          bg: 'gray.50',
-          borderBottomWidth: 2,
-          borderColor: 'green.700',
-        }}
-        {...rest}
-      />
-    </FormControl>
-  )
-}
+export const Input = forwardRef<TextInput, InputProps>(
+  (
+    {
+      value,
+      onChangeText,
+      placeholder,
+      secureTextEntry = false,
+      errorMessage,
+      onFocus,
+      keyboardType = 'default',
+      autoCapitalize = 'sentences',
+      returnKeyType = 'done',
+      onSubmitEditing,
+      leftIcon,
+      rightIcon,
+    },
+    ref,
+  ) => {
+    return (
+      <View style={styles.container}>
+        <View style={styles.inputContainer}>
+          {leftIcon && <View style={styles.iconContainer}>{leftIcon}</View>}
+          <TextInput
+            ref={ref}
+            style={[styles.input, errorMessage ? styles.inputError : {}]}
+            value={value}
+            onChangeText={onChangeText}
+            placeholder={placeholder}
+            secureTextEntry={secureTextEntry}
+            onFocus={onFocus}
+            keyboardType={keyboardType}
+            autoCapitalize={autoCapitalize}
+            returnKeyType={returnKeyType}
+            onSubmitEditing={onSubmitEditing}
+          />
+          {rightIcon && <View style={styles.iconContainer}>{rightIcon}</View>}
+        </View>
+        {errorMessage && <Text style={styles.errorText}>{errorMessage}</Text>}
+      </View>
+    )
+  },
+)
+
+Input.displayName = 'Input'
+
+const styles = StyleSheet.create({
+  container: {
+    marginBottom: 10,
+  },
+  inputContainer: {
+    flexDirection: 'row', // Garantir que os ícones e o input fiquem na mesma linha
+    alignItems: 'center', // Alinhar o conteúdo verticalmente
+    borderColor: '#ccc',
+    borderWidth: 1,
+    borderRadius: 5,
+    height: 40,
+  },
+  input: {
+    flex: 1, // O campo de texto ocupa o espaço restante
+    paddingLeft: 10,
+  },
+  iconContainer: {
+    marginLeft: 10, // Adiciona espaçamento ao redor do ícone
+    marginRight: 10,
+  },
+  inputError: {
+    borderColor: 'red',
+  },
+  errorText: {
+    color: 'red',
+    fontSize: 12,
+    marginTop: 5,
+  },
+})

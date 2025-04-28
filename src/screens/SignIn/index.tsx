@@ -1,39 +1,29 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import {
-  VStack,
-  Center,
-  Text,
   View,
-  ScrollView,
-  IconButton,
-  Box,
-  Icon,
-  Divider,
-  Stack,
-  useToast,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
   KeyboardAvoidingView,
-  NativeBaseProvider,
-} from 'native-base'
+  Platform,
+  ScrollView,
+  TextInput,
+  Image,
+  Alert,
+} from 'react-native'
+import { Input } from '@components/Input' // Seu componente Input estilizado
+import MarketPng from '@assets/rahdar.png'
+import LoginSvg from '@assets/login.svg'
+import { useNavigation } from '@react-navigation/native'
+import { AuthNavigatorRoutesProps } from '@routes/auth.routes'
+import Feather from 'react-native-vector-icons/Feather'
+import { useAuth } from '@hooks/useAuth'
+import { AppError } from '@utils/AppError'
+import { useToast } from 'native-base'
 
 import { useForm, Controller } from 'react-hook-form'
-
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-
-//import { StackNavigatorRoutesProps } from '@routes/stack.routes'
-
-import { useAuth } from '@hooks/useAuth'
-
-import LogoSvg from '@assets/logomarca.svg'
-
-import { Input } from '@components/Input'
-import { Button } from '@components/Button'
-import { Feather } from '@expo/vector-icons'
-import { MaterialIcons } from '@expo/vector-icons'
-import { useNavigation } from '@react-navigation/native'
-import { AppError } from '@utils/AppError'
-import { AuthNavigatorRoutesProps } from '@routes/auth.routes'
-import { Alert, Keyboard, TouchableWithoutFeedback } from 'react-native'
 
 type FormDataProps = {
   email: string
@@ -49,15 +39,14 @@ const signInSchema = yup.object({
 })
 
 export function SignIn() {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [errorMessage, setErrorMessage] = useState<string | undefined>('')
 
   const { signIn } = useAuth()
-
-  const [show, setShow] = React.useState(false) //mostra senha
-  const handleClick = () => setShow(!show)
-
   const navigation = useNavigation<AuthNavigatorRoutesProps>()
-
   const toast = useToast()
 
   //criando controle para o formulário
@@ -69,14 +58,8 @@ export function SignIn() {
     resolver: yupResolver(signInSchema),
   })
 
-  //Criar nova conta
   function handleNewAccount() {
     navigation.navigate('signup')
-  }
-
-  //voltar a tela anterior
-  function handleGoBack() {
-    navigation.goBack()
   }
 
   async function handleSignIn({ email, password }: FormDataProps) {
@@ -102,235 +85,165 @@ export function SignIn() {
   }
 
   return (
-    <NativeBaseProvider>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <VStack
-            space={2}
-            alignItems="center"
-            direction="row"
-            marginTop="2"
-            marginLeft="2"
-          >
-            {['sm'].map((size) => (
-              <IconButton
-                key={size}
-                borderRadius="full"
-                size={size}
-                variant="outline"
-                _icon={{
-                  as: Feather,
-                  name: 'chevron-left',
-                }}
-                onPress={handleGoBack}
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={100}
+    >
+      <ScrollView
+        contentContainerStyle={styles.scrollViewContent}
+        keyboardShouldPersistTaps="handled"
+      >
+        <View style={styles.formContainer}>
+          <View style={{ alignItems: 'center' }}>
+            <LoginSvg height={120} width={120} />
+          </View>
+          <Text style={styles.header}>Cashback na compra!</Text>
+
+          <Controller
+            control={control}
+            name="email"
+            render={({ field: { onChange, value } }) => (
+              <Input
+                placeholder="Email"
+                keyboardType="email-address"
+                autoCapitalize="none"
+                onChangeText={onChange}
+                value={value}
+                errorMessage={errors.email?.message}
               />
-            ))}
-          </VStack>
+            )}
+          />
 
-          <View
-            justifyContent="center"
-            color="green.700"
-            fontSize="2xl"
-            mb={4}
-            paddingTop="0.5"
-            paddingLeft="10"
+          <View style={styles.passwordWrapper}>
+            <Controller
+              control={control}
+              name="password"
+              render={({ field: { onChange, value } }) => (
+                <TextInput
+                  placeholder="Senha"
+                  secureTextEntry={!showPassword}
+                  style={styles.passwordInput}
+                  placeholderTextColor="#999"
+                  onChangeText={onChange}
+                  value={value}
+                />
+              )}
+            />
+
+            <TouchableOpacity
+              style={styles.iconButton}
+              onPress={() => setShowPassword(!showPassword)}
+            >
+              <Feather
+                name={showPassword ? 'eye-off' : 'eye'}
+                size={24}
+                color="#999"
+              />
+            </TouchableOpacity>
+          </View>
+
+          {errorMessage && <Text style={styles.errorText}>{errorMessage}</Text>}
+
+          <TouchableOpacity
+            style={styles.button}
+            onPress={handleSubmit(handleSignIn)}
           >
-            <Text
-              fontFamily="heading"
-              fontWeight="bold"
-              fontSize="3xl"
-              color="green.700"
-            >
-              Olá!
-            </Text>
-            <Text>Acesse sua conta ou cadastre-se</Text>
+            <Text style={styles.buttonText}>Entrar</Text>
+          </TouchableOpacity>
+
+          <View style={styles.footer}>
+            <Text style={styles.footerText}>Não tem uma conta?</Text>
+            <TouchableOpacity onPress={handleNewAccount}>
+              <Text style={styles.link}>Cadastre-se</Text>
+            </TouchableOpacity>
           </View>
-
-          <View bg="green.500" pt="4" pb="20">
-            <VStack
-              marginRight="4"
-              marginLeft="4"
-              borderRadius="2xl"
-              bg="gray.50"
-            >
-              <Center
-                marginTop="2"
-                marginBottom="2"
-                marginRight="2"
-                marginLeft="2"
-              >
-                <Box w="100%">
-                  <Controller
-                    control={control}
-                    name="email"
-                    render={({ field: { onChange, value } }) => (
-                      <Input
-                        style={{ zIndex: 1 }} // Garantir que o Input tenha prioridade
-                        onFocus={() => console.log('Input focado')}
-                        onBlur={() => console.log('Input desfocado')}
-                        keyboardType="email-address"
-                        InputLeftElement={
-                          <Icon
-                            as={<MaterialIcons name="email" />}
-                            size="sm"
-                            m={2}
-                            _light={{
-                              color: 'black',
-                            }}
-                            _dark={{
-                              color: 'gray.400',
-                            }}
-                          />
-                        }
-                        placeholder="icompras@gmail.com" // mx={4}
-                        _light={{
-                          placeholderTextColor: 'blueGray.400',
-                        }}
-                        _dark={{
-                          placeholderTextColor: 'blueGray.50',
-                        }}
-                        onChangeText={onChange}
-                        value={value}
-                        errorMessage={errors.email?.message}
-                      />
-                    )}
-                  />
-                </Box>
-
-                <Box w="100%">
-                  <Controller
-                    control={control}
-                    name="password"
-                    render={({ field: { onChange, value } }) => (
-                      <Input
-                        style={{ zIndex: 1 }} // Garantir que o Input tenha prioridade
-                        onFocus={() => console.log('Input focado')}
-                        onBlur={() => console.log('Input desfocado')}
-                        type={show ? 'text' : 'password'}
-                        InputRightElement={
-                          <Stack
-                            maxWidth={32}
-                            direction={{
-                              md: 'row',
-                            }}
-                            space="4"
-                          >
-                            <Button
-                              borderRadius="none"
-                              size={'sm'}
-                              backgroundColor="gray.50"
-                              title=""
-                              ml={1}
-                              onPress={handleClick}
-                              variant="solid"
-                              rightIcon={
-                                <Icon
-                                  as={MaterialIcons}
-                                  name="visibility"
-                                  size="lg"
-                                  m={2}
-                                  _light={{
-                                    color: 'black',
-                                  }}
-                                  _dark={{
-                                    color: 'gray.300',
-                                  }}
-                                />
-                              }
-                            >
-                              {show ? 'Hide' : 'Show'}
-                            </Button>
-                          </Stack>
-                        }
-                        InputLeftElement={
-                          <Icon
-                            as={<MaterialIcons name="lock" />}
-                            size="sm"
-                            m={2}
-                            _light={{
-                              color: 'black',
-                            }}
-                            _dark={{
-                              color: 'gray.300',
-                            }}
-                          />
-                        }
-                        placeholder="Senha" // mx={4}
-                        _light={{
-                          placeholderTextColor: 'blueGray.400',
-                        }}
-                        _dark={{
-                          placeholderTextColor: 'blueGray.50',
-                        }}
-                        onChangeText={onChange}
-                        value={value}
-                        errorMessage={errors.password?.message}
-                      />
-                    )}
-                  />
-                </Box>
-                <View alignSelf={'flex-start'} mt="0" marginBottom="2"></View>
-
-                <Button
-                  title="Entrar"
-                  fontWeight={'extrabold'}
-                  onPress={handleSubmit(handleSignIn)}
-                  isLoading={isLoading}
-                />
-
-                <Center mt={2}>
-                  <Text mb="2" color="red.700" fontSize="md">
-                    Esqueci a minha senha
-                  </Text>
-
-                  <Box w="324">
-                    <Divider
-                      my={10}
-                      bgColor="green.50"
-                      borderBottomWidth="0.2"
-                    />
-                  </Box>
-
-                  <Text
-                    color="gray.700"
-                    fontSize="md"
-                    fontWeight="bold"
-                    mt={4}
-                    mb={2}
-                    fontFamily="body"
-                  >
-                    Ainda não tem acesso?
-                  </Text>
-                </Center>
-
-                <Button
-                  title="Cadastra-se"
-                  color={'white'}
-                  variant="solid"
-                  onPress={handleNewAccount}
-                />
-              </Center>
-            </VStack>
-
-            <Center
-              my="2"
-              flexDirection="row"
-              alignItems="center"
-              marginLeft={2}
-            >
-              <LogoSvg />
-              <Text
-                color="gray.100"
-                fontWeight="extrabold"
-                fontSize="lg"
-                fontStyle="italic"
-              >
-                @iCompras
-              </Text>
-            </Center>
+          <View style={{ alignItems: 'center', marginTop: 8 }}>
+            <Image
+              style={{ height: 30, width: 160 }}
+              alt="Logo da Loja"
+              source={MarketPng}
+              borderRadius={1}
+            />
           </View>
-        </ScrollView>
-      </TouchableWithoutFeedback>
-    </NativeBaseProvider>
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   )
 }
+
+const styles = StyleSheet.create({
+  scrollViewContent: {
+    flexGrow: 1,
+    justifyContent: 'center',
+    paddingHorizontal: 20,
+  },
+  formContainer: {
+    backgroundColor: 'white',
+    borderRadius: 10,
+    padding: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    elevation: 5,
+  },
+  header: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    color: '#333',
+    textAlign: 'center',
+  },
+  passwordWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#F0F0F0',
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    marginTop: 10,
+  },
+  passwordInput: {
+    flex: 1,
+    height: 50,
+    fontSize: 16,
+    color: '#333',
+  },
+  iconButton: {
+    paddingHorizontal: 10,
+  },
+  button: {
+    backgroundColor: '#4CAF50',
+    paddingVertical: 15,
+    borderRadius: 5,
+    marginTop: 20,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  errorText: {
+    color: 'red',
+    fontSize: 14,
+    textAlign: 'center',
+    marginTop: 10,
+  },
+  footer: {
+    marginTop: 20,
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  footerText: {
+    fontSize: 16,
+    color: '#555',
+  },
+  link: {
+    fontSize: 16,
+    color: '#e1093f',
+    fontWeight: 'bold',
+    marginLeft: 5,
+    marginBottom: 8,
+  },
+})

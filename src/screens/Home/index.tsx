@@ -60,7 +60,7 @@ export function Home() {
               Onde comprar
             </Text>
           </Box>
-          <Department />
+
           <SeparatorItem />
           <Text fontSize={'16'} paddingLeft={4} bg={'white'}>
             Estabelecimentos
